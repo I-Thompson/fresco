@@ -1,0 +1,105 @@
+\documentclass[aps,prc,amsfonts,nofootinbib]{revtex4}
+\usepackage{bm,amsmath,epsfig,dcolumn,slashbox}
+
+\begin{document}
+
+\title{ Angular Correlations and {\sc fresco}}
+\author{ C.~R.~Brune }
+\date{December 2, 2009}
+\maketitle
+
+\section{Introduction}
+
+The nature of the particle emission resulting from the decay
+$B\rightarrow C+c$ following the reaction $A(a,b)B$ is discussed
+in Sec.~10.7.4 of Satchler~\cite{Sat83}.
+The double differential cross section for detecting $b$ and $c$
+is given by Satchler,
+Eq.~10.126\footnote{The branching-ratio factor $\Gamma_c/\Gamma$
+in Eq.~10.126 has been suppressed.}:
+\begin{equation}
+\frac{{\rm d}^2 \sigma}{{\rm d}\Omega_b{\rm d}\Omega_c} =
+\frac{{\rm d}\sigma}{{\rm d}\Omega_b} \frac{W}{4\pi} .
+\end{equation}
+The angular correlation function $W$ given by Satchler Eqs.~10.127 and~10.130
+\begin{equation}
+W=\sum_{kq} t_{kq}(I_B) \, R_k \, C_{kq}^* ,
+\end{equation}
+where $I_B$ and $t_{kq}(I_B)$ are the spin and polarization tensor of
+the nucleus $B$, $R_k$ are the real radiation parameters,
+and $C_{kq}$ are related to a the spherical harmonics:
+\begin{equation}
+C_{kq}=\left [ \frac{4\pi}{2k+1} \right]^{1/2} Y_{kq}.
+\end{equation}
+Following the convention used by {\sc fresco}~\cite{Tho88}, we will
+choose the $z$ axis to be along the incident beam.
+We then have  $t_{kq}(I_B)=t_{kq}(\theta_B)$ and
+$C_{kq}=C_{kq}(\theta_c,\phi_c)$ where $\theta_B=\pi-\theta_b$ and
+$\theta_c$ are the usual polar angles in the c.m. system and $\phi_c$ is
+the azimuthal angle between the particles $b$ and $c$.
+
+\section{Radiation Parameters}
+
+The particle radiation parameters $R_k$ are discussed in Sec.~10.7.4.2
+of Satchler.
+Assuming that $B\rightarrow C+c$ occurs with a single orbital
+angular momentum $L$ and channel spin $S$,
+\begin{equation}
+R_k=(2I_B+1)^{1/2}(2L+1)(-1)^{k+S-I_B}\langle LL00|k0\rangle \,
+W(LLI_BI_B;kS),
+\end{equation}
+where $\langle LL00|k0\rangle$ is a Clebsch-Gordon coefficient
+and $W(LLI_BI_B;kS)$ is a Racah coefficient.
+Parity conservation implies that $k$ must be even.
+For the case of ${}^{19}{\rm Ne}^*\rightarrow
+{}^{15}{\rm O}(1/2^-)+\alpha(0^+)$
+we have $S=\frac{1}{2}$ and $L$ is uniquely determined for
+a given $J^\pi$ state in ${}^{19}{\rm Ne}$.
+For the general case, relative partial width amplitudes for the decay
+$B\rightarrow C+c$ must be specified.
+
+\section{Polarization Tensors}
+
+The polarization tensor $t_{kq}(I_B)$ describes the polarization
+of the final nucleus $B$; the precise definition is given in
+Secs.~10.3.2 and~10.3.3 of Satchler.
+The polarization tensors can be calculated with {\sc fresco}
+by noting that the {\sc fresco} scattering amplitudes
+$f_{m'M':mM}$ are equivalent to Satchler's transition
+matrix elements $T_{\beta\alpha}$ defined by his Eq.~9.2.
+Satchler's Eq.~10.32 reads
+\begin{equation}
+t_{kq}(I_B)=\frac{tr[{\bm T}{\bm T}^\dag \tau_{kq}(I_B)]}
+{tr[{\bm T}{\bm T}^\dag]}.
+\end{equation}
+In the notation of Thompson (analogous to Eq.~3.33 of Ref.~\cite{Tho88})
+this formula becomes
+\begin{eqnarray}
+t_{kq}(I_B) &=&\frac{tr[{\bm f}{\bm f}^\dag \tau_{kq}(I_B)]}
+  {tr[{\bm f}{\bm f}^\dag]} \nonumber \\
+&=& \sqrt{2k+1} \, \frac{ \displaystyle \sum_{m'M'mM} f_{m'M':mM}(\theta)^*
+  f_{m'M'':mM}(\theta) \langle I_BM'kq|I_BM''\rangle }
+  { \displaystyle \sum_{m'M'mM} |f_{m'M':mM}(\theta)|^2 },
+\end{eqnarray}
+where $M''=M'+q$ is required for the Clebcsh-Gordon coefficient to be non-zero.
+Also note that the differential cross section is given by
+\begin{equation}
+\frac{{\rm d}\sigma}{{\rm d}\Omega_b}=\frac{1}{(2I_A+1)(2I_a+1)}
+\displaystyle \sum_{m'M'mM} |f_{m'M':mM}(\theta)|^2.
+\end{equation}
+The above equations can be used to calculate the angular correlation
+using the scattering amplitudes output by {\sc fresco}.
+Note that the scattering amplitude
+file output by {\sc fresco}  is controlled with the LAMPL parameter;
+typically LAMPL=-2 is needed. 
+
+\begin{thebibliography}{9}
+
+\bibitem{Sat83} G.~R.~Satchler, {\it Direct Nuclear Reactions},
+  (Clarendon, Oxford, 1983).
+
+\bibitem{Tho88} I.~J.Thompson, Computer Physics Reports {\bf 7}, 167 (1988).
+
+\end{thebibliography}
+
+\end{document}

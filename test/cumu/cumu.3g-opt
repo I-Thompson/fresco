@@ -1,0 +1,51 @@
+b8ex.out:0CUMULATIVE REACTION cross section                 =    0.00000  <L> =    27.50  <L**2> =    746.0
+b8ex.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000    0.11050    0.38117    1.17424    2.55996    4.08344    4.92815
+b8ex.out:0CUMULATIVE outgoing cross sections in partition 2 :    0.00000
+be11.out:0CUMULATIVE REACTION cross section                 = 2751.16261  <L> =   107.87  <L**2> =  26462.8
+be11.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000 2327.25001
+cadprsc-n.out:0CUMULATIVE REACTION cross section                 = 1187.38469  <L> =     6.60  <L**2> =     50.5
+cadprsc-n.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000
+cadprsc-n.out:0CUMULATIVE outgoing cross sections in partition 2 :    2.48420
+cadprsc.out:0CUMULATIVE REACTION cross section                 = 1186.23842  <L> =     6.57  <L**2> =     50.1
+cadprsc.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000
+cadprsc.out:0CUMULATIVE outgoing cross sections in partition 2 :    2.45233
+dex.out:0CUMULATIVE REACTION cross section                 = 3388.93394  <L> =    18.24  <L**2> =    436.0
+dex.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000  202.04838  360.36057  210.71512  149.88486  114.93551   72.66373
+dex.out:0CUMULATIVE outgoing cross sections in partition 2 :    0.00000
+dexcc.out:0CUMULATIVE REACTION cross section                 = 3397.43781  <L> =    18.25  <L**2> =    436.2
+dexcc.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000  202.85026  362.26294  209.50798  149.09129  114.17418   71.57358
+dexcc.out:0CUMULATIVE outgoing cross sections in partition 2 :    0.00000
+e80f49b-n.out:0CUMULATIVE REACTION cross section                 =  104.19816  <L> =    16.67  <L**2> =    454.4
+e80f49b-n.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000    1.63092    6.47437    0.59963    0.96594
+e80f49b-n.out:0CUMULATIVE outgoing cross sections in partition 2 :    8.33966   10.67795    2.44198    2.07850    1.11349    0.80721
+e80f49b-n.out:0CUMULATIVE outgoing cross sections in partition 3 :   10.69840    3.17172
+e80f49b-n.out:0CUMULATIVE outgoing cross sections in partition 4 :   21.97499
+e80f49b.out:0CUMULATIVE REACTION cross section                 =  104.19821  <L> =    16.67  <L**2> =    454.4
+e80f49b.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000    1.63092    6.47437    0.59963    0.96594
+e80f49b.out:0CUMULATIVE outgoing cross sections in partition 2 :    8.33965   10.67794    2.44198    2.07850    1.11348    0.80721
+e80f49b.out:0CUMULATIVE outgoing cross sections in partition 3 :   10.69842    3.17172
+e80f49b.out:0CUMULATIVE outgoing cross sections in partition 4 :   21.97497
+f19xfs.out:0CUMULATIVE REACTION cross section                 = 1342.35560  <L> =    19.36  <L**2> =    437.5
+f19xfs.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000   16.28230
+f19xfs.out:0CUMULATIVE outgoing cross sections in partition 2 :    0.01322
+lane20.out:0CUMULATIVE REACTION cross section                 = 1141.61390  <L> =    14.90  <L**2> =    257.8
+lane20.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000   29.04315    2.01245
+li7p-EM.out:0CUMULATIVE REACTION cross section                 =    0.00000  <L> =     3.50  <L**2> =      8.5
+li7p-EM.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000
+li7p-EM.out:0CUMULATIVE outgoing cross sections in partition 2 :  6.733E-04
+li9tpss0.out:0CUMULATIVE REACTION cross section                 = 1032.70302  <L> =     6.74  <L**2> =     54.1
+li9tpss0.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000
+li9tpss0.out:0CUMULATIVE outgoing cross sections in partition 2 :    6.05868
+li9tpss0.out:0CUMULATIVE outgoing cross sections in partition 3 :    0.09111
+on2.out:0CUMULATIVE REACTION cross section                 =  437.08676  <L> =    14.26  <L**2> =    374.7
+on2.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000   50.79114
+xeta.out:0CUMULATIVE REACTION cross section                 =   42.95729  <L> =     2.56  <L**2> =      9.2
+xeta.out:0CUMULATIVE outgoing cross sections in partition 1 :    0.00000
+xeta.out:0CUMULATIVE outgoing cross sections in partition 2 :    0.02732
+na.out:  Total ChiSq/N = 26010.2997 from  76367.722   156.950  1506.227
+na.out:  ChiSq/N = 26010.300 from  76367.722   156.950  1506.227
+na.out:  Total ChiSq/N =   396.0237 from    556.112   109.286   522.673
+na.out:  ChiSq/N =   396.024 from    556.112   109.286   522.673
+ss.out:  Total ChiSq/N =    20.5232 from     20.523
+ss.out:  ChiSq/N =    20.523 from     20.523
+ss.out:  ChiSq/N =     9.817 from      9.817

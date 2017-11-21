@@ -1,0 +1,26 @@
+n+238U with MASLOV03, s=4 at E =002.500
+NAMELIST
+ &Fresco  hcm= 0.1 rmatch=  20.000
+    jtmin=   0.0 jtmax= 20 absend= 0.000001 
+    thmin=0.0 thinc=2 thmax=180. iblock=  4
+    chans= 1 smats= 2 xstabl= 1
+    elab=   2.50000  pel=1 exl=1 lab=1 lin=1 lex=1 /
+ 
+&Partition namep='n       ' massp=  1.008665 zp=  0 nex=  4
+            namet='    238U' masst=238.052170 zt= 92.0 qval=  0.000/
+&States jp= 0.5 ptyp= 1 ep=  0.000000  cpot=  1 jt= 0.0 ptyt= 1 et= 0.000000/
+&States copyp= 1                       cpot=  1 jt= 2.0 ptyt= 1 et=  0.0449/
+&States copyp= 1                       cpot=  1 jt= 4.0 ptyt= 1 et=  0.1484/
+&States copyp= 1                       cpot=  1 jt= 6.0 ptyt= 1 et=  0.3072/
+&Partition /
+ 
+&POT kp=  1 type = 0 shape= 0 p(1:3)= 238.0000   0.0000   0.0000/
+&POT kp=  1 type = 1 shape= 0 p(1:3)=  45.2336   1.2600   0.6300/
+&POT kp=  1 type =11 shape=13 p(1:6)=   0.0000   1.5226   0.0000   0.6091   0.0000   0.0000/
+&POT kp=  1 type = 2 shape= 0 p(1:6)=   0.0000   0.0000   0.0000   4.2300   1.2600   0.5200/
+&POT kp=  1 type =11 shape=13 p(1:6)=   0.0000   1.5226   0.0000   0.6091   0.0000   0.0000/
+&POT kp=  1 type = 3 shape= 0 p(1:6)=   6.2000   1.1200   0.4700   0.0000   1.1200   0.4700/
+&POT /
+
+ &Overlap /
+ &Coupling /

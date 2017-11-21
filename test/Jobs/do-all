@@ -1,0 +1,19 @@
+go cadprsc.job
+fresco <  cadprsc-n.in > cadprsc-n.out
+go xeta.job
+go lane20.job
+go f19xfs.job
+go f19xfs-n.job
+go on2.job
+go be11.job
+go 11be+He200na1.job
+go li9tpss0.job
+go b8ex.job
+go e80f49b.job
+go li7p-EM.job
+fresco <  e80f49b-n.in > e80f49b-n.out
+fresco <  dex.in > dex.out
+fresco <  dexcc.in > dexcc.out
+sfresco <  na.min > na.out
+sfresco <  ss.min > ss.out
+\rm for*.*

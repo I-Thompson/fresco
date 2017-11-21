@@ -1,0 +1,31 @@
+#
+# Run all files
+#
+set noglob
+
+echo Run fresco with $argv 
+echo \rm for*.*
+\rm for*.*
+
+foreach file ($argv)
+echo fresco \< $file
+fresco<  $file>!  $file:r.out
+\mv -f fort.16 $file:r.xsec
+#\mv -f fort.22 $file:r.wf
+\mv -f fort.7 $file:r.smats
+\mv -f fort.56 $file:r.fusl
+\mv -f fort.35 $file:r.sf
+\mv -f fort.75 $file:r.lsf
+\mv -f fort.40 $file:r.fus
+\mv -f fort.44 $file:r.phe
+# \mv -f fort.13 $file:r.xst
+# \mv -f fort.57 $file:r.cdcc
+\mv -f fort.58 $file:r.wfs
+# \mv -f fort.59 $file:r.vrt
+#\mv -f fort.90 $file:r.veff
+\mv -f fort.201 $file:r.xsel
+\mv -f fort.202 $file:r.xs2
+\mv -f fort.203 $file:r.xs3
+#\rm -f fort.3
+
+end

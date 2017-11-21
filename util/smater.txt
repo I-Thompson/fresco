@@ -1,0 +1,42 @@
+With notation $S^J_{L,L^\prime}$ for incoming L and outgoing L', 
+the IJIN,ILIN,IJ,IL notation means
+  IJIN,ILIN for incoming
+  IJ,IL for outgoing
+  P  projectile spin, T  target spin,
+  Coupling order  | (L,P)j, T; J> 
+ j = IJIN + (J-T)
+ L = ILIN + (j'-P)
+ j' = IJ + (J-T)
+ L' = IL + (j'-P)
+ 
+For the simple case of P=1 and T=0, then IJIN=IJ=0 always and j=J=j'
+
+So  
+ L = ILIN + (J-P) = ILIN + (J-1)
+ L' = IL + (J-P)  = IL   + (J-1)
+
+The order of the nonnull sets in the file:
+ #  31  S for IJIN,ILIN,IJ,IL = 0 0 0 0
+ #  31  S for IJIN,ILIN,IJ,IL = 0 0 0 2
+ #  31  S for IJIN,ILIN,IJ,IL = 0 1 0 1
+ #  31  S for IJIN,ILIN,IJ,IL = 0 2 0 0
+ #  31  S for IJIN,ILIN,IJ,IL = 0 2 0 2
+
+Or
+ILIN,IL = 0 0
+ILIN,IL = 0 2
+ILIN,IL = 1 1
+ILIN,IL = 2 0
+ILIN,IL = 2 2
+
+Or
+L,L' = J-1, J-1
+L,L' = J-1, J+1
+L,L' = J,   J
+L,L' = J+1, J-1
+L,L' = J+1, J+1
+
+Therefore the five blocks of numbers are in order
+$S^J_{J-1,J-1}$, $S^J_{J-1,J+1}$, $S^J_{J,J}$, 
+$S^J_{J+1,J-1}$ and $S^J_{J+1,J+1}$. 
+The numbers at the left of each block are int(J). 

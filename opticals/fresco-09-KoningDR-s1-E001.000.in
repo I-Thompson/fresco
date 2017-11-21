@@ -1,0 +1,25 @@
+n+89Zr with KoningDR, s=1 at E =001.000
+NAMELIST
+ &Fresco  hcm= 0.1 rmatch=  20.000
+    jtmin=   0.0 jtmax= 20 absend= 0.000001 
+    thmin=0.0 thinc=2 thmax=180. iblock=  1
+    chans= 1 smats= 2 xstabl= 1
+    elab=   1.00000  pel=1 exl=1 lab=1 lin=1 lex=1 /
+ 
+&Partition namep='n       ' massp=  1.008665 zp=  0 nex=  1
+            namet='    89Zr' masst= 89.000000 zt= 40.0 qval=  0.000/
+&States jp= 0.5 ptyp= 1 ep=  0.000000  cpot=  1 jt= 4.5 ptyt=-1 et= 0.000000/
+&Partition /
+ 
+&POT kp=  1 type = 0 shape= 0 p(1:3)=  89.0000   0.0000   0.0000/
+&POT kp=  1 type = 1 shape= 0 p(1:3)=  51.2614   1.2131   0.6646/
+&POT kp=  1 type =11 shape=13 p(1:6)=   0.0000   1.0562   0.0000   0.4225   0.0000   0.0000/
+&POT kp=  1 type = 1 shape= 0 p(1:6)=   0.0000   0.0000   0.0000   0.2043   1.2131   0.6646/
+&POT kp=  1 type =11 shape=13 p(1:6)=   0.0000   1.0562   0.0000   0.4225   0.0000   0.0000/
+&POT kp=  1 type = 2 shape= 0 p(1:6)=   0.0000   0.0000   0.0000   4.9456   1.2716   0.5299/
+&POT kp=  1 type =11 shape=13 p(1:6)=   0.0000   1.1071   0.0000   0.4428   0.0000   0.0000/
+&POT kp=  1 type = 3 shape= 0 p(1:6)=   5.9481   1.0405   0.5900  -0.0119   1.0405   0.5900/
+&POT /
+
+ &Overlap /
+ &Coupling /

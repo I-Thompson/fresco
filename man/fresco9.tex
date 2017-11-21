@@ -1,0 +1,3178 @@
+\documentclass[11pt,a4paper]{article}
+\input wider.sty
+\parindent 0pt
+\parskip 10pt
+\newcommand{\vecr}{{\bf r}}
+\newcommand{\veck}{{\bf k}}
+\newcommand{\vecR}{{\bf R}}
+\newcommand{\vecl}{{\bf l}}
+\newcommand{\vecL}{{\bf L}}
+\newcommand{\vecJ}{{\bf J}}
+\newcommand{\vecs}{{\bf s}}
+\newcommand{\vecx}{{\bf x}}
+\newcommand{\Vee}{{\sf V}}
+\newcommand{\brho}{{\mbox{\boldmath $\rho$}}}
+\newcommand{\half}{\frac{1}{2}}
+\begin{document}
+
+\title{\bf Coupled Reaction Channels Calculations\\
+in Nuclear Physics}
+
+\author{Ian J. Thompson\\
+%
+Department of Engineering Mathematics,\\
+Bristol University, Bristol, BS8 1TR, UK\\
+~\\
+Address after 1st August 1988:\\
+%
+Department of Physics, Surrey University, Guildford, GU2 5XH, UK}
+
+\date{Computer Physics Reports {\bf 7} (1988) 167-212 \\
+        Latex version of Jan 2000. With corrections to original article. \\
+        Reprinted \today   }
+\maketitle
+\begin{abstract}
+This paper describes the components and methods of a comprehensive
+code for coupled reaction channels calculations in nuclear physics.
+Procedures are described which are common to the modelling of reactions
+induced by light and medium-mass ions, and which are sufficient to
+calculate the effects of successive processes to any order.
+\end{abstract}
+% .sk 1i
+% %%.rc 3 on
+% Revisions after University of Bristol Report EM/NP/01
+% %%.rc 3 off
+% .sk 1
+% %%.rc 4 on
+%  %Revisions to text after first submission to Computer Physics Reports
+% %%.rc 4 off
+% .sk 1
+% %%.rc 5 on
+% Revisions to text after publication in Computer Physics Reports
+%%.rc 5 off
+%.se htitle ='Coupled Reaction Channels'
+%.se hauthor = 'I.J. Thompson'
+%.se SYSVARH = 'yes'
+%.se SYSVART = 'no'
+%.se SYSVARX = 'no'
+
+\section{Introduction}
+
+When two nuclei approach each other
+they may interact in several ways.
+In the first approximation they may be regarded as clusters of nucleons,
+and their primary interaction results from the inter-nucleon two-body force,
+which has an
+average effect found by folding the force over the internal configurations
+of the two clusters.
+However, these configurations are not static, and
+one or more rearrangement processes may occur during the
+time in which nuclei are together during a collision.
+As well as elastic scattering, with the projectile and the target
+remaining in their ground states,
+various kinds of non-elastic interactions may have time to operate.
+
+Inelastic excitations may occur, for example when one or both of the
+nuclei are deformed or deformable, with the result that
+higher-energy states of the nuclei may become populated.
+Single-particle excitations are another kind of inelastic
+process, when a particle in one of the nuclei is excited during the reaction
+from its initial bound state to another state which may be bound
+or unbound.
+Nucleons may also transfer from nucleus to the other, either singly,
+or as the simultaneous transfer of two nucleons as a particle cluster.
+
+In this paper I will consider some mathematical models sufficient to
+describe these processes, and the principal interest will be in calculating
+the effects of their occurring successively as multi-step
+processes.  One-step processes have been traditional described with the
+Distorted Wave Born Approximation (DWBA), and although second-order DWBA
+expressions can be written down and computed, I shall be mainly concerned
+with {\em coupled-channels} formalisms, in order to predict the
+effects of multi-step processes to any or all orders.
+
+The present work is in the framework of Direct Reaction theory, which
+attempts to solve the Schr\"odinger equation for a specific model
+of the components thought to be important in the reaction, and of their
+interaction potentials.
+In direct reaction theories, the phases describing the coherence
+of all components of the wave function are coherently maintained,
+and the potentials typically include imaginary components to model
+how flux is lost from the channels of the model to other channels.
+By contrast, a theory of compound-nucleus processes would make
+approximations as to the statistical distribution of the inelastic excitations.
+Direct reaction theory would describe these effects with an imaginary potential,
+with the argument that because the compound
+nucleus channels are incoherent with respect to each other, their effects
+back on the direct-reaction channels are also incoherent, and may hence be
+represented as a statistical loss of flux that occurs when the nuclei
+overlap each other to any significant extent.
+
+Comprehensive accounts of the physical assumptions, methods and results
+of direct reaction theory is given in the papers by Tamura et al. \cite{tam74},
+and in the books by Austern \cite{aust70} and Satchler \cite{SATCH83}.
+The aim of the present paper is to show how a large subset of the
+direct reaction mechanisms can be modelled in a general purpose computer
+program.  For definiteness, I am following the methods used in the recent
+code FRESCO, while also mentioning, where appropriate, additional features that
+could well be included within its framework. Brief descriptions will also be
+given of alternative methods, and the relative merits of the different
+procedures will be discussed.
+
+The code of ref.\cite{FRESCO} has not been developed to include any
+special treatment of the long-range Coulomb mechanisms that are significant
+when heavy ions are incident on strongly-deformed nuclei.
+For methods of
+dealing with these processes efficiently, the reader is referred
+to refs. \cite{AROSA},~\cite{AROSA2},~\cite{rbrown80}, and~\cite{PIECAN},~\cite{TOLSMA2}.
+
+The organisation of this paper is as follows. Section 2 will give a
+derivation of the coupled reaction channels (CRC) equations within the
+framework of the Feshbach formalism for direct reactions, and show how
+one-step and two-step DWBA (etc.) are special cases of the CRC equations. In
+both the CRC and DWBA formalisms, particular attention is paid to the
+treatment of the so-called `non-orthogonality terms' which arise
+with couplings between different mass partitions.
+
+The wave functions needed to specify scattering states and nuclear
+eigenstates are given in section 3. Single-nucleon wave functions are
+defined for both bound and unbound energies, and a method for solving the
+coupled-channels bound state eigen-problem is presented. Two-nucleon wave
+functions are described in both the centre-of-mass and independent-radii
+coordinates. Finally, the formulae are given for calculating the
+observable cross sections and polarisations in terms of the S-matrix
+elements of the scattering wave functions.
+
+Section 4 specifies some of the different kinds of potentials that exist
+between nuclei, or can couple together the excited states of a single
+nucleus because of the interaction with its reaction partner. Details of
+the rotational model, single-particle excitations and particle transfers
+are given.
+
+The methods used to solve the CRC equations are described in section 5,
+along with the procedures for calculating the transfer form factors in
+terms of a two-dimensional kernel function.
+Appendix A defines some of the notation and phase conventions used, while
+Appendix B summarises the more widely-known coupled-channels codes which
+have been written to solve problems in nuclear physics.
+%%.rc 4 off
+%%%% Introduction ends on page &$PN., at &$LC lines from end.
+%%%
+\section{Coupled Reaction Channels Formalism}
+%%%% CRC begins on page &$PN
+
+The coupled reaction channels (CRC) model of direct reactions in nuclear
+physics proceeds by constructing a model of the system wave function, and
+solving Schr\"odinger's equation as accurately as possible within
+that model space.  The model used here projects the complete wave function
+$\overline{\Psi }$ onto a product $\phi_i \equiv\phi_{ip} *\phi_{it}$
+of projectile and target states with a wave function $\psi_i (\vecR _
+i)$ describing their relative motion:
+\begin{eqnarray} \label{discsum}
+  P\overline{\Psi } \equiv\Psi = \sum _ i ^ N \phi_i\psi_i (\vecR_i)
+\end{eqnarray}
+The basis states $\phi_{ip}$ and $\phi_{it}$ can be bound states
+of their respective nuclei,
+or they may be discrete representations of continuum levels.
+In the former case we have a `bound state approximation',
+and in the second case we have a `coupled discrete continuum channels'
+\cite{CDCC,CDCC2} (CDCC) approximation.
+The states $\phi_i$ can be in different mass partitions, or they
+can be different excited states of the projectile and/or the target in any
+one of the partitions.
+What is essential to the CRC framework is that there be a finite set ($N$
+say) of square-integrable basis states, as this leads to a finite set of
+equations coupling the channel wave functions $\psi_i (\vecR _
+i)$ as unknowns.
+
+For a complete Hamitonian $\overline{{\cal H} }$ and total energy $E$,
+Schr\"odinger's equation $ [ \overline{{\cal H} } - E ]\overline{\Psi } = 0$
+becomes $ [ {\cal H} - E ]\Psi = 0$ in the model space with \cite{fesh58}
+\begin{eqnarray} \label{Fesh}
+ {\cal H} = P \overline{{\cal H} } P -
+  P \overline{{\cal H} } Q {1 \over {Q \overline{{\cal H} } Q - E - i \epsilon}} ~
+  Q \overline{{\cal H} } P ,
+\end{eqnarray}
+%%.rc 4 on
+where $Q \equiv 1 - P$ and $\epsilon$ is a positive infinitesimal quantity whose presence ensures that
+the excluded channels have a time-retarded propagator, and hence only
+{\em remove} flux from the model space.
+%%.rc 4 off
+The second term as a whole describes the effects of the excluded channels on
+the model subspace $ P\overline{\Psi } $.  These effects could be, for example,
+from compound nucleus formation, which we have excluded from explicit
+consideration within direct reaction theory.
+In the absence of detailled knowledge of these effects, we construct our
+model Hamiltonian ${\cal H}$ using effective potentials which we believe
+approximate (in some average manner) the processes described by equation
+(\ref{Fesh}). The effective potentials will often be optical potentials with
+real and imaginary components fitted to some simpler kinds of reactions,
+and the effects of compound nucleus formation on these potentials is to
+contribute to their imaginary component.
+
+The model Hamiltonian ${\cal H}$ for the CRC system can now be projected
+onto the individual basis states $\phi_i$. If $ E_i$
+is the asymptotic kinetic energy in the $i$'th channel, then the
+channel-projected Hamiltonian $ H_i $ satisfies
+\begin{eqnarray}
+H_i - E_i =\langle\phi_i | {\cal H} - E |\phi_i\rangle
+\end{eqnarray}
+and will be composed of a kinetic energy term and a diagonal optical
+potential.  The `interaction potential' $V_i$ is then
+defined to be everything in ${\cal H}$ not included in $ H_i$, so
+\begin{eqnarray}
+H_i - E_i + V_i = {\cal H} - E .
+\end{eqnarray}
+This construction gives $ V_i$ which have vanishing diagonal matrix
+elements $\langle\phi_i | V_i |\phi_i\rangle = 0 $.
+%%%
+\subsection{Coupled Equation Set for $N$ bound state pairs}
+
+If we take the model Schr\"odinger's equation
+$ [ {\cal H} - E ]\Psi = 0, $ and project separately onto the
+different basis states $\phi_i , $ we derive the set of equations
+\begin{eqnarray} \label{CRC1}
+\left [ E_i - H_i \right ]\psi_i ( \vecR_i ) =
+   \sum _ {j \neq i}
+         \left\langle\phi_i | {\cal H}-E |\phi_j \right\rangle
+         \psi_j ( \vecR_j ) .
+\end{eqnarray}
+which couple together the unknown wave functions $\psi_i (\vecR_i).$
+The matrix element $\langle\phi_i | {\cal H} - E |\phi_k\rangle $
+has two different forms, depending on whether we expand
+\begin{eqnarray}
+{\cal H} - E & =& H_i - E_i + V_i \mbox{ (the `post' form)} \nonumber \\
+             & =& H_j - E_j + V_j \mbox{ (the `prior' form)}.\nonumber
+\end{eqnarray}
+Thus
+\begin{eqnarray} \label{popr}
+ \left\langle\phi_i | {\cal H} - E |\phi_j \right\rangle & = &
+   V_{ij}^{\rm post} + [H_i - E_i ] K_{ij} {\rm (post)} \\
+  {\rm or } & =& V_{ij}^{\rm prior} + K_{ij} [H_j - E_j ]
+                      {\rm (prior)}  \nonumber
+\end{eqnarray}
+where
+\begin{eqnarray}
+  V_{ij}^{\rm post}  \equiv\langle\phi_i | V_i |\phi_j\rangle , ~~~
+   V_{ij}^{\rm prior}   \equiv\langle\phi_i | V_j |\phi_j\rangle , ~~~
+   K_{ij}              \equiv\langle\phi_i | \phi_j\rangle .
+\end{eqnarray}
+The overlap function $K_{ij} =\langle\phi_i |\phi_j\rangle $ in
+equation (\ref{popr}) arises from the well-known non-orthogonality between the
+basis states $\phi_i $ and $\phi_j $ if these are in
+different mass partitions. We will see below that this term disappears in
+first-order DWBA, and can be made to disappear in second-order DWBA, if
+the first and second steps use the prior and post interactions
+respectively.
+%%%
+\subsection{$N$-step DWBA}
+
+If the coupling interactions $ V_i $ in equation (\ref{popr}) are
+weak, or if the back coupling effects of these interactions are already
+included in the optical potentials of the prior channel, then it becomes
+reasonable to use a distorted wave Born approximation (DWBA). This
+approximation always feeds flux `forwards' in the sequence $ 1
+\rightarrow 2 \rightarrow \cdots \rightarrow N+1 $ neglecting the back couplings. In
+the elastic channel the wave function is governed by the optical potential
+defined there, and the wave function in the $i$'th channel is
+governed by the equation
+%%.rc 4 on
+\begin{eqnarray}
+\left [ E_i - H_i \right ]\psi_i ( \vecR_i ) =
+   \sum _ {j=1} ^ {j=i-1}
+         \left\langle\phi_i | {\cal H}-E |\phi_j \right\rangle
+         \psi_j ( \vecR_j )
+\end{eqnarray}
+%%.rc 4 off
+{\bf Initial channel:}
+%%.rc 4 on
+\begin{eqnarray} \nonumber
+\left [ E_1 - H_1 \right ]\psi_1 ( \vecR_1 ) = 0
+\end{eqnarray}
+%%.rc 4 off
+{\bf Second channel:}
+%%.rc 4 on
+\begin{eqnarray}
+\left [ E_2 - H_2 \right ]\psi_2 ( \vecR_2 ) =
+         \left\langle\phi_2 | {\cal H}-E |\phi_1 \right\rangle
+         \psi_1 ( \vecR_1 )
+\end{eqnarray}
+%%.rc 4 off
+If the {\em prior} interaction is used, the right hand side becomes
+\begin{eqnarray}  \nonumber
+    &=&\langle\phi_2 | V_1 |\phi_1\rangle\psi_1
+         + \langle\phi_2 |\phi_1\rangle [H_1 - E_1 ]\psi_1 \\
+    &=&\langle\phi_2 | V_1 |\phi_1\rangle\psi_1
+          \mbox{ as } \psi_1 \mbox{ is on-shell.} \\
+    &=& V_{21}^{\rm prior}                   \psi_1
+\end{eqnarray}
+{\bf Final channel: } ($c=N+1$)
+%%.rc 4 on
+\begin{eqnarray}
+\left [ E_c - H_c \right ]\psi_c ( \vecR_c ) =
+   \sum _ {j=1} ^{j=c-1}
+         \left\langle\phi_c | {\cal H}-E |\phi_j \right\rangle
+         \psi_j ( \vecR_j )
+\end{eqnarray}
+%%.rc 4 off
+If the {\em post} interaction
+had been used for all the couplings to this last channel, then
+%%.rc 4 on
+\begin{eqnarray}
+\left [ E_c - H_c \right ]\psi_c ( \vecR_c ) =
+   \sum_ {j=1} ^ {j=c-1}
+          \langle\phi_c | V_c |\phi_j\rangle\psi_j
+  + [H_c - E_c ]~   \sum_{j=1} ^ {j=c-1}
+          \langle\phi_c |\phi_j\rangle   \psi_j
+\end{eqnarray}
+%%.rc 4 off
+so
+%%.rc 4 on
+\begin{eqnarray}
+\left [ E_c - H_c \right ] \chi_c ( \vecR_c ) =
+   \sum_{j=1} ^ {j=c-1}
+           V_{cj}^{\rm post}                    \psi_j
+\end{eqnarray}
+%%.rc 4 off
+%%%           \langle\phi_c | V_c |\phi_j\rangle\psi_j
+where
+\begin{eqnarray} \nonumber
+   \chi_c ( \vecR_c ) & =&\psi_c
+         + \sum_{j=1} ^ {j=c-1} \langle\phi_c |\phi_j\rangle\psi_j \\
+    &=&\langle\phi_c |\Psi\rangle  \nonumber
+\end{eqnarray}
+Note that, as all the $\phi_j$ are square-integrable
+and hence decay faster than $r ^ {-1}$ at large radii,
+the $\psi_c$  and $\chi_c $
+are the same asymptotically.
+They differ only by an `off-shell transformation',
+and hence yield the same (on-shell) scattering amplitudes.
+The equation for $\chi_c$ has no non-orthogonality terms once
+the {\em post} interaction is used in the final channel:
+this is what is meant by saying that the final channel is
+`effectively on-shell'.
+
+These results imply that in $N$-step DWBA, some non-orthogonality terms
+can be made to
+disappear if `prior' interactions are used for the first step, and/or if
+`post' interactions are used for the final step.  This means that the
+non-orthogonality term never appears in the first-order DWBA, irrespective
+of the choice of prior or post forms.  In second-order DWBA, the
+prior-post combination must be chosen \cite{uda73}
+to avoid the non-orthogonality
+terms.  It should be also clear that non-orthogonality terms will have to
+be evaluated if the DWBA is continued beyond second order.
+%%%
+\subsection{Full CRC solution by iteration}
+\label{nono}
+%.se nono = &@xref
+%%%% Nono section is &nono
+
+There are a number of different ways of solving the CRC equations with the
+non-orthogonality terms present: for discussions of different approaches see refs.
+\cite{iman74}, \cite{CV} and the survey of ref.[ch. 3]\cite{SATCH83}.
+
+There are schemes available which can
+iterate all channels with an arbitrary choice of post or
+prior interactions for all the couplings.
+Define
+\begin{eqnarray}
+\theta_{ij} & = & \mbox{ 0 or 1 : presence of post on the }
+                                 j \rightarrow i \mbox{ coupling,}
+ \\
+ \mbox{ so } 1 - \theta_{ij} & = &\mbox{ 1 or 0 : presence of prior}.
+\end{eqnarray}
+
+The following iterative scheme
+\cite{OSAKA}
+($n$=1,2,..) on convergence then solves the CRC equations (\ref{CRC1}):\\
+
+{\bf For $n$ =0}, start with
+\begin{eqnarray}
+\psi_i^{(0)} & = &\delta(i,i_0)\psi_{\rm elastic}
+\\
+  \delta S_i^{(0)} & = &\delta\psi_i^{(0)} = 0
+\end{eqnarray}
+{\bf For $n =1\rightarrow N+1$} (for $N$-step DWBA) solve
+\begin{eqnarray}
+ [ H_i - E_i ] \chi_i^{(n)} + S_i^{(n-1)} = 0
+\end{eqnarray}
+with
+\begin{eqnarray}
+S_i^{(n-1)} = \sum _ j
+   [ \theta_{ij} V_{ij}^{\rm post} + (1 - \theta_{ij} ) V_{ij}^{\rm prior} ] ~
+        \psi_j^{(n-1)} - \delta S_i^{(n-1)}
+\end{eqnarray}
+then calculate for subsequent iterations
+\begin{eqnarray}
+ \delta\psi_i^{(n)} &=& \sum _ j  \theta_{ij}
+                            \langle\phi_i |\phi_j\rangle\psi_j^{(n-1)}
+\\
+ \delta  S _i^{(n)} &=& \sum _ j  (1-\theta_{ij})
+                            \langle\phi_i |\phi_j\rangle
+                    [ S_j^{(n-1)} + [H_j - E_j ] \delta\psi_j^{(n)} ]
+\\
+\psi_i^{(n)} &=& \chi_i^{(n)} - \delta\psi_i^{(n)}
+\end{eqnarray}
+This scheme avoids numerical differentations except in an higher-order
+correction to $\delta S_i $ that arises in some circumstances.
+
+When the non-orthogonality terms are included properly, it becomes merely
+a matter of convenience whether post or prior couplings are used,
+for one, two, and multistep calculations.
+The equivalence of the two coupling forms can be confirmed in practice
+(see, for example, refs.\cite{OSAKA}, and \cite{lill83}),
+and used as one check on the accuracy of the numerical methods employed.
+%%%
+\section{Wave Functions for Scattering and Bound States}
+%%%
+%%.rc 4 on
+
+In order to describe details of the nuclear transitions realistically,
+it is necessary to specify in sufficient detail the initial and final
+states of the nuclei involved. To start with, the excitation energies,
+spins and parities of all the states in each mass partition need to be
+specified, along with the nuclear masses, charges and relative
+$Q$-values of the partitions.  Each {\em pair} projectile and target
+excited states is then a distinct channel with its own scattering wave
+function and boundary conditions. The initial projectile and target states
+will select one such channel as the `incoming channel', with its
+boundary conditions specifying an incoming plane wave. All channels
+(including the incoming channel) will have outgoing spherical waves.
+Particular attention must be given to the consistent
+placement of $ i^L $ factors in these definitions.
+
+The individual nuclear states are then specified in sufficient
+detail for the particular reaction mechanisms involved. It is not
+necessary to specify the full quantum mechanical states of all the
+nucleons in the nucleus, but rather, only the states of those changed in the
+reactions being considered. In particular, one and two-nucleon wave
+functions will have to be described, if those nucleons are to be
+transferred to other nuclei.  If a nuclear state consists of a particle of
+spin $s$ bound outside a nucleus with possible core states
+$\phi_I $, then the bound state radial wave functions
+$ u_{\ell s j I} (r) $ will have to be found by solving a
+coupled-channels set of equations for negative energy eigen-solutions. If
+the particle is {\em not} bound, in the other hand, then its continuum range of
+energies must be discretised into a finite collection of `bin'
+states which can be scaled to unit normalisation.
+If the nuclear state consists of two particles of intrinsic spins
+$ s_1 $ and $ s_2 $ outside a core,
+then it is usually specified by a
+shell-model or by a Sturmian-basis calculation in terms of the independent
+coordinates $ \vecr_1 $ and $ \vecr_2 $.
+To calculate transfer rates, however, the two-particle wave
+functions need to be given in terms of the collective coordinates
+(usually $ \vecr =\half ( \vecr_1 + \vecr_2 ) $ and
+$ {\brho} = \vecr_1 - \vecr_2 $).
+In order to use the states in a reaction calculation, therefore, equations are given
+for the transformation from the independent coordinates.
+
+When we have calculated the scattering wave functions, or at least their
+asymptotic parts in terms of their $S$-matrix elements, we can find the
+cross sections for each outgoing pair of projectile and target states in
+each partition. Furthermore, if the initial projectile has non-zero spin
+$ J_p $, then the effect on these cross sections of polarisation
+of the projectile is specified by the tensor analysing powers
+$ T_{kq} $ (for $ 1 \leq k \leq 2J_p $
+and $ 0 \leq q \leq k $).
+Integrated cross sections and fusion polarisations can also be found using
+the $S$-matrix elements.
+%%.rc 4 off
+%%%
+%%% \subsection{Total wave function $\Psi$}
+\subsection{Total wave function}
+
+In each partition $\kappa$ of the system into a projectile of mass
+$ A_{\kappa p}$ and a target of mass $ A_{\kappa t} $,
+the coupling order is
+\begin{eqnarray} \label{spinrep}
+  \vecL + \vecJ_p = \vecJ ;~~~ \vecJ + \vecJ_t =  \vecJ_T ,
+\end{eqnarray}
+which may be defined by writing
+\begin{eqnarray}
+ \Psi_{\kappa J_T}^{M_T} =
+  \left | ~(L~J_p )J, J_t ; J_T \right\rangle
+\end{eqnarray}
+where
+$ J_p$
+= projectile spin,
+$ J_t$
+= target spin,
+$ L$
+= orbital partial wave, and
+$ J_T$
+= total system angular momentum.
+
+The set $\{\kappa pt,~(L~J_p )J, J_t ; J_T \} $
+will be abbreviated by the single variable $\alpha$.
+Thus, in each partition,
+\begin{eqnarray} \nonumber
+\Psi_{\kappa J_T}^{M_T}
+   \left ( \vecR_\kappa , \xi_p , \xi_t \right )=
+ \sum_{\begin{array}{cc}L J_p J J_t\\M \mu_p M_J \mu_t\end{array}}
+  & \phi_{J_p} ( \xi_p )~\phi_{J_t} ( \xi_t )~
+      i^L Y_L^M ({\hat \vecR_\kappa} ) {1 \over {R_\kappa}} ~
+        f^{~\kappa J_T}_{(LJ_p )J,J_t} (R_\kappa)
+\\
+&  \left\langle LM J_p \mu_p | JM_J \right\rangle
+        \left\langle JM_J  J_t \mu_t | J_T M_T \right\rangle\label{Psieq}
+\end{eqnarray}
+here $ \vecR_\kappa $
+= radial coordinate {\em from} the target {\em to} the projectile
+in partition $\kappa$, $ \xi_p$
+= internal coordinates of projectile,
+$ \xi_t$
+= internal coordinates of target, and
+\begin{eqnarray}
+f^{~\kappa J_T}_{(LJ_p )J,J_t} (R)
+ \equiv f _\alpha (R)
+\end{eqnarray}
+are the radial wave functions.
+The $i^L$ factors arise from the spherical Bessel expansion of the
+incoming plane wave.  Some formalisms include extra powers of $i$
+in the equation (\ref{Psieq}), in order to make the coupling interactions
+$V_{\alpha :\alpha'} $ real.
+Inelastic coupling interactions can be made real (for integer-valued spins,
+at least), by including a factor $i^{J_p + J_t} $ in the
+definition of $\Psi$, and transfer couplings can be made real by including
+a factor $i^ \ell $ for {\em orbital} angular momentum
+$\ell$ of the bound particle state in this partition.
+In a general purpose code \cite{FRESCO}, however,
+there may be clashes between these different conventions. The ground state
+of $^7$Li, for example, would have a factor of $i^ {3/2} $
+on the rotational model convention, but a factor of $ i^1 $
+if the state were regarded as a $ \ell = 1 $ bound state of a $\alpha$ core
+and a triton cluster.
+It seems simplest, therefore, to omit these addition phase factors completely.
+The coupling interactions can very often be made real, nevertheless,
+if the $ i ^ L $ factors are included explicitly in the CRC equations,
+as in the next section.
+
+The wave function $\Psi$ could also have been defined using the `channel
+spin' representation (as in \cite{OUKID})
+$\Psi = | L, (J_p J_t)S; J_T\rangle $,
+which is symmetric upon projectile $\rightarrow$ target interchange except for
+a phase factor $ (-1)^{S - J_p - J_t} $.
+This would simplify the subsequent description of the coupling elements in
+section 4, as the formulae for projectile mechanisms and target mechanisms
+would differ only by this phase factor.  However, the channel spin
+representation has the disadvantage that the projectile spin-orbit force
+is not diagonal in this basis.  This would not matter if coupled-channels
+solutions were always sought, but one of the advantages of sometimes
+solving the CRC equations iteratively is that the DWBA solutions of first and
+second order (etc.) may be obtained. In order for the partially-iterated
+CRC solutions to reproduce the results of DWBA codes, it is necessary to
+treat spin-orbit forces without approximation, and since spin-orbit forces
+almost always are those of the projectile, the asymmetric representation
+of channel (\ref{spinrep}) is advisable.
+%%%
+\paragraph{Identical Nuclei}
+
+If one partition ($\kappa$ say)
+is identical to another $\kappa$ except that the projectile
+and target nuclei are exchanged,
+then the total wave function should be formed from
+$(1 + \pi P_{\kappa\kappa'}) $ times the above expression,
+where $\pi =\pm1$ is the intrinsic parity of the two nuclei under
+exchange.
+A simple method of dealing with this exchange is to first form the
+wave function of equation (\ref{Psieq}), and then operate with
+$(1 + \pi P_{\kappa\kappa'}) $
+on both the wave functions and the S-matrix elements,
+before cross sections are calculated.
+This is equivalent to the replacement
+\begin{eqnarray}
+{f _\alpha (R) \leftarrow f _\alpha (R) + c_{\alpha ,\alpha'} f_{\alpha'} (R) }
+\end{eqnarray}
+where
+\begin{eqnarray}
+c_{\alpha ,\alpha'}  =
+     \pi (-1)^L \delta_{L,L'} (-1)^{J_T + L - J - J'}
+     \hat{J} \hat{J'} W(J_p L' J_T J_t ; J J')
+\end{eqnarray}
+with $\alpha' = | (L' J_t)J' , J_p ; J_T\rangle $.
+
+\subsection{Coupled equations}
+%.se RK = 'R_\kappa'
+%.se RKP = ' ( R_\kappa )'
+\newcommand{\RK}{{(R_\kappa)}}
+\newcommand{\RKP}{{(R_{\kappa'})}}
+
+The CRC equations are in many cases of the form
+\begin{eqnarray} \nonumber
+\left [ E_{\kappa pt } - T_{\kappa L } \RK - U_\kappa \RK \right ]
+       f_\alpha \RK  &=& \sum_{\alpha' , \Gamma> 0 }
+           { i ^ {L' - L} ~
+           V^\Gamma_{\alpha :\alpha' } \RKP  f_{\alpha'} \RKP }
+\\
+  &+ & \sum_{\alpha' ,\kappa' \neq\kappa } i ^ {L' - L} ~
+   {\int_ 0 ^ {R_m }
+     { V_{\alpha :\alpha' }( \RK , {R_{\kappa'}} )
+          f_{\alpha'} (R_{\kappa'})
+            d R_{\kappa'} }}\label{CRC}
+\end{eqnarray}
+where the kinetic energy term is
+\begin{eqnarray}
+   T_{\kappa L} (R) = - {\hbar^2 \over {2 \mu_\kappa}} ~
+       \left ( {d^2 \over dR^2} - {{L(L+1)} \over R^2} \right ) ,
+\end{eqnarray}
+$U_\kappa (R_\kappa)$ is the diagonal optical potential
+with nuclear and Coulomb components,
+%%.rc 4 on
+and $R_m$ is a radius limit larger than the ranges of
+$U_\kappa (R_\kappa)$ and of the coupling terms.
+%%.rc 4 off
+The equations (\ref{CRC}) are in their most common form:
+they become more complicated when
+non-orthogonalities are included by the method of section \ref{nono}.
+The $   V^\Gamma_{\alpha :\alpha' } \RKP $ are the local
+coupling interactions of multipolarity $\Gamma$, and the
+$ V_{\alpha :\alpha' }( R_\kappa , {R_{\kappa'}} ) $
+are the non-local couplings between mass
+partitions that arise from particle transfers.
+
+For incoming channel $\alpha_0$, the
+$ f_\alpha \RK$
+satisfy the boundary conditions
+\begin{eqnarray} \label{asymp}
+ f_\alpha \RKP = _ {R_\kappa > R_m }
+  {i \over 2} \left [ \delta_{\alpha\alpha_0 }
+             H^{(-)}_{L {\eta _\alpha}} ( K_\alpha \RK )
+    - S_{\alpha_0\alpha }
+             H^{(+)}_{L {\eta _\alpha}} ( K_\alpha \RK )
+      \right ]
+\end{eqnarray}
+where
+$ H^{(-)}_{L \eta}$
+and
+$ H^{(+)}_{L \eta}$
+are the Coulomb functions \cite{COULCC}
+with incoming and outgoing boundary conditions
+respectively.
+The asymptotic kinetic energies are
+\begin{eqnarray}
+     E_{\kappa pt} = E + Q_\kappa - \epsilon_p - \epsilon_t
+\end{eqnarray}
+for excited state energies
+$ \epsilon_p , \epsilon_t$
+and Q-value $ Q_\kappa$
+in partition $\kappa$, and
+\begin{eqnarray}
+   K_\alpha = \sqrt {\left [ {2 \mu_\kappa} \over {\hbar^2}
+                      E_{\kappa pt}  \right ] }
+                      \end{eqnarray}
+where
+$
+\mu_\kappa =
+  A_{\kappa p} A_{\kappa t} / (A_{\kappa p} +  A_{\kappa t})
+$
+is the reduced mass in the channel with partition $\kappa$,
+and
+\begin{eqnarray} \label{EQeta}
+  \eta _\alpha = {{2 \mu_\kappa} \over \hbar^2} ~
+            { Z_{\kappa p} Z_{\kappa t} e^2  \over 2 K _\alpha }
+\end{eqnarray}
+is the Sommerfeld parameter for the Coulomb wave functions.
+%%%
+\subsection{Single-nucleon states}
+
+If $\phi_{JM} ( \xi ) $ is a core+particle bound state, then for coupling
+order $ \left | ( \ell s)j,I;~JM \right\rangle , $
+the wave function is
+\begin{eqnarray}
+ &&\phi_{JM} ( \xi_c , \vecr) =
+   \sum_{\ell jI}  A_{\ell sj}^{jIJ} ~
+     \left [\phi_I (\xi_c)  \varphi_{\ell sj} (\vecr) \right ]
+     _{JM}
+\\
+   &=&
+   \sum_{ {\ell jI} ,{m \mu m_s m_\ell}}
+     A_{\ell sj}^{jIJ} \left\langle jmI \mu | JM \right\rangle
+    \phi_{I \mu} (\xi_c )
+              \left\langle \ell m_\ell s m_s | jm \right\rangle
+        Y_\ell^{m_\ell} ( \hat \vecr)\phi_s^{m_s}
+        \frac{1}{r} u_{\ell sjI} (r) \nonumber
+\end{eqnarray}
+where $ \xi_c $ = core internal coordinates,
+      $\phi_{I mu} (\xi_c ) $ = core internal state,
+      $\phi_s^{m_s} $ = particle internal spin state,
+      $ u_{\ell sjI} (r) $ = particle core radial wave function,
+and
+$A_{\ell sj}^{jIJ}$ is the coefficient of fractional parentage.
+
+\subsubsection{Bound States}
+
+If the single-particle is bound at negative energy $E$ around the core,
+then its wave function may be found as the eigen-solution of a
+given potential:
+%%.rc 4 on/off
+\begin{eqnarray}
+ [ T_\ell (r) + V (r) + \epsilon_I - E ]  u_{\ell sjI} (r)
+    + \sum_{\ell' j' I', ~\Gamma>0 }
+       V^\Gamma_{\ell sjI : \ell' s j' I' } (r)
+            u_{\ell' s j' I'} (r) = 0
+\end{eqnarray}
+with boundary conditions $ u_{\ell sjI} (0) = 0 $ and,
+as $ r \geq R_m $, of
+$ u_{\ell sjI} (r) \propto W_{\ell} (k_I r) $
+where $ W_\ell (\rho) $ is the Whittaker function
+and $ k_I^2 = { 2 \mu |E - \epsilon_I | / \hbar^2 } $
+is the asymptotic wave number.
+
+If the core cannot be excited, then these coupled equations reduce
+to one uncoupled equation,
+but solving this equation can still be regarded as a special case of the
+coupled bound state problem.
+Eigen-solutions can be found by solving either for
+the bound state energy $E$, or by varying the depth of the binding potential.
+In general, however, we can choose to vary any multipole of any part of
+the binding potentials (except the Coulomb component), so one method
+of solving the full coupled bound-state problem will be outlined below.
+
+To define the phase ($\pm 1$) of the overall wave function, some
+convention has to be adopted.
+One component (say that around a core $I=0$ state)
+can be set to either positive towards the origin ($r\rightarrow 0$),
+or positive towards large distances ($r\rightarrow \infty$).
+The former choice is made in the FRESCO code,
+following the Mayer-Jensen phase convention,
+which is also used for harmonic oscillator
+wave functions in many structure calculations.
+%%%
+\subsubsection{Solution of the Coupled-Channels Eigenvalue Problem}
+
+When, for example, the problem is to find the bound state of a particle in
+a deformed potential, then
+several channels with different angular momenta will be coupled together.
+There are various techniques for calculating the wave functions of these bound states:
+for a review see ref. \cite{ogle71}.
+The Sturmian expansion method \cite{Sturm}
+can be used, or the coupled equations can be solved iteratively.
+The Sturmian method has the advantage that {\em all} solutions in the
+deformed potential are found, where sometimes the
+iterative method has difficulty in converging to a particular solution if there
+are other permitted solutions near in energy.
+%%.rc 4 on
+The iterative method has the advantage that the radial wave functions
+(once found) are subject only to the discretisation error for the
+Schr\"odinger's equation, and are not dependent on the
+(time-consuming) diagonalisation
+of large matrices, often of the order of 100 or more.
+As they satisfy the correct boundary conditions independently of the size
+of a basis-state set,
+the radial wave functions of the iterative method therefore more accurately reflect
+the details of the coupling potentials and of the core excitation energies.
+As nuclear reactions are often confined to the surface region,
+it is important to satisfy the exterior boundary conditions
+as accurately as possible.
+%%.rc 4 off
+
+A method for solving the uncoupled eigenstate problem has to be
+included in a reaction code in any case,
+and since it can be generalised as described in this section
+to solving the coupled problem, it seems a worthwhile facility to have available.
+Bound states from a previous Sturmian solution can still be included as explicit
+linear combinations of the single particle (uncoupled) basis states used in the
+Sturmian expansion.
+
+The general problem of finding eigen-solutions of a set $M$
+coupled-channels equations can be represented as the problem of finding
+$\lambda$ such that the equations
+\begin{eqnarray} \label{bseq}
+\left [ {d^2 \over dr^2} -
+        {\ell_i (\ell_i + 1) \over r^2} \right ]
+ \psi_i (r)
+ + \sum _ {j=1} ^M \left [ U_{ij} (r) + \lambda V_{ij} (r) \right ]
+  \psi_j (r) = 0
+\end{eqnarray}
+with boundary conditions
+\begin{eqnarray}
+ \psi_i (R) &=& a_i W_{\ell_i \eta_i} (k_i R)  \\
+ \psi_i (R + \delta R) &=& a_i W_{\ell_i \eta_i} (k_i
+                              (R + \delta R))\\
+ \psi_i (0) &=& 0
+\end{eqnarray}
+(with $k_i^2 \equiv\kappa^2_i + \theta \lambda$ and
+ $\eta_i \equiv {nu_i} / (2 k_i)$)
+for given partial waves $\ell_i ,$ fixed potentials
+$U_{ij} (r),$ variable potentials $V_{ij} (r),$
+matching radius $R$,
+and Coulomb proportionality constants $\nu_i$.
+%%.rc 4 on
+The energy constants $\kappa^2_i$ are the asymptotic components
+of the diagonal $U_{ii} (r) $, and $\theta$ is the asymptotic component
+of the diagonal $V_{ii} (r) $ (assumed all equal).
+%%.rc 4 off
+
+The solution begins by constructing the trial integration functions for a
+trial value of $\lambda$, on either side of an intermediate matching point
+$r = \rho $:
+
+$f_{i;j}^{\rm in} (r)$ by integrating $r$ from $h$ to $\rho$,\\
+starting with $f_{i;j}^{\rm in} (h) = \delta_{i,j} ~
+  h^{\ell_i + 1} / (2 \ell_i + 1)!! $,
+and
+
+$f_{i;j}^{\rm out} (r)$ by integrating $r$ from $R$ in to $\rho$,\\
+starting with $f_{i;j}^{\rm in} (R) = \delta_{i,j} ~
+  W_{\ell_i \eta_i} (k_i (R + \delta R)). $
+
+The intermediate point $r = \rho $ should be chosen where the
+wave functions are oscillatory, to avoid having to integrate outwards in
+the classically forbidden region.
+
+The solution is therefore
+\begin{eqnarray} \label{eigencomp}
+\psi_i (r) = \left \{ \begin{array}{ll}
+                    \sum _ j  b_j f_{i;j}^{\rm in} (r)
+                         \mbox{  for } r < \rho \\
+                    \sum _ j c_j f_{i;j}^{\rm out} (r)
+                         \mbox{  for } r \geq \rho ,
+                      \end{array} \right. ~
+\end{eqnarray}
+and the matching conditions are the equality of the two expressions and
+their derivatives at $ r = \rho $. The normalisation is still
+arbitrary, so we may fix $ c_1 = 1$. In general the
+equations (\ref{bseq}) have no solution as $\lambda$ is not exactly an eigenvalue.
+The method therefore uses the discrepancy in the matching conditions to
+estimate how $\lambda$ should be changed to $\lambda+\delta\lambda$ to
+reduce that discrepancy, and iterates this process to reduce $\delta\lambda$.
+
+Thus at each iteration we first solve as simultaneous equations the
+2$M$-1 of the matching conditions
+\begin{eqnarray}
+      \sum _ j  b_j f_{i;j}^{\rm in} (\rho)
+&=& \sum _ j  c_j f_{i;j}^{\rm out} (\rho) \mbox{  for all } i
+\\
+      \sum _ j  b_j f_{i;j}^{\rm in} (\rho)'
+&=& \sum _ j  c_j f_{i;j}^{\rm out} (\rho) \mbox{  for all } i \neq 1
+\end{eqnarray}
+along with $c_1 =1$ for the 2$M$ unknowns $b_i , c_i$. If the function
+$\psi_i (r) $ is then constructed using equation (\ref{eigencomp}),
+there will be a discrepancy as
+\begin{eqnarray}
+\psi'_ {\rm in}  \equiv\psi_1 (r)  | _ {r< \rho}  ~~~ \neq ~~~
+\psi'_ {\rm out} \equiv\psi_1 (r)  | _ {r> \rho} ,
+\end{eqnarray}
+and this difference will generate $\delta \lambda$ via
+\begin{eqnarray}
+\delta \lambda \sum _ {ij} ^ M
+   \int_ 0 ^ R \psi_i (r) V_{ij} (r)\psi_j (r) dr
+=\psi_1 (\rho) [ \psi'_ {\rm out} -\psi'_ {\rm in} ].
+\end{eqnarray}
+
+It is necessary while iterating in this manner to monitor the number of
+nodes in one or more selected components of the wave function,
+as in general a given potential will have different eigensolutions with
+different numbers of radial nodes.  When the iterations have converged to
+some accuracy criterion on the size of $\delta\lambda$, the set of wave
+functions can be normalised in the usual manner:
+\begin{eqnarray}
+   \sum _ i ^ M \int _ 0 ^ \infty
+      | \psi_i (r)| ^2 dr  = 1
+\end{eqnarray}
+and perhaps some of the components $i$ omitted if their contribution to
+this norm is below some preset threshold.
+
+%%%
+\subsubsection{Continuum States}
+%%%
+%%%
+
+If the initial and/or final single-particle states of a transfer step
+are unbound $E - \epsilon> 0$, the use of single energy eigenstates
+$\phi_k (r)$ will result in calculations of the
+transfer form factors which will not converge, as the continuum wave
+functions do not decay to zero as $ r \rightarrow \infty$
+sufficiently fast as to have square norms.
+One way \cite{CDCC}, \cite{CDCC2}
+of dealing with this divergence is to take continuum states
+not at a single energy, but averaged over a range of energies.
+These `bin' states that result {\em are} square integrable,
+and if defined as
+\begin{eqnarray} \label{binwf}
+ \Phi (r) &=& \sqrt {2 \over \pi N} ~~
+            \int_ {k_1} ^ {k_2} w(k)\phi_k (r) dk
+\\
+\mbox{ with } N &=& \int_ {k_1} ^ {k_2} |w(k)| ^ 2 dk
+\end{eqnarray}
+for some weight function $w(k)$,
+then they are normalised $\langle\Phi |\Phi\rangle = 1 $
+provided a sufficiently large maximum radius for $r$ is taken,
+and that the
+$\phi_k$ are eigensolutions of a potential which is
+energy-independent.
+They are orthogonal to any bound states, and are orthogonal to other bin
+states if their energy ranges do not overlap.
+The construction can be easily generalised to give coupled-channels
+bin wave functions.
+
+The weight function $ w(k) $ is best chosen
+(\cite{CDCC2} p. 148)
+to include some of the effects known to be caused by the variation of
+$\phi_k (r) $ within the bin range
+$ k_1 \leq k \leq k_2 $.
+If $ w(k) = \exp ( - i \delta_k ) $, where $\delta_k$
+is the scattering phase shift for $\phi_k (r) $,
+then it includes the effects of the overall phase variations
+of $\phi_k  $, at least in the
+DWBA limit.
+If, however,
+$ w(k) = \exp ( - i \delta_k ) \sin {\delta_k}
+         \equiv T_k^* $, where $T_k$
+is the $T$-matrix element for $\phi_k (r) $,
+then it includes in addition a scale factor which is useful if the
+$ | T_k | $ varies significantly, as it does, for example, over
+resonances. Both choices result in a real-valued wave function
+$\Phi (r) $ (for real potentials), which is computationally
+advantageous.
+%%.rc 4 off
+
+If the maximum radius ($R_m $ say) is not sufficiently large,
+then the wave functions $\Phi$ will not be normalised to unity by the factors
+given in equation (\ref{binwf}).
+The rms radius of a bin wave function increases as the bin width
+$k_2 - k_1 $ decreases, approximately as
+$1/(k_2 - k_1)$.
+These bin constructions can be used to describe the narrow resonant wave
+functions of say the $3^+$ state in $^6$Li,
+or the $ 7/2^-$ state in $^7$Li,
+but these states will require a large limiting radius $R_m $
+unless the
+$ w(k) = T_k^* $ weighting factor is used to emphasise
+the increase in the interior wave function over the resonance.
+The $ 3^+ $ state in $^6$Li at 0.71 MeV, for example, for which the
+resonance width is approximately 40 keV, yields the normalisations shown in
+\ref{bins}. It can be seen that without a scale factor which
+emphasises the resonance peak, very large radii $ R_m$ will be
+needed to obtain unit normalisation.
+
+\begin{figure}
+\label{bins}
+\begin{tabular}{c|cccc}
+$R_m$ & $\delta E = 0.1$ MeV &&$\delta E = 0.5$ MeV& \\
+(fm)& $e^{-i \delta_k}$& $T_k^* $ & $e^{-i \delta_k}$ & $T_k^* $\\
+\hline
+10&0.105&0.923&0.108&0.977\\
+20&0.109&0.939&0.132&0.985\\
+40&0.112&0.951&0.258&0.993\\
+80&0.122&0.971&0.411&0.996\\
+160&0.142&0.986&0.614&0.998\\
+\hline
+\end{tabular}
+%%% \caption{Normalisations &\|.$\Phi$.&\| of a continuum bin state.
+\caption{Normalisations of a continuum bin state.
+For this $ 3^+ $ state in $^6$Li at 0.71 MeV,
+Saxon-Woods potentials were used with $V$ = 77.05 MeV,
+$R$ = $R_c$ = 1.2 * 4$^{1/3}$ fm., and $a$ = 0.65 fm.}
+\end{figure}
+%%.rc 4 off
+%%%
+\subsection{Two-particle bound states}
+\label{NNBS}
+%.se NNBS = &@xref
+%%%
+\subsubsection{Centre-of-mass coordinates}
+
+If $\phi_{JT} (\xi_c , \vecr , {\brho} ) $ is a two-particle
+bound state with total spin {\bf J} and isospin $T$, then for coupling order
+$ \left | \{~L , (\ell , (s_1 s_2) S ) j \}
+           J_{12} , I ;~J \right\rangle $
+we have
+\begin{eqnarray} \nonumber
+  \phi_{J M} =
+    \sum_{\begin{array} {ccc} L  \ell S\\j  J_{12} I\end{array}}
+     && A_{L j J_{12}}^{J_{12} I J} ~
+       \phi_{I \mu_I} (\xi_c)  .
+       \phi_{s_1}^{\sigma_1} ~\phi_{s_2}^{\sigma_2} ~
+        Y_{L}^{\Lambda} ( \hat\vecr ) ~
+        Y_\ell^\mu (  \hat {\brho} ) ~
+        {1 \over r \rho} u_{12} (r, \rho)
+\\  \label{tntwf}
+    &&\langle J_{12} M_{12}  I \mu_I | J M\rangle
+       \langle L \Lambda j m_{12} | J_{12} M_{12}\rangle
+       \langle \ell \mu S \Sigma         | j m_{12}\rangle
+       \langle s_1 \sigma_1 s_2 \sigma_2  | S \Sigma\rangle
+\end{eqnarray}
+where
+$ A_{L j J_{12}}^{J_{12} I J} $ is the coefficients of fractional parentage,
+ and $\phi_{s_1}^{\sigma_1} ~\phi_{s_2}^{\sigma_2}$ are the
+intrinsic spins of the two particles.
+
+Note that two neutron transfer can be viewed as the transfer of a
+`structured particle'
+$  ( \ell , (s_1 s_2) S ) j  $, and then becomes similar to single-particle transfers of above.
+
+The radial wave function $u_{12} (r, \rho) $
+can be given either as a cluster product of single-particle wave functions
+$ u_{12} (r, \rho)  =\Phi_L (r)\phi_\ell (\rho), $
+or input directly as a two-dimensional distribution e.g. from a Faddeev bound-sate
+calculation, or calculated from the
+correlated sum of products of single-particle states, as in the next section.
+\subsubsection{Independent Coordinates}
+
+Two-particle states from shell-model calculations or from Sturmian-basis
+calculations \cite{vaag79}, and are then usually described by means of the
+$ | \vecr_1 , \vecr_2\rangle $
+coordinates, and then transformed internally into the centre-of-mass coordinates
+$ | \vecr ,  {\brho} \rangle $ of equation (\ref{tntwf})
+using $ \vecr_i = x_i \vecr + y_i {\brho} $.
+%%.rc 4 on
+For equal mass particles, $x_1 = x_2 = 1 $, and
+$y_1 = - y_2 =\half $.
+%%.rc 4 off
+The second description is as
+\begin{eqnarray}
+  \varphi_{12} ( \vecr_1 , \vecr_2 ) &=&
+   \sum _ i c_i ~
+   \left | ( \ell_1 (i), s_1 )j_1 (i),
+            ( \ell_2 (i), s_2 )j_2 (i);~ J_{12} T \right\rangle
+ \\
+& &\rightarrow %|_{\mbox{ coordinate transformation}}
+  \sum _ u {c_i} \sum_{ L \ell S j}
+   \left | L , ( \ell , (s_1 s_2 )S )j ;
+                         J_{12} T \right\rangle
+ \phi^{J_{12} T,i}_{L(\ell S)j} (r, \rho)
+\end{eqnarray}
+The transformation of the $i$'th component in the cluster basis is
+\begin{eqnarray}
+\phi^{J_{12} T,i}_{L(\ell S)j} (r, \rho) &=&
+  \left\langle L , ( \ell , (s_1 s_2 )S )j ;J_{12} T \right |
+  \left ( \ell_1 (i), s_1 )j_1 (i),
+       ( \ell_2 (i), s_2 )j_2 (i);~ J_{12} T \right\rangle
+\\
+&& \times\langle
+   \left [  Y_L (\hat \vecr) Y_\ell (\hat \rho) \right ] _ \lambda
+    |
+   \left [ \varphi_{\ell_1 s_1 j_1} (\vecr_1)\varphi_{\ell_2 s_2 j_2} (\vecr_2)
+   \right ] _ {J_{12} T}  \rangle
+\end{eqnarray}
+where (suppressing the $i$ indices for clarity)
+\begin{eqnarray} \nonumber
+\langle L , ( \ell , (s_1 s_2 )S )j ;J_{12} T |
+       ( \ell_1 , s_1 )j_1 ,
+       ( \ell_2 , s_2 )j_2 ;~ J_{12} T\rangle =
+\end{eqnarray}
+\begin{eqnarray}
+ \sum _ \lambda && \hat \lambda \hat S \hat {j_1} \hat {j_2}
+  \left ( \begin{array}{ccc}\ell_1 & \ell_2 & \lambda\\
+                            s_1    & s_2    & S \\
+                            j_1    & j_2    & J_{12} \end{array}  \right )
+         {1 + (-1)^{\ell +S+T} \over
+    \sqrt {2(1 + \delta_{\ell_1 , \ell_2} \delta_{ j_1 ,j_2}) }} ~
+\hat j \hat \lambda W(L \ell J_{12} S; \lambda j) (-1)^{\ell+L-\lambda} .
+\end{eqnarray}
+%%.rc 4 on
+The radial overlap integral can be derived by means of harmonic-oscillator
+expansions \cite{mosh60}, with the Bayman-Kallio expansion \cite{bay67}
+or using the Moshinsky solid-harmonic expansion\cite{MOSH}. This last method gives
+%%.rc 4 off
+\begin{eqnarray}
+ K^\lambda_{\ell L: \ell_1 \ell_2} (r, \rho)
+ &=&\langle
+   \left [  Y_L (\hat\vecr) Y_\ell (\hat{\brho}) \right ] _ \lambda
+    |
+   \left [ \varphi_{\ell_1} (\vecr_1)\varphi_{\ell_2} (\vecr_2)
+   \right ] ^ \lambda \rangle \nonumber
+\\
+ &=  &\sum_{n_1 n_2} ~
+      \left ( \begin{array}{c} 2 \ell_1 +1\\2n_1\end{array} \right ) ^\half
+      \left ( \begin{array}{c} 2 \ell_w +1\\2n_2\end{array} \right ) ^\half
+      (x_1 r)^{\ell_1 - n_1}
+      (y_1 \rho)^{n_1}
+      (x_2 r)^{n_2}
+      (y_2 \rho)^{\ell_2 - n_2} \nonumber
+\\
+&&\times \sum _ Q
+      {\bf q}_{\ell_1 \ell_2}^Q (r, \rho) ~
+     (2Q+1)~ \hat {\ell_1} \hat {\ell_2} \hat {\ell_1 - n_1} \hat {\ell_2 - n_2} ~
+             \hat L \hat \ell  \nonumber
+\\
+&&\times  \sum_{\Lambda_1 \Lambda_2}
+       \left ( \begin{array}{ccc}\ell_1 - n_1&n_2&\Lambda_1\\0&0&0\end{array} \right )
+       \left ( \begin{array}{ccc}\ell_w - n_2&n_1&\Lambda_2\\0&0&0\end{array} \right )
+       \left ( \begin{array}{ccc}\Lambda_1&L   &Q\\0&0&0\end{array} \right )
+       \left ( \begin{array}{ccc}\Lambda_2&\ell&Q\\0&0&0\end{array} \right )  \nonumber
+\\
+&&\times (-1)^{\ell_1 + \ell_2 +L+ \Lambda_2} (2 \Lambda_1 + 1) (2 \Lambda_2 + 1)
+        W(\Lambda_1 L \Lambda_2 \ell; Q \lambda)
+        \left ( \begin{array}{ccc} \ell_1-n_1& n_2& \Lambda_1\\
+                                   n_1       & \ell_2-n_2& \Lambda_2\\
+                                   \ell_1    & \ell_2 & \lambda \end{array} \right )  .
+\end{eqnarray}
+%%.rc 4 on
+where $ \left ( \begin{array}{c}a \\ b \end{array}\right ) $ is the binomial coefficient
+(see Appendix A).
+%%.rc 4 off
+
+The kernel function
+${\bf q}_{\ell_1 \ell_2}Q (r, \rho) $
+which appears in this expression is the Legendre expansion of the product of
+the two radial wavefunctions in terms of $u$,
+the cosine of the angle between $\vecr$ and $ {\brho} $:
+\begin{eqnarray}
+ {\bf q}^Q_ {\ell_1 , \ell_2} (r, \rho)
+ =\half
+\int_ {-1}^{+1}
+         {u_{\ell_1} (r_1) \over r_1}^{\ell_1 +1}
+       {u_{\ell_2} (r_2)\over r_2}^{\ell_2 +1} ~
+         P_Q (u) du
+\end{eqnarray}
+
+\subsection{Scattering Amplitudes}
+
+%%.rc 5 on
+The Rutherford amplitude for pure Coulomb scattering
+(with no $ e^{2i \sigma_0} $ factor) is
+\begin{eqnarray} \label{ruther}
+F_c ( \theta ) = - {\eta \over 2k} ~~
+               { \exp (-2 i \eta \ln(\sin \theta /2))  \over  \sin^2 \theta /2}
+\end{eqnarray}
+%%.rc 5 off
+The Legendre coefficients for the scattering to the projectile state
+$ J'_ p $ and target state $ J'_ t $
+from initial projectile state $ J_p $
+and target state $ J_t $ are given by
+\begin{eqnarray}  \nonumber
+ A^{L'}_{m' M' ;mM} &=&
+   \sum_{L,J,J' ,J_T }
+    \langle L0 J_p m | Jm\rangle\langle Jm J_t M |J_T M_T\rangle \\
+&& \langle L' M_{L'} J'_ p m' | J' M_{L'} + m'\rangle
+    \langle J' M_{L'}  +m' J'_ t M' |J_T M_T\rangle \nonumber\\
+&&  \nonumber
+  {4 \pi \over k} \sqrt {\frac{k'}{\mu'}\frac{\mu}{k}}
+    e^{i( \sigma_L - \sigma_0 )}
+      e^{i( \sigma'_ {L'} - \sigma'_ 0 )}\\
+&&  \label{ALeg}
+  \left ( {i \over 2} \right )
+      \left [ \delta_{\alpha ,\alpha'} - S^{J_T}_{\alpha ,\alpha'} \right ]
+    \sqrt {{2L+1 \over {4 \pi}}}~ Y_c (L' ,M_{L'})
+\end{eqnarray}
+where $Y_c (L,M)$ is the coefficient of
+$P_L^{|M|} (\cos \theta )
+    e^{iM\phi}$ in $Y_L^M (\theta ,\phi )$,
+$  \sigma_L = \arg \Gamma (1 + L + i \eta )$ is the Coulomb phase shift,
+$\alpha'$ refers to the primed values
+$ L'  J'_ p J'_ t  k' \mu' $ etc.,
+and $\alpha$ refers to the unprimed values
+$ L J_p J_t k \mu $.
+
+For each outgoing channel $J'_ p , J'_ t $,
+we may then calculate the angular-dependent scattering amplitudes
+\begin{eqnarray}
+f_{m' M' : mM} (\theta) =
+    \delta_{J_p , J'_ p}
+    \delta_{J_t , J'_ t}
+     F_c (\theta) +
+  \sum_{L'} A_{m' M' : mM}^{L'}
+                    P_{L'}^{m' +M' -m-M} (\cos \theta)
+\end{eqnarray}
+in terms of which the differential cross section is
+\begin{eqnarray}
+  {d \sigma(\theta) \over d \Omega} =
+   {1 \over (2J_p + 1)(2J_t + 1) }
+   \sum_{m' M' m M}
+           \left | f_{m' M' : mM} (\theta) \right | ^2 .
+\end{eqnarray}
+The near-side and far-side decompositions \cite{berry66}
+of this cross section are
+defined by the same process, with $P^M_L (u)$ replaced by
+$\half [P^M_L (u)\pm 2i / \pi  Q^M_L (u)]$ respectively.
+The Coulomb scattering of equation (\ref{ruther}) is included
+in the near-side component \cite{row78}.
+
+The spherical tensor analysing powers $T_{kq}$
+describe how the {\em outgoing}
+cross section depends on the {\em incoming}
+polarisation state of the {\em projectile}.
+If the spherical tensor $\tau_{kq}$
+is an operator with matrix elements
+\begin{eqnarray} \nonumber
+(\tau_{kq})_{m m''} =
+  \sqrt{2k+1}\langle J_p m k q | J_p m''\rangle,
+\end{eqnarray}
+we have
+\begin{eqnarray}
+T_{kq} (\theta)
+             &=& {Tr ({\bf f} \tau_{kq} {\bf f}^+)} \over
+                    {Tr ({\bf f}              {\bf f}^+)}
+\\
+           &=& \hat{k}
+           {   \sum_{m' M'  m  M}
+                      f_{m' M' : m M} (\theta)^*
+             \langle J_p m  k q | J_p m''\rangle
+                      f_{m' M' : m''  M} (\theta)
+                    \over
+                     \sum_{m' M'  m  M}
+                      | f_{m' M' : mM} (\theta) | ^2 }
+\end{eqnarray}
+%%.rc 4 on
+The polarisations in the `transversity frame' \cite{simon74}
+are then
+%%.rc 4 off
+\begin{eqnarray}
+  ^T T_{10} &=& \sqrt 2 i T_{11}
+\\
+  ^T T_{20}  &=& -\half (T_{20} + \sqrt 6 T_{22})
+\\
+  ^T T_{30} &=& -\half ( \sqrt 3 i T_{31} + \sqrt 5 i T_{33} ) .
+\end{eqnarray}
+
+The S-matrix elements can also be used to directly calculate the
+integrated cross sections
+%%% \sigma = intplex c\int_ {4 \pi}
+%%%            {~ {d \sigma(theta)} over {d Omega} d Omega  }
+\begin{eqnarray}
+\sigma = \int_ {4 \pi}
+           {~ {d \sigma(\theta) \over d \Omega} d \Omega  }
+\end{eqnarray}
+to give
+\begin{eqnarray}
+\sigma = {1 \over k^2} {k' \over \mu'} {\mu \over k} ~
+        {4 \pi \over (2J_p + 1)(2J_t + 1)}
+        \sum_{J_T ~\alpha ~\alpha'}
+         (2J_T + 1) \left | S^{J_T}_{\alpha ,\alpha'}
+                        \right | ^2 .
+\end{eqnarray}
+
+The fusion cross section is defined as that amount of flux which leaves
+the coupled-channels set because of the imaginary parts of the optical
+potentials. If the incoming projectile is not spherical, then
+the fusion rate will depend on its orientation, and hence on the magnetic
+substate quantum number $m$.  One can therefore define the
+{\em fusion polarisation} as the distribution
+$ \sigma^{\rm fus}_m $, which can be calculated from the S-matrix
+elements as
+\begin{eqnarray} \nonumber
+  \sigma^{\rm fus}_m  &=& {\pi \over k^2}
+     \sum_{J_T \geq m} (2J_T + 1)  \\
+ &&\times { \left [ 1 - {1 \over 2J_t + 1}
+     \sum_{J'_ p L' M \omega} ~
+  \left | \sum _ {LJ}
+   \langle J_p m J - m | L 0\rangle
+   \langle J m J_t M | J_T M + m\rangle
+    e^{i \sigma_L} S^{J_T \omega}_{\alpha ,\alpha'}
+  \right | ^ 2  \right ] }
+\end{eqnarray}
+where $\omega$ is the parity ($\pm 1$) of the coupled-channels set for each
+total angular momentum $J_T$
+
+{\em Partial Wave Interpolation:}
+Heavy ion reactions typically involve a range of partial waves $L$ up to
+several hundred or more, especially when Coulomb excitations dominate the
+highest partial waves.  In such cases it is often advantageous to solve
+the coupled channels sets (\ref{CRC}) for, say, every $n$'th value of
+$J_T$, and interpolate the intermediate values.  Different values
+of $n$ can be used in different reaction regions: $n$ can be small (1 or
+2) for the grazing partial waves, and up to 5 or 10 for the
+Coulomb-dominated peripheral processes, and can be adjusted for
+the required balance between speed and accuracy.
+
+This interpolation may be performed on the S-matrix elements themselves,
+or on the Legendre amplitudes of equation (\ref{ALeg})
+In this second method (that used in ref. \cite{FRESCO}),
+cubic spline interpolations
+are used. The main factor limiting the accuracy of this process is
+that the rate of change with $J_T$ of the Coulomb phase shifts
+$\exp i(\sigma_L + \sigma'_ {L'})$ does {\em not}
+diminish as $J_T$ increases.  For that reason, it is advisable to
+interpolate not on the $A^{L'} $ of equation (\ref{ALeg}), but on
+a $\tilde A^{L'}$ defined with a {\em revised} phase shift factor
+$\exp i(\sigma_L - \sigma'_ {L'}) .$  Since $L$ and $L'$ both tend to be near $J_T$, it is only the
+{\em difference} the phase shifts which limits the accuracy of the
+interpolation. It will therefore be more accurate for smaller projectile
+and target spins, and incoming and outgoing channels with similar
+Sommerfeld parameter $\eta$ (equation \ref{EQeta}).
+%%%
+\section{Coupling Interactions}
+\label{potls}
+%%.se potls = substr &@xref 1 1
+%%%% potentials section = &potls
+
+%%.rc 4 on
+When two nuclei interact, a variety of kinds of elastic and inelastic
+potentials may be needed to describe their interaction.
+As well as the scalar nuclear attractions and scalar Coulomb repulsions,
+if either of the nuclei has spin $ J \neq 0$, then there can be
+higher-order tensor interactions which couple together the spin and the
+orbital motion. If a nucleus has spin $ J \geq\half$, then there can be
+a spin-orbit component $ V_{ls} (R) 2 \vecl \cdot \vecJ $ in the
+Hamiltonian ${\cal H}$. and if its spin is one or greater
+($J \geq 1$), there can be tensor forces of various kinds.
+The most commonly used tensor force is a $ T_r $ potential
+of the form
+$V_{Tr} (R) {\bf R}_2 ( \vecR , \vecR ) {\bf .S}_2 (J,J) $.
+Similar tensor forces are also generated if the projectile and target
+spins coupled together can reach $J_p + J_t \geq 1 $:
+such is the case with the tensor force between the proton and the neutron
+within the deuteron.
+
+Inelastic potentials (\ref{potls}.2) arise when one or both of the
+nuclei have permanent deformations (as seen in their intrinsic frame),
+or are vibrationally deformable. The inelastic potentials which come from
+rotating a permanently deformed nucleus are described in the Hamiltonian
+by terms of the form
+\begin{eqnarray} \label{rotdef}
+{\bf V}_\lambda =   \sum _ \mu \Vee_\lambda (R) D^\lambda_{\mu 0}
+         Y^\mu_\lambda (\hat \vecR)
+\end{eqnarray}
+where the form factors $\Vee_\lambda (R)$ have both nuclear and
+Coulomb components for angular momentum transfers $\lambda$.
+Their nuclear component is approximately proportional
+to the derivative of the scalar potential between the two reaction
+partners. Simultaneous excitations of both nuclei are also possible
+(see e.g. \cite{iman69}), but have not been included in the present code.
+Vibrational excitations of a nucleus have more complicated form factors in
+general \cite{TAM65}, but can still be expanded in the form of
+equation (\ref{rotdef}).
+For the more intricate level schemes of strongly-deformed nuclei, it will
+in general be necessary for each allowed transition to have  its own
+transition rate specified independently of a particular rotational or
+vibrational model.
+
+Inelastic potentials also arise when one of the
+nuclei can be decomposed into a `core' + `valence particle'
+structure \ref{potls}.3),
+such that the opposing nucleus interacts with the two
+components with distinct potentials acting on distinct centres-of-mass.
+The valence particle can be a single nucleon, as in the case of
+$^{17}$O = $^{16}$O + n, or it can be a cluster of nucleons,
+as in $^6$Li =$\alpha$ + $^2$H, or
+$^7$Li =$\alpha$ + $^3$H.  In all these cases, there arise
+inelastic potentials which can re-orient the ground state of the
+composite nucleus, or can excite the valence particle into higher-energy
+eigenstates.
+
+Finally, transfer interactions (\ref{potls}.4) arise when the
+reaction brings about the transfer of a valence particle from one nucleus
+into a bound state around the other. As the incoming and outgoing
+projectiles have different centres-of-mass, with the targets likewise,
+the correct treatment of transfer interactions requires taking into
+account the effects of recoil and of the finite ranges of the binding
+potentials. These result in the coupling form factors becoming non-local,
+so that they must be specified by the two-dimensional kernel functions
+$ V_{\alpha :\alpha'} (R_\kappa , R_{\kappa'} )$
+in equation (\ref{CRC}). They also require that the coupled equations be solved
+by iteration, as will be discussed in section \ref{solns}.
+If the effects of recoil are neglected, the `no-recoil' (NR)
+approximation is obtained, but in general\cite{LOLA}
+this is inaccurate in ways which are difficult to predict. For that reason
+the NR approximation is not included in the present code.
+For many light-ion reactions, however, another `zero-range'
+approximation is available, and this does remove many of the finite-range
+requirements. Alternatively, a first-order correction for the finite-range
+effects may be estimated, to give the `local energy approximation'.
+These two special cases are discussed at the end of the section.
+%%.rc 4 off
+%%%
+%%%
+\subsection{Matrix Elements of Tensor Forces}
+
+%\newcommand{\Vee}{{\sf V}}
+\newcommand{\Jp}{J_p}
+\newcommand{\Jt}{J_t}
+\newcommand{\JT}{J_T}
+\newcommand{\Jpq}{\ensuremath{J'_p}}
+\newcommand{\Jtq}{\ensuremath{J'_t}}
+\newcommand{\Lq}{L'}
+%\newcommand{J'_1}{\ensuremath{J_1^'}}
+%\newcommand{J'_1}{\ensuremath{J_1}}
+%\newcommand{J'_2}{\ensuremath{J'_2}}
+%\newcommand{J_1}{\ensuremath{J_1}}
+%\newcommand{J_2}{\ensuremath{J_2}}
+\newcommand{\Sq}{\ensuremath{S'}}
+%%%
+
+This section presents the matrix elements for spin-orbit forces and a
+variety of tensor interactions.  The radial form factors
+$\Vee_Q (R)$ which multiply these matrix elements are not
+specified, since these are usually determined by a fitting procedure
+in an optical-model search code, and a wide variety of
+parameterised forms have been used.
+
+We shall use the $ | (LJ_p) J_1 ,J_t ;J_T\rangle $ representation
+for the order of coupling the spins, as in equation (\ref{spinrep}).
+%%%
+\subsubsection{Spin-orbit Interactions}
+
+For the projectile spin-orbit force $ {\bf L\cdot J}_p $
+\begin{eqnarray}\nonumber
+&&\left\langle (L \Jp ) J_1 , \Jt ; \JT | {\bf L\cdot J}_p
+                             | ( \Lq \Jp ) J'_1 , \Jt ; \JT \right\rangle
+\\
+&&= \delta_{L \Lq } \delta_{ J_1  J'_1 }
+    \half [ J_1 ( J_1 +1) - L(L+1) - \Jp ( \Jp + 1) ]
+\end{eqnarray}
+This convention amounts to a $ 2 \vecl \cdot \vecs $ spin-orbit force, rather
+than one based on $ \vecl \cdot {\bf \sigma}$. These are the same for nucleons
+and spin $\half$ nuclei, but it means, for example, that the
+spin-orbit strengths for deuterons and $^7$Li will
+have to be decreased as they have $ \vecs$ = 1 and 3/2 respectively.
+
+For the target spin-orbit interaction $ {\bf L\cdot J}_t$, we first transform
+\begin{eqnarray} \nonumber
+ | (LJ_p) J_1 ,J_t ;J_T\rangle &=& (-1)^{J_1 - L - J_p }
+                                    | (J_p L) J_1 ,J_t ;J_T\rangle
+\\
+ &  =& (-1)^{J_1 - L - J_p } \sum _ {J_2}
+ | J_p , (LJ_t ) J_2 ; J_T\rangle \hat J_1 \hat J_2
+  W( J_p L J_T J_t ; J_1 J_2 )
+\end{eqnarray}
+so
+\begin{eqnarray*} \nonumber
+&&\left\langle (L J_p ) J_1 , J_t ; J_T | {\bf L\cdot J}_t
+                             | ( L' J_p ) J'_1 , J_t ; J_T \right\rangle\\
+ &&= (-1)^{J_1 - J'_1 + L' - L} \hat J_1 \hat J'_1
+  \sum _ {J_2} (2 J_2 + 1)  W( J_p L J_T J_t ; J_1 J_2 )
+                           W( J_p L J_T J_t ; J'_1 J_2 )
+\\
+ && \delta_{L L' }\half [ J_2 ( J_2 +1) - L(L+1) - J_t ( J_t + 1) ]
+\end{eqnarray*}
+
+\subsubsection{Second-rank Tensor Forces}
+
+We use the notations of ref. \cite{satch60}:
+\begin{eqnarray}
+\langle S \| {\bf S}_2 \| S\rangle = {1 \over \sqrt 6} ~
+      { 3K^2 - S(S+1) \over \langle SK20 | SK\rangle}
+      \mbox{ for  any } | K | \leq S ,
+\end{eqnarray}
+and
+\begin{eqnarray}
+\langle L' \| {\bf R}_2 \| L\rangle = \sqrt {2 \over 3}
+       {\hat L \over \hat{L'}}\langle L~0~2~0~ | L' ~0~\rangle
+\end{eqnarray}
+for the reduced matrix elements of the second-rank spin and radial tensors
+respectively.
+With the projectile $ {\bf T_r} $ tensor force
+$ {\bf R}_2 \cdot {\bf S}_2 ( J_p J_p ) $,
+the coupling interactions are
+\begin{eqnarray} \nonumber
+\left\langle (L J_p ) J_1 , J_t ; J_T |  {\bf R}_2 \cdot {\bf S}_2 ( J_p J_p )
+                             | ( L' J_p ) J'_1 , J_t ; J_T \right\rangle
+\end{eqnarray}
+\begin{eqnarray}
+ ~=~
+     \delta_{ J_1 J'_1 } \hat L \hat J_p (-1)^{ J_1 - L - J_p }
+    W(L L' J_p J_p ; 2 J_1 )\langle L \| {\bf R}_2 \| L'\rangle
+                              \langle J_p \| {\bf S}_2 \| J_p\rangle
+\end{eqnarray}
+
+For the target $ {\bf T_r} $ tensor force
+$ {\bf R}_2 \cdot {\bf S}_2 ( J_t J_t ) $
+the coupling interactions are
+\begin{eqnarray} \nonumber
+\left\langle (L J_p ) J_1 , J_t ; J_T |  {\bf R}_2 \cdot {\bf S}_2 ( J_t J_t )
+                             | ( L' J_p ) J'_1 , J_t ; J_T \right\rangle
+\end{eqnarray}
+\begin{eqnarray}  \nonumber
+ ~=~
+    (-1)^{J_1 - J_1' + L' - L}
+ \sum _ {J_2} \hat J_1 \hat J'_1 (2 J_2 + 1)
+  W( J_p L J_T J_t ; J_1 J_2 ) W( J_p L' J_T J_t ; J_1' J_2 )
+\end{eqnarray}
+\begin{eqnarray}
+   \times  \hat L \hat J_t (-1)^{ J_2 - L - J_t }
+    W(L L' J_t J_t ; 2 J_2 )\langle L \| {\bf R}_2 \| L'\rangle
+                              \langle J_t \| {\bf S}_2 \| J_t\rangle
+\end{eqnarray}
+
+For the combined target-projectile $ {\bf T_r} $ tensor force
+$ {\bf R}_2 \cdot {\bf S}_2 ( J_p J_t ) $
+the coupling interactions are
+\begin{eqnarray} \nonumber
+\left\langle (L J_p ) J_1 , J_t ; J_T |  {\bf R}_2 \cdot {\bf S}_2 ( J_p J_t )
+                             | ( L' J_p ) J'_1 , J_t ; J_T \right\rangle
+\end{eqnarray}\begin{eqnarray}  \nonumber
+ ~=~
+ \sum_{S S' }   \hat J_1 \hat J'_1 \hat S \hat S'
+  W( L J_p J_T J_t ; J_1 S ) W( L' J_p J_T J_t ; J'_1 S' )
+\end{eqnarray}
+\begin{eqnarray}
+\times \hat L \hat S\ (-1)^{J_T - L - S' } W(L L' S S' ; 2 J_T )
+  \langle L \| {\bf R}_2 \| L'\rangle
+  \langle ( J_p J_t )S \| {\bf S}_2 \| ( J_p J_t ) S'\rangle
+\end{eqnarray}
+where the second-rank reduced matrix element is
+\begin{eqnarray} \nonumber
+ \langle ( J_p J_t )S \| {\bf S}_2 \| ( J_p J_t ) S'\rangle
+=
+ \hat S' \hat 2 \hat J_p \hat J_t  ~
+ \left ( \begin{array}{ccc}S & J_p & J_t \\S' & J_p & J_t\\2 & 1& 1\end{array} \right )  ~
+\sqrt { J_p ( J_p + 1) } \sqrt { J_t ( J_t + 1) }
+\end{eqnarray}
+%%%
+\subsection{Inelastic Excitations}
+\subsubsection{Nuclear Rotational Model}
+
+Consider a deformed nucleus with deformation lengths $\delta_\lambda$.
+The effect of these deformations can be expressed as a change in the radius
+at which we evaluate the optical potentials, the change depending on the
+relative orientations of the radius vector to the intrinsic orientation
+of the nucleus.  Deformation lengths are used to specify the these
+changes, rather than fractional deformations $\beta_\lambda$,
+to remove a dependence on the `average potential radius'
+$R_U$. This is desirable because often the real and imaginary
+parts of the potential have different radii, and it is not clear which is
+to be used. It also removes a dependence on exactly how the `average
+radius' of a potential is to be defined.
+
+When $U(R)$ is the potential shape to be deformed,
+the coupling interaction is
+\begin{eqnarray}
+ {\bf V}( {\bf \xi} , \vecR) = U(R - \delta( \hat\vecR ,  {\bf \xi} ))
+\end{eqnarray}
+where the `shift function' has the multipole expansion
+\begin{eqnarray}
+ \delta( \hat{\vecR'}) = \sum_{\lambda \neq 0}  \delta_\lambda
+         Y^0_\lambda (\hat{\vecR'})
+\end{eqnarray}
+($\hat \vecR' $ is the vector $ \hat\vecR$ in the
+body-centred frame of coordinates defined by $ {\bf \xi} $).
+Transforming to the space-fixed frame of reference,
+and projecting onto the spherical harmonics,
+the multipole expansion becomes
+\begin{eqnarray}
+ {\bf V}( {\bf \xi} , \vecR) =
+   & \sum_{\lambda \mu} \Vee_\lambda (R) D^\lambda_{\mu 0}
+         Y^\mu_\lambda (\hat\vecR )
+\\
+ \mbox{where }  \Vee_\lambda (R) =&\half \int _{-1}^{+1}
+                U(~r(R,\cos \theta)~) Y_\lambda^\mu (\theta ,0) ~d(\cos \theta)
+\\
+ \mbox{and } r(R,u) = &R - \sqrt{ {2 \lambda+1 \over 4 \pi} } P_\lambda (u) \delta_\lambda
+                        + \epsilon
+\\
+ \mbox{with }  \epsilon = &{\sum _ \lambda {\delta_\lambda}^2} / (4 \pi R_U )
+\end{eqnarray}
+The correction $\epsilon$ is designed (\cite{Sturm})
+to ensure that the volume integral of the monopole potential
+$\Vee_0 (R)$ is the same as that of $U(R)$, and is correct
+to second order in the $\{\delta_\lambda\}\}$.
+
+%%.rc 5 on
+When the $\{\delta_\lambda\}\}$ are small, the above multipole functions
+are simply the first derivatives of the $U(R)$ function:
+\begin{eqnarray}
+\Vee_\lambda (R) = - {\delta_\lambda \over \sqrt {4 \pi}} ~{dU(R) \over dR} ,
+\end{eqnarray}
+with the same shape for all multipoles $\lambda> 0$.
+%%.rc 5 off
+%%%
+\subsubsection{Coulomb Deformations}
+
+The deformations of the Coulomb potential can also be defined by the
+$\delta_\lambda$, but unfortunately an average potential radius is
+again introduced.  The dependence on models for average radii can be
+reduced by defining the Coulomb deformations in terms of a reduced matrix
+element such as that of Brink and Satchler \cite{bs68}, or that of Alder and Winther
+\cite{alder66}.
+For the present purposes we adopt that of Alder and Winther, as it is
+hermitian upon interchanging the forward and reverse directions.
+We include, however,
+a simple phase factor to keep it real-valued.  The new deformation
+parameter is called $M(E \lambda)$ and has units of $e . {\rm fm}^\lambda $.
+In terms of the Alder and Winther reduced matrix element it is
+\begin{eqnarray}
+  M(E \lambda) = i^{ I - I' + | I - I' |} \times
+            \langle I' \| E \lambda \| I\rangle
+\end{eqnarray}
+and is directly related to the observable electro-magnetic transition
+rate without any model-dependent parameters entering (except a sign):
+\begin{eqnarray}
+   M(E \lambda) =\pm\sqrt { (2I+1) B(E \lambda , I \rightarrow I') }.
+\end{eqnarray}
+
+A model dependent radius parameter $R_c$
+only enters in the relation to the
+deformation lengths of the rotational model:
+\begin{eqnarray} \label{MEk}
+   M(E \lambda , I \rightarrow I') =
+               {3Z \delta_\lambda {R_c}^{\lambda-1} \over 4 \pi} ~
+               i^{ I - I' + | I - I' |} ~
+               \sqrt {2I+1} ~~\langle I K \lambda 0 | I' K\rangle
+\end{eqnarray}
+for transitions from a state of spin $I$ to one of spin $I'$
+in a rotational band of projection $K$ in a nucleus of charge $Z$.
+Within $K$=0 bands, $M(E \lambda , 0 \rightarrow I) = M(E \lambda , I \rightarrow 0) $
+have the same sign as $\delta_\lambda$.
+
+The only disadvantage of using reduced matrix elements as input parameters
+in this way is
+that the transitions in a rotational band do not all have the same
+matrix elements $M(E \lambda , I \rightarrow I')$,
+even when the deformation length is constant.
+
+The radial form factors for Coulomb inelastic processes may be simply
+derived from the multipole expansion of
+$| \vecr - \vecr' |^{-1}$, giving
+%%.rc 3 on
+\begin{eqnarray}
+\Vee_\lambda^c (R) = M(E \lambda ) ~
+             { \sqrt {4 \pi} e^2 \over 2 \lambda+1} ~~
+          \left \{  \begin{array}{ll}
+                {R^\lambda  /   {R_c}^{2 \lambda+1} ~~(R \leq R_c)}\\
+                 {1  /   R^{\lambda+1} ~~ (R> R_c) }
+                 \end{array} \right. ~
+\end{eqnarray}
+%%.rc 3 off
+remembering that a factor $ \delta_\lambda {R_c}^{\lambda - 1} =
+\beta_\lambda {R_c}^\lambda $ is already included in the matrix element
+%%.rc 3 on
+of equation (\ref{MEk}) which appears in this form factor.
+This form factor is to be multiplied by the angular momentum coupling
+coefficients of the next section, and also by the charge of the
+opposing nucleus.
+%%.rc 3 off
+%%%
+\subsubsection{Angular Momentum Coupling Coefficients}
+
+\newcommand{\BX}{{\bf X}}
+The basic rotational coupling coefficient, with $ {\bf V}_\lambda $
+given by equation (\ref{rotdef}), is
+\begin{eqnarray}
+ \BX^{J \lambda}_{LI:L' I'} (R) =
+     \langle LI; J | {\bf V}_\lambda | L' I' ; J\rangle
+\end{eqnarray}
+%%.rc 5 on
+The Coulomb form factors $\Vee_\lambda^c (R)$ have
+coupling coefficients
+\begin{eqnarray}
+  \BX^{J \lambda}_{LI:L' I'} (R) =
+     \hat L \hat {L'} (-1)^{J-I' -L+L'}
+     W(L L' I I' ; \lambda J)
+    \langle L 0 L' 0 | \lambda 0\rangle
+       ~~ \Vee_\lambda^c (R)
+\end{eqnarray}
+whereas the nuclear form factors $ \Vee_\lambda (R) $ defined for
+a rotational band with projection $K$ have coupling coefficients
+\begin{eqnarray}\nonumber
+  \BX^{J \lambda}_{LI:L' I'} (R) &=&
+ \hat L \hat {L'} (-1)^{J-I' -L+L'}
+     W(L L'  I  I' ;  \lambda J)
+    \langle L  0  L'  0 | \lambda 0\rangle
+       ~~ \Vee_\lambda (R) \\
+ &&\hat{I' } \langle I'  K  \lambda  0  |  I  K\rangle .
+\end{eqnarray}
+%%.rc 5 off
+
+For projectile inelastic excitation, this coupling coefficient may be used
+directly as
+\begin{eqnarray}
+\langle (L J_p)J, J_t ; J_T | {\bf V}_\lambda |
+    (L' J'_ p)J' , J'_ t ; J_T\rangle
+=
+ \delta_{J_t , J'_ t} ~\delta_{J , J'} ~
+ \BX^{J \lambda}_{LJ_p :L' J'_ p} (R)
+\end{eqnarray}
+whereas for target excitations,
+\begin{eqnarray}
+\nonumber
+&&\langle (L J_p)J, J_t ; J_T | {\bf V}_\lambda |
+    (L' J'_ p)J' , J'_ t ; J_T\rangle
+=
+  \delta_{J_p , J'_ p} ~
+  (-1)^{J-J' -L+L'} \hat J \hat {J'}
+\\
+&& \times \sum_{J_2}    (2J_2 + 1)
+      W(J_p L     J_T J    _t ; J     J_2)
+      W(J_p L' J_T J'_ t ; J' J_2)
+      \BX^{J_2 \lambda}_{LJ_t :L' J'_ t} (R)
+\end{eqnarray}
+%%%
+\subsection{Single Particle Excitations}
+
+When a nucleus consists of a single particle outside a core,
+the state of the particle can be disturbed by the interaction with1
+another nucleus, as the force of that nucleus can act differentially
+on the particle and the core.
+If $V_{cc} (\vecR_c)$ and $ V_p (\vecr') $
+are the interactions of the second nucleus with the
+core and particle respectively,
+then the excitation coupling from state
+$| (\ell' L') \lambda\rangle$ to state
+$| (\ell L) \Lambda\rangle$ is given by the single-folding expression
+\begin{eqnarray}
+\BX^\Lambda_{\ell L: \ell' L'} (R) =
+\langle (\ell L) \Lambda
+     | V_{cc} (\vecR_c) + V_p (\vecr') - U_{\rm opt} (\vecR) |
+    (\ell' L') \Lambda\rangle
+\end{eqnarray}
+where $U_{\rm opt} (\vecR) $ is the optical potential already defined for
+these channels.
+This optical potential is subtracted to avoid double counting of either
+the Coulomb or the nuclear potentials,
+rather than disabling the potentials which have already been defined.
+This means that the `monopole' potential $ \Vee_0 (R,r) $
+(to be constructed) will have no long-range Coulomb component,
+and will not disturb the matching of the wave functions to the
+asymptotic Coulomb functions.
+It also means that if a nuclear well has already been defined,
+the new monopole form factor will be simply the difference between this well
+and that desired well calculated from the folding procedure.
+
+If the potentials $V_{cc} (\vecR_c)$ and $U_{\rm opt} (\vecR)$
+contain only scalar components, then
+the $R$- and $r$- dependent Legendre multipole potentials
+can be formed as
+\begin{eqnarray}
+  \Vee_K (R,r) =\half \int_{-1}^{+1}
+    \left [ V_{cc} (\vecR_c) + V_p (\vecr') - U_{\rm opt} (\vecR) \right ]
+      . P_K (u) du
+\end{eqnarray}
+where
+\begin{eqnarray} \nonumber
+  K &=& \mbox{ the multipole moment,}
+\nonumber
+\\
+  u &=& \hat\vecr \cdot \hat\vecR
+            \mbox{ is the cosine of the angle between } \vecr \mbox{ and } \vecR ,
+\nonumber
+\\
+  \vecr &=& a \vecR + b \vecr \mbox{ is the particle-core vector,}
+\nonumber
+\\
+  \mbox{and } \vecR_c &=& p \vecR + q \vecr \mbox{ is the core-nucleus vector.}
+\nonumber
+\end{eqnarray}
+The coupling form factor between states $u_{\ell'} (r) $
+and $u_\ell (r) $ is then
+\begin{eqnarray} \nonumber
+ \BX^\Lambda_{\ell L: \ell' L'} (R)
+     &=&\half \sum _ K
+     { \int_ 0^ {R_m} u_\ell (r)^*
+                \Vee_K (R,r) u_{\ell'} (r) dr}
+                (-1)^{\Lambda+K} \hat\ell \hat L \hat {\ell'} \hat {L'}\\
+ &\times&
+       (2K+1) W(\ell \ell' L L' ;K \Lambda)
+        \left ( \begin{array}{ccc}K &\ell& \ell'\\0&0&0 \end{array} \right )
+        \left ( \begin{array}{ccc}K&L&L'\\0&0&0 \end{array} \right )
+\end{eqnarray}
+%%%
+\subsubsection{Projectile Single-Particle Mechanisms}
+
+If the {\em projectile} has the particle - core composition, then the
+coupling interaction is
+\begin{eqnarray}
+ V^{J_T}_{\alpha :\alpha'} (R) =
+\langle (L       J      _p)J, J_t ;J_T | {\bf V} |
+   (L' J'_ p)J, J_t ;J_T\rangle
+\end{eqnarray}
+where the initial (primed) and final (unprimed) states are
+\begin{eqnarray}
+   \phi_{J'_ p} (\xi_p , r) =
+    \sum_{\ell' sj'}
+      A_{\ell ' sj'}^{j' I_p J'_ p}
+      | ( \ell' s) j' , I_p ; J'_ p\rangle
+       \mbox{  and }
+   \phi_{J_p} (\xi_p , r) =
+    \sum_{\ell sj}
+      A_{\ell  sj}^{jI_p J_p}
+    | ( \ell s) j , I_p ; J_p\rangle ,
+\end{eqnarray}
+respectively, and $I_p$ is the (fixed) spin of the core.
+Then
+\begin{eqnarray} \nonumber
+ V^{J_T}_{\alpha :\alpha'} (R)
+     &=&
+ \sum_{\begin{array}{c}F \Lambda I_p\\j j' \ell \ell'\end{array}}
+     {\hat j \hat {j'} (2F+1) \hat {J_p} \hat {J'_ p} (2 \Lambda+1)
+     W(\ell s J_p I_p ; j F)
+     W(\ell' s J'_ p I_p ; j' F)  }
+\\
+ && \times
+  A_{\ell ' sj'}^{j' I_p J'_ p} ~
+  A_{\ell  sj}^{jI_p J_p} ~
+  W(L \ell J F; \Lambda J_p)
+  W(L' \ell' J F; \Lambda J'_ p)
+  \times
+  \BX^\Lambda_{\ell L: \ell' L'} (R)
+\end{eqnarray}
+%%%
+\subsubsection{Target Single-Particle Mechanisms}
+
+If the {\em target} has the particle - core composition, then the
+coupling interaction is
+\begin{eqnarray}
+ V^{J_T}_{\alpha :\alpha'} (R) =
+\langle(L       J_p)J, J'_ t ;J_T | {\bf V} |
+   (L' J_p)J, J    _t ;J_T\rangle
+\end{eqnarray}
+where the initial (primed) and final (unprimed) states are
+\begin{eqnarray}
+   \phi_{J'_ t} (\xi_t , r) =
+    \sum_{\ell' sj'}
+      A_{\ell ' sj'}^{j' I_t J'_ t}
+      | ( \ell' s) j' , I_t ; J'_ t\rangle
+    \mbox{  and }
+   \phi_{J_t} (\xi_t , r) =
+    \sum_{\ell sj}
+      A_{\ell  sj}^{jI_t J_t}
+    | ( \ell s) j , I_t ; J_t\rangle ,
+\end{eqnarray}
+respectively, and $I_t$ is the (fixed) spin of the core in the target.
+Then
+\begin{eqnarray}
+ V^{J_T}_{\alpha :\alpha'} (R)
+   &=&
+ \sum_{I_t j j' \ell \ell'}
+  A_{\ell ' sj'}^{j' I_t J'_ t} ~
+  A_{\ell  sj}^{jI_t J_t}
+\nonumber
+\\
+&& \times \sum_{J_a}
+    (2J_a + 1) \hat{J'_ t} \hat {J_t}        ~
+     W(J j J_T I_t ; J_a J_t) ~
+     W(J' j' J_T I_t ; J_a J'_ t)
+\nonumber
+\\
+&& \times {\sum_{\Lambda s_a } }
+    \left \{ \begin{array}{ccc} L&\ell&\Lambda\\J_p&s&s_a\\J&j&J_a\end{array}\right \}
+    \left \{ \begin{array}{ccc} L'&\ell'&\Lambda\\J_p&s&s_a\\J'&j'&J_a\end{array}\right \}
+  \BX^\Lambda_{\ell L: \ell' L'} (R)
+\end{eqnarray}
+%%%
+%.se scl = '\ell'
+%%%
+\subsection{Particle Transfers}
+\subsubsection{Finite Range Transfers}
+\label{EFR}
+%.se EFR = &@xref
+
+To calculate the coupling term that arises when a particle is transferred,
+for example from a target bound state to being bound in the projectile,
+we need to evaluate source terms of the form
+\begin{eqnarray}
+    S_\alpha (R) = \int_ 0 ^ \infty
+\langle (LJ_p)J,J_t ;J_T | {\bf V} |
+   (L' J'_ p)J' ,J'_ t ;J_T\rangle ~
+   f^{J_T}
+    _{ (L' J'_ p)J' ,J'_ t} (R' ) dR'
+\end{eqnarray}
+where the initial (primed) state has a composite target
+with internal coordinates
+$ \xi'_ t \equiv \{ \xi_t , \vecr' \}: $
+$
+ \phi_{J'_ t} (\xi_t , \vecr' ) =
+    | ( \ell' s) j' , J_t ; J'_ t\rangle
+$
+and the final (unprimed) state has a composite projectile
+with internal coordinates
+$ \xi_p \equiv \{ \xi_{p'} , \vecr \}: $
+$
+   \phi_{J_p} (\xi'_ p , \vecr) =
+    | ( \ell s) j , J'_ p ; J_p\rangle .
+$
+
+The ${\bf V}$ is the interaction potential, of which the prior form is
+\begin{eqnarray}
+  {\bf V} = V_{\ell sj} (\vecr) + U_{cc} (R_c) - U_{\alpha'} (\vecR')
+\end{eqnarray}
+and the post form is
+\begin{eqnarray}
+ {\bf V} = V_{\ell' sj'} (\vecr') + U_{cc} (R_c) - U _\alpha (\vecR)
+\end{eqnarray}
+where $ V_\beta (\vecr)$ is the potential which binds
+$ \varphi_\beta (\vecr),$ $U _\alpha (\vecR)$
+are the optical potentials, and $U_{cc} (\vecR_c)$
+is the `core-core' potential, here between the $p'$
+and the $t$ nuclei.
+The $ V_\beta$ will be real, but the $U _\alpha$ and
+$U_{cc}$ will typically have both real and imaginary components.
+
+This source function $S_\alpha (R)$ evaluates a non-local
+integral operator, as it operates on the function
+$f_{\alpha'} (R' ) $ to produce a function of $R$.
+This section therefore derives the non-local kernel
+$V_{\alpha ,\alpha'} (R,R' ) $
+so that the source term, which initially involves a five
+dimensional integral over $ \vecr $ and $ \hat \vecR$,
+may be calculated by means
+of a one-dimensional integral over $R'$:
+\begin{eqnarray} \label{sourceint}
+S_\alpha (R) = \int_ 0 ^ {R_m}
+                  V_{\alpha ,\alpha'} (R,R' )
+                  f_{\alpha'} (R' ) dR' .
+\end{eqnarray}
+Note that when the initial and final single-particle states are real, then
+the kernel function is symmetric
+\begin{eqnarray}
+  V_{\alpha ,\alpha'} (R,R' ) =
+  V_{\alpha' ,\alpha} (R' ,R),
+\end{eqnarray}
+whereas if the states are unbound and complex-valued, then the kernel
+function is hermitian provided the interaction potential
+${\bf V}$ is real. If the particle states and the interaction potential
+are complex, then both the forward and reverse kernels must be
+each calculated independently.
+
+When the potential {\bf V} contains only scalar potentials, the
+kernel calculation can be reduced to the problem of finding
+$\BX^\Lambda_{\ell L: \ell' L'} (R,R' ) $
+such that, given
+\begin{eqnarray}
+&&\langle (LJ_p)J,J_t ;J_T | {\bf V}|(L' J'_ p)J' ,J'_ t ;J_T\rangle=\sum_{\Lambda F}
+(-1)^{s+J'_ p - F} \hat J \hat {J'_ t} \hat j \hat F \hat {J_p} \hat \Lambda
+\left \{ \begin{array}{ccc}L'&J'_p&J'\\ \ell'&s'&j'\\ \Lambda&F&J\end{array} \right \} \nonumber \\
+ && \times W(J_t j' J_T J' ;~ J'_ t J)
+             W(ls J_p J'_ p ;~jF)
+             W(L \ell  J F;~ \Lambda J_p )
+            \langle \ell L; \Lambda | {\bf V} | \ell' L' ; \Lambda\rangle  ,
+        \label{Vtransf}
+\end{eqnarray}
+the integral operator
+$
+\langle \ell L; \Lambda | {\bf V} | \ell' L' ; \Lambda\rangle
+\mbox{ has the kernel function }
+ \BX^\Lambda_{\ell L: \ell' L'} (R,R' ).
+$
+Note that the $F$ summation may be performed in an inner loop that does
+not evaluate the kernel function.
+
+Now the $\vecr$ and $\vecr'$ are linear combinations of the channel vectors
+$\vecR$ and $\vecR'$:
+$ \vecr = a \vecR + b \vecR' \mbox{ and } \vecr' = a' \vecR + b' \vecR' $
+where,
+when $ \varphi_\ell (\vecr) $ is the projectile bound state,
+\begin{eqnarray}
+a = \nu_t \omega , ~~~ b = - \omega , ~~~ a' = \omega , ~~~
+b' = - \nu_p \omega ,
+\end{eqnarray}
+with
+$ \nu_p \equiv A_{\kappa' p} / A_{\kappa p}$ ,
+ $\nu_t \equiv A_{\kappa t} / A_{\kappa' t}$ ,
+  and $ \omega = (1 - \nu_p \nu_t ) ^ {-1}$ .
+%%.rc 5 on
+When $ \varphi_\ell (\vecr) $ is the target bound state
+\begin{eqnarray}
+a = - \nu_p \omega, ~~~ b = \omega , ~~~ a' = - \omega ,
+b' = \nu_t \omega
+, ~~~
+\end{eqnarray}
+%%.rc 5 off
+with
+$\nu_p \equiv A_{\kappa p} / A_{\kappa' p}$ ,
+$\nu_t \equiv A_{\kappa' t} / A_{\kappa t}$ ,
+  and $ \omega = (1 - \nu_p \nu_t ) ^ {-1}$ .
+%%.rc 5 on
+The `core-core' vector is always $ \vecR_c = \vecr' - \vecr
+ = (a' - a) \vecR + (b' - b) \vecR' . $
+%%.rc 5 off
+
+Thus the spherical harmonics
+$ Y_\ell ( \hat \vecr ) $ and $ Y_{\ell'} ( \hat\vecr' ) $
+can be given in terms of the spherical harmonics
+$ Y_n ( \hat\vecR ) $ and $ Y_{n'} ( \hat\vecR' ) $
+by means of the Moshinsky \cite{MOSH}
+solid-harmonic expansion (see also refs. \cite{aust64}
+and~\cite{OHMURA}
+\begin{eqnarray}
+Y_\ell^m ( \hat \vecr) =
+   \sqrt {4 \pi} \sum_{n \lambda} c( \ell ,n)
+   {(a R)^{\ell  - n} (b R' )^n  \over r^ \ell }
+   Y_{\ell  - n}^{m - \lambda} ( \hat\vecR)
+   Y_n^\lambda ( \hat\vecR')
+  \langle \ell  - n m - \lambda n \lambda | \ell m\rangle
+\end{eqnarray}
+where
+\begin{eqnarray} \nonumber
+c( \ell ,n) = \sqrt { {1 \over 2n+1} ~~
+                        \left ( \begin{array}{c}2 \ell + 1\\ 2n\end{array} \right ) } ,
+\end{eqnarray}
+with $\left ( \begin{array}{c}x\\y\end{array} \right )$  the binomial coefficient (Appendix A).
+
+
+%%.rc 5 on
+We now perform the Legendre expansion
+\begin{eqnarray}
+{\bf V} {u_{\ell sj} (r) \over r^{\ell +1}} ~
+      {u_{\ell' sj'} (r') \over {r'}^{\ell' +1} }~
+ =
+  \sum _ T  (2T+1) {\bf q}^T_ {\ell , \ell'} (R,R')
+                P_T (u)
+\end{eqnarray}
+where the Legendre polynomials $ P_T (u)$
+%%.rc 5 off
+are functions of $u$, the cosine of the angle between
+$\vecR $ and $\vecR' ,$ by using
+$r = (a^2 R^2 +b^2 {R'}^2 + 2abRR' u)^{1/2} $
+(with $r'$ analogously) in the numerical quadrature of the integral
+\begin{eqnarray} \label{genq}
+ {\bf q}^T_ {\ell , \ell'} (R,R')
+ =
+   \half \int_ {-1} ^ {+1}
+         {\bf V} {u_{\ell sj} (r)\over r^{\ell + 1}} ~
+               {u_{\ell' sj'} (r')\over {r'}^{\ell' +1}} ~
+              P_T (u) du
+\end{eqnarray}
+The quadrature methods used here, and the accuracy attained, are
+discussed in section 5.3.
+
+%%.rc 5 on
+Using the Legendre expansion, the radial kernel function
+\begin{eqnarray} \nonumber
+&&\BX^\Lambda_{\ell L: \ell' L'} (R,R' )
+   =  {| b |^3 \over 2} \sum_{nn'} c(\ell n) c(\ell' n')
+        R R' (aR)^{\ell - n} (bR')^n
+        (a' R)^{\ell' - n'} (b' R')^{n'}
+\nonumber
+\\\nonumber
+ && \times \sum_T  {\bf q}^T_ {\ell , \ell'} (R,R')
+        (2T+1) (-1)^{\Lambda+T+L+L'} ~
+          \hat \ell \hat \ell' ~\hat{(\ell - n)}~ \hat{(\ell' - n')}
+              \hat n \hat {n'} \hat L \hat {L'}
+\nonumber
+\\\nonumber
+ && \times \sum_{K K'} (2K+1)(2K' + 1)
+        \left ( \begin{array}{ccc}\ell - n&n'&K\\0&0&0 \end{array} \right )
+        \left ( \begin{array}{ccc}\ell'-n'&n&K'\\0&0&0 \end{array} \right )
+        \left ( \begin{array}{ccc}K&L &T\\0&0&0 \end{array} \right )
+        \left ( \begin{array}{ccc}K'&L'&T\\0&0&0 \end{array} \right ) \nonumber
+\\
+  && \times \sum_{Q} (2Q+1)
+        W(\ell L \ell' L' ; \Lambda Q)
+        W(K L K' L' ; T Q)
+        \left ( \begin{array}{ccc} \ell'&Q&\ell\\ n'&K&\ell-n\\\ell' - n'&K'&n \end{array} \right )
+        \label{useq}
+\end{eqnarray}
+%%.rc 5 off
+These formulae can also be used with $ {\bf V} \equiv 1$ to calculate the kernel
+functions $ K^\Lambda_{\ell L: \ell' L'} (R,R' ) $
+for the wave function overlap operator
+$K_{ij} \equiv\langle\phi_i |\phi_j\rangle $
+needed in evaluating the non-orthogonality terms of section \ref{nono}.
+
+One disadvantage of this method of calculating the two-dimensional
+radial kernels
+$\BX^\Lambda_{\ell L: \ell' L'} (R,R' ) $
+is that in the process of transforming the solid harmonics of
+$ \vecr $ and $\vecr' $ into those of
+$ \vecR $ and $\vecR' $, there appears summations containing
+high powers of the coefficients $ a, b, a' $ and $b'$
+These products will become larger than unity by several orders of
+magnitude, will the summed result is typically of the order of
+unity.  This means that
+the summations involve large cancellations,
+and as the degree of cancellation gets worse for large
+$ \ell $ and $ \ell' ,$ the cancellation places a limit
+on the maximum value $ \ell + \ell' $ of the
+transferred angular momentum.
+
+One way of circumventing this loss of accuracy is that proposed by
+Tamura and Udagawa \cite{TUM}, whereby solid harmonics are avoided in favour of a suitable
+choice of axes to render it practical to calculate $m$-dependent
+form factors directly.  If the ${\bf z} $ axis is not (as
+usual) parallel to the incident momentum, but set parallel to
+$\vecR$, and the $\vecx' $ axis set in the plane determined
+by $\vecR $ and $ \vecR' ,$ then the $\vecr $ and $ \vecr'$
+vectors are also in this plane.
+The radial kernels may then be calculated as a sum of $m$-dependent
+integrals over $ \cos \theta = \hat \vecR \cdot \hat{\vecR'} $,
+as before the cosine of the angle between $\vecR $ and $ \vecR'$.
+Although there are hence a larger number of radial integrals to be
+performed, there are no large cancellations between the separate terms,
+and there is no limit on the size of the transferred angular momentum.
+
+A third method \cite{robson72}
+of calculating the transfer form factors is that involving
+expanding the initial and final channel wave functions in terms of
+spherical Bessel functions:
+\begin{eqnarray} \label{expan}
+f _\alpha (R) = \sum_{n=1}^ {N(L)} {a _\alpha (K_n) R ~
+                j_L (K_n R) } .
+\end{eqnarray}
+Using then the Fourier transform of the bound state wave functions
+$ u_\ell (r) $ and $ u_{\ell'} (r')$,
+a transfer T-matrix element may be written as a sum of a set of
+one-dimensional integrals over a momentum variable.
+Efficient codes \cite{nagel76}
+have been written for CCBA calculations of transfers induced by light
+ions (up to masses $\sim$ 10 to 15 amu).
+
+This plane-wave expansion method has however several disadvantages  when
+it comes to solving problems with coupled reaction channels.   If
+transfers are to be calculated at each iteration of the coupled
+equations, then the expansion (\ref{expan}) has to be recalculated at each step.
+Another difficulty is that the method is not suited to heavy-ion induced
+transfers, as the large degree of absorption inside the nuclei in these
+cases requires a large number of momentum basis states  $ K_n $
+to be represented accurately. The plane-wave expansion  becomes
+uneconomical, and sometimes the determination of the
+$ a _\alpha (K_n)$ coefficients becomes numerically ill-conditioned
+
+We will see in section 5.3.1, however, that
+if the cancellation which occurs in the first method is monitored,
+and steps taken to keep it to a minimum, a workable code
+\cite{FRESCO}
+results which can produce accurate results for L-transfers up to around 6.
+%%%
+\subsubsection{Zero Range Transfers}
+
+When the projectile wave functions
+$ \varphi_\ell ( \vecr ) $
+are all $s$-states ($\ell=0$ and
+the interaction potential is of zero-range
+$ ({\bf V} \varphi (\vecr) \sim D_0 \delta ( \vecr )~) , $
+then the form factor
+$ \BX^\Lambda_{\ell L: \ell' L'} (R,R' ) $
+of equation (\ref{useq}) can be simplified to
+\begin{eqnarray}
+\BX^L_{0L: \ell' L'} (R,R') = D_0  ~
+          {(-1)^{L' - \ell'} \over \hat L} ~
+          {\hat{\ell'} \hat L \hat {L'}\over \sqrt{4 \pi}} ~
+          \left ( \begin {array}{ccc}\ell'&L &L'\\0&0&0\end{array} \right ) ~
+          {1 \over R} u_{\ell' sj'} (R ) ~
+          {b^2 \over a} \delta (aR+bR') .
+\end{eqnarray}
+This can be made local by defining a new step size
+$h' = -ah/b \equiv \nu_t h$
+in the stripping channel $\alpha'$.
+%%%
+\subsubsection{Local Energy Approximation}
+
+If the interaction potential is of small range, though not zero,
+and the projectile still contains only $s$-states,
+then a first-order correction may be made to the above form factor.
+This correction will depend on the rate of oscillation of the source wave
+function
+$   f^{J_T} _{ (L' J'_ p),J' ,J'_ t} (R' ) $
+within a `finite-range effective radius' $\rho$.
+The rate of oscillation is estimated from the local energy
+in the entrance and exit channels,
+%%% DF.
+%%%   K_{\alpha'} (R') = \sqrt \left [ {2 mu'} over \hbar^2 ~
+%%%              \left ( E_{\alpha'} - U_{\alpha'} \right ) \right ] .
+%%% EDF.
+and the result \cite{buttle64}
+is to replace $u_{\ell' sj'} (R) $
+in the previous section by
+\begin{eqnarray} \label{lea}
+u_{\ell' sj'} (R) \rightarrow
+u_{\ell' sj'} (R)
+    \left [ 1 + \rho^2 {2 \mu _\alpha^{(p)}\over \hbar^2} ~
+    \left ( U_{\alpha'} ( R) + V_{\ell' sj'} (R)
+          -U _\alpha (R) + \epsilon _\alpha \right ) \right ]
+\end{eqnarray}
+where the $U(R)$ are the optical potentials, with
+$V_{\ell' sj'} (r)$ the single-particle binding potential in the target.
+The $ \mu _\alpha^{(p)}$ is the reduced mass of the particle in the projectile,
+and $ \epsilon _\alpha $ its binding energy.
+
+At sub-Coulomb incident energies \cite{gold68}, the details of the nuclear potentials
+in equation (\ref{lea}) become invisible, and as the longer-ranged Coulomb
+potentials cancel by charge conservation, the form factor can be simplified to
+\begin{eqnarray}
+ D_0 u_{\ell' sj'} (R) \rightarrow
+     u_{\ell' sj'} (R) D_0
+       \left [ 1 + \rho^2 {2 \mu _\alpha^{(p)}\over \hbar^2} \epsilon _\alpha \right ]
+   &=& u_{\ell' sj'} (R) D
+\end{eqnarray}
+where
+\begin{eqnarray} \label{DD0}
+  D = D_0 \left [ 1 + \left ( \rho k _\alpha^{(p)} \right ) ^2 \right ]
+\end{eqnarray}
+is the effective zero-range coupling constant for sub-Coulomb transfers.
+
+The parameters $~ D_0 $ and $ D $ can be derived
+from the details of the projectile bound state $ \varphi_{0ss} ( \vecr)$.
+The zero-range constant $ D_0$ may be defined as
+\begin{eqnarray}
+    D_0 = \sqrt {4 \pi} \int_ 0^\infty r V(r) u_{0ss} (r) dr.
+\end{eqnarray}
+The parameter $D$, on the other hand, reflects the asymptotic
+strength of the wave function $u_{0ss} (r)$ as $r \rightarrow \infty$,
+as it is the magnitude of this tail which is important in sub-Coulomb reactions:
+\begin{eqnarray}
+    u_{0ss} (r) = _ {r \rightarrow \infty}
+         {2 \mu _\alpha^{(p)}\over \hbar^2} {1 \over \sqrt {4 \pi}} ~
+         D e^{-k _\alpha^{(p)} r} .
+\end{eqnarray}
+It may be also found, using Schr\"odinger's equation, from the
+integral
+\begin{eqnarray}
+    D  = \sqrt {4 \pi} \int_ 0 ^\infty
+                {\sinh (k^{(p)} _\alpha r)\over k^{(p)} _\alpha} ~
+                  V(r) u_{0ss} (r) dr.
+\end{eqnarray}
+From this equation we can see that as the range of the potential becomes smaller,
+$D$ approaches $D_0$. The `finite-range effective radius'
+$\rho$ of equation (\ref{DD0}) is thus some measure of the mean radius
+of the potential $V(r).$
+%%%
+\section{Numerical Solutions}
+\label{solns}
+%%.rc 4 on
+
+This section discusses the methods used to solve the coupled reaction
+channels equations (\ref{CRC}), when in general there are both  local
+couplings $ V_{\alpha :\alpha'}^\Gamma (R_\kappa)$
+{\em and} non-local kernels
+$ V_{\alpha :\alpha'} (R_\kappa , R_{\kappa'} )$.
+Now a group of $m$ equations can be solved `exactly' (subject only
+to radial discretisation errors) by finding \cite{BSH}
+a set of $m$ linearly independent groups of solutions
+$ g_{i,k} (R) $, and taking a linear combination of these which satisfies
+the required boundary conditions.
+This method is only practicable, however, if there are not too many
+equations (the numerical effort can rise as $m^3$), and if there
+are only local couplings. For in that case the independent solutions can
+be found in a single outward `sweep' of $m^2$ radial
+functions. Non-local couplings mean, unfortunately, that the source terms
+at a given radius depend on the wave functions at other radii both larger
+and smaller, so that this `exact' method becomes impractical.
+
+In many cases of interest in nuclear physics, however, the non-local
+couplings are not too strong, and can be treated as successive
+perturbations. They can then be applied iteratively until further
+applications have progressively smaller efffects, and the solutions have
+converged (to some preset criterion of accuracy).
+Some failures of convergence can remedied by the use of Pad\'e
+approximants.
+
+When both local and non-local couplings are present, and the local
+couplings are too strong to allow an iterative scheme to converge, a
+combination of the exact and iterative schemes is possible.
+In this approach, several channels can be `blocked' together, and
+treated as one unit during the iterations, while solving the couplings
+{\em within} the block by the exact method.
+
+There are several other features of typical nuclear reaction calculations
+which simplify the numerical methods:
+\begin{enumerate}
+\item If the sum of the incoming projectile and target spins is greater than
+one, then solutions will often be required for the {\em same} set of
+CRC equations, only with different boundary conditions.
+\item The diagonal potentials $U_\kappa (R_\kappa )$ usually have
+a significant imaginary component for small $ R_\kappa $, and
+hence damp the solutions  $f_\alpha (R_\kappa )$
+in this region. This enables lower radial cutoffs to be used for
+$ R_\kappa $ near zero, with little loss of accuracy.
+\item
+The bound states $u_{\ell sjI} (r) $ used in transfer
+reactions decay exponentially outside the surface region of the nuclei.
+This means that the integrand in equation (\ref{genq}) for the transfer kernels
+will often decay exponentially both as
+$| R  - R' | $ increases, and as
+$ u \equiv cos \theta \equiv \hat {\vecR } \cdot \hat {\vecR'}$
+decreases from unity.
+\end{enumerate}
+%%.rc 4 off
+%%%% Ch. 5 intro ended on page &$PN., at &$LC lines from end.
+%%%
+\subsection{Integration of the Radial Equations}
+\label{ExCC}
+%.se ExCC = &@xref
+
+If the non-local interactions $ V_{\alpha ,\alpha'} (R,R')$
+in the CRC equations (\ref{CRC}) are present, then it will always be necessary
+to solve the coupled channels by iteration. With the local couplings
+$ V_{\alpha ,\alpha'}^\Gamma (R), $ however, we have a choice
+whether to iterate, or to include them in the exact solutions of
+the close-coupling method.  A simple option is to allow a specifiable
+number $b$ of channels to be coupled
+exactly, with the remainder only being fed after one or more iterations.
+This would be useful, for example, if the channels for the low-lying
+states of a highly-deformed target were included in this block of $b$
+channels, and if the remaining channels (e.g. for transfers) were not fed
+by more than 2 or 3 steps beyond this initial block.
+Restricting these iterations to one is equivalent to solving a CCBA model.
+
+Whether the coupled equations are of the simpler form of equation (\ref{CRC}),
+or of the more complex form of section \ref{nono}, a particular $n$'th
+iteration will require solving set of $m$ equations of the form
+\begin{eqnarray} \label{diffeq}
+  {d^2 \over dR^2} f_i (R) &=& \sum _ {j=1} ^ b
+      C_{ij} (R) f_j (R) + S_i (R)
+    \mbox{  for } i=1 \cdots b ,
+\\
+ \mbox{  and } {d^2 \over dR^2} f_i (R) &=&
+      C_{ii} (R) f_i (R) + S_i (R)
+    \mbox{  for } i=b+1 \cdots m ,
+\end{eqnarray}
+where $ S_i (R) $ is the source term constructed by means of the
+wave functions $ f_i^{(n-1)} (R) $ of previous iterations :
+\begin{eqnarray}
+    S_i (R) = \sum_{j = j_{\rm min}}^ m
+                  C_{ij} (R) f_j^{(n-1)} (R)
+\end{eqnarray}
+where $ j_{\rm min} = b+1 \mbox{ if } i \leq b $ and
+$ j_{\rm min} = 1 $ if $ i> b. $
+
+These coupled differential equations can be solved, following the method
+of ref. \cite{BSH} by forming the linearly independent solution
+sets $ g_{i,k} (R) $, where the $k$'th solution consists of
+a set of all channels ($i=1 \cdots m$) which is made independent of
+the other sets by having a distinctive starting value
+\begin{eqnarray} \label{rstart}
+    g_{i,k} (R_{\rm min} - h) = 0, ~~~~~
+    g_{i,k} (R_{\rm min}) = {1 \over (2L_i + 1)!!} ~
+       (K_i R_{\rm min})^{L_i + 1} \delta_{i,k}
+\end{eqnarray}
+for the initial conditions in the radial integration of equations (\ref{diffeq}).
+For this integration, the code FRESCO uses the modified Numerov method,
+and other codes such as Tamura's JUPITOR \cite{tam67}
+have used Euler's method to start with near the origin ($R$=0),
+and then St\"ormer's 6-point method to continue.
+%%.rc 3 on
+A general discussion of numerical integration schemes
+is given in Melkanoff et al. \cite{melk66}, along with error analyses of the different methods.
+%%.rc 3 off
+%%%
+
+
+The independent solutions $g_{i,k} (R) $ are required for $m$+1
+values of $k$. The solution vectors for $k=1 \cdots m$ are solved
+starting with equation (\ref{rstart}) but with {\em no} source term in
+the equation (\ref{diffeq}): these will contribute to the complementary
+solution of the homogeneous equation.
+We also need a particular solution $g_{i,0} (R) $ of the
+inhomogeneous equation, solved {\em with} the source terms but with
+{\em no} non-zero values in equation (\ref{rstart}). These partial
+solutions may be conveniently laid out as in figure \ref{CCsoln}.
+If, however, it is known that the wave functions of certain channels are
+not required (if, for example, they are only fed in the last iteration),
+then it is not necessary to store their components in the array, for their
+S-matrix elements can still be calculated.
+
+The solutions $f_i (R) $ are the linear combination of the
+$g_{i,k} (R) $
+\begin{eqnarray} \label{linsum}
+     f_i (R)  = \sum _{k=0} ^ m a_k g_{i,k} (R)
+\end{eqnarray}
+satisfying the boundary conditions of equation (\ref{asymp}) at
+$R = R_m$ and say $R = R_m - 5h. $
+The coefficient $ a_0 $ is always unity, to match the source terms
+correctly.  The S-matrix elements are a by-product of the linear matching
+equations (\ref{asymp}).
+
+\begin{figure} \label{CCsoln}
+\begin{tabular}{c|ccccccc|l}
+\multicolumn{1}{c}{IT}&&&&&&&\multicolumn{1}{c}{}&\\
+\cline{2-8}
+1&$g_{1,0}$&$g_{2,0}$&..&  &   &   &$g_{m,0}$&{\em in}homogeneous solns.\\ \cline{2-8}
+2&&(not used)&&\multicolumn{1}{c|}{}& ${\bf g}_{b+1,b+1}$&..&${\bf g}_{m,m}$ &uncoupled regular solns.\\ \cline{2-8}
+3&${\bf g}_{1,1}$&$g_{2,1}$&..&\multicolumn{1}{c|}{}&\\ \cline{2-5}
+4&$g_{1,2}$&${\bf g}_{2,2}$&..&\multicolumn{1}{c|}{}& & coupled regular solutions \\ \cline{2-5}
+$\downarrow$&..&..&..&\multicolumn{1}{c|}{}& & (equations $1\rightarrow b$) \\ \cline{2-5}
+$b+2$&$g_{1,b}$&$g_{2,b}$&..&\multicolumn{1}{c|}{${\bf g}_{b,b}$}\\ \cline{2-5}
+\end{tabular}
+\caption{ Independent Solution Vectors:
+Layout of the independent radial wave functions for solving a system of
+$m$ equations, of which $b$ are to coupled exactly. Each entry
+represents a vector of $n$ radial points, and the entries in bold are
+those with a non-zero initial values for their outward radial integration.}
+\end{figure}
+
+Note that the independent solutions $ g_{i,k} (R)$ for $k \geq 1$
+need only be calculated the {\em first} time this coupled channels
+set is used. If they are stored as in figure \ref{CCsoln},
+subsequent iterations need only recalculate the first row (IT=1)
+as the source terms vary.  Furthermore, if there are multiple incoming
+channels for fixed total spin $J_T$ and parity $\omega$, then
+solutions after the first can also use the $g_{i,k} (R)$ already
+stored. The first iteration for these subsequent incoming channels will in
+fact not require any radial integrations whatsoever, merely finding a new
+set of $ \{ a_k \} $ from the new matching conditions,
+and recalculating the sum (\ref{linsum}) if the
+wave functions are required.
+
+Tolsma and Veltkamp \cite{TOLV}
+point out one difficulty with this method, which is that if the couplings
+$ C_{i,j} $ are strong for $ i \neq j$, then the linear
+independence of the $ g_{i,j} (R)$ will be reduced as $R$
+increases through a classically forbidden region.  This is because the
+components with negative local kinetic energy will generally consist of an
+exponentially growing part and an exponentially decreasing part.  The
+former is responsible for the tendency to destroy the initially generated
+linear independence of the solution vectors. The longer the integration
+continues through a classically forbidden region, the stronger this
+tendency will be; for instance, it will occur in scattering problems of
+nuclear physics with energies near or below the Coulomb barrier. It will
+also occur if inelastic form factors are used which are not approximately
+derivatives of the diagonal potential, but which extend more than usual
+into the interior of the nucleus that is classically forbidden because
+of the centrifugal potentials.
+
+Tolsma et al. \cite{TOLV} propose a stabilization procedure to
+monitor and if necessary re-orthogonalise the solution vectors.  If this
+were not done, there would be large cancellations in the sum of equation
+(\ref{linsum}), resulting if severe in complete loss of accuracy of the
+S-matrix elements and the solution wave functions.
+
+A simpler approach is to increase the starting radius $R_{\rm min}$
+at which the radial integrations begin. It is advisable in any case for
+reasons of stability at small radii to have a minimum radius proportional to
+some angular momentum $\overline L $ typical of the coupled channels set:
+\begin{eqnarray} \label{Rmin}
+    R_{\rm min} \geq c \overline L h
+\end{eqnarray}
+for some constant $c$ in the region of 1 or 2, where $h$ is the radial
+step size.  This constant could be increased to avoid the loss of
+independence in the present problem, but this is not always satisfactory,
+as the absorptive effects of the optical potentials at intermediate radii
+might thereby be lost.  An alternative remedy
+(adopted in ref.\cite{FRESCO}) is to have a specifiable radial
+cutoff $R^(c)_min$ for the {\em off}-diagonal coupling
+terms only. This allows the absorption in the diagonal potentials to be
+effective at all radii outside $R_{\rm min}$ of equation (\ref{Rmin}),
+but does not allow any strong coupling terms to lead to loss of
+independence until some larger radius which can be adjusted to keep the
+loss of accuracy to an acceptable level. It thus should be a regular
+policy in a computer code to integrate the equations (\ref{diffeq}) to a
+precision of at least 12 to 16 significant figures, to
+monitor the degree of cancellation in equation (\ref{linsum}),
+and to notify the user should this approach within 2 or
+3 powers of ten of the precision limit of the computer.
+Note that it is {\em not} necessary for the coupling terms
+$ C_{ij} (R) $ (etc)
+to be {\em accurate} to full machine precision, only that they should
+be consistently {\em precise} when converted to that precision.
+%%%
+\subsection{Convergence of the Iterative Method}
+
+The iterative method of solving the CRC equations (\ref{CRC1}, \ref{CRC})
+will converge if the couplings are sufficiently small.
+The procedure will however diverge if the the couplings are too large, or if
+the system is too near a resonance.
+%%% or some other kind of pole
+%%% in the analytic continuation of the solution
+%%% as a function of the strength of the couplings being iterated.
+On divergence, the successive wave functions $\psi_i^{(n)}$
+will become larger and larger as $n$ increases, and not converge to
+any fixed limit. Unitarity will of course be violated as the S-matrix
+elements will become much larger than unity.
+\subsubsection{Improving the Convergence Rate}
+
+There are several ways of dealing with this problem:
+\begin{enumerate}
+\item Solving some of the local couplings exactly by the methods of section \ref{ExCC},
+and iterating only on the non-local couplings and the remaining
+local couplings.
+\item
+Solving all the channels simultaneously via a very lar ge system of linear equations,
+with each radial point in each channel as a separate unknown
+\cite{bang83}.
+\item
+Find a separable expansion for the non-local kernels,
+so that they can be included exactly in the coupled-channels solution \cite{PHD}.
+\item
+Expand the wave functions with a range of basis states
+of Coulomb and (say) Gaussian \cite{KAWAI} or Airy \cite{PIECAN}
+functions, and take the coefficients in this basis as the unknowns in a system of
+linear equations.
+\item
+Use Pad\'e approximants to accelerate the convergence of the sequence
+$S^{(n)} _\alpha $ of S-matrix elements \cite{ECIS1,ptolemy}.
+\item Iterating the equations sequentially
+as in \cite{ECIS1} and \cite{ptolemy}, rather than all equations as a block.
+\item The inwards-outwards method of refs. \cite{ald77}, \cite{ichi0000}
+and \cite{TOLSMA2}.
+\end{enumerate}
+For the range of heavy and light-ion reactions that we are considering here,
+the methods (1) and (5) above have been adopted.
+
+The method (2) is not used because of the size of the matrix that results.
+Initially, the matrix would be sparse, with selected elements away from the
+diagonal being non-zero because of the coupling potentials.
+The kinetic energy operators occupy a band of width three along
+the diagonal. Although a Gaussian elimination procedure
+would allow potentials of arbitrary coupling strength to be included,
+it will fill in large regions of the matrix as the solution proceeds,
+and this makes the storage requirements prohibitive.
+
+The separable expansion method (3), while useful for light-ion reactions,
+is unsatisfactory for heavy-ion transfers. This is because if the
+masses of the initial and final nuclei become large relative
+to the mass of the transferred particle,
+the form factor for the transfers becomes more nearly local.
+As we approach the no-recoil limit (which makes the form factors exactly local)
+a separable expansion of a nearly-local kernel will require
+a large number of terms.  In the limit of a local form factor,
+the separable expansion will require the same number of terms
+as there are radial points.
+
+The method (4) of expanding the wave functions in Gaussians
+could have been used, provided the characteristic widths in R-space
+of the basis states were chosen in accordance with the wave number
+$K _\alpha$ in the relevant channel.
+This requirement is less severe with light-ion reactions, where the
+wave numbers are typically $ \leq 1$ fm$^{-1}$.
+For heavy-ion reactions, however, the oscillation rates are much larger,
+and a more sensible method is to expand in terms of Airy functions
+that are depend explicitly on the local wave number over some radial region.
+
+It is very useful to be able to iterate the coupled equations in
+a conventional manner, as then 1, 2 and 3 step DWBA results (etc.)
+can be recovered by stopping the iterations short of full convergence.
+This recovery of DWBA results is more difficult with sequential iteration (6),
+but both that method and the method of (7)
+would be definitely advantageous when, say, exciting a long
+rotational band by successive application of a quadrupole coupling.
+Using Pad\'e acceleration has the advantages that it need only
+be employed if ordinary iterations are seen to diverge,
+and that it transforms the previously-divergent results
+with little new computational effort.
+%%%
+\subsubsection{Pad\'e Approximants for Sequence Extrapolation}
+
+A given sequence $S_0 , S_1 , \cdots $ of S-matrix elements
+that result from iterating the CRC equations
+can be regarded as the successive partial sums of the polynomial
+\begin{eqnarray}
+  f(\lambda) = S_0 + (S_1 - S_0) \lambda
+                   + (S_2 - S_1) \lambda ^ 2 + \cdots
+\end{eqnarray}
+evaluated at $\lambda$=1.
+This polynomial will clearly convergence for $\lambda$ sufficiently small,
+but will necessarily diverge if the analytic continuation of the
+$f (\lambda) $ function has any pole or singularities inside the circle
+$ | \lambda |> 1 $ in the complex $\lambda$-plane.
+The problem that Pad\'e approximants solve is that of finding a computable
+approximation to the analytic continuation of the $f (\lambda) $ function.
+This is accomplished by finding a rational approximation
+\begin{eqnarray}
+ P_{[n,m]} (\lambda) = {p_0 + p_1 \lambda + p_2 \lambda^2 + \cdots + p_n \lambda^n
+                  \over
+                   1       + q_1 \lambda + q_2 \lambda^2 + \cdots + q_m \lambda^m }
+\end{eqnarray}
+which agrees with the $f(\lambda)$ function in the region where the latter
+does converge, as tested by matching the coefficients in the polynomial
+expansion of $ P_{[n,m]} (\lambda) $ up to and including the coefficient of
+$ \lambda^{n+m} $.
+
+There are many different ways \cite{Pade}
+of evaluating the coefficients
+\{$p_m , q_n$\}, but for the present problem we can use
+Wynn's $\epsilon$-algorithm \cite{wynn66}, which is a method of evaluating
+the upper right half of the Pad\'e table at $\lambda$=1 directly
+in terms of the original sequence  $S_0 , S_1 , \cdots $.
+
+\subsubsection{Wynn's epsilon Algorithm}
+
+Initialising $\epsilon_0^{(j)} = S_j $
+and $ \epsilon^{(j)}_{-1} = 0 $,
+we form an array
+% \begin{eqnarray}
+% { {\epsilon sup(0)_-1} .vab .vab {\epsilon sup(1)_-1}
+%                        .vab .vab {\epsilon sup(2)_-1}
+%                        .vab .vab {\epsilon sup(3)_-1} .vab .vab {..} } ~~~
+% {                           .vab {\epsilon sup(0)_0}
+%                        .vab .vab {\epsilon sup(1)_0}
+%                        .vab .vab {\epsilon sup(2)_0} .vab .vab {..} } ~~~
+% {                    .vab .vab
+%   {\epsilon sup(0)_ 1} .vab .vab {\epsilon sup(1)_ 1} .vab .vab {..} } ~~~
+%             { .vab .vab .vab {\epsilon sup(0)_ 2} .vab .vab {..} }
+%             { .vab .vab .vab .vab .vab .vab {..}              }
+% \end{eqnarray}
+using the relation $ \epsilon^(j)_{k+1} = \epsilon^{(j+1)}_{k-1} +
+  ( \epsilon_k^{(j+1)} - \epsilon_k^{(j)} ) ^ {-1} .  $
+Thus we can construct the table given the second column from the initial sequence
+$ S_j $.
+The table then gives the transposed upper right half of the Pad\'e table,
+including the diagonal:
+\begin{eqnarray}
+  \epsilon^{(j)}_{2k}  = P_{[k,k+j]} (1) .
+\end{eqnarray}
+Experience has shown that for typical sequences the most accurate Pad\'e
+approximants are those near the diagonal of the Pad\'e table,
+and these are just the right-most
+$ \epsilon^{(0)}_{2k} $ in the $\epsilon$ table.
+
+When accelerating a {\em vector} S-matrix elements
+$ {\bf S}_j $, with a component for each coupled channel,
+then it is important to accelerate the vector as a whole.
+Wynn \cite{wynn61}
+pointed out that this can be done using the Samuelson inverse
+\begin{eqnarray}
+  {\bf x}^{-1} = ({\bf x} \cdot {\bf x}^* ) ^ {-1} {\bf x}^*
+\end{eqnarray}
+where $ {\bf x}^* $ is the complex conjugate of ${\bf x}$.
+Otherwise there will be problems when iterating (say) a two-channel
+system with alternating backwards and forwards coupling,
+because of zero divisors in the $\epsilon$ algorithm.
+%%%
+\subsection{Transfer Form Factors}
+\subsubsection{The Cancellation Problem}
+
+As discussed in section \ref{EFR},
+the summations over $T$ in equation (\ref{useq}) involve large cancellations,
+and as the degree of cancellation gets worse for large
+$ \ell $ and $ \ell' $, this places a limit
+on the maximum value $ \ell + \ell' $ of the
+transferred angular momentum.
+
+Typically, however, the transfer form factors are only needed to be accurate to
+around 0.1 to 1\%,
+so if computer arithmetic is used which is accurate to 14 or
+16 decimal digits, then cancellations up to 12 or 13 orders of magnitude
+should in principle not result in catastrophic errors in the transfer
+rates.  With careful programming, this accuracy can be achieved.
+What is necessary is to be careful that all quantities in the equations
+(\ref{useq}, \ref{genq}) above which depend on the Legendre order $T$ are calculated
+to the full computer precision.  It is not necessary, for example,
+for the channel wave functions $ f _\alpha (R) $, the bound
+state wave functions $u_{\ell sjI} (r) $ or the
+quadrature of the integral (\ref{genq}) to be accurate to full precision
+(which in any case would be impossible). It is only necessary
+that all these quantities have {\em exactly the same computer
+precision} when the coefficients over $T$ (the
+${\bf q}_{\ell , \ell'}^T (R,R') )$ are evaluated,
+and when the sums over $T$ (in equation \ref{useq}) are performed.
+This will require principally that the `radial framework' that gives
+$ \vecr $ and $ \vecr' $ in terms of $\vecR$ and $\vecR'$
+be accurate to full machine precision, as also the Racah algebra
+coefficients in equation (\ref{useq}). In fact, the channel wave functions
+$ f _\alpha (R) $ and the bound state wave functions
+$u_{\ell sjI} (r) $ may be calculated with reduced precisions
+using shorter computer words and faster arithmetic should
+these be available. It is also not necessary for the coefficients and sums
+over $T$ be consistent to full accuracy for different $R$ and
+$R'$ values, as the large cancellations only occur between
+different $T$ values for each separate $R$ and $R'$ combination.
+
+Since the accuracy of the quadrature in the equation (\ref{genq}) is not critical
+to the overall accuracy of the transfers, calculations may be speeded up if we
+economise on the range of the $u$ variable and on the
+number of intermediate steps required.
+Even in light ion reactions it is not necessary to integrate $u$ to $-1$
+($\theta$ to 180$^\circ$) as was done in the code LOLA
+\cite{LOLA}
+for example.  An efficient procedure to adopt is that used in the DWBA
+code DAISY\cite{DAISY}, where, for each successive $R$ value, the code monitors the rate
+of decay of the integrand as $\theta$ increases.  For a given accuracy
+criterion, an estimate can then be made of an adequate upper limit
+for the $\theta$ integration at the next $R$ value.  Typically, the upper
+limits of $\theta$ decrease monotonically as $R$ increases from 0 to the
+upper limit $R_m$.
+Because the integrand is largest for $\theta$=0, the accuracy of the angular
+integration for small $\theta$ is improved by a change of variable from $u$
+to $x$ as in ref.\cite{DAISY}:
+\begin{eqnarray}
+ \theta = \frac{1}{4} (3 x^2 + 1) x \theta_{\rm max}
+\end{eqnarray}
+for $0 \leq x \leq 1. $  The quadrature over $u$ of equation (\ref{genq}) then becomes
+\begin{eqnarray}
+ {\bf q}^T_ {\ell , \ell'} (R,R')
+ =
+   \half \int_ 0 ^ 1
+         {\bf V} {u_{\ell sj} (r)\over r^{\ell + 1}} ~
+               {u_{\ell' sj'} (r')\over {r'}^{\ell' +1}} ~
+              P_T (u) \sin(\theta) {d \theta \over dx} dx.
+\end{eqnarray}
+The parameter $\theta_{\rm max}$ is adjusted for each successive
+value of $R$. according to the rate at which the integrand is observed to decay
+as $\theta$ increases, as described earlier.
+%%%
+\subsubsection{Radial Grids}
+
+The methods used to calculate, store and use the non-local form factors
+$ qu^T_{\ell , \ell'} (R,R') $ (equation \ref{genq}) and
+$V_{\alpha ,\alpha'} (R,R') $ (equation \ref{Vtransf})
+have to be efficient in a wide variety of reactions, from light-ion
+reactions such as
+$^3$He($^3$H,$^4$He)$^2$H or $^{16}$O($^{20}$Ne,$^{24}$Mg)$^{12}$C
+to heavy-ion reactions, such as nickel on tin one-nucleon transfers.
+In the former cases, the radial form factors
+$V_{\alpha ,\alpha'} (R,R') $
+will be non-zero over large regions of the $R-R'$ space, so
+(following ref \cite{SM1}) interpolation procedures should prove effective.
+
+However, when small masses are transferred between two larger nuclei
+the form factor is nearly local, and only large around
+$R \sim R' .$
+If the whole $(R,R')$ array had to be calculated and stored in
+these cases,
+modelling heavy-ion transfers would become inefficient,
+even with interpolation methods.
+The form factor now varies rapidly as a function of
+$\delta R \equiv R - R'$ (especially for heavy ion reactions,
+as the Jacobian $b^3$ in equation (\ref{useq}) becomes large),
+and varies only slowly with $R$ (if $\delta R$ is constant),
+as this variation follows the radial dependence of the bound state
+wave functions.
+The best procedure is thus \cite{SM1}
+to first change to the coordinate pair
+$\delta R$ and $R$, and then to use different interpolatory
+intervals $h_\delta$ and $h_R$ in the two directions
+respectively. Then, when nuclear masses become large compared with the mass
+of the transferred particle, $h_\delta$ can become smaller,
+perhaps even smaller than $h$, the basic radial step size.
+
+The method adopted in FRESCO is to let the user specify
+$h_\delta$ and $h_R $ as multiples or
+submultiples of $h$. The value of $h_R $ is very often always 3 to 5
+times larger than $h$, as this reflects the typical rate at which bound
+state wave functions vary.
+If the bound state wave functions have many internal nodes, then the
+interpolation interval $h_R$ cannot be so large
+(this is often the case with $\alpha$-particle bound states).
+
+The $h_\delta ,$
+on the other hand, will be larger than $h$ for light-ion reactions
+(as described in \cite{TUM}), but will be comparable with or smaller than
+$h$ for few-nucleon transfers between heavy ions.  The user also
+specifies the maximum and minimum values of the range of $\delta R ,$
+which again will be large ( $\sim$ nuclear radii) for light ions,
+and small ( $\sim$ 1 or 2 fm.) for heavy ion reactions.  The accuracy of these
+choices is checked retrospectively by collecting statistics on the
+distributions of the functions
+$ {\bf q}^T_{\ell , \ell'} (R, \delta R),$ averaging
+over $R$. and all partial waves $T$, $\ell$, and $\ell' .$
+
+When $h_\delta$ or $h_R $ are {\em multiples} $h$,
+then (say) cubic splines in two dimensions can be used to expand the form
+factors for the integrals of equation (\ref{sourceint}).
+If, however, $h_\delta$ is a {\em submultiple} $h$,
+as is the case in many heavy-ion reactions,
+then a more efficient procedure is possible.
+
+Suppose, say, we wish to evaluate the numerical integral
+\begin{eqnarray}
+   {\cal I} = \sum _ j V(x_j) \overline f (x_j) ,
+\end{eqnarray}
+where the $\overline f (x_j)$ are the interpolated values of the
+function $f(x)$ between its stored values $f_i$ at
+$x = (i-1)h .$ Let the interpolation method be linear:
+\begin{eqnarray}
+  \overline f (x) = \sum _ m  a_m (x) f_m
+\end{eqnarray}
+for some $x$-dependent coefficients $a_m (x)$ from (say) fitting
+cubic splines over some range (most of the $a_m$ will be zero except
+for $ m\sim i\pm 2 $).  Then $\cal I$ can be evaluated directly
+in terms of the $f_m : $
+\begin{eqnarray}
+ {\cal I} &=& \sum _ j V(x_j)
+            \sum _ m  a_m (x_j)  f_m
+\\
+ &=& \sum _ m \overline V_m f_m
+\end{eqnarray}
+where
+\begin{eqnarray} \label{preempt}
+\overline V_m \equiv \sum _ j V(x_j) a_m (x_j)
+\end{eqnarray}
+is a new effective form factor
+This means that when $h_\delta$ is a submultiple of $h$,
+we do not need to store a form factor at intervals of $h_\delta ,$
+only at intervals of $h$, if we use the `preemptive
+interpolation' of equation (\ref{preempt}).
+This has the further advantage that as the no-recoil limit is approached
+(as the mass of the transferred particle becomes a smaller fraction of the
+interacting nuclei), then the form factors
+$ \overline{\bf q}^T_{\ell , \ell'} (R, \delta R) $ and
+$\overline V_{\alpha ,\alpha'} (R, \delta R) $
+need fewer grid points in the
+$\delta R$ direction. Less arithmetic is needed to evaluate
+the source functions of equation (\ref{sourceint}), which change from
+\begin{eqnarray}
+  S _\alpha (R) = \int_ {\delta R_{\rm min}} ^ {\delta R_{\rm max}}
+           \overline V_{\alpha ,\alpha' } (R, \delta R) ~
+           f_{\alpha'} (R - \delta R)  d( \delta R)           .
+\end{eqnarray}
+to
+\begin{eqnarray}
+ S _\alpha (i h_R) = h \sum _ j
+          \overline V_{\alpha ,\alpha' } (ih_R , j h)
+          f_{\alpha'} ((in_R - j)h)
+          \mbox{  where } n_R \equiv h_R / h
+\end{eqnarray}
+even when the original kernel functions
+vary rapidly as $\delta R$ changes in steps of $h$ (with $R$ constant).
+
+{\em Simultaneous Two-Nucleon Transfers}:
+A similar `preemptive' summation is possible when calculating the
+form factors for the simultaneous transfer of two nucleons between states
+of the form of equation (\ref{tntwf}) in the projectile and in the target.
+As mentioned in section \ref{NNBS},
+two-nucleon transfer can be viewed as the transfer of a
+`structured particle' with internal coordinates
+$ ( \ell , (s_1 s_2) S)j $ and
+$\rho$, the distance between the two nucleons.  A transfer is only possible
+if the initial and final states have identical values for these `internal
+coordinates'. The angular momentum quantum numbers can be matched
+exactly, but source terms can either be constructed for each $\rho$
+value and summed in equation (\ref{sourceint}),
+or the separate $\rho$ products can be summed as early as equation (\ref{genq}).
+Because the separate $\rho$ values are only used in a summation,
+it is most economical to use Gaussian quadrature,
+as for a given accuracy this reduces by a half
+the number of $\rho_i$ values at which the wave functions of equation
+(\ref{tntwf}) need to be calculated and stored.
+If the $\rho_i$ are chosen to be the Gaussian quadrature points over
+some chosen range, and if $ w_i $ are the corresponding weights,
+the equation (\ref{genq}) becomes
+\begin{eqnarray}
+ {\bf q}^T_ {L , L'} (R,R')  =
+   \half \int_ {-1}^{+1}
+         r^{-L-1} {r'}^{-L' -1} ~
+        [ \sum _ i  w_i {\bf V} u_{12} (r, \rho_i) ~
+                                   u'_{12} (r' , \rho_i) ]
+              P_T (u) du.
+\end{eqnarray}
+Equation (\ref{useq}) remains unchanged, and this means that two nucleon
+transfers can be calculated efficiently with little more computational work
+than that required for single-particle transfers.
+%%%
+\subsubsection*{Acknowledgements}
+
+I would like to thank Dr. Nagarajan, John Lilley, Ray Mackintosh,
+Victoria Andres and a referee for valuable questions and comments at various stages
+in this project.
+Manchester University, Daresbury Laboratory, the Niels Bohr Institute, and
+Bristol University are thanked for their hospitality when these ideas were
+being developed, and the Department of Engineering Mathematics at Bristol
+is thanked for their assistance in the preparation of this paper.
+
+
+\begin{thebibliography}{99}
+\itemsep=-2pt
+\bibitem{TAM65}
+T. Tamura, Rev. Mod. Phys. {\bf 37} (1965) 679.
+\bibitem{tam74}
+T. Tamura, Phys. Reports {\bf 14C} (1974) 59.
+\bibitem{aust70}
+N. Austern, {\em Direct Nuclear Reaction Theories} (Wiley, New York, 1970).
+\bibitem{rbrown80}
+M. Rhoades-Brown, M.H. Macfarlane and S.C. Pieper, Phys. Rev. C {\bf 21} (1980) 2417.
+\bibitem{PIECAN}
+L.D. Tolsma, Phys. Rev. C {\bf 20} (1979) 592, J. Comp. Phys. {\bf 17} (1975) 384.
+\bibitem{fesh58}
+H. Feshbach, Annals of Phys. (N.Y.) {\bf 5} (1958) 357, {\bf 19} (1962) 287.
+\bibitem{uda73}
+T. Udagawa, H.H. Wolter and W.R. Coker, Phys. Rev. Letts.
+{\bf 31} (1973) 1507.
+\bibitem{iman74}
+B. Imanishi, M. Ichimura and M. Kawai, Phys. Lett. {\bf 52B} (1974) 267.
+\bibitem{lill83}
+J.S. Lilley, B.R. Fulton, D.W. Banes, T.M. Cormier, I.J. Thompson, S. Landowne,
+and H.H. Wolter, Phys. Letts. {\bf 128B} (1983) 153, and
+J.S. Lilley, M.A. Nagarajan, D.W. Banes, B.R. Fulton and I.J. Thompson,
+Nucl. Phys. {\bf A463} (1987) 710.
+\bibitem{ogle71}
+W. Ogle, S. Wahlborn, R. Piepenbring and S. Frederiksson, Rev. Mod. Phys.
+{\bf 43} (1971) 424.
+\bibitem{vaag79}
+J.S. Vaagen, B.S. Nilsson, J. Bang and R.M. Ibarra,
+Nucl. Phys. {\bf A319} (1979) 143;
+J.M. Bang, F.G. Gareev, W.T. Pinkston and J.S. Vaagen, Phys. Reports
+{\bf 125} (1985) 253.
+\bibitem{mosh60}
+T.A. Brody and M. Moshinsky, {\em Tables of Transformation Brackets}.,
+(Monografias del Instituto de Fisica, Mexico, 1960);
+D.H. Feng and T. Tamura, Comput. Phys. Commun. {\bf 10} (1975) 87.
+\bibitem{bay67}
+B. Bayman and A. Kallio, Phys. Rev. {\bf 156} (1967) 1121.
+\bibitem{berry66}
+M.V. Berry, Proc. Phys. Soc. {\bf 89} (1966) 479,
+J. Phys. B: Atom. Molec. Phys. {\bf 2} (1969) 381;
+R.C. Fuller, Phys. Rev. C {\bf 12} (1975) 1561.
+\bibitem{row78}
+N. Rowley, J. Phys. A: Math. Gen. {\bf 11} (1978) 1545.
+\bibitem{simon74}
+M. Simonius, {\em Lecture Notes in Physics}.,
+Ed D. Fick, {\bf 30} (Springer, 1974) 38.
+\bibitem{iman69}
+B. Imanishi, Nucl. Phys. {\bf A125} (1969) 33.
+\bibitem{satch60}
+G.R. Satchler, Nucl. Phys. {\bf 21} (1960) 116.
+\bibitem{bs68}
+D.M. Brink and G.R. Satchler, {\em Angular Momentum}.,
+(Clarendon Press, Oxford, 1968).
+\bibitem{alder66}
+K. Alder and \AA. Winther, {\em Coulomb Excitation}
+(Academic Press, New York, 1966)
+and {\em Electromagnetic Excitation} (North Holland, Amsterdam, 1975).
+\bibitem{aust64}
+N. Austern, R.M. Drisko, E.C. Halbert and G.R. Satchler, Phys. Rev.
+{\bf 133} (1964) B3.
+\bibitem{robson72}
+D. Robson and R.D. Koshel, Phys. Rev. {\bf C6} (1972) 1125.
+\bibitem{nagel76}
+P. Nagel and R.D. Koshel, Phys. Rev. {\bf C13} (1976) 907,
+Comput. Phys. Commun. {\bf 15} (1978) 193.
+\bibitem{buttle64}
+P.J.A. Buttle and L.J.B. Goldfarb,
+Proc. Phys. Soc. (London) {\bf 83} (1964) 701;
+for a review see G.R. Satchler,  \cite[\S 6.14.1]{SATCH83}.
+\bibitem{gold68}
+L.J.B. Goldfarb and E. Parry, Nucl. Phys. {\bf A116} (1968) 309.
+\bibitem{tam67}
+T. Tamura, Oak Ridge National Laboratory Report No. ORNL-4152 (1967).
+\bibitem{melk66}
+M.A. Melkanoff, T. Sawada and J. Raynal,
+{\em Methods in Computational Physics}, Vol. 6 (1966),
+Academic Press (New York).
+\bibitem{bang83}
+J. Bang, J.-J. Benayoun, C. Gignoux, and I.J. Thompson,
+Nucl. Phys. {\bf A405} (1983) 126.
+\bibitem{ald77}
+K. Alder, F. R\"osel and R. Morf, Nucl. Phys. {\bf A284} (1977) 145.
+\bibitem{ichi0000}
+M. Ichimura, M. Igarashi, S. Landowne, C.H. Dasso, B.S. Nilsson, R.A. Broglia
+and \AA. Winter, Phys. Letts. {\bf 67B} 129.
+\bibitem{wynn66}
+P.Wynn, Numer. Math. {\bf 8} (1966) 264;
+see also A. Genz, p 112 in ref.\cite{Pade}
+\bibitem{wynn61}
+P. Wynn, Math. Comput. {\bf 16} (1961) 23.
+\bibitem{SATCH83}
+G.R. Satchler, {\em Direct Nuclear Reactions}. (Clarendon, Oxford, 1983).
+\bibitem{FRESCO}
+I.J. Thompson, FRESCO users' manual and code, available from
+the author.
+\bibitem{AROSA}
+F. R\"osel, J.X. Saladin and K. Alder, Comput. Phys. Commun. {\bf 8}
+(1974) 35.
+\bibitem{AROSA2}
+G.H. Rawitscher and C.H. Rasmussen, Comput. Phys. Commun. {\bf 11}
+(1976) 183.
+\bibitem{TOLSMA2}
+L.D. Tolsma, Phys. Rev. C {\bf 35} (1987) 177.
+\bibitem{ECIS2}
+J.D. Raynal, Phys. Rev. {\bf C23} (1983) 2571.
+\bibitem{CDCC}
+G.H. Rawitscher, Phys. Rev. {\bf C9} (1974) 2210,
+{\bf C11} (1975) 1152, Nucl. Phys. {\bf A241} (1975) 365.
+\\
+M. Yahiro and M. Kamimura, Prog. Theor. Phys. {\bf 65} (1981) 2046,
+{\bf 65} (1981) 2051.
+\bibitem{CDCC2}
+Y. Sakuragi, M. Yahiro and M. Kamimura, Prog. Theor. Phys. Suppl.
+{\bf 89} (1986).
+\bibitem{CV}
+S.R. Cotanch and C.M. Vincent, Phys. Rev. {\bf C14} (1976) 1739.
+\bibitem{OSAKA}
+I.J. Thompson, in: {\em Light Ion Reaction Mechanism}., proc. of RCNP
+Symposi\bibitem{OUKID}
+P. Nagel and R.D. Koshel, Phys. Rev. {\bf C13} (1976) 907,
+Comput. Phys. Commun. {\bf 15} (1978) 193.um, Osaka, 1983, ed. H. Ogata.
+\bibitem{COULCC}
+I.J. Thompson and A.R. Barnett, Comput. Phys. Commun. {\bf 36}
+(1985) 363, J. Comp. Phys. {\bf 64} (1986) 490.
+\bibitem{Sturm}
+J.M. Bang and  J.S. Vaagen, Z. Physik A {\bf 297} (1980) 223.
+\bibitem{OHMURA}
+T. Ohmura, B. Imanishi, M. Ichimura and M. Kawai, Prog. Theor. Phys.
+{\bf 41} (1969) 391, {\bf 43} (1970) 347,
+{\bf 44} (1970) 1242.
+\bibitem{TUM}
+T. Tamura, T. Udagawa, K.E. Wood and H. Amakawa, Comput. Phys. Commun.
+{\bf 18} (1979) 63.
+\\
+T. Tamura, T. Udagawa and M.C. Mermaz,  Phys. Reports {\bf 65} (1980) 345.
+\bibitem{Pade}
+P.R. Graves-Morris, {\em Pad\'e Approximants},
+(Institute of Physics, London and Bristol, 1973)
+\bibitem{PHD}
+I.J. Thompson, Ph.D. report (University of Auckland, 1979, unpublished).\bibitem{KAWAI}
+M. Kawai, M. Kamimura, Y. Mito, K. Takesako, Prog. Theor. Phys.
+{\bf 59} (1978) 674 and 676.
+\\
+M. Kamimura, Prog. Theor. Phys. Suppl. No. 62 (1977) 236.
+\bibitem{ECIS1}
+J. Raynal, {\em Computing As a Language of Physics},
+(IAEA, Vienna, 1972) 281.
+\bibitem{ptolemy}
+M. Rhoades-Brown, M.H. Macfarlane and S.C. Pieper,
+Phys. Rev. C {\bf 21} (1980) 2436.
+\bibitem{BSH}
+B. Buck, A.P. Stamp and P.E. Hodgson, Phil. Mag., {\bf 8} (1963)
+1805.
+\bibitem{TOLV}
+L.D. Tolsma and G.W. Veltkamp, Comput. Phys. Commun. {\bf 40} (1986)
+233.
+\bibitem{DAISY}
+P.J.A. Buttle, Comput. Phys. Commun. {\bf 14} (1978) 133.
+\bibitem{SM1}
+T. Tamura,  Comput. Phys. Commun. {\bf 8} (1974) 349.
+\bibitem{YOSH}
+S. Yoshida, Proc. Phys. Soc. (London) {\bf A69} (1956) 668.
+
+\bibitem{APS}
+A.P. Stamp, Nucl. Phys. B{\bf 3} (1966) 232.
+
+\bibitem{RAWIT}
+G.H. Rawitscher, Phys. Rev. {\bf 163} (1967) 1223.
+\\
+G.H. Rawitscher and S.N. Mukherjee, Phys. Rev. {\bf 181} (1969) 1518.
+
+\bibitem{Bang}
+J.M. Bang and S. Wollesen, Phys. Lett. {\bf 33B} (1970) 395.
+
+\bibitem{asc}
+R.J. Ascuitto, N.K. Glendinning and B. S{\o}rensen,
+Nucl. Phys. {\bf A170} (1971) 65.
+
+\bibitem{RMA}
+R.S. Mackintosh, Nucl. Phys. {\bf A209} (1973) 91.
+
+\bibitem{SCHB}
+R. Schaeffer and G.F. Bertsch, Phys. Lett. {\bf 38B} (1972) 159.
+
+\bibitem{Toyama}
+M. Toyama, Phys. Lett. {\bf 38B} (1972) 147.
+
+\bibitem{CHUCK}
+P.D. Kunz, Program CHUCK3 (University of Colorado, 1978, unpublished),
+
+\bibitem{CHUCK3}
+Extended version of \cite{CHUCK}
+by J.R. Comfort, (University of Pittsburgh, 1980, unpublished).
+
+\bibitem{QUICC}
+A.J. Baltz, Phys. Rev. {\bf C25} (1982) 240.
+
+\bibitem{C13}
+B. Imanishi and W. von-Oertzen, Phys. Lett. {\bf 87B} (1979) 188.
+
+\bibitem{TWOSTP}
+M. Toyama and M. Igarashi, 1972 and 1977, unpublished.
+
+\bibitem{ZAFRA}
+N.M. Clarke, J. Phys. G: Nucl. Phys. {\bf 10} (1984) 1219.
+
+\bibitem{MOSH}
+M. Moshinsky, Nucl. Phys. {\bf 13} (1959) 104.
+\bibitem{LOLA}
+R.M. DeVries, Phys. Rev. {\bf C8} (1973) 951.
+\end{thebibliography}
+%%%
+\appendix
+\newpage
+\section{Notation and Phase Conventions}
+
+\subsubsection*{Spherical Harmonics}
+  The phase convention used here is
+\begin{eqnarray} \nonumber
+ Y_L^m ( \theta ,\phi ) =
+  \sqrt {{ 2L+1 \over 4 \pi} {(L-m)! \over (L+m)!} } (-1)^m e^{im\phi}
+  P_L^m ( \cos \theta )
+\end{eqnarray}
+for $ m \geq 0 $, and
+$ Y_L^{-m} = (-1)^m Y_L^{m *}$
+to give negative $ m$ values.
+%%%
+\subsubsection*{Angular Momentum Coupling Coefficients}
+
+%\newcommand{\ba}{\begin{array}}
+\newcommand{\baa}{\begin{array}{c}}
+\newcommand{\bab}{\begin{array}{cc}}
+\newcommand{\bac}{\begin{array}{ccc}}
+\newcommand{\ea}{\end{array}}
+
+The notation $\langle \ell_1 m_1 \ell_2 m_2 | LM\rangle $
+has been used for the Clebsch-Gordon coupling coefficient
+for coupling states $\ell_1 m_1 $ and
+$\ell_2 m_2 $ together to form $LM.$
+The
+\begin{eqnarray} \nonumber
+%   \left ( a .ab\alpha b .ab beta c above\ gamma \right ) \equiv ~
+    \left ( \bac a&b&c\\ \alpha&\beta&\gamma \ea \right ) \equiv ~
+%    \left ( \begin{array}{ccc} a&b&c\\ \alpha&\beta&\gamma \end{array} \right ) \equiv ~
+        {(-1)^{a - b -\gamma} \over \hat c}
+                    \langle a\alpha b \beta | c -\gamma\rangle
+\end{eqnarray}
+represents the Wigner 3-$j$ symbol, and
+\begin{eqnarray} \nonumber
+     \hat x \equiv \sqrt{2x+1}  .
+\end{eqnarray}
+The 9-$j$ coupling coefficient is used in two forms related by
+\begin{eqnarray} \nonumber
+   \left \{ \bac a&b&c\\d&e&f\\g&h&i \ea \right \}
+      \equiv \hat c \hat f \hat g \hat h ~
+   \left ( \bac a&b&c\\d&e&f\\g&h&i \ea \right ) .
+\end{eqnarray}
+The binomial coefficient is
+\begin{eqnarray} \nonumber
+\left ( \baa x \\ y \ea \right ) = {x! \over y!(x-y)!} .
+\end{eqnarray}
+%%%
+\newpage
+\section{Coupled Channels Codes in Nuclear Physics}
+
+There is a natural progression of complexity in the codes being
+considered here:
+\begin{enumerate}
+\item One-step (DWBA) codes
+ Inelastic excitations
+ Zero-range transfers (ZR)
+ No-recoil transfers (NR)
+%%%
+\item Coupled channels (CC) codes with local form factors
+ Inelastic excitations (CC)
+ Zero-range transfers (ZR-CC, sometimes included in CCBA)
+ No-recoil transfers (NR-CC, sometimes included in CCBA)
+%%%
+\item One-step (DWBA) codes for exact finite-range transfers (EFR-DWBA)
+%%%
+\item Coupled channels Born approximation (CCBA): a coupled set of channels
+followed by a finite-range transfer (sometimes called EFR-CCBA).
+%%%
+\item Two-step DWBA
+ Zero-range transfers (2-step ZR-DWBA)
+ No-recoil transfers (2-step NR-DWBA)
+%%%
+\item One-step DWBA codes for exact finite-range transfers (EFR-DWBA)
+%%%
+\item Two-step DWBA for exact finite-range transfers (2-step EFR-DWBA)
+%%%
+\item Coupled reaction channels (CRC), allowing finite-range transfers.
+%%%
+\end{enumerate}
+
+The following is a summary of the more widely known coupled channels
+codes (codes which can only perform one-step DWBA calculations have
+been excluded).
+\begin{enumerate}
+\itemsep=-2pt
+%%.rc 3 on/off
+\item Yoshida \cite{YOSH}: Inelastic CC with $\delta$-function interactions
+\item Buck, Stamp and Hodgson \cite{BSH} and Satchler (see ref.\cite{BSH}): Inelastic CC
+\item Tamura \cite{TAM65}: General purpose inelastic CC
+\item Stamp \cite{APS}: ZR-CC
+\item Rawitscher \cite{RAWIT}: ZR-CC using iterated Green functions
+\item Tamura and Low \cite{SM1} and \cite{TUM}: Saturn-Mars - NR-DWBA and EFR-DWBA
+%%% \item Tamura, Low and Udagawa (1973, unpublished): Saturn-Mars II - EFR-CCBA
+%%% \item Udagawa, Low and Tamura (1974, unpublished): Saturn-Mars III - EFR-CRC ?
+\item Ohmura et al. \cite{OHMURA}: CRC for deuterons
+\item Ascuitto et al. \cite{asc}: ZR-CCBA using source terms
+\item Mackintosh \cite{RMA}: ZR-CRC for deuterons and protons
+\item Bang and Wollesen \cite{Bang}: two-step ZR-DWBA.
+\item Toyama \cite{Toyama}: two-step ZR-DWBA
+\item Schaeffer and Bertsch \cite{SCHB}: two-step ZR-DWBA
+\item R\"osel et al. \cite{AROSA}, extended by Rawitscher \cite{AROSA2}:
+AROSA - CC for Coulomb excitations
+\item Cotanch and Vincent \cite{CV}: CRC for deuterons
+\item Raynal \cite{ECIS1} and \cite{ECIS2}:
+General purpose inelastic CC and ZR-CC
+\item Kunz \cite{CHUCK}, and later Comfort \cite{CHUCK3}:
+CHUCK - General purpose CC (inelastic and ZR)
+\item Nagel and Koshel \cite{OUKID}: OUKID - EFR-CCBA for light ions
+\item Kawai \cite{KAWAI}: CRC for deuterons
+\item Baltz \cite{QUICC}: QUICC - Inelastic CC for heavy ions
+\item Imanishi \cite{C13}: CRC for $^{12}$C+$^{13}$C reactions
+\item Tolsma \cite{PIECAN} and \cite{TOLSMA2}:
+PIECANSOL - Inelastic CC for heavy ions
+\item Toyama and Igarashi \cite{TWOSTP}: TWOSTP - 2-step ZR- and EFR-DWBA for light ions, and
+\\
+Igarashi: TWOFNR/PTFF - 2-step EFR-DWBA for sequential and simultaneous
+transfers of two nucleons for light ion reactions.
+\item Thompson \cite{PHD}: CRC for deuterons
+\item MacFarlane, Pieper and Rhoades-Brown \cite{ptolemy}\\
+ PTOLEMY/1 - Inelastic DWBA and EFR-DWBA for heavy and light ions\\
+ PTOLEMY/2 - General purpose inelastic CC for heavy ions
+\item Kunz  : CHORK - ZR-CC, and NR-CC for heavy ions
+\item Thompson \cite{FRESCO}: FRESCO - General purpose CRC for light
+and heavy ions
+\item Clarke \cite{ZAFRA}: a new `zero-angle' approximation for
+CC finite-range transfers (i.e. `ZA-CC')
+\end{enumerate}
+
+Note that it is sometimes difficult to put these developments in a definite
+chronological order.
+
+
+
+
+
+\end{document}

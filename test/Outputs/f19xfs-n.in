@@ -1,0 +1,83 @@
+Test run: CCBA calculation 28Si(19F,16O) 31P, cluster form factors.             
+NAMELIST
+ &FRESCO  hcm= 0.040 rmatch=  25.000 rintp=  0.50
+     hnl= 0.100 rnl=  3.00 centre=  0.00
+     jtmin=  0.0 jtmax=    80.0 absend=  0.0100 dry=F rela=' ' nearfa= 0
+     thmin= 0.00 thmax=60.00 thinc=  2.50
+     ips= 0.0000  it0=0 iter=  1 fatal=T iblock= 2 pade=0 nosol=F psiren=F
+     iso=' ' nnu= 30 maxl=   0 minl=  0 mtmin= 0 epc= 0.0000
+     chans= 1 listcc= 2 treneg= 0 cdetr= 0 smats= 1 xstabl= 0 nlpl= 0
+     waves= 0 lampl= 0 veff= 0 kfus= 0 wdisk= 0 bpm= 0 melfil= 0
+     unitmass= 1.007335 finec=137.03599
+     inh=0 pel=1 exl= 1 lab=0 lin=0 lex= 0
+     elab(1)=    60.0000 /
+ &PARTITION namep='19-F    ' nex= 2 pwf=T   namet='28-SI   ' qval=  0.0000/               
+ &STATES jp= 0.5 ptyp= 1 ep=  0.0000  cpot=  0                                  
+         jt= 0.0 ptyt= 1 et=  0.0000/                                           
+ &STATES jp= 2.5 ptyp= 1 ep=  0.2000  cpot=  0                                  
+         jt= 0.0 ptyt= 0 et=  0.0000/                                           
+ &PARTITION namep='16-O    ' nex= 1 pwf=T   namet='31-P    ' qval=  6.1990/               
+ &STATES jp= 0.0 ptyp= 1 ep=  0.0000  cpot=  0                                  
+         jt= 0.5 ptyt= 1 et=  0.0000/                                           
+ &partition /                                                                   
+ &pot kp= 1 type= 0                                                             
+      p(1:3)=   28.000  19.000   1.200 /                                        
+ &pot kp= 2 type= 0                                                             
+      p(1:3)=   31.000  16.000   1.350 /                                        
+ &pot kp= 2 type= 1                                                             
+      p(1:7)=   31.200   1.450   0.470  15.100   1.270   0.310   0.000 /        
+ &pot kp= 2 type= 3                                                             
+      p(1:3)=    0.750   1.240   0.370 /                                        
+ &pot kp= 3 type= 0                                                             
+      p(1:7)=   19.000   0.000   1.250   0.650   0.000   0.000   0.000 /        
+ &pot kp= 3 type= 1                                                             
+      p(1:3)=  115.000   1.250   0.650 /                                        
+ &pot kp= 3 type= 3                                                             
+      p(1:3)=    6.300   1.250   0.650 /                                        
+ &pot kp= 4 type= 0                                                             
+      p(1:7)=   31.000   0.000   1.250   0.650   0.000   0.000   0.000 /        
+ &pot kp= 4 type= 1                                                             
+      p(1:3)=   99.000   1.250   0.650 /                                        
+ &pot kp= 4 type= 3                                                             
+      p(1:3)=    6.300   1.250   0.650 /                                        
+ &pot kp= 5 type= 0                                                             
+      p(1:3)=   28.000   0.000   1.200 /                                        
+ &pot kp= 5 type= 1                                                             
+      p(1:7)=   27.000   2.425   0.460  11.660   2.145   0.238   0.000 /        
+ &pot kp= 6 type= 0                                                             
+      p(1:7)=   28.000   0.000   1.250   0.650   0.000   0.000   0.000 /        
+ &pot kp= 6 type= 1                                                             
+      p(1:7)=  160.000   1.070   0.720  37.000   1.350   0.880   0.000 /        
+ &pot /                                                                        
+ &OVERLAP kn1=  1 kn2=  0 ic1=1 ic2=2 in= 1                                     
+          kind=0 nn= 4 l=0 sn= 0.5 j= 0.5                                       
+    kbpot= 3 krpot= 0 be= 11.7300 isc=1 ipc=0 nfl=  0 nam=  1 ampl=  1.0000 /   
+ &OVERLAP kn1=  2 kn2=  0 ic1=1 ic2=2 in= 2                                     
+          kind=0 nn= 4 l=0 sn= 0.5 j= 0.5                                       
+    kbpot= 4 krpot= 0 be= 17.8990 isc=1 ipc=0 nfl=  0 nam=  1 ampl=  1.0000 /   
+ &OVERLAP kn1=  3 kn2=  0 ic1=1 ic2=2 in= 1                                     
+          kind=0 nn= 3 l=2 sn= 0.5 j= 2.5                                       
+    kbpot= 3 krpot= 0 be= 11.5300 isc=1 ipc=0 nfl=  0 nam=  1 ampl=  1.0000 /   
+ &overlap /                                                                     
+ &COUPLING icto= 2 icfrom= 1 kind=7 ip1= 0 ip2= 0 ip3= 0 /                      
+   &cfp  in= 1 ib=  1 ia=  1 kn=  1  a=   1.000     /                           
+   &cfp  in= 1 ib=  2 ia=  1 kn=  3  a=   1.000     /                           
+   &cfp  in=-2 ib=  1 ia=  1 kn=  2  a=   1.000     /                           
+ &COUPLING icto= 1 icfrom= 2 kind=3 ip1= 4 ip2= 1 ip3= 0                        
+   p1=  6.0000 p2=  5.0000 jmax=   0.0 rmax=  0.00/                             
+   &cfp  in= 0 ib=  0 ia=  0 kn=  0  a=   0.000     /                           
+ &COUPLING icto= 0 icfrom= 1 kind=1 ip1= 0 ip2= 0 ip3= 0 /                      
+
+ Please check that your input numbers have sufficient
+ range and accuracy in the formats chosen for the namelists,
+ and that 'unitmass' is correct for your masses.
+
+
+ To exactly reproduce previous FRESCO runs using 2*amu/hbar^2 = 0.0481960
+  you will need to enter to this version the numbers:
+     unitmass= 1.007335 finec=137.56480
+
+ To exactly reproduce previous FRESCO runs using 2*amu/hbar^2 = 0.0478326
+  you will need to enter to this version the numbers:
+     unitmass= 0.999740 finec=137.04550
+

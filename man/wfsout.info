@@ -1,0 +1,28 @@
+WDISK
+  = 1 :  Print elastic wave functions on output file 17, FORMATTED
+  = 2 :  Print   all   wave functions on output file 17, FORMATTED
+
+The following data formats are used when WDISK > 0 :
+
+card A: (I4,2F8.4,F8.1,I3)          NR,H,ENLAB,JTOTAL,PARITY : 
+			number radial points, step size, lab. energy,  J,pi
+			[int, real, real, real, int(+1 or -1)]
+card B: (2I4,2F6.1,I4,F6.1,2F15.10)
+         IT,L,J,JTOT,LIN,JIN,SMAT (complex)
+
+where
+
+IT = index to excited state pair, counts cards 7.
+L  = partial wave
+J  = L + projectile spin
+JTOT = total spin = J_{total} = J + target spin
+LIN  = incoming partial wave
+JIN  = incoming J value.
+SMAT = S matrix element for this partial wave.
+
+
+card C: (6E12.4)   (psi(I),I=1,NR)   wave function
+card C is repeated until NR complex values given
+NB: the first point psi(1) = 0 always, as at r=0
+
+Cards B \& C are repeated for each channel, until IT < 0.

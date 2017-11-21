@@ -1,0 +1,2 @@
+grep CUMU *.out | grep -v OUTGOING | sort 
+grep ChiSq *.out 

@@ -1,0 +1,38 @@
+\documentclass{article}
+
+\begin{document}
+
+\subsection*{Average local polarisation potential}
+
+We can define a complex ``weighted mean'' local polarisation
+potential $V^{P}(R)$  [1]
+
+\begin{equation}
+V^{P}(R)=\frac{\sum_{J}w_{J}(R)V_{J}^{TE}(R)}{\sum_{J}w_{J}(R)},  \label{Eq13}
+\end{equation}
+where $V_{J}^{TE}(R)$ are the ``trivially equivalent potentials'' defined by
+\begin{equation}
+V_{J}^{TE}(R)=\frac{1}{f_{g.s, J}(R)}\sum_{\alpha^{\prime}\neq g.s} V_{g.s:\alpha^{\prime}}^{J}(R)f_{\alpha^{\prime}, J}(R),  \label{Eq14}
+\end{equation}
+and $w_{J}(R)$ are weight factors chosen as
+\begin{equation}
+w_{J}(R)=a_{J}\mid f_{g.s, J}(R)\mid ^{2},  \label{Eq15}
+\end{equation}
+for some coefficients $a_{J}$ to be specified. This choice of weight factors
+$w_{J}(R)$ avoids singularities when $f_{g.s, J}(R)$ has a node in
+some $R$. The coefficients $a_{J}$ are considered as proportional to partial
+reaction cross sections
+\begin{equation}
+a_{J}=(2J+1)(1-\mid S_{J}\mid ^{2}),  \label{Eq16}
+\end{equation}
+where $S_{J}$ are the elastic S-matrix elements for each $J$ value.
+A single channel calculation (elastic
+channel) using the sum of ``$V_{g.s:g.s}^{J}(R)$ + $V^{P}(R)$'' should
+approximately reproduce the elastic scattering [1]) cross sections.
+
+\bigskip
+\noindent
+[1] I.J. Thompson, M.A. Nagarajan, J.S. Lilley and M.J. Smithson,
+Nucl. Phys. A 505 (1989) 84.
+
+\end{document}

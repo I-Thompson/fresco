@@ -1,0 +1,29 @@
+#   5 angles,  2 tensor ranks for 0=projectile
+@subtitle   "7Li(p,g)8Be with surface repulsion - Sampaio"                                  
+@legend ON
+@legend x1 0.2
+@legend y1 0.8
+@g0 type LOGY
+@yaxis ticklabel format power
+@xaxis label "Scattering angle (degrees)"
+@yaxis label "Cross section (mb/sr)"
+@legend string   0 "Partition=  1 Excit=  1 near/far= 1"
+#legend string   0 "Lab energy =    2.0000"
+@s0 linestyle   1
+#  Theta       sigma       iT11        T20         T21         T22         Kyy for projectile
+  0.1000E-01   1.000      0.7351E-12
+   45.00       2.257      0.9152E-02
+   90.00       6.298      0.1541    
+   135.0       9.412      0.2109    
+   180.0       10.78      0.6113E-04
+ END
+@legend string   1 "Partition=  2 Excit=  1 near/far= 1"
+#legend string   0 "Lab energy =    2.0000"
+@s1 linestyle   2
+#  Theta       sigma       iT11        T20         T21         T22         Kyy for projectile
+   0.000      0.7177E-04   0.000    
+   45.00      0.6437E-04 -0.1188    
+   90.00      0.4966E-04 -0.5196E-01
+   135.0      0.4735E-04  0.9457E-01
+   180.0      0.5187E-04   0.000    
+ END

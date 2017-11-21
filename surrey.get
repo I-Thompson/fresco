@@ -1,0 +1,1 @@
+rsync -av phs1it@pierre.ph.surrey.ac.uk:Archive/mac/fresco/fres/source . --exclude '*.o'  --exclude '*.mod' -u $*

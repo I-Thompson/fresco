@@ -1,0 +1,23 @@
+p + 112Cd elastic
+NAMELIST
+ &FRESCO  hcm= 0.100 rmatch=  20.000 rintp=  1.00
+     jtmin=  0.0 jtmax=   200.0 absend=  0.0100
+     thmin=  0.00 thmax=180.00 thinc=  2.00
+     iter=  1
+     chans= 1 listcc= 0 treneg= 0 cdetr= 0 smats= 2 xstabl= 1
+     elab(1)=    27.9000 /
+
+ &PARTITION namep='Proton  ' massp=  1.0000 zp=  1 nex= 1 pwf=T
+            namet='112Cd   ' masst=112.0000 zt= 48 qval=  0.0000/
+ &STATES jp= 0.5 ptyp= 1 ep=  0.0000  cpot=  1 jt= 0.0 ptyt= 1 et=  0.0000/
+ &partition /   ! END OF DEFINING PARTITIONS
+
+ &pot kp= 1 type= 0 p(1:3)=  112.000  0.0000  1.2000 /
+ &pot kp= 1 type= 1 p(1:7)=   52.500  1.1700  0.7500  3.5000  1.3200  0.6100  0.0000 /
+ &pot kp= 1 type= 2 p(1:7)=    0.000  0.0000  0.0000  8.5000  1.3200  0.6100  0.0000 /
+ &pot kp= 1 type= 3 p(1:3)=    6.200  1.0100  0.7500 /
+ &pot /   ! END OF DEFINING POTENTIALS
+
+ &overlap /   ! END OF DEFINING OVERLAPS
+
+ &COUPLING /

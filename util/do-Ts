@@ -1,0 +1,21 @@
+#!/bin/csh
+#
+set noglob
+foreach fo ($argv)
+
+echo Extract iT11,T20,T21,T22 from $fo
+
+
+# iT11.awk
+cat $fo | grep -v @ | grep -v \# | awk '{print $1 , $3}' > $fo:r.iT11
+
+# T20.awk
+cat $fo | grep -v @ | grep -v \# | awk '{print $1 , $4}' > $fo:r.T20
+
+# T21.awk
+cat $fo | grep -v @ | grep -v \# | awk '{print $1 , $5}' > $fo:r.T21
+
+# T22.awk
+cat $fo | grep -v @ | grep -v \# | awk '{print $1 , $6}' > $fo:r.T22
+
+end

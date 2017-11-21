@@ -1,0 +1,1 @@
+xmgr *.T22 -legend load -graph 1 *.T20 -graph 2 *.iT11 -graph 3 *.T21 -arrange 2 2  &

@@ -1,0 +1,54 @@
+From J.Christley@ph.surrey.ac.uk Thu Sep 29 05:01:12 1994
+From: James Christley <J.Christley@ph.surrey.ac.uk>
+Date: Thu, 29 Sep 94 10:47:49 BST
+To: ithompso@nitrogen.helios.nd.edu
+Subject: constants
+Cc: phs1jc@ph.surrey.ac.uk
+Content-Length: 977
+Status: RO
+X-Lines: 43
+
+
+Dear Ian,
+
+I've asked Jeff about the constants. His values are
+from TWOFNR
+
+FMSCAL = 0.0481967     ETACNS = 0.15805086
+
+Your old values were
+
+FMSCAL = 0.0478196     ETACNS = 0.157454
+
+and your new values
+
+FMSCAL = 0.048196      ETACNS = 0.157454 (ie unchanged)
+
+
+The fusion cross section is particularly sensitive:
+
+eg 16O+144Sm at 76 MeV
+
+old FMSCAL   sigF = 349 mb
+new FMSCAL   sigF = 336 mb
+
+I guess the effect is large still at sub barrier 
+energies (the values are not very sensitive to ETACNS)
+
+Looking at other codes
+
+Hioptim    FMSCAL = 0.04783258    ETACNS = 0.157454
+Daizy               0.047834               0.15758
+
+Chuck has hbarc= 197.3289  mu = 931.502
+        which gives                FMSCAL = 0.0478445
+
+CCFUS has hbarc= 197.3286  mu = 931.5016
+        which gives                FMSCAL = 0.0478447
+
+For consistency with my previous results I will use the
+old FRESCO value. I guess I ought to check with the most
+recent table of physical constants.
+
+James
+

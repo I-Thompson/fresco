@@ -1,0 +1,25 @@
+n+238U with KoningDR, s=1 at E =002.500
+NAMELIST
+ &Fresco  hcm= 0.1 rmatch=  20.000
+    jtmin=   0.0 jtmax= 20 absend= 0.000001 
+    thmin=0.0 thinc=2 thmax=180. iblock=  1
+    chans= 1 smats= 2 xstabl= 1
+    elab=   2.50000  pel=1 exl=1 lab=1 lin=1 lex=1 /
+ 
+&Partition namep='n       ' massp=  1.008665 zp=  0 nex=  1
+            namet='    238U' masst=238.052170 zt= 92.0 qval=  0.000/
+&States jp= 0.5 ptyp= 1 ep=  0.000000  cpot=  1 jt= 0.0 ptyt= 1 et= 0.000000/
+&Partition /
+ 
+&POT kp=  1 type = 0 shape= 0 p(1:3)= 238.0000   0.0000   0.0000/
+&POT kp=  1 type = 1 shape= 0 p(1:3)=  46.3523   1.2385   0.6424/
+&POT kp=  1 type =11 shape=13 p(1:6)=   0.0000   1.4966   0.0000   0.5987   0.0000   0.0000/
+&POT kp=  1 type = 1 shape= 0 p(1:6)=   0.0000   0.0000   0.0000   0.1052   1.2385   0.6424/
+&POT kp=  1 type =11 shape=13 p(1:6)=   0.0000   1.4966   0.0000   0.5987   0.0000   0.0000/
+&POT kp=  1 type = 2 shape= 0 p(1:6)=   0.0000   0.0000   0.0000  10.8108   1.2442   0.5052/
+&POT kp=  1 type =11 shape=13 p(1:6)=   0.0000   1.5035   0.0000   0.6014   0.0000   0.0000/
+&POT kp=  1 type = 3 shape= 0 p(1:6)=   6.4403   1.0810   0.5900  -0.0068   1.0810   0.5900/
+&POT /
+
+ &Overlap /
+ &Coupling /

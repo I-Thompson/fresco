@@ -1,0 +1,28 @@
+fort.13: total cross sections for each Elab
+line 1: heading
+line 2: PEL,EXL,NCHAN,ENLAB,BEPROJ	entrance partition & excited state, # partitions, Lab. energy, projectile binding energy
+for each partition IC=1,NCHAN:
+line 3: IC, NEX(IC)			partition index IC, number of excited states
+for each excited state IA=1,NEX(IC):
+line 4 for elastic: Jp,ptyp,Ep,Jt,ptyt,Et, sigt, sigtot,sigel   projectile state p, target state t, outgoing sig_pt, sig_tot = sig_pt + sig_el, sig_el
+line 4 for nonelastic: Jp,ptyp,Ep,Jt,ptyt,Et, sigr	projectile state p, target state t, outgoing sig_xpt
+
+where IC=x  IA={pt}
+
+fort.39: 2 cross sections for each Ecm
+for each incident energy:
+
+E_total = Ecm - Q(1), total fusion sig_A, reaction sig_R, total reaction + elastic sig_tot, total outgoing = sig_R - sig_A
+
+where Q(1) = Q value for partition 1.
+
+
+fort.40: all cross sections for each Elab
+for each incident energy:
+
+E_lab, total fusion sig_A, reaction sig_R, (outgoing sig_xpt, for all xpt), sig_tot, sig_el
+
+
+
+
+

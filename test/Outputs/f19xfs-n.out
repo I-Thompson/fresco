@@ -1,0 +1,43 @@
+ FRESCO - FRES 3.1: Coupled Reaction Channels
+ Assuming NAMELIST input.
+
+ Test run: CCBA calculation 28Si(19F,16O) 31P, cluster form factors.             
+
+   0.040  25.000   0.500   0.100   3.000   0.000   0.000   0.000   0.000   0.000
+
+ Centre-of-mass Range is    626 * 0.0400 fm., Maximum at  24.96 fm., Interpolating NL forms every  0.52 fm.
+ Non - locality width is     26 * 0.1200 fm., Maximum of   3.00 fm., Centred at  0.00 fm.
+ 2-Nucleon Separation of      0 * 0.5200 fm., Maximum of   0.00 fm., Minimum at  0.00 fm.
+ Maximum single particle bins of 24.9600 fm.
+               M,Mint =          625         625
+
+
+ Range of total J is     0.0 <= J <=    80.0 (at least     0.0) and Absorbtion =>     0.0100 mb.
+ Dry Run = F, CC set limits =  0  0, Relativistic kinematics =  , Both/Far/Near Analyses =  1
+
+ Cross Sections (and up to T0 for 0=projectile) for Theta from   0.0 to 180.0 in steps of  1.0 degrees.  Coordinates = 0 (Mads)
+
+ Lower Radial Cutoff = maximum of -1.60*L*h &       0.0 fm.,  Lower Cutoff for Couplings =   0.0  fm.
+
+
+ Iterate Couplings between   0 and   1 times, to  0.000 % if sooner.                                          
+  Block solved exactly =   2 chs., with Pade = 0 & Isocen =  =0, NOSOL = F, initwf =  0
+  NL quadrature with   30 Gaussian points, Calculate multipoles up to    86 from   0
+  M-transfers for lp+lt greater than or equal to  6, Angular Integration Cutoff below  1.0000 %
+
+
+ Trace switches are :  CHANS =  1, LISTCC =  2, TRENEG =  0, CDETR =  0, SMATS =  1, XSTABL =  0, NLPL =  0
+
+                       WAVES =  0, LAMPL =  0, VEFF =  0, KFUS =  0, WDISK =  0, BPM =  0, MELFIL =  0
+
+                       CDCC =  0, NFUS =  0
+
+ Using unit mass = 1.007335 amu and 1/fine-structure constant = 137.03599 ( 1.000000 * true ) with hc = 197.32705 MeV.fm,
+  thus 2*amu/hbar^2 = 0.0481960 = 1/20.7486 and Coulomb constant = 0.1580620 so e^2 = 1.43997, and nuclear magneton= 0.1261183
+
+ Now pre-scan input and save to file 3
+
+  Using mass table /netopt/PHS1IT/lib/m88lrb
+ Could not open mass table : 
+ /netopt/PHS1IT/lib/m88lrb                                             
+ Get from ftp://ftp.ph.surrey.ac.uk/pub/fresco/m88lrb if necessary.

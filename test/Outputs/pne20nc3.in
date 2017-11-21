@@ -1,0 +1,16 @@
+p + 20-NE (0-2) BETA(2) ONLY.
+NAMELIST
+ &FRESCO hcm=0.050 rmatch=20 jtmin=0 jtmax=35 absend= 0.0100 thmin=0 thmax=180 thinc=1
+     iter=0 iblock=2 elab(1)=20 chans=1 smats=2 xstabl=1 /
+
+ &PARTITION namep='proton' massp= 1.0078 zp= 1 nex=2 namet='NE-20' masst=19.9920 zt=10 /
+ &STATES jp=0.0 ptyp=1 ep=0  cpot=1 jt=0 ptyt=1 et= 0/
+ &STATES                     cpot=1 jt=2 ptyt=1 et= 1.6340/
+ &partition /
+
+ &pot kp=1 at=20 rc=1.300 mnet(2)=11.89 /
+ &pot kp=1 v=50 rv=1.220 av=0.820 w=0 rw=1.770 aw=0.630 deft(2) =1.325 /
+ &pot kp=1 wd=17.900 wdr=1.770 wda=0.630 deft(2)=1.922 /
+ &pot /
+ &overlap /
+ &coupling /

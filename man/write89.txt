@@ -1,0 +1,107 @@
+!***********************************************************************
+!     
+!    Copyright (c) 2012, Lawrence Livermore National Security, LLC.
+!                        Produced at the Lawrence Livermore National
+!                        Laboratory.
+!                        Written by Ian Thompson, I-Thompson@llnl.gov
+!     
+!    LLNL-CODE-XXXXX All rights reserved.
+!
+!    Copyright 2012, I.J. Thompson
+!     
+!    This file is part of FRESCO.
+!
+!    FRESCO is free software: you can redistribute it and/or modify it
+!    under the terms of the GNU General Public License as published by
+!    the Free Software Foundation, either version 3 of the License, or
+!    (at your option) any later version.
+!     
+!    FRESCO is distributed in the hope that it will be useful, but
+!    WITHOUT ANY WARRANTY; without even the implied warranty of
+!    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+!    GNU General Public License for more details.
+!     
+!    You should have received a copy of the GNU General Public License
+!    along with HFBTHO. If not, see <http://www.gnu.org/licenses/>.
+!     
+!    OUR NOTICE AND TERMS AND CONDITIONS OF THE GNU GENERAL PUBLIC
+!    LICENSE
+!     
+!    Our Preamble Notice
+!
+!      A. This notice is required to be provided under our contract
+!         with the U.S. Department of Energy (DOE). This work was
+!         produced at the Lawrence Livermore National Laboratory under
+!         Contract No. DE-AC52-07NA27344 with the DOE.
+!      B. Neither the United States Government nor Lawrence Livermore
+!         National Security, LLC nor any of their employees, makes any
+!         warranty, express or implied, or assumes any liability or
+!         responsibility for the accuracy, completeness, or usefulness
+!         of any information, apparatus, product, or process disclosed,
+!         or represents that its use would not infringe privately-owned
+!         rights.
+!      C. Also, reference herein to any specific commercial products,
+!         process, or services by trade name, trademark, manufacturer
+!         or otherwise does not necessarily constitute or imply its
+!         endorsement, recommendation, or favoring by the United States
+!         Government or Lawrence Livermore National Security, LLC. The
+!         views and opinions of authors expressed herein do not
+!         necessarily state or reflect those of the United States
+!         Government or Lawrence Livermore National Security, LLC, and
+!         shall not be used for advertising or product endorsement
+!         purposes.
+!        
+!    The precise terms and conditions for copying, distribution and
+!    modification are contained in the file COPYING.
+!        
+!***********************************************************************
+C optical potentials (POTENT)
+      if(TRENEG>0) then
+	call rewop(89)
+	written(89) = .true.
+        DO M=1,NF
+        WRITE(89,'(''#'',4i5)') M,MATCH,MR,1
+        WRITE(89,141) KP,(PTYPE(I,M),I=1,3)
+        DO 83 I=1,MATCH,MR
+83      WRITE(89,144) RL(I),FORMF(I,M)
+	WRITE(89,*) '&'
+	enddo
+      endif
+
+C cdcc couplings (MULTIP)
+	if(TRENEG>=1) then
+	call rewop(89)
+	do IK=1,NK
+        WRITE(89,'(''#'',4i5)') IK+LOCF,N,MR,2
+        WRITE(89,141) IK,IK+LOCF,FPT(1,IK),FPT(3,IK),FPT(4,IK),FPT(2,IK)
+141     FORMAT('# Single-particle multipole form factors ',i4,' at',I5,
+     &    ': <',I3,' /',2I2,' /',I3,'>')
+        DO 143 I=1,N,MR
+143     WRITE(89,144) (I-1)*H,FORMF(I,LOCF+IK)
+144   FORMAT(1X,F8.3,1p,2g13.5)
+	WRITE(89,*) '&'
+	enddo
+	endif
+
+C end of potentials (FR)
+	write(89,211) 0,0,0,0
+
+C coupling coefficients (MAKESET)
+      if(TRENEG>=1) then
+      write(89,210) JTOTAL,PARITY,NCH
+210	format('#',f7.1,i3,i5,' : J,pi,NCH')
+      DO 215 C1=1,NCH
+	write(89,212) C1,LVAL(C1),JVAL(C1),JPROJ(C1),JTARG(C1),
+     x                PART(C1,1),EXCIT(C1,1)
+      DO 215 C2=1,NCH
+      IN = NCLIST(C1,C2)
+      write(89,211) C1,C2,IN
+	do I=1,IN
+	write(89,213) NFLIST(C1,C2,I),CLIST(C1,C2,I)
+	enddo
+211	format('#',4i5)
+212	format('##',i4,' LJ:',i5,3f6.1,2i4)
+213	format('#',i5,1p,2e14.6)
+215   continue
+	write(89,211) 0,0,0
+      endif
