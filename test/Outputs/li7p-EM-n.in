@@ -1,0 +1,61 @@
+7Li(p,g)8Be with surface repulsion - Sampaio                                    
+NAMELIST
+ &FRESCO  hcm= 0.100 rmatch=  30.000 rintp=  0.30
+     hnl= 0.100 rnl=  0.00 centre=  0.00
+     jtmin=  0.5 jtmax=     1.5 absend= -1.0000 dry=F rela=' ' nearfa= 0
+     thmin=  0.00 thmax=180.00 thinc= 45.00 koords=0 kqmax=1 pp=0
+     cutl=  0.00 cutr=  0.00 cutc=  0.00
+     ips= 0.0000  it0=0 iter=  1 fatal=T iblock= 0 pade=0 nosol=F psiren=F
+     iso=' ' nnu=  0 maxl=   0 minl=  0 mtmin= 0 epc= 0.0000
+     erange= -1.0000  dk=  0.0100
+     chans= 5 listcc= 2 treneg= 0 cdetr= 0 smats= 4 xstabl= 2 nlpl= 0
+     waves= 0 lampl= 0 veff= 0 kfus= 0 wdisk= 1 bpm= 0 melfil= 0
+     unitmass= 1.000000 finec=137.03599
+     inh=0 pel=0 exl= 1 lab=1 lin=1 lex= 1
+     elab(1)=     2.0000 /
+
+ &PARTITION namep='proton  ' massp=  1.0078 zp=  1 nex= 1 pwf=T                 
+            namet='7LI     ' masst=  7.0160 zt=  3 qval=  0.0000/               
+ &STATES jp= 0.5 ptyp= 1 ep=  0.0000  cpot=  1                                  
+         jt= 1.5 ptyt=-1 et=  0.0000/                                           
+ &PARTITION namep='Gamma   ' massp=  0.0000 zp=  0 nex= 1 pwf=T                 
+            namet='8Be     ' masst=  8.0053 zt=  4 qval= 17.2500/               
+ &STATES jp= 1.0 ptyp= 1 ep=  0.0000  cpot=  3                                  
+         jt= 0.0 ptyt= 1 et=  0.0000/                                           
+ &partition /   ! END OF DEFINING PARTITIONS                                    
+                                                                                
+ &pot kp= 1 type= 0                                                             
+      p(1:3)=    7.000  0.0000  1.1500 /                                        
+ &pot kp= 1 type= 1                                                             
+      p(1:3)=   71.400  1.1500  0.6000 /                                        
+ &pot kp= 1 type= 2                                                             
+      p(1:3)=   -9.960  1.9500  0.7000 /                                        
+ &pot kp= 1 type= 3                                                             
+      p(1:3)=    5.580  1.1500  0.6000 /                                        
+ &pot kp= 3 type= 0                                                             
+      p(1:3)=    8.000  0.0000  1.1600 /                                        
+ &pot /   ! END OF DEFINING POTENTIALS                                          
+                                                                                
+ &OVERLAP kn1=  1 kn2=  0 ic1=1 ic2=2 in=-2                                     
+          kind=0 nn= 1 l=1 sn= 0.5 j= 1.5                                       
+    kbpot= 1 krpot= 0 be= 17.2500 isc= 1 ipc=4 nfl=-21 nam=  0 ampl=  0.0000 /  
+ &overlap /   ! END OF DEFINING OVERLAPS                                        
+                                                                                
+ &COUPLING icto= 2 icfrom= 1 kind=2 ip1= 2 ip2= 0 ip3= 0 /                      
+   &cfp  in=-2 ib=  1 ia=  1 kn=  1  a=   1.000     /                           
+ &COUPLING icto= 0 icfrom= 0 kind=1 ip1= 1 ip2= 1 ip3= 1 /                      
+ ! *******  END OF FRESCO INPUTS *******                                        
+
+ Please check that your input numbers have sufficient
+ range and accuracy in the formats chosen for the namelists,
+ and that 'unitmass' is correct for your masses.
+
+
+ To exactly reproduce previous FRESCO runs using 2*amu/hbar^2 = 0.0481960
+  you will need to enter to this version the numbers:
+     unitmass= 1.007335 finec=137.56480
+
+ To exactly reproduce previous FRESCO runs using 2*amu/hbar^2 = 0.0478326
+  you will need to enter to this version the numbers:
+     unitmass= 0.999740 finec=137.04550
+
