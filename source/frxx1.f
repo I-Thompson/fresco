@@ -206,11 +206,12 @@ C
 C    CALCULATION OF CROSS SECTIONS
 C    -----------------------------
       REAL*8 JCOEF,TOTFUS(3),CORFUS(3,NFUS1),SIGT(3),FUSL(1+NFUS1),
-     x       SIGTOT(3),SIGEL(3),datanorm
+     x       SIGTOT(3),SIGEL(3),datanorm,DSPINS(MXX)
       REAL*8 SIGJ(0:MXPEX),SIGR(MXP,MXX),OUTJ,SFAC(MXPEX),rtrace,
      X FUSJPI,CHSIZES(MXPEX),XSC,AMDSQS,FUSJ,TOTJ,CFUSJ(NFUS1),sfa
       integer LCROSS,LFAM,LXSEC,NANGL,SMALLS(MXPEX),NSMALL,
-     x        CHPRES(MXPEX),LEG,MAXPLM
+     x        CHPRES(MXPEX),LEG,MAXPLM,DMULTIES(MXX),NMULTIES,LGAM,
+     x        DLEVEL(MXX)
 C
     	character*70 TMP,TMPN
      	common/cfs/ TMP,TMPN  
@@ -220,7 +221,7 @@ C
       real*8 Z,HALF,EPS,DDEXP
 C
       CHARACTER*80 CHME*3,LINE
-      CHARACTER*8 NAME(2,MXP+1),NAMEV
+      CHARACTER*8 NAME(2,MXP+1),NAMEV,DNAME
       CHARACTER*4 W
       CHARACTER*1 SCALE(0:MXPEX),PSIGN(3)
 C
@@ -2342,15 +2343,33 @@ C
          IP = SIGN(1,BAND(1,IC,IA))
          MAXPLM = max(1,nint(JEX(1,IC,IA)+JEX(2,IC,IA)+
      x                 JEX(1,PEL,EXL)+JEX(2,PEL,EXL)))
+         NMULTIES=0
+       if(DGAM>0) then
+         IN = PP-1
+         DNAME = NAME(IN,IC)
+         do 1471 IB=1,IA-1
+         IF(COPY(IN,IC,IB,1)>0) go to 1471
+           LGAM=abs(JEX(IN,IC,IA)-JEX(IN,IC,IB))
+           LGAM = max(LGAM,1)   !  no L=0 photons
+           if((-1)**LGAM * SIGN(1,BAND(IN,IC,IA))*SIGN(1,BAND(IN,IC,IB))
+     x        <0) LGAM=LGAM+1
+           if(LGAM > JEX(IN,IC,IA)+JEX(IN,IC,IB)) go to 1471
+             NMULTIES=NMULTIES+1
+	     DSPINS(NMULTIES) = JEX(IN,IC,IB)
+             DMULTIES(NMULTIES) = LGAM
+             DLEVEL(NMULTIES) = IB
+1471	 continue
+        endif
       CALL CRISS(IC,IA,JEX(1,IC,IA),NSA,NJA,PEL,EXL,JEX(1,PEL,EXL),
      X           LUSED,K,ETA,RMASS,CSIG,KOORDS,MMXCH,MAXF,ENLAB,LEN,
-     X           THMIN,THMAX,THINC,EXTRA(1,IC,IA),LAMPL,NEARFA,KQMAX,
+     X           THMIN,THMAX,THINC,EXTRA(1,IC,IA),LAMPL,NEARFA,KQMAX+1,
      X           SIGR(IC,IA),XSTABL,LJMAX,NLJ,NJDONE,JBORD,JUMP,
      X           ITC(IC,IA),ITC(PEL,EXL),IEXCH,PP,PPKIND(PP),CDCC,IP,
      X           IBIN(IA),ENEX(1,IC,IA),PI,HEADNG,IOFAM(1,IC,IA),
      X		 IOFAM(2,IC,IA),LCROSS,LFAM,LXSEC,CHSIGN(IA),
      X           ETOTAL-EOFF,MASS(LIN,LAB),MASS(3-LIN,LAB),
-     X           ECMC,MASS(LIN,IC),MASS(3-LIN,IC),LEG,MAXPLM)
+     X           ECMC,MASS(LIN,IC),MASS(3-LIN,IC),LEG,MAXPLM,
+     x           DSPINS,DMULTIES,NMULTIES,DLEVEL,DNAME)
 	call flush(16)
 C
 775     continue

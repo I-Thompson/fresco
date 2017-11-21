@@ -5,8 +5,6 @@
 #   QSUB-lM 1500000w
 #   QSUB
 #cd $TMPDIR
-pwd
-#chdir batch
 ln -s cadprsc.wf1 fort.21
 ln -s cadprsc.wf2 fort.22
 cat > data.$$ << EOF

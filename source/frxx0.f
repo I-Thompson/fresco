@@ -122,7 +122,7 @@
      x   kqmax,pp,thmin,thmax,thinc,koords,cutl,cutr,cutc,complexbins,
      x   ips,it0,iter,fatal,iblock,pade,psiren,iso,nnu,maxl,minl,mtmin,
      X   epc,erange,dk, nosol,nrbases,nrbmin,pralpha,pcon,rmatr,ebeta,
-     X   meigs,buttle,weak,llmax,expand,hktarg,pluto,bes,
+     X   meigs,buttle,weak,llmax,expand,hktarg,pluto,bes,dgam,
      X   chans,listcc,treneg,cdetr,smats,xstabl,nlpl,waves,
      x   lampl,veff,kfus,wdisk,bpm,melfil,cdcc,nfus, nparameters,
      x	 smallchan,smallcoup,sumform,maxcoup,ompform,initwf,
@@ -174,7 +174,7 @@
 	ko3 = 301
     	
         write(koe,1002) 
- 1002 	format(' FRESCO - FRES 3.1: Coupled Reaction Channels')
+ 1002 	format(' FRESCO - FRES 3.2: Coupled Reaction Channels')
 	uu = .false.
 	inquire(file='fresco.in',exist=uu)
 	if(uu) then
@@ -400,8 +400,8 @@
       JTMAX = JJBORD(NJ+1)
 
       if(.not.nml) read(ki,1055) kqmax,pp,thmin,thmax,thinc,koords,
-     X				  cutl,cutr,cutc
- 1055 format(2i1,f6.2,f8.3,f6.3,i2,3f8.3)
+     X				  cutl,cutr,cutc,dgam
+ 1055 format(2i1,f6.2,f8.3,f6.3,i2,3f8.3,i2)
 !      write(koe,1055) kqmax,pp,thmin,thmax,thinc,koords,cutl,cutr,cutc
       !PP = mod(PP,4)
       IF(abs(CUTL).LT.EPS) CUTL = -1.6
@@ -409,15 +409,19 @@
       CUTC = (ICUTC-1)*HCM
       WORD = '    '
       if(CUTR.lt.0.) WORD = 'Turn'
+      if(DGAM>0.and. (PP/=2 .and. PP/=3.or.kqmax<2)) then
+	write(koe,*) 'For decay gammas need PP=2 or 3, and KQMAX>>0'
+ ! 	stop
+	endif
       
-      WRITE(koe,1060) KQMAX,PP,PPKIND(PP),THMIN,THMAX,THINC,KOORDS,
-     X  '(',COORDS(1),(',',COORDS(I+1),I=1,MIN(KOORDS,3)),')'
+      WRITE(koe,1060) KQMAX,PP,PPKIND(PP),THMIN,THMAX,THINC,dgam,
+     X  KOORDS,'(',COORDS(1),(',',COORDS(I+1),I=1,MIN(KOORDS,3)),')'
       
       WRITE(koe,1065) CUTL,WORD,CUTR,CUTC
  1060 FORMAT(/' Cross Sections (and up to T',I1,
-     x ' for ',I1,'=',A10,') for ',
-     X 'Theta from',F6.1,' to',F6.1,' in steps of',F5.1,' degrees.  ',
-     X 'Coordinates =',I2,' ',5(A1,A4))
+     x ' for ',I1,'=',A10,') for Theta from',F6.1,' to',
+     x      F6.1,' in steps of',F5.1,' degrees, DGAM=',i1,
+     X ',  Coordinates =',I2,' ',5(A1,A4))
  1065 FORMAT(/' Lower Radial Cutoff = maximum of',F6.2,'*L*h & ',A4,
      X F5.1,' fm.,  Lower Cutoff for Couplings =',F6.1,'  fm.'/)
 !	     write(48,*) '              Mint,icutc = ',mint,icutc  ! for DECs
@@ -652,7 +656,7 @@ C
 	name = namep; call ucase(name)
 	if(abs(massp)<eps.and.name(1:3)/='GAM') then
 	 if(.not.given) then
-	   write(koe,*) ' Using mass table ',trim(MASFIL)
+	   write(koe,*) ' Using mass table ',trim(MASFIL),'for',namep
 	   given = .true.
 	   endif
         call GETMASS(RM,AM,EM,IA,IZ,IFLAG,namep,MASFIL)
@@ -669,7 +673,7 @@ C
 	endif
 	if(abs(masst)<eps) then
 	 if(.not.given) then
-	   write(koe,*) ' Using mass table ',trim(MASFIL)
+	   write(koe,*) ' Using mass table ',trim(MASFIL),'for',namet
 	   given = .true.
 	   endif
         call GETMASS(RM,AM,EM,IA,IZ,IFLAG,namet,MASFIL)
@@ -1599,7 +1603,7 @@ c        kind = 3 & 4 :    s.p. inelastic form factors of multipole 'ik'
 !@	 gailitis=0; gailacc=0; ngail=0
          jtmin=0; jtmax=0; absend=0.1; pset=0; jset=0; rela=' '
 	 jump(:,:)=0; jbord(:)=0; nearfa=0 ; jleast=0.
-         kqmax=0; pp=0; thmin=0; thmax=180; thinc=1; koords=0; 
+         kqmax=0; pp=0; thmin=0; thmax=180; thinc=1; koords=0; dgam=0
 	 cutl=0; cutr=0; cutc=0; smallchan=0; smallcoup=0
          ips=0; it0=0; iter=0; fatal=.true.; iblock=0; pade=0; 
 	 psiren=.false.; iso=' '; nnu=0; maxl=0; minl=0; mtmin=0; 

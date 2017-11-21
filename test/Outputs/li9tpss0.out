@@ -1,5 +1,5 @@
 ln: fort.16: File exists
- FRESCO - FRES 3.1: Coupled Reaction Channels
+ FRESCO - FRES 2.9.3: Coupled Reaction Channels
 
  9Li(t,p) with s^2 triton & Yabana 11Li. Sim+seq                                 
 
@@ -9,7 +9,7 @@ ln: fort.16: File exists
  Non - locality width is     41 * 0.3000 fm., Maximum of  12.00 fm., Centred at  0.00 fm.
  2-Nucleon Separation of     39 * 0.5000 fm., Maximum of  20.00 fm., Minimum at  0.50 fm.
  Maximum single particle bins of 25.0000 fm.
-               M,Mint =          251         251
+               M,Mint =  251 251
 
 
  Range of total J is     0.0 <= J <=    30.0 (at least     0.0) and Absorbtion =>     0.0100 mb.
@@ -37,8 +37,7 @@ ln: fort.16: File exists
 
  Now pre-scan input and save to file 3
 
-  WARNING: target longitudinal recoil NOT included in the ZR coupling # 
-           2
+  WARNING: target longitudinal recoil NOT included in the ZR coupling #  2
 
 
  *********** PARTITION NUMBER  1 ******************************************************************************************
@@ -124,10 +123,10 @@ ln: fort.16: File exists
 
   KN1 KN2  P1  P2  IN KIND TYP J12,T  PAIRS KNZR LMIN LMAX SMIN FILE ISC IPC  EP2%  AMPL
 
-   10  90   1   3   1   9      0.0,1    1    0    0      1  0.0 -21   0   2  0.10%  0.0000
+   10  90   1   3   1   9      0.0,1    1    0    0      1  0.0 -21   0   2  0.10%  1.0000
 
    3   3   0   0  1.0000,
- SP state :           3
+ SP state : 3
    0.6890   0.6369   0.5246   0.3980   0.2890   0.2069   0.1484   0.1076   0.0789   0.0585
 
  TWO-PARTICLE FORM FACTOR for LL,l,s,j =   0   0 0.0 0.0  : Sq. Norm =  0.945781
@@ -229,7 +228,7 @@ ln: fort.16: File exists
    90 170   1   3   2   6      0.0,1    1    0    0      1  0.0 -22   0   2 -0.10%  1.0000
 
    6   6   0   0  1.0000,
- SP state :           6
+ SP state : 6
    0.2245   0.2001   0.1765   0.1432   0.1077   0.0763   0.0524   0.0359   0.0250   0.0178
 
  TWO-PARTICLE FORM FACTOR for LL,l,s,j =   0   0 0.0 0.0  : Sq. Norm =  0.275564
@@ -403,7 +402,7 @@ ln: fort.16: File exists
 
  ************************************************************************************************************************************
 
- TWO-way COUPLING # 1 for partitions  2 <-  1 of KIND  7,   1  1  0  0  0 & P1,P2 = -163.2000   0.0000 : for J <=    30.5 & R <  24.5 fm.
+ TWO-way COUPLING # 1 for partitions  2 <-  1 of KIND  7,   1  1  0  0  0 & P1,P2 = -163.2000   0.0000 : for J <=    30.5 & R <  24.7 fm.
 
 
  data =  1  1  1  1  1.1758,  so  < [Triton   #  1] / [Deuteron #  1]  * Eigen-form #  1>  =   1.1758            BE =  6.257     1
@@ -416,11 +415,12 @@ ln: fort.16: File exists
 
           Using between Deuteron & 9Li      the potential No.   2, and subtracting optical potential No.  1
 
-   A real*8 is            2  bytes
-   NLL,NLN,NLO =          50          51          41
-0File  11 needs RL =    2050    REAL*8 numbers, and NR =    38. i.e.     0.16 Megabytes
-   File           11  RECL =        4100
-0RECOMMENDED NON-LOCAL WIDTH IS GREATER THAN    6.60 FM.,  RECOMMENDED CENTRATION  -0.60, after    0.00 secs.
+   A real*8 is  8  bytes
+   NLL,NLN,NLO = 50 51 41
+0File  11 needs RL =    2050    REAL*8 numbers, and NR =    38. i.e.   0.62 Megabytes
+   File  11  RECL = 16400
+  IC7,ICV,FFREAL = 1 1 T
+0RECOMMENDED NON-LOCAL WIDTH IS GREATER THAN    6.60 FM.,  RECOMMENDED CENTRATION  -0.60, after    0.01 secs.
 0Relative non-local usages (rms) are
     0.004   0.007   0.012   0.021   0.037   0.062   0.113   0.199   0.351   0.651   1.148   2.175   4.028   7.175  13.052
    20.911  35.580  54.460  75.075 100.000  99.519  73.291  41.302  17.998   6.220   1.846   0.620   0.401   0.295   0.198
@@ -428,7 +428,7 @@ ln: fort.16: File exists
 
  ************************************************************************************************************************************
 
- TWO-way COUPLING # 2 for partitions  3 <-  2 of KIND  6,   0  1  0  0  0 & P1,P2 = -125.7000   0.0000 : for J <=    30.5 & R <  24.5 fm.
+ TWO-way COUPLING # 2 for partitions  3 <-  2 of KIND  6,   0  1  0  0  0 & P1,P2 = -125.7000   0.0000 : for J <=    30.5 & R <  24.7 fm.
 
 
  data =  1  1  1  2  1.0000,  so  < [Deuteron #  1] / [Proton   #  1]  * Eigen-form #  2>  =   1.0000            BE =  2.224     2
@@ -443,7 +443,7 @@ ln: fort.16: File exists
 
  ************************************************************************************************************************************
 
- TWO-way COUPLING # 3 for partitions  3 <-  1 of KIND  7,   1  1  0  0  0 & P1,P2 =    0.0000   0.0000 : for J <=    30.5 & R <  24.5 fm.
+ TWO-way COUPLING # 3 for partitions  3 <-  1 of KIND  7,   1  1  0  0  0 & P1,P2 =    0.0000   0.0000 : for J <=    30.5 & R <  24.7 fm.
 
 
  data =  1  1  1 10  1.0000,  so  < [Triton   #  1] / [Proton   #  1]  * Eigen-form # 10>  =   1.0000            BE =  8.480    48
@@ -494,7 +494,8 @@ ln: fort.16: File exists
 
           Using between Proton   & 9Li      the potential No.   3, and subtracting optical potential No.  1
 
-0RECOMMENDED NON-LOCAL WIDTH IS GREATER THAN   12.60 FM.,  RECOMMENDED CENTRATION  -0.90, after    0.10 secs.
+  IC7,ICV,FFREAL = 1 1 T
+0RECOMMENDED NON-LOCAL WIDTH IS GREATER THAN   12.60 FM.,  RECOMMENDED CENTRATION  -0.90, after    3.23 secs.
 0Relative non-local usages (rms) are
     0.858   1.220   1.742   2.494   3.586   5.078   7.320  10.382  14.348  20.245  26.097  36.244  46.610  57.499  72.110
    77.919  93.993  98.208 100.000  94.640  82.532  56.375  32.698  22.815  20.732  16.311  10.100   5.277   3.282   2.999
@@ -509,7 +510,7 @@ ln: fort.16: File exists
    from    0.00000     to   0.00000     in     0 intervals
 
  Largest real,imaginary parts of any form factor at R=   24.00 are   2.05E-01  3.65E-10 MeV
- Finished all Couplings @   0.1324880              14
+ Finished all Couplings @  3.272804 14
 
  Symmetric Hamiltonian
 1***********************************************************************************************************************************
@@ -520,7 +521,7 @@ ln: fort.16: File exists
  ***********************************************************************************************************************************
  ***********************************************************************************************************************************
 
- Allocate arrays for            4  channels, of which            4  need wfs.
+ Allocate arrays for  4  channels, of which  4  need wfs.
 
  Total SPIN, PARITY =     0.5 +,      4 chs,      0 cc.  Rmin & Coul turning =    0.0    0.1
 
@@ -534,7 +535,7 @@ ln: fort.16: File exists
 
  Total SPIN, PARITY =     0.5 -,      4 chs,      0 cc.  Rmin & Coul turning =    0.0    0.1
  Reaction Xsec     0.5-/ 1 @ 1 =   9.664 , Out:   0.000#   2.834/   4.754/   9.656f
- Allocate arrays for            5  channels, of which            5  need wfs.
+ Allocate arrays for  5  channels, of which  5  need wfs.
 
  Total SPIN, PARITY =     1.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    0.1    0.9
  Reaction Xsec     1.5+/ 2 @ 1 =  19.335 , Out:   0.000#   5.624/   2.970/  19.326f
@@ -654,23 +655,19 @@ ln: fort.16: File exists
  Reaction Xsec    20.5+/20 @ 1 =   0.123 , Out:   0.000#   0.658/   0.005#   0.122f
 
  Total SPIN, PARITY =    20.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    3.2   11.5
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.2 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.2 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
  Reaction Xsec    20.5-/21 @ 1 =   0.065 , Out:   0.000#   0.154/   0.001#   0.065f
 
  Total SPIN, PARITY =    21.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    3.3   12.0
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.6 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
-
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.6 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
-
  Reaction Xsec    21.5+/22 @ 1 =   0.036 , Out:   0.000#   0.075/   0.000#   0.036f
 
  Total SPIN, PARITY =    21.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    3.3   12.0
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.5 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.5 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
  Reaction Xsec    21.5-/21 @ 1 =   0.069 , Out:   0.000#   0.326/   0.003#   0.068f
 
@@ -678,54 +675,50 @@ ln: fort.16: File exists
  Reaction Xsec    22.5+/22 @ 1 =   0.038 , Out:   0.000#   0.156/   0.001#   0.038f
 
  Total SPIN, PARITY =    22.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    3.5   12.6
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.6 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.6 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
  Reaction Xsec    22.5-/23 @ 1 =   0.020 , Out:   0.000#   0.034/   0.000#   0.020f
 
  Total SPIN, PARITY =    23.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    3.6   13.2
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.6 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.0 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.6 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.0 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
  Reaction Xsec    23.5+/24 @ 1 =   0.011 , Out:   0.000#   0.014/   0.000#   0.011f
 
  Total SPIN, PARITY =    23.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    3.6   13.2
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.2 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.2 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
  Reaction Xsec    23.5-/23 @ 1 =   0.021 , Out:   0.000#   0.070/   0.000#   0.021f
 
  Total SPIN, PARITY =    24.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    3.8   13.7
-0****** WARNING : ACCURACY LOSS IN ERWIN = 15.1 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
-0****** WARNING : ACCURACY LOSS IN ERWIN = 15.1 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
  Reaction Xsec    24.5+/24 @ 1 =   0.012 , Out:   0.000#   0.028/   0.000#   0.012f
 
  Total SPIN, PARITY =    24.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    3.8   13.7
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.6 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
-
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.6 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
-
  Reaction Xsec    24.5-/25 @ 1 =   6.233/, Out:   0.000#   4.985#   0.000#   0.006f
 
  Total SPIN, PARITY =    25.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    4.0   14.3
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.8 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.8 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
  Reaction Xsec    25.5+/26 @ 1 =   3.442/, Out:   0.000#   1.578#   0.000#   0.003f
 
  Total SPIN, PARITY =    25.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    4.0   14.3
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.6 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
-0****** WARNING : ACCURACY LOSS IN ERWIN = 14.6 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
 
  Reaction Xsec    25.5-/25 @ 1 =   6.487/, Out:   0.000#   0.010/   0.000#   0.006f
- Finished all CC sets @   0.2440070    
+ Finished all CC sets @  3.6046
 0CUMULATIVE REACTION cross section                 = 1032.70374  <L> =     6.74  <L**2> =     54.1
 0CUMULATIVE outgoing cross sections in partition 1 :    0.00000
 0CUMULATIVE outgoing cross sections in partition 2 :    6.05966
@@ -830,7 +823,6 @@ ln: fort.16: File exists
 +                                         /R =   1.0875E+00
     90.00 deg.: X-S =     0.079330 mb/sr,
 +                                         /R =   1.5111E+00
-                                           Integrated********** mb, over [   0.000,  90.000] at    39.8000 MeV 
 
  CROSS SECTIONS FOR OUTGOING Deuteron & 10Li     in state #   1 with spins & parities 1.0  + &  0.5  -;  0
 
@@ -859,7 +851,7 @@ ln: fort.16: File exists
     36.00 deg.: X-S =     0.007449 mb/sr,
     38.00 deg.: X-S =     0.010395 mb/sr,
     40.00 deg.: X-S =     0.013034 mb/sr,
-    42.00 deg.: X-S =     0.015017 mb/sr,
+    42.00 deg.: X-S =     0.015018 mb/sr,
     44.00 deg.: X-S =     0.016162 mb/sr,
     46.00 deg.: X-S =     0.016433 mb/sr,
     48.00 deg.: X-S =     0.015913 mb/sr,
@@ -884,8 +876,7 @@ ln: fort.16: File exists
     86.00 deg.: X-S =     0.000178 mb/sr,
     88.00 deg.: X-S =     0.000228 mb/sr,
     90.00 deg.: X-S =     0.000285 mb/sr,
-                                           Integrated    0.0887 mb, over [   0.000,  90.000] at    39.8000 MeV 
- Finished all xsecs @   0.2462940    
+ Finished all xsecs @  3.606791
 
   The following files have been created:
    3:local copy of User input.            6:standard output.                   
@@ -923,4 +914,4 @@ ln: fort.16: File exists
  3: Recommended RNL: non-local width >  12.60 cf:  12.00 fm: OK      
     Recommended CENTRE: centration   ~  -0.90 cf:   0.00 fm
 
- Total CPU  0 time =       0.25 seconds
+ Total CPU  0 time =       3.61 seconds

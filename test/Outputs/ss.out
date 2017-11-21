@@ -1,4 +1,4 @@
-SFRESCO - FRES 3.1: Search Coupled Reaction Channels
+SFRESCO - FRES 2.9.3: Search Coupled Reaction Channels
 
  Please give search file name
  SFresco search file = ss.search                                         
@@ -6,8 +6,7 @@ SFRESCO - FRES 3.1: Search Coupled Reaction Channels
  Fresco input file = p-cd.in                                           
    and output file = p-cd.frout                                        
  Search on  4 variables for   1 datasets,
- MNINIT UNABLE TO DETERMINE ARITHMETIC PRECISION. WILL ASSUME:  0.40E-06
-  MINUIT RELEASE 96.03  INITIALIZED.   DIMENSIONS 100/ 50  EPSMAC=  0.80E-06
+  MINUIT RELEASE 96.03  INITIALIZED.   DIMENSIONS 100/ 50  EPSMAC=  0.89E-15
 
   Define SEARCH VARIABLES:
 
@@ -23,13 +22,13 @@ SFRESCO - FRES 3.1: Search Coupled Reaction Channels
    Variable  4=WD         is potential KP= 1, line= 3 col= 4
      value   8.5000           step  0.1000, min,max   0.0000  0.0000
 
-  Read definition of data set            1
+  Read definition of data set  1
   Read DATA SET  1 from file =                                                 
     of type  0           with absolute errors, CM  for state/excit  1  1,  idir= 1
 
   Angular cross section T00
-  Read data set            1
-            28  data points:
+  Read data set  1
+   28  data points:
   Angle CM  Datum     Absolute error
    22.000  0.5480      0.4400E-01
    26.000  0.4750      0.2400E-01
@@ -59,12 +58,12 @@ SFRESCO - FRES 3.1: Search Coupled Reaction Channels
   122.000  0.2230      0.9000E-02
   126.000  0.1890      0.6000E-02
   130.000  0.1610      0.5000E-02
- 
+
   FRESCO output to p-cd.frout*
- 
+
  Calculate scattering at energies
    27.900
- 
+
 
   Total ChiSq/N =    20.5232 from     20.523
 
@@ -103,45 +102,44 @@ minuit>  **********
  FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
  START MIGRAD MINIMIZATION.  STRATEGY 0.  CONVERGENCE WHEN EDM .LT. 0.36E-05
 
- FCN=   20.52320     FROM MIGRAD    STATUS=INITIATE       8 CALLS        9 TOTAL
+ FCN=   20.52320     FROM MIGRAD    STATUS=INITIATE      10 CALLS       11 TOTAL
                      EDM= unknown      STRATEGY= 0      NO ERROR MATRIX       
 
   EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
   NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
-   1      r0        1.1710       0.10000E-01   0.10000E-01   -808.68    
-   2      V         52.500       0.10000       0.10000       -8.0670    
-   3      W         3.5000       0.10000       0.10000        18.756    
-   4      WD        8.5000       0.10000       0.10000        9.1064    
+   1      r0        1.1710       0.10000E-01   0.10000E-01   -784.14    
+   2      V         52.500       0.10000       0.10000       -8.1024    
+   3      W         3.5000       0.10000       0.10000        18.764    
+   4      WD        8.5000       0.10000       0.10000        9.1249    
                                ERR DEF= 0.357E-01
  MIGRAD FAILS TO FIND IMPROVEMENT
- MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
 
  MIGRAD MINIMIZATION HAS CONVERGED.
 
- FCN=   8.956081     FROM MIGRAD    STATUS=CONVERGED     62 CALLS       63 TOTAL
-                     EDM=  0.10E-01  STRATEGY=0  ERROR MATRIX UNCERTAINTY= 18.4%
+ FCN=   8.935222     FROM MIGRAD    STATUS=CONVERGED    120 CALLS      121 TOTAL
+                     EDM=  0.29E-05  STRATEGY=0  ERROR MATRIX UNCERTAINTY= 11.0%
 
   EXT PARAMETER                APPROXIMATE        STEP         FIRST   
   NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
-   1      r0        1.1811       0.17658E-02    0.0000       -9.7222    
-   2      V         52.179       0.19470        0.0000       0.13150    
-   3      W         2.7928       0.76020E-01    0.0000      -0.52289    
-   4      WD        8.3166       0.87602E-01    0.0000      -0.13717    
+   1      r0        1.1814       0.17903E-02   -0.0000       0.13965    
+   2      V         52.184       0.17900        0.0000      -0.15027E-02
+   3      W         2.8947       0.12733        0.0000      -0.24834E-03
+   4      WD        8.1833       0.17585       -0.0000       0.12949E-02
                                ERR DEF= 0.357E-01
 
  EXTERNAL ERROR MATRIX.    NDIM=  50    NPAR=  4    ERR DEF= 0.357E-01
-  0.312E-05-0.323E-03-0.921E-04 0.910E-04
- -0.323E-03 0.379E-01 0.103E-01-0.106E-01
- -0.921E-04 0.103E-01 0.578E-02-0.539E-02
-  0.910E-04-0.106E-01-0.539E-02 0.767E-02
+  0.321E-05-0.289E-03 0.115E-04-0.633E-04
+ -0.289E-03 0.320E-01 0.445E-02-0.190E-02
+  0.115E-04 0.445E-02 0.162E-01-0.210E-01
+ -0.633E-04-0.190E-02-0.210E-01 0.309E-01
  ERR MATRIX APPROXIMATE
 
  PARAMETER  CORRELATION COEFFICIENTS
        NO.  GLOBAL     1     2     3     4
-        1  0.94069  1.000-0.939-0.686 0.588
-        2  0.94312 -0.939 1.000 0.697-0.622
-        3  0.85088 -0.686 0.697 1.000-0.810
-        4  0.81580  0.588-0.622-0.810 1.000
+        1  0.93768  1.000-0.901 0.051-0.201
+        2  0.93484 -0.901 1.000 0.195-0.060
+        3  0.94870  0.051 0.195 1.000-0.938
+        4  0.95174 -0.201-0.060-0.938 1.000
  ERR MATRIX APPROXIMATE
 minuit>  **********
  **    5 **END 
@@ -152,6 +150,6 @@ minuit>  **********
  END OF MINUIT COMMAND INPUT.    RETURN TO USER PROGRAM.
 
 sfresco> 
-  ChiSq/N =     8.956 from      8.956
+  ChiSq/N =     8.935 from      8.935
   xmgr file written: ss-fit.plot                                       
 sfresco> 

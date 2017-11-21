@@ -1,4 +1,4 @@
-FRESCO   FRES version 3.1
+FRESCO   FRES version 3.2
 
 This directory contains four sub-directories: source, man, test and util.
 
@@ -11,7 +11,7 @@ The test/   directory contains : at least 6 test jobs xeta, lane20 & f19xfr,
                 hence the comments at the beginning.)
 
 The man/   directory contains the instruction manual in latex:
-                      fres31.tex, fres31.pdf:  latex source  & output
+                      fres32.tex, fres32.pdf:  latex source  & output
 		 and fresco9.pdf: the Computer Physics Reports paper.
 
 To compile FRESCO,

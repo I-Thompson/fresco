@@ -88,7 +88,7 @@
      x			    term,nopot
 	namelist /data/ type,data_file,points,xmin,delta,lab,energy,
      X          idir,iscale,abserr,ic,ia,k,q,angle,jtot,par,channel,
-     x          pel,exl,labe,lin,lex,value,error
+     x          pel,exl,labe,lin,lex,value,error,ib
 	
         data stype/ ' ','in Fm**2','in barns', 'in mb', 'in micbn'/
 ! DATA:
@@ -128,7 +128,7 @@
 
 	written = .false.; written(3) = .true.
 1	write(6,1001) 
- 1001   format('SFRESCO - FRES 3.1: Search Coupled Reaction Channels'
+ 1001   format('SFRESCO - FRES 3.2: Search Coupled Reaction Channels'
      x          /)
 !
 !####### Read in search input
@@ -253,6 +253,7 @@
 	  if(type==0.and.energy>0) write(6,1030) k,q,energy
 	  if(type==1) write(6,1031) k,q
 	  if(type==2) write(6,1032) k,q,angle,cmlab
+          if(type<=3.and.ib>0) write(6,1033) 'gamma decay to state',ib
           if(type==3.and.ic>=1) write(6,1033)
           if(type==3.and.ic==0) then
                 if(ia==0) write(6,1033) 'fusion'
@@ -345,7 +346,7 @@
              endif
   	  ndof = ndof + datalen(id)
           data_idir(id)=idir; data_idir1(id)=idir; data_lab(id)=lab; 
-          data_ic(id) = ic; data_ia(id) = ia; 
+          data_ic(id) = ic; data_ia(id) = ia;  data_ib(id) = ib
           data_rank_k(id) = k; data_rank_q(id) = q; 
 	  data_ch(id) = channel; data_jtot(id)=jtot; data_par(id)=par
 	  if(data_type(id)/=6) then

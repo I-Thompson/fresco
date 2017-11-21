@@ -65,7 +65,7 @@
 	real*8 unitmass,finec,fmscal,coulcn,amu,hbc,etacns
 	real*8 pmass,mun
 	integer melfil,nfus,nfus1,kpmax,buttle
-	integer maxnlr,maxnlc
+	integer maxnlr,maxnlc,dgam
 	end module parameters
 
 	module io
@@ -117,7 +117,7 @@
      x		allpart,cxwf,ccbins,nn2wf,sumccbins,sumkql,bes
 	real*8 rin,ebeta(2),rmatr,smallchan,smallcoup,gailacc,weak
 	integer mlm,nlcn,mint,mintm2,nj,jset,pset,icutc,itmin,nsol,
-     x          nforml1,nforml2,sumform,ompform,initwf,npluto,pluto(10)
+     x         nforml1,nforml2,sumform,ompform,initwf,npluto,pluto(10)
         character*10 ppkind(0:4)
         data ppkind / 'projectile','target','ejectile','residual',
      x		      'proj+eject' /
@@ -165,7 +165,7 @@
 	logical data_lab(mds),data_matched(mds),gettheoryplot
 	integer data_type(mds),bs_no(mdl,mds)
 	integer data_pel(mds),data_exl(mds),data_labe(mds),
-     x 	        data_lin(mds),data_lex(mds)
+     x 	        data_lin(mds),data_lex(mds),data_ib(mds)
 	integer data_ic(mds),data_ia(mds),data_thfile(mds),ndof
 	integer data_idir(mds),data_idir1(mds),data_rank_k(mds)
 	integer data_ch(mds),data_par(mds),data_rank_q(mds)

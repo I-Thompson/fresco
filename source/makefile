@@ -36,7 +36,9 @@ OBJ = $(COMMON) fresco.o
 
 target: fresco sfresco 
 install: fresco sfresco 
-	cp -fp fresco sfresco $(HOME)/bin/$(ARCH)
+	cp -fp fresco sfresco $(FRESCOLIB)
+
+#	cp -fp fresco sfresco $(HOME)/bin/$(ARCH)
 
 fresco: $(OBJ)
 	$(FC) $(FFLAGS) -o fresco $(OBJ)
@@ -49,7 +51,7 @@ sfresco: $(OBJS)
 frxx1.o: globx7.o frxx1.f usescatwf.f veffpot.f bpmfus.f
 frxx17.o: globx7.o frxx17.f usescatwf.f
 
-.f.o:
+.f.o:	globx7.o
 	$(FC) $(FORM) -c $(FFLAGS)  $<
 
 #########

@@ -1,4 +1,4 @@
-!***********************************************************************
+
 !     
 !    Copyright (c) 2012, Lawrence Livermore National Security, LLC.
 !                        Produced at the Lawrence Livermore National
@@ -785,7 +785,7 @@ C    ...........................................................
      X             (GPT(1,IN),GPT(2,IN),LOG10(MAX(ALOSS(IN),1D0)),
      X             ALOSS(IN)*RERR*100., IN=1,NG(2))
 80    FORMAT(' For coupling #',I2,', acc. loss in kernel =',F5.1,
-     X ' digits.',/,(10X,' Between bound states ',I3,' &',I3,
+     X ' digits.',/,(10X,' Between bound states ',I3,' and ',I3,
      X '  loss =',F5.1,' D, so errors =',F10.5,' %'))
 C
       ELSE if(IL.EQ.2.and.MCLA) then
@@ -2063,31 +2063,35 @@ C                    Any additional L-dependent factors:
 *****CRISS**************************************************************
       SUBROUTINE CRISS(IC,IA,JEX,NSA,NJA,PEL,EXL,JIX,
      &         MAL,K,ETA,RMASS,CSIG,KOORDS,MMXCH,MAXF,ENLAB,LEN,
-     &         THMIN,THMAX,THINC,EXCH,LAMPL,NEARFA,KQMAX,SIGR,XSTRAC,
+     &         THMIN,THMAX,THINC,EXCH,LAMPL,NEARFA,KQMAX0,SIGR,XSTRAC,
      &         LJMAX,NLJ,NJ,JBORD,JUMP,ITX,ITEL,IEXCH,PP,PPK,CDCC,IP,
      &         IBIN,PENEX,PI,HEADNG,INFAM,OUTFAM,LCROSS,LFAM,
-     & 		LXSEC,BSIGN,ECMI,A1,A2,ECMF,A3,A4,LEG,MAXPLM)
+     & 		LXSEC,BSIGN,ECMI,A1,A2,ECMF,A3,A4,LEG,MAXPLM,
+     &          DSPINS,DMULTIES,NMULTIES,DLEVEL,DNAME)
 	use io
 	use parameters
 	use searchpar
 	use searchdata
       IMPLICIT REAL*8(A-H,O-Z)
-      PARAMETER(MAXKQ1=7)
+      ! PARAMETER(KQMAX1=7)
       REAL*8 JEX(2),JIX(2),RMASS(MXP),MBP,MJAP,MJBP,JTOTAL,MAA,PENEX,
      & 	     JVAL(MMXCH),MODSQ,JBORD(NJ+1),LJMAX,MA,MAP,MT,MB,MJA,MJB,
-     &       JT,JLAST,AI(4),JPREV,XSEC(MAXKQ1,MAXKQ1),TENS(5),TENHJ(3)
+     &       JT,JLAST,AI(4),JPREV,XSEC(KQMAX0,KQMAX0),TENS(5),TENHJ(3)
       INTEGER PEL,EXL,PART(MMXCH),EXCIT(MMXCH),LVAL(MMXCH),C,EL,XSTRAC
-     &       ,JUMP(7,3),PP,CDCC,BSIGN,INFAM,OUTFAM,KAD(mds),
-     &        KANG(mds),IANGLS(mdl,mds)
+     &       ,JUMP(7,3),PP,CDCC,BSIGN,INFAM,OUTFAM,KAD(mds),KANG(mds),
+     &        IANGLS(mdl,mds),DMULTIES(NMULTIES),DLEVEL(NMULTIES)
       REAL*8 RR(MMXCH,MAXF),ANGLES(mds*mdl),KYY,CM_LAB(mds*mdl)
       COMPLEX*16 O,C6,C7,C9,C0,FCOUL,C6D,FAM(MAXF),SMAT(MMXCH),FCOUL2,
-     &           AMP,FA(MAXKQ1,MAXKQ1,MAXKQ1,2-MAXKQ1:MAXKQ1),CI
+     &           AMP,FA(KQMAX0,KQMAX0,KQMAX0,2-KQMAX0:KQMAX0),CI
       REAL*8 CSIG(LMAX1,MXPEX),K(MXP,MXX),ETA(MXP,MXX),FUSL(1+NFUS1)
-      REAL*8 PL(LMAX1,MAXPLM+1,2)
+      REAL*8 PL(LMAX1,MAXPLM+1,2),PLEG(KQMAX0),SIGG(KQMAX0),
+     &       RCOEF(KQMAX0,NMULTIES),DSPINS(NMULTIES),GXSECS(NMULTIES),
+     &       TGXSECS(NMULTIES)
       COMPLEX*16,allocatable:: AMPL(:),YSIG(:,:)
       LOGICAL EXCH,DESCR,IFO,EXTRA
       CHARACTER*12 SIDES(3),PPK*10
       CHARACTER*80 HEADNG,HDGQ
+      CHARACTER*8 DNAME
       DATA  SIDES / 'BOTH SIDES','FAR SIDE','NEAR SIDE' /,
      X      DESCR / .false. /
       MODSQ(O) = CONJG(O) * O
@@ -2102,7 +2106,7 @@ C                    Any additional L-dependent factors:
          MAM = NSA * NJA * NSB * NJB
 !	 write(48,*) 'CRISS:',NSA,NJA,NSB,NJB,NSA*NJA*NSB*NJB,MAM
 !	 call flush(48)
-      KQMAX1  = MIN( MAXKQ1 , KQMAX+1)
+      KQMAX1 = KQMAX0
       KQMAX2  = 1
 
       if(mod(PP,4).eq.0) KQMAX1  = MIN( nint(2*JIX(1)+1) , KQMAX1 )
@@ -2142,7 +2146,7 @@ C                    Any additional L-dependent factors:
       
       HDGQ = '"'//HEADNG(1:lnbl(HEADNG))//'"'
       KQ1PR = 0
-      IF(XSTRAC.NE.0) KQ1PR = MIN(KQMAX1,ABS(XSTRAC),MAXKQ1)
+      IF(XSTRAC.NE.0) KQ1PR = MIN(KQMAX1,ABS(XSTRAC))
          MAM = NSA * NJA * NSB * NJB
          MAL1 = MAL + 1
 !	 write(48,*) 'CRISS:',NSA,NJA,NSB,NJB,NSA*NJA*NSB*NJB,MAM
@@ -2363,13 +2367,17 @@ C:    IF(LAMPL.EQ.0 ) GO TO 230
       IF(EXTRA) NANGL = NANGL0 +  NANGLE
 
       IFOUT=200+ITX
+      IFOG = IFOUT+100
       IFO = ITX<=10
       IF(IC.EQ.PEL .AND. IA.EQ.EXL) then
 	  if(IFOUT/=201)  IFOUT=200
 	  IFO=.true.
 	endif
       if(NANGL>0) call openif(16)
-      if(IFO.and.NANGL>0) call openif(IFOUT)
+      if(IFO.and.NANGL>0) then
+	call openif(IFOUT)
+        if(NMULTIES>0.and.IA>1) call openif(100+IFOUT)
+        endif
 
       DO 290 NEARF = 1,ABS(NEARFA)
          IF(NEARFA.GT.0 .AND. NEARF.GT.1
@@ -2394,8 +2402,13 @@ C:    IF(LAMPL.EQ.0 ) GO TO 230
           IF(LEG.lt.10) WRITE(LCROSS,23031) LEG,LS
           IF(LEG.ge.10.and.LEG<100) WRITE(LCROSS,23032) LEG,LS
           IF(LEG>=100) WRITE(LCROSS,23033) LEG,LS
+          if(DGAM==0) then
             WRITE(LCROSS,2305) PPK
             if(IFO) WRITE(IFOUT,2305) PPK
+          else
+            WRITE(LCROSS,23051)
+            if(IFO) WRITE(IFOUT,23051)
+          endif
             LEG = LEG + 1
         ENDIF
 2302  FORMAT('#',I4,' angles,',I3,' tensor ranks for ',I1,'=',A10,/,
@@ -2412,6 +2425,13 @@ C:    IF(LAMPL.EQ.0 ) GO TO 230
      X       '@yaxis label "Cross section (mb/sr)"')
 2305  FORMAT('#  Theta       sigma       iT11        T20',
      X        '         T21         T22         Kyy for ',A10)
+23051 FORMAT('#  Theta       sigma       iT10        T20',
+     X        '        iT30         T40        iT50')
+23021 FORMAT('#',I4,' angles, gamma decay distributions from state ',i2,
+     x   ' to state ',I2,','/
+     X   '#   using ',I1,' tensor ranks, for nucleus ',I1,'=',A10,/,
+     X   '@subtitle ',A82,/,'@legend ON')
+
       IF(XSTRAC*LXSEC.LT.0) WRITE(LXSEC,*) IC,IA,KQ1PR,NANGL,NEARF
       IF(ABS(LAMPL).eq.IC) WRITE(LFAM,*) JIX,JEX,NANGL,NEARF,ENLAB
       if(ABS(LAMPL).eq.IC) written(LFAM) = .true.
@@ -2423,6 +2443,7 @@ C:    IF(LAMPL.EQ.0 ) GO TO 230
 	written(abs(OUTFAM)) = .true.
 	endif
 
+      SIGG(:) = 0.
       SUMXS = 0.0
       DO 280 ITH=1,NANGL
          IF(ITH.LE.NANGL0) THETA = (ITH-1)*abs(THINC) + THMIN
@@ -2565,10 +2586,16 @@ C240    FORMAT(' ',2I3,5F5.1,    7F10.4,2F13.5)
       XSEC(1,1) = FA(1,1,1,1) * XCOEF
       KYY = 0.
       if(IKYY==1) KYY = sqrt(2./3.)*(FA(2,2,2,2)+FA(2,2,2,0))/SNZ
-!      if(IKYY==1) write(48,*) ITH,real(FA(2,2,2,2)),real(FA(2,2,2,0))
+
       T = 100.
       IF(XSEC(1,1).GT.1E-20) T = LOG10(XSEC(1,1))
-      if(IKYY==0) then
+      if(DGAM>0) then
+       IF(ABS(T).GT.4) THEN
+        WRITE(KO,256) THETA,(XSEC(KQ1,1),KQ1=1,KQMAX1)
+       ELSE
+        WRITE(KO,255) THETA,(XSEC(KQ1,1),KQ1=1,KQMAX1)
+       ENDIF
+      else if(IKYY==0) then
        IF(ABS(T).GT.4) THEN
         WRITE(KO,256) THETA,((XSEC(KQ1,LQ1),LQ1=1,KQ1),KQ1=1,KQMAX1)
        ELSE
@@ -2656,31 +2683,33 @@ C      Print Hooton-Johnson second-rank tensors from above:
        if(THMAX.lt.0.) XEL = XSEC(1,1)
 C
 	if(NEARF==1) then
-	do IK=1,KA   ! Calculate chi-sq for data
-	 id = KAD(IK)
-	 kq1 = data_rank_k(id)+1
-	 lq1 = data_rank_q(id)+1
-	 idir = data_idir(id)
-!		Adjust any datanorm search parameter!
-	   datanorm=1.0
-	   do ip=1,nvars
-	   if(srch_kind(ip)==5.and.srch_datanorm(ip)==id) 
+		do 2575 IK=1,KA   ! Calculate chi-sq for data
+		 id = KAD(IK)
+		 ib = data_ib(id)
+		 if(ib>0) go to 2575  ! only do particles here
+		 kq1 = data_rank_k(id)+1
+		 lq1 = data_rank_q(id)+1
+		 idir = data_idir(id)
+	!		Adjust any datanorm search parameter!
+		   datanorm=1.0
+		   do ip=1,nvars
+		   if(srch_kind(ip)==5.and.srch_datanorm(ip)==id) 
      x	     datanorm = datanorm * srch_value(ip)
-	   enddo
+		   enddo
 !           WRITE(KO,*) ' dataset ',id,kq1,lq1,real(datanorm)
-           if(lq1<=kq1)  theory = XSEC(kq1,lq1)
-           if(kq1==2.and.lq1==3) theory = KYY
+		   if(lq1<=kq1)  theory = XSEC(kq1,lq1)
+		   if(kq1==2.and.lq1==3) theory = KYY
 !           call flush(6)
-           if(idir>=1) theory = theory/RUTH
-	   theorycm = theory
-           if(idir==0.and.kq1==1.and.data_lab(id)) 
+		   if(idir>=1) theory = theory/RUTH
+			theorycm = theory
+		   if(idir==0.and.kq1==1.and.data_lab(id)) 
      x         theory = theory / CM_LAB(ITH-NANGL0) ! convert to lab
 
-	sfactor = exp(2d0*PI*ETA(PEL,EXL)) * ECMI
-        do ip=1,datalen(id)
-	  if(IANGLS(ip,id)>=0) then       
-	  if(ITH == NANGL0+IANGLS(ip,id)) then       
-!           WRITE(KO,*) ' XS',datangles(ip,id),THETA,ITH,IANGLS(ip,id)
+		sfactor = exp(2d0*PI*ETA(PEL,EXL)) * ECMI
+		do ip=1,datalen(id)
+		  if(IANGLS(ip,id)>=0) then       
+		  if(ITH == NANGL0+IANGLS(ip,id)) then       
+	!           WRITE(KO,*) ' XS',datangles(ip,id),THETA,ITH,IANGLS(ip,id)
            if(idir==2) then  !  convert to ratio to Rutherford, the first time
               datavals(ip,id) = datavals(ip,id)/RUTH
               dataerr(ip,id) = dataerr(ip,id)/RUTH
@@ -2702,7 +2731,7 @@ C
            endif
            
           enddo
-	enddo
+2575	continue
 	endif  ! NEARF==1
 C---       Print Rutherford-ratio or sigma, in simple forms for plotting
 c     IF(THETA.LT.0.01 .AND. IC.EQ.PEL .AND. IA.EQ.EXL) GO TO 260
@@ -2714,7 +2743,7 @@ c     IF(THETA.LT.0.01 .AND. IC.EQ.PEL .AND. IA.EQ.EXL) GO TO 260
      2     (KYY,I=1,IKYY)
 c258   FORMAT(1P,6E12.4)
 c258   FORMAT(6G12.5)
-258   FORMAT(7G12.4)
+258   FORMAT(10G12.4)
       if(CDCC/=0.and.IA>1) WRITE(57,265) (FAM(IAM)*BSIGN,IAM=1,MAM)
       IF(XSTRAC*LXSEC.LT.0) WRITE(LXSEC,*) THETA,XEL
 C---
@@ -2731,16 +2760,153 @@ C---
          IF(KQ1PR.GT.0) WRITE(LCROSS,*) 'END'
          if(KQ1PR.GT.0.and.IFO) WRITE(IFOUT,*) 'END'
       endif
+
+       if(NMULTIES>0.and.ITH.LE.NANGL0) then
+         do KQ1=1,KQMAX1
+          TKQ=1.0
+          if(KQ1>1) TKQ = XSEC(KQ1,1)
+          SIGG(KQ1) = SIGG(KQ1) + XSEC(1,1)*TKQ*STH
+         enddo
+         endif
 280   CONTINUE
+
       IF(ITH.GT.1 .AND. SUMXS.NE.0.)
-     #    WRITE(KO,263) 2*PI * SUMXS * (abs(THINC)*PI/180.) ,
+     #    WRITE(KO,293) 2*PI * SUMXS * (abs(THINC)*PI/180.) ,
      #    THMIN,abs(THMAX),ENLAB
- 263   FORMAT(41X, '  Integrated',f10.4,' mb, over [',
+ 293   FORMAT(41X, '  Integrated',f10.4,' mb, over [',
      x        f8.3,',',f8.3,'] at ',f10.4,' MeV ')
          IF(KQ1PR.GT.0.and.EXTRA) then
 	    WRITE(LCROSS,*) 'END'
             if(IFO) WRITE(IFOUT,*) 'END'
 	    endif
+
+         if(NMULTIES>0.and.IA>1) then
+        write(KO,1471) DNAME,IA,(DSPINS(I),DMULTIES(I),I=1,NMULTIES)
+1471    format(/' GAMMA DECAY CROSS SECTIONS mb/sr of ',A8,' level',i3,
+     X     ' as if 100% to states/multipoles:', 10(f5.1,'/',i2,';'))
+         IN = PP-1
+         do KQ1=1,KQMAX1
+          KQ = KQ1-1
+          SIGG(KQ1) = SIGG(KQ1) * abs(THINC)*PI/180.  *2d0*PI
+          do IFF=1,NMULTIES
+           LGAM=DMULTIES(IFF)
+           RCOEF(KQ1,IFF)= sqrt(2d0*JEX(IN)+1d0) * (2*LGAM+1) 
+     x      * (-1)**nint(JEX(IN)-DSPINS(IFF)+KQ+1) 
+     x      * cleb6(LGAM+Z,1d0,LGAM+Z,-1d0,KQ+Z,Z)
+     x      * racah(LGAM+Z,LGAM+Z,JEX(IN),JEX(IN),KQ+Z,DSPINS(IFF))
+          enddo
+         enddo
+	  write(KO,1472) SIGG(1:KQMAX1)
+!1472      format(/'     Multipole integrals:',10(f10.5,f4.1))
+ 1472      format(/'     Multipole integrals:',20f10.5)
+          do IFF=1,NMULTIES
+	  write(KO,1473) IFF,RCOEF(1:KQMAX1,IFF)
+1473      format( '     R coefficients to',i2,':',20f10.5)
+	  enddo
+	  write(KO,*)
+           if(IFO) WRITE(IFOG,23021) NANGL0,IA,IFF,KQMAX1,PP,PPK,HDGQ
+           if(IFO) written(IFOG) = .true.
+            LS = MOD(LEG,5)+1
+            WRITE(LCROSS,2303) '@',LEG,IC,IA,NEARF
+            WRITE(LCROSS,23034) '#',LEN-1,ENLAB
+            if(IFO) WRITE(IFOG,23034) '#',LEN-1,ENLAB
+            if(IFO) WRITE(IFOG,2303) '@',LEG,IC,IA,NEARF
+          IF(LEG.lt.10) WRITE(LCROSS,23031) LEG,LS
+          IF(LEG.ge.10.and.LEG<100) WRITE(LCROSS,23032) LEG,LS
+          IF(LEG>=100) WRITE(LCROSS,23033) LEG,LS
+            WRITE(LCROSS,23052) 
+            if(IFO) WRITE(IFOG,23052) 
+23052       FORMAT('#  Theta       sigma (decay gamma)')
+            LEG = LEG + 1
+
+            TGXSECS(:) = 0.
+         DO 288 ITH=1,NANGL
+            IF(ITH.LE.NANGL0) THETA = (ITH-1)*abs(THINC) + THMIN
+            IF(ITH.GT.NANGL0) THETA = ANGLES(ITH-NANGL0)
+            IF(THETA.LT.0.0 .OR. THETA.GT.180.) GO TO 288
+             TH = THETA * PI/180.0
+             CTH = COS(TH)
+             STH = SIN(TH)
+             CALL PLM(CTH,KQMAX1-1,0,KQMAX1,PLEG)
+            do IFF=1,NMULTIES
+            GXSECS(IFF) = 0.
+             do KQ1=1,KQMAX1
+              GXSECS(IFF) = GXSECS(IFF) + 
+     x            RCOEF(KQ1,IFF) * PLEG(KQ1)*SIGG(KQ1)/(4d0*PI)
+             enddo
+            enddo
+           write(KO,285) THETA,GXSECS
+285       FORMAT(1X,F8.2,' deg. GX-S =',10F13.6)
+   
+                    WRITE(LCROSS,258) THETA,GXSECS
+           IF(IFO)  WRITE(IFOG,258) THETA,GXSECS
+            TGXSECS(:) = TGXSECS(:) + GXSECS(:)*STH
+
+C
+		if(NEARF==1) then
+		do 287 IK=1,KA   ! Calculate chi-sq for data
+		 id = KAD(IK)
+		 kq1 = data_rank_k(id)+1
+		 lq1 = data_rank_q(id)+1
+		 ib = data_ib(id)
+		  iff=0
+		  do I=1,NMULTIES
+		    if(DLEVEL(I)==ib) IFF=I
+			enddo
+		 if(iff==0) go to 287   ! only do gammas here
+	!		Adjust any datanorm search parameter!
+		   idir = data_idir(id)
+		   datanorm=1.0
+		   do ip=1,nvars
+		   if(srch_kind(ip)==5.and.srch_datanorm(ip)==id) 
+     x	     datanorm = datanorm * srch_value(ip)
+		   enddo
+	!           WRITE(KO,*) ' dataset ',id,kq1,lq1,real(datanorm)
+			   theory = GXSECS(IFF)
+			   if(idir>=1) theory = theory/RUTH
+		   theorycm = theory
+!			   if(idir==0.and.kq1==1.and.data_lab(id)) 
+!    x         theory = theory / CM_LAB(ITH-NANGL0) ! convert to lab
+
+		sfactor = exp(2d0*PI*ETA(PEL,EXL)) * ECMI
+			do ip=1,datalen(id)
+		  if(IANGLS(ip,id)>=0) then       
+		  if(ITH == NANGL0+IANGLS(ip,id)) then       
+	!           WRITE(KO,*) ' XS',datangles(ip,id),THETA,ITH,IANGLS(ip,id)
+			   if(idir==2) then  !  convert to ratio to Rutherford, the first time
+				  datavals(ip,id) = datavals(ip,id)/RUTH
+				  dataerr(ip,id) = dataerr(ip,id)/RUTH
+				 endif
+			   if(idir==-1) then  !  convert to absolute, the first time
+				  datavals(ip,id) = datavals(ip,id)/sfactor
+				  dataerr(ip,id) = dataerr(ip,id)/sfactor
+				 endif
+
+				chi = (theory/datanorm-datavals(ip,id))/dataerr(ip,id)
+				data_chisq(id) = data_chisq(id) + chi**2
+			theoryvals(ip,id) = theory
+				 call flush(6)
+			   else if(ITH<=NANGL0.and.data_type(id)<=2) then
+				 theoryplot(ITH,id) = theorycm
+!	   			 write(190,281) ith,id,ip,theory,enlab
+!281		     format(' theory ',3i3,'=',f8.5,' at E =',f8.3)
+			   endif
+			   endif
+		   
+			  enddo
+287		continue
+		endif  ! NEARF==1
+
+288	  continue  ! THETA loop for gamma angle
+
+      IF(ITH.GT.1)WRITE(KO,289) 2*PI*TGXSECS(:)*(abs(THINC)*PI/180) 
+289   FORMAT(/'    Angle integrated:',10F13.6)
+      
+         WRITE(KO,*)
+         WRITE(LCROSS,*) 'END'
+         WRITE(IFOG,*) 'END'
+ 	endif
+
 290    continue
 300   deallocate (AMPL)
 301   deallocate (YSIG)

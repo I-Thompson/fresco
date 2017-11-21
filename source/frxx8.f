@@ -305,9 +305,9 @@ C     WRITE(KO,20)
       DO 10 I=1,N1
 10    PL(I,J)=0.
       PL(1,1) = 1.
-      PL(2,1) = X
+      if(NA>1) PL(2,1) = X
       SX = SQRT(1.-X*X)
-      PL(2,2) = SX
+      if(M>0) PL(2,2) = SX
 	  FACT=1.
 	  PMM=1.
 	  DO 15 J=2,min(M1,N1)

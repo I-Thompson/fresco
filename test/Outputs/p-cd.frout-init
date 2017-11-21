@@ -1,4 +1,4 @@
- FRESCO - FRES 3.1: Coupled Reaction Channels
+ FRESCO - FRES 2.9.3: Coupled Reaction Channels
 
  p + 112Cd elastic                                                               
 
@@ -8,10 +8,10 @@
  Non - locality width is    101 * 0.1000 fm., Maximum of  10.00 fm., Centred at  0.00 fm.
  2-Nucleon Separation of      0 * 1.0000 fm., Maximum of   0.00 fm., Minimum at  0.00 fm.
  Maximum single particle bins of 20.0000 fm.
-               M,Mint =          201         201
+               M,Mint =  201 201
 
 
- Range of total J is     0.0 <= J <=    20.0 (at least     0.0) and Absorbtion =>     0.0100 mb.
+ Range of total J is     0.0 <= J <=   200.0 (at least     0.0) and Absorbtion =>     0.0100 mb.
  Dry Run = F, CC set limits =  0  0, Relativistic kinematics =  , Both/Far/Near Analyses =  1
 
  Cross Sections (and up to T0 for 0=projectile) for Theta from   0.0 to 180.0 in steps of  2.0 degrees.  Coordinates = 0 (Mads)
@@ -21,7 +21,7 @@
 
  Iterate Couplings between   0 and   1 times, to  0.000 % if sooner.                                          
   Block solved exactly =   0 chs., with Pade = 0 & Isocen =  =0, NOSOL = F, initwf =  0
-  NL quadrature with   18 Gaussian points, Calculate multipoles up to    26 from   0
+  NL quadrature with   18 Gaussian points, Calculate multipoles up to   206 from   0
   M-transfers for lp+lt greater than or equal to  6, Angular Integration Cutoff below  2.7778 %
 
 

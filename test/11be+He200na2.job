@@ -21,7 +21,7 @@ CDCC
    thmax=30 thinc=.05 smats=2 xstabl=1  cutr=-10 cutc=0
    nk=50 ncoul=0 reor=0 q=3 
    /
- &NUCLEUS part='Proj' name='11Be' spin=0.5 parity=+1 be = 0.500 n=2 l=0 j=0.5 /
+ &NUCLEUS part='Proj' name='11Be' charge=4 mass=11 spin=0.5 parity=+1 be = 0.500 n=2 l=0 j=0.5 /
  &NUCLEUS part='Core' name='10Be' charge=4 mass=10 /
  &NUCLEUS part='Valence' name='neutron' charge=0 mass=1 spin=0.5/
  &NUCLEUS part='Target' name='4He' charge=2 mass=4 /

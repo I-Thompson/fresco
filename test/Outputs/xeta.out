@@ -1,4 +1,4 @@
- FRESCO - FRES 3.1: Coupled Reaction Channels
+ FRESCO - FRES 2.9.3: Coupled Reaction Channels
 
  (T,ALPHA) REACTION ON 136-XENON AT SUB-BARRIER ENERGIES                         
 
@@ -8,7 +8,7 @@
  Non - locality width is     26 * 0.2000 fm., Maximum of   5.00 fm., Centred at  0.80 fm.
  2-Nucleon Separation of      0 * 0.5000 fm., Maximum of   0.00 fm., Minimum at  0.00 fm.
  Maximum single particle bins of 25.0000 fm.
-               M,Mint =          251         251
+               M,Mint =  251 251
 
 
  Range of total J is     0.0 <= J <=    10.0 (at least     0.0) and Absorbtion =>    -0.1000 mb.
@@ -100,7 +100,7 @@
 
  ************************************************************************************************************************************
 
- TWO-way COUPLING # 1 for partitions  2 <-  1 of KIND  7,   0 -1  0  0  0 & P1,P2 =    0.0000   0.0000 : for J <=    10.5 & R <  24.5 fm.
+ TWO-way COUPLING # 1 for partitions  2 <-  1 of KIND  7,   0 -1  0  0  0 & P1,P2 =    0.0000   0.0000 : for J <=    10.5 & R <  24.7 fm.
 
 
  data =  1  1  1  1  1.4142,  so  < [ALPHA    #  1] / [TRITON   #  1]  * Eigen-form #  1>  =   1.4142            BE = 19.814     1
@@ -113,10 +113,11 @@
 
           Using between TRITON   & I-135    the potential No.   1, and subtracting optical potential No.  2
 
-   A real*8 is            2  bytes
-   NLL,NLN,NLO =          50          51          26
-0File   9 needs RL =    2600    REAL*8 numbers, and NR =    18. i.e.     0.09 Megabytes
-   File            9  RECL =        5200
+   A real*8 is  8  bytes
+   NLL,NLN,NLO = 50 51 26
+0File   9 needs RL =    2600    REAL*8 numbers, and NR =    18. i.e.   0.37 Megabytes
+   File  9  RECL = 20800
+  IC7,ICV,FFREAL = 0 1 F
 0RECOMMENDED NON-LOCAL WIDTH IS GREATER THAN    3.20 FM.,  RECOMMENDED CENTRATION   0.40, after    0.00 secs.
 0Relative non-local usages (rms) are
     0.001   0.007   0.075   0.255   0.823   4.960  12.877  46.441  82.638 100.000  86.374  54.952  28.468  13.535   6.471
@@ -131,7 +132,7 @@
    from    0.00000     to   0.00000     in     0 intervals
 
  Largest real,imaginary parts of any form factor at R=   24.00 are   6.00E-02  5.74E-08 MeV
- Finished all Couplings @   6.5229996E-03          10
+ Finished all Couplings @  0.010057 10
 
  Symmetric Hamiltonian
 1***********************************************************************************************************************************
@@ -142,7 +143,7 @@
  ***********************************************************************************************************************************
  ***********************************************************************************************************************************
 
- Allocate arrays for            2  channels, of which            2  need wfs.
+ Allocate arrays for  2  channels, of which  2  need wfs.
 
 
  ######################################################################################################################
@@ -162,7 +163,7 @@
    S-matrix    2 =    0.00558  -0.00458 for L=    4, J=    4.0 channel on core I =   3.5 from L=    0,  Acc. loss =  0.9 D.
        0.5  0.94955664  0.01877058i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     0.5+/ 0 @ 1 =   3.785 , Out:   0.000#   2.887/   3.782f
- 
+
 
 
  ######################################################################################################################
@@ -177,8 +178,8 @@
    S-matrix    2 =   -0.00452   0.00335 for L=    3, J=    3.0 channel on core I =   3.5 from L=    1,  Acc. loss =  0.6 D.
        0.5  0.95484878  0.01431842i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     0.5-/ 1 @ 1 =   3.401 , Out:   0.000#   1.753/   3.399f
- 
- Allocate arrays for            3  channels, of which            3  need wfs.
+
+ Allocate arrays for  3  channels, of which  3  need wfs.
 
 
  ######################################################################################################################
@@ -194,7 +195,7 @@
    S-matrix    3 =   -0.00238   0.00227 for L=    4, J=    4.0 channel on core I =   3.5 from L=    2,  Acc. loss =  0.8 D.
        1.5  0.97235936  0.01373509i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     1.5+/ 2 @ 1 =   4.197 , Out:   0.000#   2.952/   4.194f
- 
+
 
 
  ######################################################################################################################
@@ -210,8 +211,8 @@
    S-matrix    3 =    0.00396  -0.00397 for L=    5, J=    5.0 channel on core I =   3.5 from L=    1,  Acc. loss =  1.2 D.
        1.5  0.95484878  0.01431842i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     1.5-/ 1 @ 1 =   6.802 , Out:   0.000#   4.072/   6.798f
- 
- Allocate arrays for            4  channels, of which            4  need wfs.
+
+ Allocate arrays for  4  channels, of which  4  need wfs.
 
 
  ######################################################################################################################
@@ -228,7 +229,7 @@
    S-matrix    4 =    0.00268  -0.00394 for L=    6, J=    6.0 channel on core I =   3.5 from L=    2,  Acc. loss =  1.4 D.
        2.5  0.97235936  0.01373509i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     2.5+/ 2 @ 1 =   6.295 , Out:   0.000#   4.954/   6.290f
- 
+
 
 
  ######################################################################################################################
@@ -245,8 +246,8 @@
    S-matrix    4 =   -0.00121   0.00154 for L=    5, J=    5.0 channel on core I =   3.5 from L=    3,  Acc. loss =  1.0 D.
        2.5  0.98346055  0.00845750i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     2.5-/ 3 @ 1 =   3.793 , Out:   0.000#   2.105/   3.791f
- 
- Allocate arrays for            5  channels, of which            5  need wfs.
+
+ Allocate arrays for  5  channels, of which  5  need wfs.
 
 
  ######################################################################################################################
@@ -264,7 +265,7 @@
    S-matrix    5 =   -0.00059   0.00112 for L=    6, J=    6.0 channel on core I =   3.5 from L=    4,  Acc. loss =  1.1 D.
        3.5  0.99282528  0.00492580i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     3.5+/ 4 @ 1 =   2.205 , Out:   0.000#   1.539/   2.204f
- 
+
 
 
  ######################################################################################################################
@@ -282,7 +283,7 @@
    S-matrix    5 =    0.00131  -0.00282 for L=    7, J=    7.0 channel on core I =   3.5 from L=    3,  Acc. loss =  1.4 D.
        3.5  0.98346055  0.00845750i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     3.5-/ 3 @ 1 =   5.057 , Out:   0.000#   3.096/   5.054f
- 
+
 
 
  ######################################################################################################################
@@ -300,7 +301,7 @@
    S-matrix    5 =    0.00052  -0.00190 for L=    8, J=    8.0 channel on core I =   3.5 from L=    4,  Acc. loss =  1.4 D.
        4.5  0.99282528  0.00492580i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     4.5+/ 4 @ 1 =   2.756 , Out:   0.000#   1.789/   2.755f
- 
+
 
 
  ######################################################################################################################
@@ -318,7 +319,7 @@
    S-matrix    5 =   -0.00021   0.00065 for L=    7, J=    7.0 channel on core I =   3.5 from L=    5,  Acc. loss =  1.1 D.
        4.5  0.99687743  0.00213793i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     4.5-/ 5 @ 1 =   1.203 , Out:   0.000#   0.690/   1.203f
- 
+
 
 
  ######################################################################################################################
@@ -336,7 +337,7 @@
    S-matrix    5 =   -0.00006   0.00035 for L=    8, J=    8.0 channel on core I =   3.5 from L=    6,  Acc. loss =  1.0 D.
        5.5  0.99883843  0.00082625i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     5.5+/ 6 @ 1 =   0.538 , Out:   0.000#   0.297/   0.538f
- 
+
 
 
  ######################################################################################################################
@@ -354,7 +355,7 @@
    S-matrix    5 =    0.00017  -0.00105 for L=    9, J=    9.0 channel on core I =   3.5 from L=    5,  Acc. loss =  1.0 D.
        5.5  0.99687743  0.00213793i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     5.5-/ 5 @ 1 =   1.444 , Out:   0.000#   0.702/   1.443f
- 
+
 
 
  ######################################################################################################################
@@ -372,7 +373,7 @@
    S-matrix    5 =    0.00004  -0.00055 for L=   10, J=   10.0 channel on core I =   3.5 from L=    6,  Acc. loss =  2.0 D.
        6.5  0.99883843  0.00082625i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     6.5+/ 6 @ 1 =   0.628 , Out:   0.000#   0.249/   0.627f
- 
+
 
 
  ######################################################################################################################
@@ -390,7 +391,7 @@
    S-matrix    5 =   -0.00002   0.00017 for L=    9, J=    9.0 channel on core I =   3.5 from L=    7,  Acc. loss =  0.6 D.
        6.5  0.99955718  0.00027287i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     6.5-/ 7 @ 1 =   0.239 , Out:   0.000#   0.097/   0.239f
- 
+
 
 
  ######################################################################################################################
@@ -408,7 +409,7 @@
    S-matrix    5 =   -0.00000   0.00008 for L=   10, J=   10.0 channel on core I =   3.5 from L=    8,  Acc. loss =  1.5 D.
        7.5  0.99983741  0.00008375i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     7.5+/ 8 @ 1 =   0.100 , Out:   0.000#   0.028/   0.100f
- 
+
 
 
  ######################################################################################################################
@@ -426,7 +427,7 @@
    S-matrix    5 =    0.00001  -0.00027 for L=   11, J=   11.0 channel on core I =   3.5 from L=    7,  Acc. loss =  2.4 D.
        7.5  0.99955718  0.00027287i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     7.5-/ 7 @ 1 =   0.274 , Out:   0.000#   0.072/   0.273f
- 
+
 
 
  ######################################################################################################################
@@ -444,7 +445,7 @@
    S-matrix    5 =    0.00000  -0.00013 for L=   12, J=   12.0 channel on core I =   3.5 from L=    8,  Acc. loss =  2.6 D.
        8.5  0.99983741  0.00008375i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     8.5+/ 8 @ 1 =   0.113 , Out:   0.000#   0.019/   0.113f
- 
+
 
 
  ######################################################################################################################
@@ -462,7 +463,7 @@
    S-matrix    5 =   -0.00000   0.00003 for L=   11, J=   11.0 channel on core I =   3.5 from L=    9,  Acc. loss =  1.9 D.
        8.5  0.99994044  0.00002402i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     8.5-/ 9 @ 1 =   0.041 , Out:   0.000#   7.109#   0.041f
- 
+
 
 
  ######################################################################################################################
@@ -480,7 +481,7 @@
    S-matrix    5 =   -0.00000   0.00001 for L=   12, J=   12.0 channel on core I =   3.5 from L=   10,  Acc. loss =  2.0 D.
        9.5  0.99997861  0.00000664i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     9.5+/10 @ 1 =   0.017 , Out:   0.000#   1.601#   0.017f
- 
+
 
 
  ######################################################################################################################
@@ -498,7 +499,7 @@
    S-matrix    5 =    0.00000  -0.00006 for L=   13, J=   13.0 channel on core I =   3.5 from L=    9,  Acc. loss =  2.6 D.
        9.5  0.99994044  0.00002402i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec     9.5-/ 9 @ 1 =   0.046 , Out:   0.000#   4.252#   0.046f
- 
+
 
 
  ######################################################################################################################
@@ -516,7 +517,7 @@
    S-matrix    5 =    0.00000  -0.00002 for L=   14, J=   14.0 channel on core I =   3.5 from L=   10,  Acc. loss =  2.2 D.
       10.5  0.99997861  0.00000664i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec    10.5+/10 @ 1 =   0.018 , Out:   0.000#   0.863#   0.018f
- 
+
 
 
  ######################################################################################################################
@@ -534,8 +535,8 @@
    S-matrix    5 =   -0.00000   0.00001 for L=   13, J=   13.0 channel on core I =   3.5 from L=   11,  Acc. loss =  2.0 D.
       10.5  0.99999246  0.00000177i: elastic S-matrix  @@      0.00  0   0 F  0
  Reaction Xsec    10.5-/11 @ 1 =   6.404/, Out:   0.000#   0.327#   0.006f
- 
- Finished all CC sets @   4.8667997E-02
+
+ Finished all CC sets @  0.069582
 0CUMULATIVE REACTION cross section                 =   42.95725  <L> =     2.56  <L**2> =      9.2
 0CUMULATIVE outgoing cross sections in partition 1 :    0.00000
 0CUMULATIVE outgoing cross sections in partition 2 :    0.02732
@@ -581,7 +582,6 @@
 +                                         /R =   9.3328E-01
    146.00 deg.: X-S =   126.281265 mb/sr,
 +                                         /R =   9.2794E-01
-                                           Integrated 3578.8339 mb, over [  66.000, 146.000] at     5.8900 MeV 
 
  CROSS SECTIONS FOR OUTGOING ALPHA    & I-135    in state #   1 with spins & parities 0.0  + &  3.5  +;  0
 
@@ -603,8 +603,7 @@
    136.00 deg.: X-S =     0.004924 mb/sr,
    141.00 deg.: X-S =     0.005121 mb/sr,
    146.00 deg.: X-S =     0.005288 mb/sr,
-                                           Integrated    0.0219 mb, over [  66.000, 146.000] at     5.8900 MeV 
- Finished all xsecs @   4.9980000E-02
+ Finished all xsecs @  0.071495004
 
   The following files have been created:
    3:local copy of User input.            6:standard output.                   
@@ -638,4 +637,4 @@
  1: Recommended RNL: non-local width >   3.20 cf:   5.00 fm: OK      
     Recommended CENTRE: centration   ~   0.40 cf:   0.80 fm
 
- Total CPU  0 time =       0.05 seconds
+ Total CPU  0 time =       0.07 seconds

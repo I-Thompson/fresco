@@ -6,11 +6,12 @@
 #   QSUB
 #cd $TMPDIR
 \rm fort.16
+echo Running on `hostname` at `date`
 ln -s be11.xsec fort.16
 ln -s be11.fusl fort.56
 cat > data.$$ << EOF
 Simple  11Be + 197Au Coulex of 1/2- at the barrier
-0.050    -50.   0.25    0.025   1.5      -0.00
+0.040    -50.   0.25    0.025   1.5      -0.00
 340.0   0.001   1000.0  100.0
   0.1500 -0.001  F     1  10300.  201300                
 1  1.00 180.    1.00
