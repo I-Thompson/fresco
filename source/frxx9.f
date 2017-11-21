@@ -1,13 +1,6 @@
 !***********************************************************************
 !     
-!    Copyright (c) 2012, Lawrence Livermore National Security, LLC.
-!                        Produced at the Lawrence Livermore National
-!                        Laboratory.
-!                        Written by Ian Thompson, I-Thompson@llnl.gov
-!     
-!    LLNL-CODE-XXXXX All rights reserved.
-!
-!    Copyright 2012, I.J. Thompson
+!    Copyright 2017, I.J. Thompson
 !     
 !    This file is part of FRESCO.
 !
@@ -26,35 +19,12 @@
 !     
 !    OUR NOTICE AND TERMS AND CONDITIONS OF THE GNU GENERAL PUBLIC
 !    LICENSE
-!     
-!    Our Preamble Notice
 !
-!      A. This notice is required to be provided under our contract
-!         with the U.S. Department of Energy (DOE). This work was
-!         produced at the Lawrence Livermore National Laboratory under
-!         Contract No. DE-AC52-07NA27344 with the DOE.
-!      B. Neither the United States Government nor Lawrence Livermore
-!         National Security, LLC nor any of their employees, makes any
-!         warranty, express or implied, or assumes any liability or
-!         responsibility for the accuracy, completeness, or usefulness
-!         of any information, apparatus, product, or process disclosed,
-!         or represents that its use would not infringe privately-owned
-!         rights.
-!      C. Also, reference herein to any specific commercial products,
-!         process, or services by trade name, trademark, manufacturer
-!         or otherwise does not necessarily constitute or imply its
-!         endorsement, recommendation, or favoring by the United States
-!         Government or Lawrence Livermore National Security, LLC. The
-!         views and opinions of authors expressed herein do not
-!         necessarily state or reflect those of the United States
-!         Government or Lawrence Livermore National Security, LLC, and
-!         shall not be used for advertising or product endorsement
-!         purposes.
-!        
 !    The precise terms and conditions for copying, distribution and
 !    modification are contained in the file COPYING.
-!        
+!
 !***********************************************************************
+
 *****FRXX9*************************************************************
       SUBROUTINE WHIT(HETA,R,XK,E,LL,F,FD,IE)
 C
