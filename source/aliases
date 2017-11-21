@@ -59,3 +59,4 @@
 setenv FRESCOLIB ~/bin/`arch`
 set path=($path $FRESCOLIB)
 alias run	'chmod +x \#* ; nohup \!* >& \!*.out &'
+alias go	'chmod +x \#* ; nohup \!* >& \!*.out '
