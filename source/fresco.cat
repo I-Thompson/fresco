@@ -1,28 +1,28 @@
-!***********************************************************************
-!     
-!    Copyright 2017, I.J. Thompson
-!     
-!    This file is part of FRESCO.
-!
-!    FRESCO is free software: you can redistribute it and/or modify it
-!    under the terms of the GNU General Public License as published by
-!    the Free Software Foundation, either version 3 of the License, or
-!    (at your option) any later version.
-!     
-!    FRESCO is distributed in the hope that it will be useful, but
-!    WITHOUT ANY WARRANTY; without even the implied warranty of
-!    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-!    GNU General Public License for more details.
-!     
-!    You should have received a copy of the GNU General Public License
-!    along with FRESCO. If not, see <http://www.gnu.org/licenses/>.
-!     
-!    OUR NOTICE AND TERMS AND CONDITIONS OF THE GNU GENERAL PUBLIC
-!    LICENSE
-!
-!    The precise terms and conditions for copying, distribution and
-!    modification are contained in the file COPYING.
-!
-!***********************************************************************
+#***********************************************************************
+#     
+#    Copyright 2017, I.J. Thompson
+#     
+#    This file is part of FRESCO.
+#
+#    FRESCO is free software: you can redistribute it and/or modify it
+#    under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#     
+#    FRESCO is distributed in the hope that it will be useful, but
+#    WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#     
+#    You should have received a copy of the GNU General Public License
+#    along with FRESCO. If not, see <http://www.gnu.org/licenses/>.
+#     
+#    OUR NOTICE AND TERMS AND CONDITIONS OF THE GNU GENERAL PUBLIC
+#    LICENSE
+#
+#    The precise terms and conditions for copying, distribution and
+#    modification are contained in the file COPYING.
+#
+#***********************************************************************
 
 cat	globx7.f fresco.f frxx2.f frxx3.f frxx4.f frxx5.f frxx7a.f frxx7b.f frxx8.f coulg.f frxx9.f frxx0.f cdc.f frxx1.f frxx10.f frxx11.f frxx13.f frxx16.f etime.f flush.f frxx17.f lapack.f
