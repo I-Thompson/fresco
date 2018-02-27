@@ -42,7 +42,7 @@
 	include 'frxx1.f'
 	include 'frxx10.f'
 	include 'frxx11.f'
-	include 'naglib.f'
+	include 'nagstub.f'
 	include 'frxx13.f'
 	include 'frxx16.f'
 !	include 'etime.f'

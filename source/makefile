@@ -20,6 +20,10 @@ FFLAGS = -O2 		# generic
 FC=g95
 F90C=$(FC)
 
+#   Use NAG library if available for 2D interpolationm of external 3-body wave functions
+# NAG = -lnag
+NAG = nagstub.o
+
 #               Select subroutine for CPU time:
 #TIME = etime.o		# Comment out for g95 versions >= 0.91
 #TIME = system_clock.o
@@ -29,7 +33,7 @@ TIME = cpu_time.o
 #FLUSH = 
  
 COMMON= globx7.o frxx0.o frxx1.o frxx2.o frxx3.o frxx4.o frxx5.o frxx6.o frxx7a.o \
-        frxx7b.o frxx8.o coulfg.o frxx9.o frxx10.o frxx11.o naglib.o \
+        frxx7b.o frxx8.o coulfg.o frxx9.o frxx10.o frxx11.o \
         frxx13.o frxx16.o frxx17.o lapack.o cdc.o   $(TIME) $(FLUSH)
 
 OBJ = $(COMMON) fresco.o 
@@ -40,16 +44,17 @@ install: fresco sfresco
 
 #	cp -fp fresco sfresco $(HOME)/bin/$(ARCH)
 
-fresco: $(OBJ)
-	$(FC) $(FFLAGS) -o fresco $(OBJ)
+fresco: $(OBJ)  nagstub.o
+	$(FC) $(FFLAGS) -o fresco $(OBJ) $(NAG)
 
 OBJS = $(COMMON) sfresco.o minuit.o
 
 sfresco: $(OBJS)
-	$(FC) $(FFLAGS) -o sfresco $(OBJS)
+	$(FC) $(FFLAGS) -o sfresco $(OBJS) $(NAG)
 
 frxx1.o: globx7.o frxx1.f usescatwf.f veffpot.f bpmfus.f
 frxx17.o: globx7.o frxx17.f usescatwf.f
+frxx3.o: globx7.o frxx3.f 
 
 .f.o:	globx7.o
 	$(FC) $(FORM) -c $(FFLAGS)  $<

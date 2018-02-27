@@ -29,7 +29,7 @@ TIME = cpu_time.o
 #FLUSH = 
  
 COMMON= globx7.o frxx0.o frxx1.o frxx2.o frxx3.o frxx4.o frxx5.o frxx6.o frxx7a.o \
-        frxx7b.o frxx8.o coulfg.o frxx9.o frxx10.o frxx11.o naglib.o \
+        frxx7b.o frxx8.o coulfg.o frxx9.o frxx10.o frxx11.o nagstub.o \
         frxx13.o frxx16.o frxx17.o lapack.o cdc.o   $(TIME) $(FLUSH)
 
 OBJ = $(COMMON) fresco.o 

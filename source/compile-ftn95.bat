@@ -39,7 +39,7 @@ ftn95 /fixed frxx8.f
 ftn95 /fixed frxx9.f
 ftn95 /fixed frxx10.f
 ftn95 /fixed frxx11.f
-ftn95 /fixed naglib.f
+ftn95 /fixed nagstub.f
 ftn95 /fixed frxx13.f
 ftn95 /fixed frxx16.f
 ftn95 /fixed frxx17.f
