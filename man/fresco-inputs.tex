@@ -686,11 +686,11 @@ If NEX $<$ 0, then cross sections for this partition are not printed.
 (repeat NEX times before the next Card 6) :
 \begin{verbatim}
 F4.1,I2,   I2,    F8.4,2F4.1, I4,1X,A1
-Jp,  COPYp,BANDp ,Ep,  Kp,Tp, KP,PWF,
+Jp,  COPYp,BANDp ,Ep,  KKp,Tp,KP,PWF,
 -------projectile state-----
 
 F4.1,I2,   I2,    F8.4,2F4.1,  2L2,         2I4
-Jt,  COPYt,BANDt ,Et,  Kt,Tt,  EXCH,IGNORE, INFAM,OUTFAM
+Jt,  COPYt,BANDt ,Et,  KKt,Tt, EXCH,IGNORE, INFAM,OUTFAM
 -----target state-----------
 \end{verbatim}
 
@@ -731,7 +731,7 @@ for only the original `copied' level.
 E     = excitation energy of state relative to ground state.
 
 \hangindent 7ex\hangafter 1
-K     = K of rotation band containing this state.
+KK    = K of rotation band containing this state.
 (If zero, use spin of first level in this band.)
 
 \hangindent 7ex\hangafter 1
