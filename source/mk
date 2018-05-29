@@ -63,11 +63,11 @@ if( ${ARCH} == 'ppc' ) then 	# Mac Powerpc
 endif
 if( ${ARCH} == 'i386' ) then 	# Mac Intel
       if( -X gfortran )     set COMP = 'gfortran'
-      if( -X ifort )   set COMP = 'ifort'
       if( -X f95 )     set COMP = 'f95'
       if( -X g95-0.93 )     set COMP = 'g95-0.93'
       if( -X g95 )     set COMP = 'g95'
 #      if( -X pgf90 )   set COMP = 'pgf90'
+      if( -X ifort )   set COMP = 'ifort'
       set PREF=${ARCH}
 endif
 if( ${ARCH} == 'sun4' || ${ARCH} == 'sun4u' ) then 	# Sun sparc

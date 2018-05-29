@@ -162,8 +162,8 @@ C    ---------
 C
 C    INCOMING ENERGIES
 C    -----------------
-      REAL*8 K(MXP,MXX),ETA(MXP,MXX),ETOTAL,ECMC,ENLAB,EOFF,ENCOM,
-     X     RMK,RMKD,CFG(MAXMUL,4),DE,ELAST,CSIG(LMAX1,MXPEX)
+      REAL*8 K(MXP,MXX),ETA(MXP,MXX),ETOTAL,ECMC(MXP,MXX),ENLAB,EOFF,
+     X     ENCOM,RMK,RMKD,CFG(MAXMUL,4),DE,ELAST,CSIG(LMAX1,MXPEX)
       REAL*8 JTOTAL,JAP,JSWITCH,JAL,JN,LJMAX,SSWITCH,JNLAST
 C
 C    ARRAYS FOR NON-LOCAL COUPLING FORM FACTORS
@@ -445,27 +445,28 @@ C    ----------------
       NA = NEX(IC)
       DO 145 IA=1,NA
       IT = ITC(IC,IA)
-         ECMC = ETOTAL + QVAL(IC) - ENEX(1,IC,IA) - ENEX(2,IC,IA)
+         ECMC(IC,IA) = ETOTAL+QVAL(IC) - ENEX(1,IC,IA)-ENEX(2,IC,IA)
 !@@
          IF(RMASS(IC).lt.1e-5) then
-            K(IC,IA) = ECMC/HBC
+            K(IC,IA) = ECMC(IC,IA)/HBC
          ELSE
-            EE = FMSCAL*RMASS(IC) * ABS(ECMC)
+            EE = FMSCAL*RMASS(IC) * ABS(ECMC(IC,IA))
             K(IC,IA) = SQRT(EE)
            if(rela/=' ') then
            if(rela=='a')
-     x      X = (1. + ECMC/(2.*AMU*RMASS(IC)))
-     x        / (1. + 2*ECMC/((MASS(1,IC)+MASS(2,IC))*AMU))
+     x      X = (1. + ECMC(IC,IA)/(2.*AMU*RMASS(IC)))
+     x        / (1. + 2*ECMC(IC,IA)/((MASS(1,IC)+MASS(2,IC))*AMU))
            if(rela=='b')
-     x      X = (1. + ECMC/(2.*AMU*MASS(1,IC)))
-     x        / (1. + ECMC/((MASS(1,IC)+MASS(2,IC))*AMU))
+     x      X = (1. + ECMC(IC,IA)/(2.*AMU*MASS(LIN,IC)))
+     x        / (1. + ECMC(IC,IA)/((MASS(1,IC)+MASS(2,IC))*AMU))
             K(IC,IA) = sqrt(EE*X)
+            ECMC(IC,IA) = ECMC(IC,IA)*X
            endif
          ENDIF
-!        K(IC,IA) = SQRT(FMSCAL*RMASS(IC) * ABS(ECMC) )
+!        K(IC,IA) = SQRT(FMSCAL*RMASS(IC) * ABS(ECMC(IC,IA)) )
 !@@
          ETA(IC,IA) = ETACNS * MASS(2+1,IC) * MASS(2+2,IC)
-     X                                      * SQRT(RMASS(IC)/ ABS(ECMC))
+     X                         * SQRT(RMASS(IC)/ ABS(ECMC(IC,IA)))
         if(IC.eq.PEL.and.IA.eq.EXL) then
          if(mod(PLANE,2)==1) ETA(IC,IA) = 0.  ! elastic channel
         else
@@ -543,11 +544,10 @@ C    -----------------
       DO 160 IA=1,NA
       IT = ITC(IC,IA)
 !!       if(RMASS(IC).lt.1e-5) go to 160
-         ECMC = ETOTAL + QVAL(IC) - ENEX(1,IC,IA) - ENEX(2,IC,IA)
          RMK = (M-1)*HP(IC) * K(IC,IA)
 	 if(DERIV) RMK = (MRM-1)*HP(IC) * K(IC,IA)
          RMKD = (MD-1)*HP(IC)  * K(IC,IA)
-         IF(ECMC.GT.0.0) THEN
+         IF(ECMC(IC,IA).GT.0.0) THEN
          CALL PHASES(ETA(IC,IA),MAL1,CSIG(1,IT))
 !@       IF (NGAIL>=1) go to 160
           T = K(IC,IA)
@@ -592,7 +592,7 @@ C 151         CHL(L1,IT,2)= CMPLX(CG,CF)
 C              CLOSED CHANNELS:
         IE = 0
          R = (M-1)*HP(IC)
-        CALL WHIT(ETA(IC,IA),R,K(IC,IA),ECMC,MAL1,CFG,CFG(1,2),IE)
+      CALL WHIT(ETA(IC,IA),R,K(IC,IA),ECMC(IC,IA),MAL1,CFG,CFG(1,2),IE)
            DO L1=1,MAL1
               CSIG(L1,IT) = 0.0
               CHL(L1,IT,1) = dcmplx(0d0,CFG(L1,1))
@@ -603,7 +603,7 @@ C              CLOSED CHANNELS:
 	   ENDDO
 	else
          R = (MD-1)*HP(IC)
-        CALL WHIT(ETA(IC,IA),R,K(IC,IA),ECMC,MAL1,CFG,CFG(1,2),IE)
+      CALL WHIT(ETA(IC,IA),R,K(IC,IA),ECMC(IC,IA),MAL1,CFG,CFG(1,2),IE)
            DO L1=1,MAL1
   	    CHL(L1,IT,2)= dcmplx(0d0,CFG(L1,1))
 	    enddo
@@ -924,7 +924,7 @@ C    ----------------------------------------------------------------
 !#	write(48,*) 'Makeset: NFDEC = ',NFDEC,N,MAXB,NICH,' proceed'
 
       CALL CCSET(JTOTAL,PARITY,ETOTAL,JTMIN,KINTL,
-     X        NEX,NCHAN,GIVEXS,QVAL,ENEX,PEL,EXL,LMAX,JEX,ECM,
+     X        NEX,NCHAN,GIVEXS,QVAL,ENEX,PEL,EXL,LMAX,JEX,ECM,ECMC,
      X        LVAL,JVAL,PART,EXCIT,COPY,JPROJ,JTARG,CUTL,CUTR,CUTOFF,
      X        HP,RMASS,INCOME,BLOCKD,LUSED,MAL1,LJMAX,
      X        MINTL,INITL,ITC,IBLOCK,IEX,NCH,NCHPART,CHBASE,
@@ -1786,8 +1786,7 @@ C   Store best SMAT in SOMA(*,2) and wfns in file 18
              IC = PART(C,1)
              IA = EXCIT(C,1)
              IT = ITC(IC,IA)
-             ECMC = ETOTAL + QVAL(IC) - ENEX(1,IC,IA) - ENEX(2,IC,IA)
-          IF(ECMC .GT. 0.0) THEN
+          IF(ECMC(IC,IA) .GT. 0.0) THEN
           AMDSQS = ABS(SMAT(C))**2
           IF(C.EQ.EL) AMDSQS = 1 - AMDSQS
 !@@
@@ -2028,8 +2027,7 @@ C                next JTOTAL :
   730 CONTINUE
 C                next JBLOCK :
   740 CONTINUE
-         ECMC = ETOTAL + QVAL(PEL) - ENEX(1,PEL,EXL) - ENEX(2,PEL,EXL)
-	  !   if(ECMC.lt.0) go to 948
+	  !   if(ECMC(PEL,EXL).lt.0) go to 948
           T = TM(I)
   750 continue
       REWIND 10
@@ -2307,8 +2305,7 @@ C
      X I4,' with spins & parities',F4.1,1X,A2,' &',F5.1,1X,A2,';',i3/)
          IF(DRY .AND..NOT.(IC.EQ.PEL .AND. IA.EQ.EXL)) GO TO 775
          IF(.NOT.GIVEXS(IC)) GO TO 775
-            ECMC = ETOTAL + QVAL(IC) - ENEX(1,IC,IA) - ENEX(2,IC,IA)
-         IF(ECMC .LE. 0.0) GO TO 775
+         IF(ECMC(IC,IA) .LE. 0.0) GO TO 775
          IF(BAND(1,IC,IA)*BAND(2,IC,IA).EQ.0) GO TO 775
          IP = SIGN(1,BAND(1,IC,IA))
          MAXPLM = max(1,nint(JEX(1,IC,IA)+JEX(2,IC,IA)+
@@ -2338,7 +2335,7 @@ C
      X           IBIN(IA),ENEX(1,IC,IA),PI,HEADNG,IOFAM(1,IC,IA),
      X		 IOFAM(2,IC,IA),LCROSS,LFAM,LXSEC,CHSIGN(IA),
      X           ETOTAL-EOFF,MASS(LIN,LAB),MASS(3-LIN,LAB),
-     X           ECMC,MASS(LIN,IC),MASS(3-LIN,IC),LEG,MAXPLM,
+     X           ECMC(IC,IA),MASS(LIN,IC),MASS(3-LIN,IC),LEG,MAXPLM,
      x           DSPINS,DMULTIES,NMULTIES,DLEVEL,DNAME)
 	call flush(16)
 C

@@ -43,7 +43,6 @@ C                          local potential FNC from just above)
          VPOT(1:N,1) = VPOT(1:N,1)+ELCOEF(IF)*FORMF(1:N,IF)
 	  endif
   860   CONTINUE
-      ECMC = ETOTAL+QVAL(PEL)-ENEX(1,PEL,EXL)-ENEX(2,PEL,EXL)
 C***********************************************************************
 C    Use this R1 to distinguish interior from exterior regions
 C                 (full fusion & none, respectively)
@@ -72,7 +71,7 @@ C     Print out Polarisation Potential for latter use:
      X          ' Elastic Channel Potential')
         IF(C1.EQ.2) WRITE(KO,*) 'Including CRC local equivalent potentia
      Xl.'
-        WRITE(KO,864) DBLE(ECMC),R1
+        WRITE(KO,864) ECMC(PEL,EXL),R1
 864     FORMAT(/' Incident energy (cm) =',F8.3,'. Fusion inside radius o
      Xf',F8.3,' fm.'/)
         IMA = R1/HP(PEL) + 1.5
@@ -89,7 +88,7 @@ C        IF(ABS(BPM).GE.3)  WRITE(6,680) (VPOT(I,C1),I=1,M)
            RSO = 0.0
            DO 870 I=M,IMA,-1
             R = (I-1)*HP(PEL)
-            S = VPOT(I,C1) + T/R**2 - ECMC
+            S = VPOT(I,C1) + T/R**2 - ECMC(PEL,EXL)
             RS = DBLE(S)
       		IF(L.le.-11.and.BPM>1) 
      x	 WRITE(KO,*) 'I,RS,RSO,RTURN2 =',I,RS,RSO,RTURN2,EKL1

@@ -1551,7 +1551,7 @@ C                                            2nd ORDER PROJECTILE AND/OR TARGET
       END
 
       SUBROUTINE CCSET(JTOTAL,PARITY,ETOTAL,JTMIN,KINTL,
-     X        NEX,NCHAN,GIVEXS,QVAL,ENEX,PEL,EXL,LMAX,JEX,ECM,
+     X        NEX,NCHAN,GIVEXS,QVAL,ENEX,PEL,EXL,LMAX,JEX,ECM,ECMC,
      X        LVAL,JVAL,PART,EXCIT,COPY,JPROJ,JTARG,CUTL,CUTR,CUTOFF,HP,
      X        RMASS,INCOME,BLOCKD,LUSED,MAL1,LJMAX,
      X        MINTL,INITL,ITC,ITL,IEX,NCH,NCHPART,CHBASE,
@@ -1583,7 +1583,7 @@ C    INCOMING ENERGIES
 C    -----------------
       REAL*8 JVAL(MAXCH),JPROJ(MAXCH),JTARG(MAXCH),
      X       JTOTAL,JAP,JTMIN,JN,ECM(MAXCH,3),LJMAX,
-     X       K(MXP,MXX),ETA(MXP,MXX),ETOTAL,ECMC,RMK
+     X  K(MXP,MXX),ETA(MXP,MXX),ETOTAL,ECMC(MXP,MXX),RMK
 C
 C
       CHARACTER*8 NAME(2,MXP+1)
@@ -1619,7 +1619,6 @@ C     if(CUTR.lt.0.) CUTOFF = max(CUTOFF,int((RTURN+CUTR)/HP(1)))
 	 DROPPED = DROPPED+1
 	 go to 240
 	 endif
-      ECMC = ETOTAL + QVAL(IC) - ENEX(1,IC,IA) - ENEX(2,IC,IA)
       LPAR = PARITY *  SIGN(1, BAND(1,IC,IA)*BAND(2,IC,IA) )
       ITP = 2.*JEX(1,IC,IA) + 1.5
       JN = JEX(1,IC,IA) + JEX(2,IC,IA)
@@ -1644,7 +1643,7 @@ C-----------------------------------------------------------
          IF(FAIL3(JAP,JEX(2,IC,IA),JTOTAL)) GO TO 220
       C = C + 1
       IF(C.GT.MAXCH) GO TO 220
-      ECM(C,1) = ECMC
+      ECM(C,1) = ECMC(IC,IA)
       LVAL(C)= LAP
       JVAL(C)= JAP
       PART(C,1)= IC
@@ -1665,7 +1664,7 @@ C-----------------------------------------------------------
       JTARG(C)= JEX(2,IC,IA)
 !@@
       IF(RMASS(IC).lt.1e-5) then   ! coefficient of second derivative
-          ECM(C,2) = - HBC**2 / ECMC
+          ECM(C,2) = - HBC**2 / ECMC(IC,IA)
       ELSE 
           ECM(C,2) = -1.0 / (FMSCAL * RMASS(IC))
       ENDIF
