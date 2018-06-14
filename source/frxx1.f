@@ -1072,11 +1072,12 @@ C                       Take K=7 as an inelastic monopole
           KK = 0
        ELSE if(KK==0) then
 C			Normal KK=0 should exclude off-diagonal monopoles
-	  if(IA/=IB) GO TO 300
+	  if(C/=C2) GO TO 300
+           T = 1.0
        ENDIF
 C
-      IF(JFT>=12.and.JFT<=13) THEN
-C                           LOOK UP TABLE OF ALLOWED COUPLINGS :
+      IF(JFT>=12.and.JFT<=13.and.PTYPE(3,JF)>0) THEN
+C                           LOOK UP TABLE OF ALLOWED COUPLINGS for KK>0 or off-diagonal monopole (7)
          T = 0.0
          DO 294 IX=1,NIX
            IF(MATRIX(1,IX).NE.EXCIT(C,JFT-10) .OR.
