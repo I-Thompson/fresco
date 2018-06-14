@@ -1073,7 +1073,8 @@ C                       Take K=7 as an inelastic monopole
        ELSE if(KK==0) then
 C			Normal KK=0 should exclude off-diagonal monopoles
 	  if(C/=C2) GO TO 300
-           T = 1.0
+           if(JFT==12) T = sqrt(2*JPROJ(C)+1.)   ! projectile couplings
+           if(JFT==13) T = sqrt(2*JTARG(C)+1.)   ! target couplings
        ENDIF
 C
       IF(JFT>=12.and.JFT<=13.and.PTYPE(3,JF)>0) THEN
