@@ -975,6 +975,96 @@ if reasonable):
       6 : Vol Gaussian = 12 * P1 * exp(-RH*RH)\\
       7,8,9 : Read from cards, as above.
 
+\medskip
+
+\hangindent 5ex\hangafter 1
+If SHAPE $\geq$ 30, then use SHAPE-30, and define a
+$J$- or  $L$-dependent potential by a factor defined
+by reading in Card 10.5:
+\begin{verbatim}
+Card 10.5    4X,A1,I3,2F8.4       JL,LSHAPE,XLVARY,ALVARY
+\end{verbatim}
+so that the potential is multiplied by a form factor:
+
+\hangindent 9ex\hangafter 1
+LSHAPE=0 : Woods-Saxon  = 1 / (1 + 1/E), \\
+      =1 : WS squared   = 1 / (1 + 1/E)$^2$\\
+      =2 : Gaussian     = exp(-RH$^2$), \\
+where X=L (for JL=`L'), X=J (JL=`J'),
+RH = (X-XLVARY)/ALVARY, and E=exp(-RH).
+
+\medskip
+
+\hangindent 5ex\hangafter 1
+If SHAPE $\geq$ 10 and $<$ 19, then use SHAPE-10, and write out the
+resulting potential to {\em Output file 25} in FORMAT(6E12.4):
+a form suitable for subsequent reading by a SHAPE $\geq$ 20.
+
+\medskip
+
+\hangindent 5ex\hangafter 1
+If SHAPE $\geq$ 20 and $<$ 30, then a $J_{T}/\pi$-dependent
+potential is defined.
+\\
+For each subsequent coupled-channels set with total angular momentum
+$J_{T}$, a form factor is read into this potential from
+{\em Input file \# SHAPE}, reading M = RMATCH/HCM+1 complex numbers
+in FORMAT(6E12.4) from the
+file as a random-access set of card images, with (M-1)/3+1 card images
+for each form factor.
+\\
+For each CC set, form factor number
+$int(J_{T})+1$ (for SHAPE $\geq$ 24) or
+1/2 for +/- parity (for SHAPE $<$ 24) is read.
+
+\hangindent 5ex\hangafter 1
+If SHAPE = 40, then a $\pi$-dependent potential is defined:
+use KP = P1 for + parity CC sets, and P2 for - parity.
+
+\hangindent 5ex\hangafter 1
+If SHAPE = 41, then a L-dependent potential is defined:
+use KP = P(L+1) for L=0--5, and P0 for L$\geq$6.
+
+\hangindent 5ex\hangafter 1
+If SHAPE = 42, then a J-dependent potential is defined:
+use KP = P(J+1) for J=0--5, and P0 for J$\geq$6, with J = int($J_T$).
+
+\hangindent 5ex\hangafter 1
+If SHAPE = 43, then a L-parity-dependent potential is defined:
+use KP = P1 for L even, and P2 for L odd.
+\\
+There need only be one Card 9 or 10 for 40 $\leq$ SHAPE$\leq$43. The values of TYPE
+and P2-P7 are ignored. No files are used. Choices are listed in fort.48
+
+\hangindent 5ex\hangafter 1
+If SHAPE = 45, then an energy-dependent potential is defined, using linear interpolation of the potential forms.
+The nodes are KP=P1 at energy P2, P3 at energy P4, etc., up to KP=P9 at energy P10 (MeV).
+
+
+\hangindent 0ex\hangafter 1
+\bigskip
+{\em Nucleon - nucleon Potentials}
+\bigskip
+
+\hangindent 9ex\hangafter 1
+The SHAPEs for the nucleon-nucleon SSC (C) potential (TYPE = 8) are
+taken from the subroutine SSCC in FRESCO.
+The input NUM is the number of angular momentum components stored,
+using the order
+\\
+ $^1S_{0}$, $^3S_{1}$, $^3S-^3D$, $^3D_{1}$, $^1P_{1}$, $^3P_{0}$
+$^3P_{1}$, $^3P_2$, $^3P-^3F$, $^3F_2$, $^1D_2$, and $^3D_2$
+\\
+Note that TYPEs 8 \& 9 can only be used in KIND = 1 ($LS$-coupled)
+single-particle states.
+\bigskip
+
+\hangindent 9ex\hangafter 1
+The SHAPEs for the user's nucleon-nucleon potential (TYPE = 9) are
+taken from the subroutine NNPOT, with NUM the same meaning as above.
+
+
+
 \hangindent 0ex\hangafter 1
 \bigskip
 {\em Deformations}
@@ -2283,7 +2373,7 @@ and the oxygen core being folded together to give a diagonal Watanabe
 potential for elastic $^{19}$F scattering as well as the couplings to the
 inelastic 1/2+ state.
 These elastic and inelastic channels are coupled together to all orders,
-then a finite-range transfer step is calculated for the ê$^{16}$O + ê$^{31}$P channel,
+then a finite-range transfer step is calculated for the $^{16}$O + $^{31}$P channel,
 thus performing a CCBA calculation.
 
 The Card types and line numbers added here only for convenience:
