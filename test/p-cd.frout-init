@@ -1,4 +1,4 @@
- FRESCO - FRES 3.0: Coupled Reaction Channels
+ FRESCO - FRES 3.2: Coupled Reaction Channels
 
  p + 112Cd elastic                                                               
 
@@ -8,13 +8,13 @@
  Non - locality width is    101 * 0.1000 fm., Maximum of  10.00 fm., Centred at  0.00 fm.
  2-Nucleon Separation of      0 * 1.0000 fm., Maximum of   0.00 fm., Minimum at  0.00 fm.
  Maximum single particle bins of 20.0000 fm.
-               M,Mint =  201 201
+               M,Mint =          201         201
 
 
  Range of total J is     0.0 <= J <=   200.0 (at least     0.0) and Absorbtion =>     0.0100 mb.
  Dry Run = F, CC set limits =  0  0, Relativistic kinematics =  , Both/Far/Near Analyses =  1
 
- Cross Sections (and up to T0 for 0=projectile) for Theta from   0.0 to 180.0 in steps of  2.0 degrees.  Coordinates = 0 (Mads)
+ Cross Sections (and up to T0 for 0=projectile) for Theta from   0.0 to 180.0 in steps of  2.0 degrees, DGAM=0,  Coordinates = 0 (Mads)
 
  Lower Radial Cutoff = maximum of -1.60*L*h &       0.0 fm.,  Lower Cutoff for Couplings =   0.0  fm.
 

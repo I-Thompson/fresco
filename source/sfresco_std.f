@@ -34,6 +34,7 @@
 	include 'frxx3.f'
 	include 'frxx4.f'
 	include 'frxx5.f'
+	include 'frxx6.f'
 	include 'frxx7a.f'
 	include 'frxx7b.f'
 	include 'frxx8.f'
@@ -48,3 +49,4 @@
 	include 'flush.f'
 	include 'frxx17.f'
 	include 'lapack.f'
+	include 'nagstub.f'
