@@ -1,0 +1,53 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+%\geometry{landscape}                		% Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{url}
+\usepackage{amssymb}
+
+\title{Structure overlaps}
+\author{Ian Thompson}
+\date{}							% Activate to display a given date or no date
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\begin{document}
+\maketitle
+%\section{}
+%\subsection{}
+
+
+\section{Cluster overlaps}
+
+Reactions involving the transfer of a cluster can either be treated as the
+movement of a single `particle', or more microscopically as a combination of
+simultaneous and sequential transfers.
+
+The bound states of clusters treated as one particle are commonly found in a
+Saxon-Woods potential with the same geometry parameters as are
+found for low-energy scattering of the same nuclei. The number of
+radial nodes is chosen by means of a shell-model counting of oscillator quanta,
+to accommodate the Pauli exclusion principle, as follows.
+
+Suppose that the valence nucleon shell has ${\cal N}_i =2 n_i + \ell_i$ quanta, that
+is ${\cal N}=1$ for the $p$-shell, 2 for the $sd$-shell, etc. If the transferred valence cluster is taken
+as composed of $v$ such nucleons, then the total energy of the cluster nucleons
+will be $v {\cal N}_i \hbar\omega$. If the {\em internal} cluster configuration has
+${\cal N}_{\rm int} = 2 n_{\rm int} + \ell_{\rm int}$ quanta (0 for $s$-shell clusters), then the
+cluster-core motion in partial wave $L$ has $N$ nodes where \index{radial nodes}
+\beq \label{cluster-q}
+   2N + L + {\cal N}_{\rm int} = v {\cal N}_i .
+\eeq
+Usually $L$ is fixed by the spin of the composite state, so $N$ may be
+determined.  Note that $N=0,1,\dots$ is the number of nodes {\em excluding} the
+origin.%
+\footnote{The {\tt NN} parameter for {\sc Fresco} bound states includes the
+origin, so ${\tt NN} = N + 1 \geq 1$. \index{Fresco!radial nodes}}%
+\index{overlap function|)}
+
+~ \\
+Section 5.3.3 from `Nuclear Reactions for Astrophysics',\\
+\url{http://www.fresco.org.uk/book/reactions.htm}
+
+
+\end{document}  
