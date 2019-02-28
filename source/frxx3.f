@@ -1329,9 +1329,11 @@ C
       SUBROUTINE SOURCE(INHOMG,PSI,N,H,NCH,IEX,FORMF,NF,FORMFR,CUTOFF,
      &  ICUTC,SIMPLE,ITNL,NLN,NLO,MR,NL,EMPTY,SAME,SH,WAVES,LVAL,
      &  MLT,SKIP,FED,NLC, CHNO,MLM,NICH,NAXICH,PTYPE,LOCFIL,
-     &  CLIST,NCLIST,NFLIST)
+     &  CLIST,NCLIST,NFLIST,GAM,M1GAM,M2GAM,EXCIT,PART) ! Modified by MGR & AMoro
+!     &  CLIST,NCLIST,NFLIST)
 	use parameters
 	use io
+       use fresco1, only: rela ! AMoro
       IMPLICIT REAL*8(A-H,O-Z)
       COMPLEX*16 PSI(MAXN,NICH),INHOMG(MAXN,MAXCH),FORMF(MAXM,MLOC),
      &      FORMFR(NF),
@@ -1342,6 +1344,11 @@ C
       REAL*8 H(NCH)
       LOGICAL ITNL,EMPTY(MAXCH),SAME(MAXCH),SKIP(MAXCH),NREV,NFOR,SH,
      &        SIMPLE(MAXCH),FFR,FED(MAXCH),CP,LOCFIL
+!MGR & AMoro ------------------------------------------------------------
+      INTEGER M1GAM, M2GAM
+      REAL*8 GAM(M1GAM,M2GAM)
+      INTEGER PART(NCH,3),EXCIT(NCH,3)
+!MGR & AMoro ------------------------------------------------------------     
       DATA EPS / 1E-12 /, CI / (0.0,1.0) /
 C
       DO 3 C=1,NCH
@@ -1471,14 +1478,38 @@ C        IF(SH.AND.FFR) CALL DISPLY(FNL,NLL,NLO,NLN,SCALE)
              I = (KMIN-1)*MR + II
             DO 29 K=KMIN,KMAX
              V = (-P2*EXF(K-1)+Q*EXF(K+2))*X + (P1*EXF(K)-P*EXF(K+1))*Y
+!            INHOMG(I,D) = INHOMG(I,D) + (V*PH) * PSI(I+JJ,C)
+!MGR & AMoro -------------------------------------------------------------
+!             write(*,*) 'Inserting gamma line 834'
+             if ((rela .eq. 'na').or.(rela .eq. '3d') .or.(rela.eq.'c')
+     & ) then
+!              write(*,*) 'rela ',rela
+             INHOMG(I,D) = INHOMG(I,D) + (V*PH) * PSI(I+JJ,C)
+     &        *GAM(PART(D,1),EXCIT(D,1)) !MGR include gammas
+             else
+!             write(*,*) 'rela ',rela
             INHOMG(I,D) = INHOMG(I,D) + (V*PH) * PSI(I+JJ,C)
+             endif
+!-----------------------------------------------------------------------    
 29           I = I + MR
           ELSE
             IF(II.EQ.1) CALL ECPAND(FNC,NLN,NLL,NLO,ECF,J,MLT)
              I = (KMIN-1)*MR + II
             DO 30 K=KMIN,KMAX
              S = (-P2*ECF(K-1)+Q*ECF(K+2))*X + (P1*ECF(K)-P*ECF(K+1))*Y
-            INHOMG(I,D) = INHOMG(I,D) + (S*PH) * PSI(I+JJ,C)
+!            INHOMG(I,D) = INHOMG(I,D) + (S*PH) * PSI(I+JJ,C)
+!MGR & AMoro --------------------------------------------------------------
+             
+
+             if ((rela .eq. 'na').or.(rela .eq. '3d') .or.(rela.eq.'og')
+     &       ) then
+
+             INHOMG(I,D) = INHOMG(I,D) + (S*PH) * PSI(I+JJ,C)
+     &        *GAM(PART(D,1),EXCIT(D,1)) !MGR include gammas
+             else
+             INHOMG(I,D) = INHOMG(I,D) + (S*PH) * PSI(I+JJ,C)
+             endif
+!-----------------------------------------------------------------------             
 30           I = I + MR
          ENDIF
 31      CONTINUE
@@ -1501,14 +1532,33 @@ C        IF(SH.AND.FFR) CALL DISPLY(FNL,NLL,NLO,NLN,SCALE)
              I = (KMIN-1)*MR + II - JJ
             DO 38 K=KMIN,KMAX
              V = (-P2*EXF(K-1)+Q*EXF(K+2))*X + (P1*EXF(K)-P*EXF(K+1))*Y
-            INHOMG(I,C) = INHOMG(I,C) + (V*CONJG(PH)) * PSI(I+JJ,D)
+!            INHOMG(I,C) = INHOMG(I,C) + (V*CONJG(PH)) * PSI(I+JJ,D)
+!MGR & AMoro -------------------------------------------------------------
+             if ((rela .eq. 'na').or.(rela .eq. '3d') .or.(rela.eq.'c')
+     &        ) then
+             INHOMG(I,C) = INHOMG(I,C) + (V*CONJG(PH)) * PSI(I+JJ,D)
+     &        *GAM(PART(C,1),EXCIT(C,1)) !MGR include gammas
+             else
+             INHOMG(I,C) = INHOMG(I,C) + (V*CONJG(PH)) * PSI(I+JJ,D)
+             endif
+!-----------------------------------------------------------------------             
 38           I = I + MR
           ELSE
             IF(II.EQ.1) CALL ECPAND(FNC,NLN,NLL,NLO,ECF,J,MLT)
              I = (KMIN-1)*MR + II - JJ
             DO 40 K=KMIN,KMAX
              S = (-P2*ECF(K-1)+Q*ECF(K+2))*X + (P1*ECF(K)-P*ECF(K+1))*Y
-            INHOMG(I,C) = INHOMG(I,C) + S * CONJG(PH) * PSI(I+JJ,D)
+!            INHOMG(I,C) = INHOMG(I,C) + S * CONJG(PH) * PSI(I+JJ,D)
+!MGR & AMoro ---------------------------------------------------------------
+             if ((rela .eq. 'na').or.(rela .eq. '3d') .or.(rela.eq.'c')
+     &       ) then
+!             write(*,*) 'Inserting gamma line 886'             
+             INHOMG(I,C) = INHOMG(I,C) + S * CONJG(PH) * PSI(I+JJ,D)
+     &       *GAM(PART(C,1),EXCIT(C,1)) !MGR include gammas
+             else
+             INHOMG(I,C) = INHOMG(I,C) + S * CONJG(PH) * PSI(I+JJ,D)
+             endif
+!-----------------------------------------------------------------------             
 40           I = I + MR
          ENDIF
 42    CONTINUE
@@ -2256,6 +2306,7 @@ C					ALLOWS SKIPS IF ZERO COUPLING
 	use parameters
 	use searchpar, only: final
 	use trace, only: smatl
+	use fresco1, only: rela,rener ! AMoro
       IMPLICIT REAL*8(A-H,O-Z)
 C
       INTEGER PEL,EXL,PARITY,SMATS,CHANS,C,ITC(MXP,MXX),EL,
@@ -2295,6 +2346,17 @@ C
          ELSE
              S = K(IC,IA)/RMASS(IC)/(K(PEL,EXL)/RMASS(PEL))
          ENDIF
+! AMoro & MGR
+         if ((rela.eq.'3d').or.(rela.eq.'na').or.(rela.eq.'c').or.
+     &    (rela.eq.'30').or.(rela.eq.'n0')) then
+!         write(0,*) 'Rescaling frxx3.f'
+         S=S*(RENER(PEL,EXL)/RENER(IC,IA))
+     &      *(RMASS(IC)/RMASS(PEL))
+!         write(*,*)'frxx3: xs scaled by',
+!     & (RENER(PEL,EXL)/RENER(IC,IA))
+!     &      *(RMASS(IC)/RMASS(PEL))
+         endif
+
 !	 S is v_out/v_in but for photons this is just
 !	      c/v_in for emission so since
 !	      v_in/c = h*K_in/(RMASS_in*c) 

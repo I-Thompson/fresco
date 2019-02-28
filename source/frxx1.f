@@ -133,7 +133,12 @@ C    -----------------
 	integer NJDONE,LL,JJ,I0,nbas,CHANSI,JF0,NFD,NEXK
 	integer LAST,J2LAST,J2,KNLAST
 	integer I1,I2,IX1,IX2,LAM1,LAM2
-        integer NJTOTAL,IJTOTAL
+	integer NJTOTAL,IJTOTAL
+! AMM --------------------------------------
+      real*8 rturnc
+      real*8 x1,ecmi,ecmf,triangle,mp,mt,ep,et,erel,mbig,msmall
+!-------------------------------------------
+
 C
 C    DEFINING THE MASS PARTITIONS AND THEIR EXCITED STATES
 C    -----------------------------------------------------
@@ -164,6 +169,7 @@ C    INCOMING ENERGIES
 C    -----------------
       REAL*8 K(MXP,MXX),ETA(MXP,MXX),ETOTAL,ECMC(MXP,MXX),ENLAB,EOFF,
      X     ENCOM,RMK,RMKD,CFG(MAXMUL,4),DE,ELAST,CSIG(LMAX1,MXPEX)
+      REAL*8 GAM(MXP,MXX)  ! AMoro
       REAL*8 JTOTAL,JAP,JSWITCH,JAL,JN,LJMAX,SSWITCH,JNLAST
 C
 C    ARRAYS FOR NON-LOCAL COUPLING FORM FACTORS
@@ -436,6 +442,11 @@ C
 C
 C    CHANNEL ENERGIES
 C    ----------------
+! ----------------------------- AMoro -------------------
+      if (.not.allocated(rener)) allocate(rener(mxp,mxx))
+      rener(:,:)=0
+! -------------------------------------------------------
+
       MAL1 = MIN(LMAX,INT(JTMAX+20.)) + 1
             XLMAX = MAL1 - 1
 	hktarg = min(hktarg,0.20d0)
@@ -443,9 +454,17 @@ C    ----------------
 	BEST = HCM
       DO 145 IC=1,NCHAN
       NA = NEX(IC)
+! AMoro
+      sinv=amu**2*(mass(1,lab) +mass(2,lab))**2
+     &   + 2*amu*mass(3-lin,lab)*enlab
+      ecmi=sqrt(sinv)-(mass(1,lab) +mass(2,lab))*amu- eoff ! total initial kinetic energy
+!      write(*,*) 'sqrt(sinv),Ecmi(rel),eoff=',sqrt(sinv),Ecmi,eoff
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
       DO 145 IA=1,NA
       IT = ITC(IC,IA)
          ECMC(IC,IA) = ETOTAL+QVAL(IC) - ENEX(1,IC,IA)-ENEX(2,IC,IA)
+	GAM(IC,IA) = 1.0
 !@@
          IF(RMASS(IC).lt.1e-5) then
             K(IC,IA) = ECMC(IC,IA)/HBC
@@ -461,6 +480,29 @@ C    ----------------
      x        / (1. + ECMC(IC,IA)/((MASS(1,IC)+MASS(2,IC))*AMU))
             K(IC,IA) = sqrt(EE*X)
             ECMC(IC,IA) = ECMC(IC,IA)*X
+! AMoro
+	  if (rela=='c'.or.rela=='3d') then
+       mp       =mass(1,ic)*amu+ENEX(1,IC,IA)
+       mt       =mass(2,ic)*amu+ENEX(2,IC,IA)
+!       ecmnr     =ecmi + QVAL(IC) - ENEX(1,IC,IA)-ENEX(2,IC,IA)
+       k(ic,ia) =sqrt(abs(triangle(sinv,mp**2,mt**2)))/2/sqrt(sinv)/hbc
+       X        =k(ic,ia)**2/ee
+       ep=(sinv + (mp**2-mt**2))/2./sqrt(sinv)      ! total energy of projectile in CM
+       et=(sinv - (mp**2-mt**2))/2./sqrt(sinv)      ! total energy of target     in CM
+       rener(ic,ia) = ep*et/(ep+et)/amu             ! reduced energy (amu)
+! Relatistic energy
+       erel = k(ic,ia)**2/(FMSCAL*rener(IC,ia))  ! 3D and LEA convention
+! Effective energy for Schrodinger-like equation
+       ecmc(ic,ia ) = k(ic,ia)**2/(FMSCAL*rmass(ic))
+
+       gam(ic,ia)= rener(ic,ia)/rmass(ic) ! Erel/mu_rel
+       eta(ic,ia)=gam(ic,ia)*fmscal*rmass(ic)*MASS(2+1,IC)*MASS(2+2,IC)
+     x   *coulcn/k(ic,ia)/2
+      endif ! 3d
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
            endif
          ENDIF
 !        K(IC,IA) = SQRT(FMSCAL*RMASS(IC) * ABS(ECMC(IC,IA)) )
@@ -1567,6 +1609,14 @@ c
 C
 	if(.not.rterms) then
 
+	if(rela /= '  ') then
+	  DO 85 C1=1,NCH
+	  DO 85 C2=1,NCH
+	  DO 85 NC=1,NCLIST(C1,C2)
+85	  CLIST(C1,C2,NC) = GAM(PART(C1,1),EXCIT(C1,1))*CLIST(C1,C2,NC)
+	endif
+
+
 C    SOLVING THE SET OF COUPLED CHANNELS FOR EACH INCOMING CHANNEL
 C    -------------------------------------------------------------
       REPEAT = .FALSE.
@@ -1845,7 +1895,8 @@ C
       CALL SOURCE(SRC,PSI,N,ECM(1,3),NCH,IEX,FORMF,NF,FORMF,CUTOFF,
      X  ICUTC,SIMPLE,.TRUE.,NLN,NLO,MR,NL,EMPTY,SAME,SHFL,
      X  WAVES,LVAL, MLT,SKIP,SKIP(1,2),NLC,CHNO,
-     X  MLM,NICH,MMXICH,PTYPE,LOCFIL,CLIST,NCLIST,NFLIST)
+     X  MLM,NICH,MMXICH,PTYPE,LOCFIL,CLIST,NCLIST,NFLIST,
+     X  GAM,mxp,mxx,EXCIT,PART)! MGR  & AMoro 
 C
       IF(NPRIOR.AND.ITNL.GT.1)
      X CALL RENO(SRC,PHI,N,ECM(1,3),NCH,CUTOFF,NLN,NLO,MR,MLM,1,
@@ -2447,4 +2498,12 @@ C              give warning of limits for Coulomb excitations:
       RETURN
 CUNI  DEBUG SUBCHK
       END
+
+c AMoro
+c Triangle function defined by eg Joachain (2.100)
+      function triangle(x,y,z)
+      implicit none
+      real*8 x,y,z,triangle
+      triangle=(x-y-z)**2-4*y*z
+      end function
 

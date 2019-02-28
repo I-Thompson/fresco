@@ -77,6 +77,8 @@
 	module fresco1
         character*100 headng
       	character*1 iso,rela
+        real*8 sinv ! AMoro
+        real*8,allocatable::rener(:,:) ! reduced energy (AMoro)
 	real*8 hcm,rmatch,hnl,rnl,centre,hnn,rnn,rmin,rasym,accrcy,rsp,
      X   switch,ajswtch,sinjmax,jtmin,jtmax,absend,erange,dk,hktarg,
      X   thmin,thmax,thinc,cutl,cutr,cutc,ips,jbord(8),elab(5),jleast
