@@ -441,7 +441,7 @@ C
 C                       Just read in wave functions from file NFL
         ADJ = 'FIL'
 !        VARY = 0.0
-	rlb = .true.; cmb = .false.
+	rlb = .true.; cmb = .false.; EIGEN=.true. ! only real for now
         GO TO 50
        ENDIF
 C                                          couplings

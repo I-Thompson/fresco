@@ -17,6 +17,7 @@ FFLAGS = -O2 		# generic
 #FFLAGS = -g
 #FFLAGS = -g  -C  	 				# generic debug for f90
 #FFLAGS = -g -check all -O0 -debug 			# debug for ifort
+FFLAGS = -g -fbacktrace -O0 -fcheck=all  		# debug for ifort
 FC=g95
 F90C=$(FC)
 
