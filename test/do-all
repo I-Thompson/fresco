@@ -12,8 +12,9 @@ go b8ex.job
 go e80f49b.job
 go li7p-EM.job
 fresco <  e80f49b-n.in > e80f49b-n.out
-fresco <  dex.in > dex.out
+fresco <  dex.frin > dex.out
 fresco <  dexcc.in > dexcc.out
+fresco <  dNi-cdcc-QR.in > dNi-cdcc-QR.out
 sfresco <  na.min > na.out
 sfresco <  ss.min > ss.out
 \rm for*.*

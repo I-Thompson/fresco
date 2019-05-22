@@ -98,7 +98,7 @@
 
 	written = .false.; written(3) = .true.
 1	write(6,1001) 
- 1001   format('SFRESCO - FRES 3.2: Search Coupled Reaction Channels'
+ 1001   format('SFRESCO - FRES 3.3: Search Coupled Reaction Channels'
      x          /)
 !
 !####### Read in search input

@@ -18,7 +18,7 @@ FFLAGS = -O2 		# generic
 #FFLAGS = -g  -C  	 				# generic debug for f90
 #FFLAGS = -g -check all -O0 -debug 			# debug for ifort
 #FFLAGS = -g -fbacktrace -O0 -fcheck=all  		# debug for ifort
-FC=g95
+FC=gfortran
 F90C=$(FC)
 
 #   Use NAG library if available for 2D interpolationm of external 3-body wave functions

@@ -25,7 +25,7 @@
 #
 #***********************************************************************
 
-mk g95 -k
-mk gfortran -k
-mk ifort -k
-#mk pgf90 -k
+mk gfortran -k -j 5
+mk ifort -k -j 5
+#mk pgf90 -k -j 5
+mk g95 -k -j 5

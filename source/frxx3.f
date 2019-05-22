@@ -36,6 +36,7 @@
 	use parameters
 	use drier
 	use searchpar, only: final
+      use fresco1,   only: rmorto,hort
       IMPLICIT REAL*8(A-H,O-Z)
 C
 C        SOLVE 'NEQ' COUPLED SCHROEDINGERS EQUATIONS
@@ -72,6 +73,8 @@ C               MINIMUM VECTOR LENGTH FOR EFFICIENT OPERATION.
      X           SKIP(MAXCH),FED(MAXCH),DO1,DO2,DO3,BFEED,BSKIP,LOCFIL,
      X           FCWFN,FJSWTCH
       AMD1(C) = ABS(DBLE(C)) + ABS(AIMAG(C))
+      complex*16 wdiag(neqs) ! AMM
+
 C
       NM1 = N-1
       NR = 1 + 2*NEQS
@@ -94,6 +97,12 @@ C     AL = 0.0
 !     NLIF = NICH*2 + IEX*NICH
       NLIF = NITS*NICH
 !      NVREQ = 2 * NN*NLIF  + 4*MAXB*MAXCH
+
+! AMM !!!!!!!!!!!!!!!!!!
+      norto=nint(hort/h(1))
+!      write(*,*)'hort,norto,rmorto=',hort,norto,rmorto
+!      write(*,'(3x,"R-turns:",100(5f8.2))')rturnv(:)
+
 
        IF(REPEAT) THEN
          NITS = 1
@@ -308,7 +317,6 @@ C
 13         CONTINUE
        endif
 1302         FORMAT(' AT I=',I3,' ZI(',I5,',',I5,')=',1P,2E12.2)
-
          DO 16 IT=FIT,NITS
             IF(SKFED.GT.0) THEN
 C       Approx. ZI(IT,J), if J is FED and SKIPed,
@@ -324,6 +332,13 @@ C         by F(L1+J,I) already stored, for use in DO 24 loop.
            KMAX = KLAST
            IF(IT.GE.3) KMAX = MIN(IEX,KLAST)
         IF(KMAX-KFIRST.LT.MINVEC-1) THEN
+c AMM.................................................................
+       WDIAG(:)=0.
+       DO K=1,NEQS
+       wdiag(k)=(ONEC - SMAT(K) * (R12 - SMAT(K)*(ENA2 + SMAT(K)*ENA3)))
+       ENDDO
+c.......................................................................
+
 CDIR$ NOVECTOR
          DO 158 K=KFIRST,KMAX
 158       IF(.NOT.SKIP(K)) FI(IT,K) = ZI(IT,K) *
@@ -441,6 +456,16 @@ CDIR$ VECTOR
             ZI(IT,K) = ZPV
 43            CONTINUE
 46    CONTINUE
+
+c AMM ........................................................
+      r=h(1)*(i-1.)
+      if ((r.lt.rmorto).and.(i.gt.is).and.(hort.gt.0)
+     & .and.(mod(i-is,norto).eq.0).and.(i.lt.md)) then 
+        write(*,*) '    -> re-orthogonalizing at i,r=',i,r
+      CALL LQFACT(ZI,ZM,FI,WDIAG,COUPL,R12,NEQS,MAXB,MAXCH)
+      endif
+c ............................................................
+
       KMAX = KLAST
       DO 468 IT=FIT,NITS
        IF(IT.GE.3) KMAX = MIN(IEX,KLAST)
@@ -1891,6 +1916,7 @@ C     WRITE(KO,20)
 	use parameters
 	use drier
 	use searchpar, only: final
+      use fresco1,   only: rmorto,hort
       IMPLICIT REAL*8(A-H,O-Z)
 C
 C        SOLVE 'NEQ' COUPLED SCHROEDINGERS EQUATIONS BY EXACT CC
@@ -1920,6 +1946,8 @@ C
      X        NCLIST(MAXCH,MAXCH),PTYPE(8,NF)
       LOGICAL SING,SHSMAT,SMATEL,FCWFN,FJSWTCH,REPEAT,LOCFIL
       AMD1(C) = ABS(DBLE(C)) + ABS(AIMAG(C))
+      complex*16 wdiag(neqs)  ! AMM
+
 C
       NM1 = N-1
       NR = 2*NEQS
@@ -1944,7 +1972,6 @@ C     AL = 0.0
         SMALL = 1.0/FPMAX
         EPS = SQRT(SMALL)
         BIG = 1./EPS
-
 C
       IF (FJSWTCH)  THEN
 c                              skip nmrov , match CRCWFN to zero
@@ -1998,6 +2025,8 @@ C-----------------------------------------------------------------------
 	   read(19) 
 	  enddo
 	  endif
+!        write(*,*)'IS=',IS
+!        write(*,*)'CUTVAL=',CUTVAL(1:NEQS)
          DO 60 I=IS,NM1
           RI2 = 1D0 / DBLE(I-1)**2
 	  if(LOCFIL) read(19) FORMFR
@@ -2030,6 +2059,13 @@ C
 1302         FORMAT(' AT I=',I3,' ZI(',I5,',',I5,')=',1P,2E12.2)
 
 
+
+c AMM....................................................................
+       WDIAG(:)=0.
+       DO K=1,NEQS
+       wdiag(k)=(ONEC - SMAT(K) * (R12 - SMAT(K)*(ENA2 + SMAT(K)*ENA3)))
+       ENDDO
+c ......................................................................
 
          DO 158 IT=1,NEQS
          DO 158 K=1,NEQS
@@ -2075,6 +2111,17 @@ C
             ZI(IT,K) = ZPV
 43            CONTINUE
 46    CONTINUE
+
+c AMoro ........................................................
+      norto=nint(hort/h(1))  ! AMM
+      r=h(1)*(i-1.)
+      if ((r.lt.rmorto).and.(i.gt.is).and.(hort.gt.0)
+     & .and.(mod(i-is,norto).eq.0).and.(i.lt.md)) then 
+        write(*,'(5x,"-> re-orthogonalizing at i,r=",i4,1f8.1)')i,r
+      CALL LQFACT(ZI,ZM,FI,WDIAG,COUPL,R12,NEQS,MAXB,MAXCH)
+      endif
+c ...............................................................
+
       DO 468 IT=1,NEQS
        IF(I.EQ.M) THEN
         DO 463 K=1,NEQS
@@ -2471,4 +2518,96 @@ C
 !!!!!!	rewind ifile
 	return
 	end
+
+c *** -----------------------------------------------------------
+c *** Re-orthogonalize solutions by LQ factorization (AMoro)
+c *** -----------------------------------------------------------
+      subroutine LQFACT(ZI,ZM,FI,WDIAG,COUPL,R12,NEQS,MAXB,MAXCH)
+      implicit none
+      integer   :: neqs,maxb,maxch,it,itp,k
+      complex*16:: zi(maxb,maxch),zm(maxb,maxch),fi(maxb,maxch)
+      complex*16:: coupl(maxb,maxb),c
+      complex*16:: wdiag(neqs),w(maxb,maxch)
+      real*8    :: r12
+      complex*16,parameter:: zero=(0d0,0d0)
+c ... for ztrsm
+      complex*16 alpha
+      integer ldb
+      character diag,side,transa,uplo
+c ... for ZGELQF
+      complex*16:: LT(maxb,maxch),work(2*maxb),tau(min(maxb,maxch))
+      integer   :: nrhs, info,lwork
+      character*1  trans
+      integer   :: ipiv(neqs)
+!      EXTERNAL  ZGETRF, ZGETRS
+
+c ... LQ factorization: ZI=LT*Q 
+c     (Q=orthogonal matrix; LT= triangular LOWER matrix)
+      LT=ZI
+!      LWORK=-1
+!      call ZGELQF(neqs,neqs, LT, MAXB, TAU, WORK, LWORK, INFO )
+!      LWORK=WORK(1)
+      LWORK=2*maxb
+      call ZGELQF(neqs,neqs, LT, MAXB, TAU, WORK, LWORK, INFO )
+      if (info.ne.0)  then
+         write(*,*)'zgelqf failed with exit code=',info
+      endif
+ 
+c ... Calculate new values of ZI, ZM by solving:
+c       Z(old)= LT*Z(new)  
+c     Solve   A*X  = B
+c     and make: Z(new)= X 
+      
+c ... X*op( A ) = alpha*B
+      side  ='L' ! A acts on the left
+      uplo  ='L' ! R is lower triangle matrix
+      transa='N' ! no transpose
+      diag  ='N' !??????????
+      alpha =1d0
+
+      if (1>2) then 
+
+      write(*,*)'Re[zi(old)] '
+      do k=1,min(5,neqs)
+        write(*,'(5x,i3,50g14.5)') k,
+     &  (real(zi(it,k)), it=1,min(5,neqs))
+      enddo
+      write(*,*)' '
+
+
+      write(*,*)'|zi x zip| (before QR)'
+        do it=1,min(neqs,5)
+        write(*,'(5x,50g14.5)') 
+     &    ( abs(dot_product(zi(it,:),zi(itp,:)))
+     &      / sqrt(abs(dot_product(zi(it,:),zi(it,:))))
+     &      / sqrt(abs(dot_product(zi(itp,:),zi(itp,:)))),
+     &   itp=1,min(neqs,5)) 
+        enddo
+      endif
+      
+      call ZTRSM(SIDE,UPLO,TRANSA,DIAG,NEQS,NEQS,ALPHA,LT,MAXB,ZI,MAXB)
+      call ZTRSM(SIDE,UPLO,TRANSA,DIAG,NEQS,NEQS,ALPHA,LT,MAXB,ZM,MAXB)
+
+      if (1>2) then !
+      write(*,*)'|zi x zip| (after QR)'
+        do it=1,min(neqs,5)
+        write(*,'(5x,50g14.5)') 
+     &    ( abs(dot_product(zi(it,:),zi(itp,:)))
+     &      / sqrt(abs(dot_product(zi(it,:),zi(it,:))))
+     &      / sqrt(abs(dot_product(zi(itp,:),zi(itp,:)))), 
+     &    itp=1,min(neqs,5)) 
+        enddo
+      endif
+
+
+c Recalculate FI(:,:) 
+      FI=zero
+      do 24 k=1,neqs
+       do 24 it=1,neqs
+       if (it.eq.k) fi(k,k)=fi(k,k)+wdiag(k)
+       c=coupl(k,it)*r12
+       if (c/=zero) fi(1:neqs,k)=fi(1:neqs,k)-c*zi(1:neqs,it)
+24    continue
+      end subroutine        
+
 

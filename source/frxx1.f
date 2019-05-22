@@ -1575,6 +1575,7 @@ C
       WRITE(KS) (LVAL(C),JVAL(C),PART(C,1),EXCIT(C,1),C=1,NCH)
       written(KS) = .true.
 c
+      rmorto =rmort
       DO 345 C=1,NCH
         CUTVAL(C) = CUTOFF
         IF(CUTL.lt.0) then
@@ -1588,11 +1589,23 @@ C       			Make lower cutoff on L(C) not JTOTAL
 !     X 	                           RTURN*10.**(CUTR/(JTOTAL+1)),
 !     #         CUTVAL(C)*HP(1)
 c        CUTVAL(C) = 5
+! AMoro !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        IF(ECM(C,1).GT.0.) THEN
+          RTURNC =(T+SQRT(T**2 + LVAL(C)*(LVAL(C)+1d0)))/K(IC,IA)
+          if (rturnc.gt.rmorto) rmorto=rturnc
+        ELSE
+          Rmorto = rmatch
+        ENDIF
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
        if(CDETR.gt.0) 
-     *  write(KO,*) 'L-cutoff at ',CUTVAL(C),ICUTC,' for C,Lin,J=',
-     *       		C,LVAL(C),real(JTOTAL)
-        endif
+     +  write(KO,*) 'L-cutoff at ',CUTVAL(C),ICUTC,' for C,Lin,J=',
+     +       		C,LVAL(C),real(JTOTAL)
+      endif
 345       continue
+       if (hort.gt.0.) then
+         write(*,'(" *** Solutions stabilized at intervals of",f5.1,
+     +   " fm, and up to",f7.1," fm")') hort,rmorto
+       endif
        CUTOFF = N
       DO 346 C=1,NCH
        CUTVAL(C) = max(2,CUTVAL(C))

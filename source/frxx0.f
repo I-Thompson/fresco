@@ -86,6 +86,7 @@
      X	fexch,ignore,trnl,adjq,fail,given,parall,haso(ma),foldso,cdc,
      x  complexbins
 	namelist/fresco/hcm,rmatch,rintp,hnl,rnl,centre,hnn,
+     X   hort,rmort, ! AMM
      X   rnn,rmin,rsp, rasym,accrcy,switch,ajswtch, sinjmax,plane,
 !@     X   gailitis,gailacc,
      X   jtmin,jtmax,absend,dry,rela,nearfa,jump,jbord,pset,jset,jleast,
@@ -144,7 +145,7 @@
 	ko3 = 301
     	
         write(koe,1002) 
- 1002 	format(' FRESCO - FRES 3.2: Coupled Reaction Channels')
+ 1002 	format(' FRESCO - FRES 3.3: Coupled Reaction Channels')
 	uu = .false.
 	inquire(file='fresco.in',exist=uu)
 	if(uu) then
@@ -173,6 +174,7 @@
 !@	call defaults(TMP,MASFIL,gailitis)
 	call defaults(TMP,MASFIL)
 	jump(:) = 0 ; jbord(:) = 0
+      rmort=0
 	if(nml) then
 	 ios=0
          if(trnl) then
@@ -192,7 +194,8 @@
 	fcwfn=.false.
 	if(.not.nml) then
 		hcm=0;rmatch=0;rintp=0;hnl=0;
-		rnl=0;centre=0;hnn=0;rnn=0;rmin=0;rsp=0
+		rnl=0;centre=0;hnn=0;rnn=0;rmin=0;rsp=0;
+            hort=0; rmort=0; 
         read(line,1010,iostat=ios,err=10101) hcm,rmatch,rintp,hnl,
      x                            rnl,centre,hnn,rnn,rmin,rsp
 	go to 10109
@@ -284,6 +287,11 @@
      *  ',   Switch = ',F8.2,' fm.,   L switch = ',F8.2,
      *  ',   SinJmax =',f8.2) !@',  Gailitis =',i3,' gailacc =',1p,e9.1)
        ENDIF
+      if (hort.gt.0.) then
+         write(koe,'(x,"Solutions stabilized at intervals of",f5.1,
+     +  " fm, and up to at least",f7.1," fm (if non-zero)")') hort,rmort
+       endif
+
       	mintm2 = mint -2
 	write(koe,*) '              M,Mint = ',m,mint
 

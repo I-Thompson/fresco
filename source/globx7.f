@@ -80,6 +80,7 @@
         real*8 sinv ! AMoro
         real*8,allocatable::rener(:,:) ! reduced energy (AMoro)
 	real*8 hcm,rmatch,hnl,rnl,centre,hnn,rnn,rmin,rasym,accrcy,rsp,
+     X   rmorto, hort, rmort,! AMM
      X   switch,ajswtch,sinjmax,jtmin,jtmax,absend,erange,dk,hktarg,
      X   thmin,thmax,thinc,cutl,cutr,cutc,ips,jbord(8),elab(5),jleast
  	integer nearfa,jump(7,3),koords,kqmax,pp,isocen,nnn,ngail,

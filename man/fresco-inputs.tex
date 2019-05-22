@@ -3086,4 +3086,20 @@ plot
 \end{verbatim}
 \normalsize
 where {\tt search4.in} is the above {\tt search\_file} input file name.
+
+\newpage
+\section*{Appendix VII : Stabilization method for coupled channels solutions}
+\parskip 6pt
+
+Antonio Moro has contributed a 
+a stabilization algorithmn to solve or, at least, palliate, the common problem of loss of linear dependence of the coupled channels solutions. Following the suggestion of some Japanese researchers, he implemented a method of re-orthogonalization similar to that described in the papers of Baylis {\em et al}, but using a QR orthogonalization procedure instead of the Gram-Schmidt method used by them.
+
+Thanks to this implementation, we are now able to solve efficiently problems which were otherwise not feasible, for example, CDCC calculations with high-lying breakup states, including closed-channels. His group to extend this to the case of transfer reactions, but only with limited success, so in practice it works only for pure coupled channels equations.
+
+A test case {\tt dNi-cdcc-QR.in} is included in the test/ folder, corresponding to a d+$^{58}$Ni reaction at 20 MeV, including closed channels. In this case, the standard Numerov method fails for JT$>$3, whereas with the stabilization procedure the calculation runs smoothly for all required partial waves. 
+
+To activate this option we added a variable {\tt hort} to the FRESCO namelist, which corresponds to the radial interval step at which stabilization is performed. Typically, try {\tt hort} = 5 fm. 
+This orthogonalizing continues out to the largest classical turning radius for any open channel, but can continued further by setting the radius variable {\tt rmort} also in the FRESCO namelist.
+
+WE. Baylis and S.J. Peel, Computer Physics Communications {\bf 25} (1982), 7-19, 
 \end{document}
