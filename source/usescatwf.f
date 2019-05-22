@@ -256,7 +256,7 @@ C     ---------------------------------
       IF(CHSIZES(IT)>SMALLCOUP) SMALLJ = .false.
         T = ETA(IC,IA)
         T4 =(T+SQRT(T**2 + JTOTAL*(JTOTAL+1d0)))/K(IC,IA)
-*	write(139,*) ia,ic,jtotal,real(rturn),real(rturn+gap),real(t4)
+*	write(139,*) ic,ia,jtotal,real(rturn),real(rturn+gap),real(t4)
 *	call flush(139)
 !		Drop a channel if its  turning point is too far outside
 !		the turning point of the elastic channel.

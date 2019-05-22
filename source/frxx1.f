@@ -1119,8 +1119,8 @@ C			Normal KK=0 should exclude off-diagonal monopoles
            if(JFT==13) T = sqrt(2*JTARG(C)+1.)   ! target couplings
        ENDIF
 C
-      if (JFTT.eq.10.and.BAND(1,ia,ic).ne.BAND(1,ib,ic) .or.
-     x   JFTT.eq.11.and.BAND(2,ia,ic).ne.BAND(2,ib,ic) ) go to 300
+      if (JFTT.eq.10.and.BAND(1,ic,ia).ne.BAND(1,ic,ib) .or.
+     x    JFTT.eq.11.and.BAND(2,ic,ia).ne.BAND(2,ic,ib) ) go to 300
 
       IF(JFT>=12.and.JFT<=13.and.PTYPE(3,JF)>0) THEN
 C                           LOOK UP TABLE OF ALLOWED COUPLINGS for KK>0 or off-diagonal monopole (7)
