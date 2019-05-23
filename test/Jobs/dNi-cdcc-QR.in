@@ -1,0 +1,82 @@
+d+ 58Ni E=20 MeV CDCC (s+d) with QR stabilisations
+NAMELIST
+ &Fresco  hcm= 0.100 rmatch=  80.000 rintp=  0.25 rsp=  75.0
+     hort = 5.0
+     jtmin=   0.0 jtmax=     40.0 absend=    0.0010 
+     thmin=  0.00 thmax= 180.00 thinc=  1.00  cutl=  0.00 cutr= -8.00 cutc=  0.00
+     it0= 0 iter=  0 iblock= 16 nnu= 24
+     chans= 1 listcc= 0 smats= 2 xstabl= 1
+     elab=    20.0000    /
+
+ &Partition namep='d       ' massp=  2.0140 zp=  1 nex= 15 namet='58Ni    ' masst= 58.0000 zt= 28 qval=  2.2250/
+
+ &States jp= 0.0 ptyp= 1 ep=  0.0000  cpot=  1 jt= 0.0 ptyt= 1 et=  0.0000/
+ &States jp= 0.0 ptyp= 1 ep=  2.5042  cpot=  1 copyt= 1/
+ &States jp= 0.0 ptyp= 1 ep=  3.4528  cpot=  1 copyt= 1/
+ &States jp= 0.0 ptyp= 1 ep=  5.2220  cpot=  1 copyt= 1/
+ &States jp= 0.0 ptyp= 1 ep=  7.8118  cpot=  1 copyt= 1/
+ &States jp= 0.0 ptyp= 1 ep= 11.2220  cpot=  1 copyt= 1/
+ &States jp= 0.0 ptyp= 1 ep= 15.4528  cpot=  1 copyt= 1/
+ &States jp= 0.0 ptyp= 1 ep= 20.5042  cpot=  1 copyt= 1/
+ &States jp= 2.0 ptyp= 1 ep=  2.5042  cpot=  1 copyt= 1/
+ &States jp= 2.0 ptyp= 1 ep=  3.4528  cpot=  1 copyt= 1/
+ &States jp= 2.0 ptyp= 1 ep=  5.2220  cpot=  1 copyt= 1/
+ &States jp= 2.0 ptyp= 1 ep=  7.8118  cpot=  1 copyt= 1/
+ &States jp= 2.0 ptyp= 1 ep= 11.2220  cpot=  1 copyt= 1/
+ &States jp= 2.0 ptyp= 1 ep= 15.4528  cpot=  1 copyt= 1/
+ &States jp= 2.0 ptyp= 1 ep= 20.5042  cpot=  1 copyt= 1/
+
+ &Partition namep='p       ' massp=  1.0078 zp=  1 nex= -1 namet='58Ni  +n' masst= 59.0087 zt= 28 qval=  0.0000/
+
+ &States jp= 0.0 ptyp= 1 ep=  0.0000  cpot=  2 jt= 0.0 ptyt= 1 et=  0.0000/
+ &Partition /   ! END OF DEFINING PARTITIONS
+
+ &Pot kp= 1 type= 0 shape= 0 p(1:3)=   58.0000   0.0000   1.2500 /
+
+ &Pot kp= 2 type= 0 shape= 0 p(1:3)=   58.0000   0.0000   1.2500 /
+ &Pot kp= 2 type= 1 shape= 0 p(1:7)=   44.7000   1.1920   0.6630   3.9500   1.1920   0.6630   0.0000 /
+ &Pot kp= 2 type= 2 shape= 0 p(1:7)=    0.0000   0.0000   0.0000   5.3200   1.2820   0.5500   0.0000 /
+
+ &Pot kp= 3 type= 0 shape= 0 p(1:3)=   58.0000   0.0000   1.2500 /
+ &Pot kp= 3 type= 1 shape= 0 p(1:7)=   39.5000   1.1920   0.6630   3.9700   1.1920   0.6630   0.0000 /
+ &Pot kp= 3 type= 2 shape= 0 p(1:7)=    0.0000   0.0000   0.0000   4.9000   1.2780   0.5360   0.0000 /
+
+ &Pot kp= 4 type= 0 shape= 0 p(1:3)=    0.0000   1.0000   1.0000 /
+ &Pot kp= 4 type= 1 shape= 2 p(1:3)=   72.1500   0.0000   1.4840 /
+
+ &Pot /   ! END OF DEFINING POTENTIALS
+
+ &Overlap kn1=   1 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l= 0 sn=0.0 j= 0.0 nam=1 ampl=  1.0000 kbpot= 4 be=  2.2250 isc= 1 ipc=0 /
+ &Overlap kn1=   2 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 0 sn=0.0 j= 0.0 nam=1 ampl=  1.0000 kbpot= 4 be= -0.2792 isc=12 ipc=2 nk=  50 er= -0.5384 /
+ &Overlap kn1=   3 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 0 sn=0.0 j= 0.0 nam=1 ampl=  1.0000 kbpot= 4 be= -1.2278 isc=12 ipc=2 nk=  50 er= -1.3589 /
+ &Overlap kn1=   4 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 0 sn=0.0 j= 0.0 nam=1 ampl=  1.0000 kbpot= 4 be= -2.9970 isc=12 ipc=2 nk=  50 er= -2.1795 /
+ &Overlap kn1=   5 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 0 sn=0.0 j= 0.0 nam=1 ampl=  1.0000 kbpot= 4 be= -5.5868 isc=12 ipc=2 nk=  50 er= -3.0000 /
+ &Overlap kn1=   6 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 0 sn=0.0 j= 0.0 nam=1 ampl=  1.0000 kbpot= 4 be= -8.9970 isc=12 ipc=2 nk=  50 er= -3.8205 /
+ &Overlap kn1=   7 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 0 sn=0.0 j= 0.0 nam=1 ampl=  1.0000 kbpot= 4 be=-13.2278 isc=12 ipc=2 nk=  50 er= -4.6411 /
+ &Overlap kn1=   8 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 0 sn=0.0 j= 0.0 nam=1 ampl=  1.0000 kbpot= 4 be=-18.2792 isc=12 ipc=2 nk=  50 er= -5.4616 /
+ &Overlap kn1=   9 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 2 sn=0.0 j= 2.0 nam=1 ampl=  1.0000 kbpot= 4 be= -0.2792 isc= 2 ipc=2 nk=  50 er= -0.5384 /
+ &Overlap kn1=  10 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 2 sn=0.0 j= 2.0 nam=1 ampl=  1.0000 kbpot= 4 be= -1.2278 isc= 2 ipc=2 nk=  50 er= -1.3589 /
+ &Overlap kn1=  11 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 2 sn=0.0 j= 2.0 nam=1 ampl=  1.0000 kbpot= 4 be= -2.9970 isc= 2 ipc=2 nk=  50 er= -2.1795 /
+ &Overlap kn1=  12 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 2 sn=0.0 j= 2.0 nam=1 ampl=  1.0000 kbpot= 4 be= -5.5868 isc= 2 ipc=2 nk=  50 er= -3.0000 /
+ &Overlap kn1=  13 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 2 sn=0.0 j= 2.0 nam=1 ampl=  1.0000 kbpot= 4 be= -8.9970 isc= 2 ipc=2 nk=  50 er= -3.8205 /
+ &Overlap kn1=  14 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 2 sn=0.0 j= 2.0 nam=1 ampl=  1.0000 kbpot= 4 be=-13.2278 isc= 2 ipc=2 nk=  50 er= -4.6411 /
+ &Overlap kn1=  15 ic1=1 ic2=2 in= 1 kind=0 nn= 0 l= 2 sn=0.0 j= 2.0 nam=1 ampl=  1.0000 kbpot= 4 be=-18.2792 isc= 2 ipc=2 nk=  50 er= -5.4616 /
+ &Overlap /   ! END OF DEFINING OVERLAPS
+
+ &Coupling icto= 1 icfrom= 2 kind=3 ip1= 2 ip2= 0 ip3= 0 p1=    3.0000 p2=  2.0000 /
+   &Cfp  in= 1 ib=  1 ia=  1 kn=   1  a=  1.0000     /
+   &Cfp  in= 1 ib=  2 ia=  1 kn=   2  a=  1.0000     /
+   &Cfp  in= 1 ib=  3 ia=  1 kn=   3  a=  1.0000     /
+   &Cfp  in= 1 ib=  4 ia=  1 kn=   4  a=  1.0000     /
+   &Cfp  in= 1 ib=  5 ia=  1 kn=   5  a=  1.0000     /
+   &Cfp  in= 1 ib=  6 ia=  1 kn=   6  a=  1.0000     /
+   &Cfp  in= 1 ib=  7 ia=  1 kn=   7  a=  1.0000     /
+   &Cfp  in= 1 ib=  8 ia=  1 kn=   8  a=  1.0000     /
+   &Cfp  in= 1 ib=  9 ia=  1 kn=   9  a=  1.0000     /
+   &Cfp  in= 1 ib= 10 ia=  1 kn=  10  a=  1.0000     /
+   &Cfp  in= 1 ib= 11 ia=  1 kn=  11  a=  1.0000     /
+   &Cfp  in= 1 ib= 12 ia=  1 kn=  12  a=  1.0000     /
+   &Cfp  in= 1 ib= 13 ia=  1 kn=  13  a=  1.0000     /
+   &Cfp  in= 1 ib= 14 ia=  1 kn=  14  a=  1.0000     /
+   &Cfp  in=-1 ib= 15 ia=  1 kn=  15  a=  1.0000     /
+ &Coupling /

@@ -1,0 +1,66 @@
+1-ADCC d + 208Pb Q=0,1,2 to p-waves at 50 MeV of 1+10*3 chs to 20 MeV, coul only
+NAMELIST
+ &FRESCO  hcm= 0.050 rmatch=  30.000 rintp=  0.40 rasym=   300.00 accrcy=  0.0010 
+     hnl= 0.025 rnl=  1.50 centre=  0.00
+     jtmin=  0.0 jtmax=    40.0 absend= -1.0010 
+     jump(1:6)=    4    0    0    0    0    0 jbord=    0.0    0.0    0.0    0.0    0.0    0.0
+     thmin= 20.00 thmax=  0.00 thinc= 20.00 
+     cutl= -1.60 cutr=-10.00 cutc=  0.00
+     nnu= 24 mtmin= 8
+     nrbases=10 nrbmin= 5 buttle= 0 pralpha=F pcon=0  rmatr=   20.00  
+     chans= 1 listcc= 1 smats= 4 xstabl= 0 veff= 1
+     elab(1)=    50.0000 /
+
+ &PARTITION namep='Deuteron' massp=  2.0000 zp=  1 nex=11 
+            namet='208Pb   ' masst=208.0000 zt= 82 qval=  0.0000/
+ &STATES jp= 0.0 ptyp= 1 ep=  0.0000  cpot=  1 jt= 0.0 ptyt= 1 et=  0.0000/
+ &STATES jp= 1.0 ptyp=-1 ep=  0.0000  cpot=  1 copyt= 1/
+ &STATES jp= 1.0 ptyp=-1 ep=  0.0000  cpot=  1 copyt= 1/
+ &STATES jp= 1.0 ptyp=-1 ep=  0.0000  cpot=  1 copyt= 1/
+ &STATES jp= 1.0 ptyp=-1 ep=  0.0000  cpot=  1 copyt= 1/
+ &STATES jp= 1.0 ptyp=-1 ep=  0.0000  cpot=  1 copyt= 1/
+ &STATES jp= 1.0 ptyp=-1 ep=  0.0000  cpot=  1 copyt= 1/
+ &STATES jp= 1.0 ptyp=-1 ep=  0.0000  cpot=  1 copyt= 1/
+ &STATES jp= 1.0 ptyp=-1 ep=  0.0000  cpot=  1 copyt= 1/
+ &STATES jp= 1.0 ptyp=-1 ep=  0.0000  cpot=  1 copyt= 1/
+ &STATES jp= 1.0 ptyp=-1 ep=  0.0000  cpot=  1 copyt= 1/
+
+ &PARTITION namep='Proton  ' massp=  1.0000 zp=  1 nex=-1 
+            namet='209Pb   ' masst=209.0000 zt= 82 qval=  0.0000/
+ &STATES jp= 0.0 ptyp= 1 ep=  0.0000  cpot=  3 jt= 0.0 ptyt= 1 et=  0.0000/
+ &partition /   ! END OF DEFINING PARTITIONS
+
+ &pot kp= 1 type= 0 p(1:3)=  208.000  0.0000  1.3000 /
+ &pot kp= 1 type= 1 p(1:3)=    0.000  0.0000  0.0000 /
+ &pot kp= 2 type= 1 p(1:7)=  165.530  0.4000  0.6000  0.0000  0.0000  0.0000  1.0000 /
+ &pot kp= 3 type= 0 p(1:3)=  208.000  0.0000  1.3000 /
+ &pot kp= 3 type= 1 p(1:7)=   50.000  1.2000  0.7500 15.0000  1.2000  0.7500  0.0000 /
+ &pot kp= 5 type= 0 p(1:3)=  208.000  0.0000  1.3000 /
+ &pot /   ! END OF DEFINING POTENTIALS
+
+ &OVERLAP kn1=  1 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=0 sn= 0.0 j= 0.0 kbpot= 2 be=  2.2260 isc= 1 ipc=0 nam=  0 ampl=  0.0000 /
+ &OVERLAP kn1= 23 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.0 j= 1.0 kbpot= 2 be= -1.0000 isc= 0 ipc=2 nam=-40 ampl= -1.9800 /
+ &OVERLAP kn1= 25 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.0 j= 1.0 kbpot= 2 be= -3.0000 isc= 0 ipc=2 nam=-40 ampl= -2.0000 /
+ &OVERLAP kn1= 27 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.0 j= 1.0 kbpot= 2 be= -5.0000 isc= 0 ipc=2 nam=-40 ampl= -2.0000 /
+ &OVERLAP kn1= 29 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.0 j= 1.0 kbpot= 2 be= -7.0000 isc= 0 ipc=2 nam=-40 ampl= -2.0000 /
+ &OVERLAP kn1= 31 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.0 j= 1.0 kbpot= 2 be= -9.0000 isc= 0 ipc=2 nam=-40 ampl= -2.0000 /
+ &OVERLAP kn1= 33 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.0 j= 1.0 kbpot= 2 be=-11.0000 isc= 0 ipc=2 nam=-40 ampl= -2.0000 /
+ &OVERLAP kn1= 35 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.0 j= 1.0 kbpot= 2 be=-13.0000 isc= 0 ipc=2 nam=-40 ampl= -2.0000 /
+ &OVERLAP kn1= 37 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.0 j= 1.0 kbpot= 2 be=-15.0000 isc= 0 ipc=2 nam=-40 ampl= -2.0000 /
+ &OVERLAP kn1= 39 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.0 j= 1.0 kbpot= 2 be=-17.0000 isc= 0 ipc=2 nam=-40 ampl= -2.0000 /
+ &OVERLAP kn1= 41 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.0 j= 1.0 kbpot= 2 be=-19.0000 isc= 0 ipc=2 nam=-40 ampl= -2.0000 /
+ &overlap /   ! END OF DEFINING OVERLAPS
+
+ &COUPLING icto= 1 icfrom= 2 kind=3 ip1= 2 ip2= 0 ip3= 0 p1=    5.0000 p2=  3.0000 /
+   &cfp  in= 1 ib=  1 ia=  1 kn=  1  a=   1.000     /
+   &cfp  in= 1 ib=  2 ia=  1 kn= 23  a=   1.000     /
+   &cfp  in= 1 ib=  3 ia=  1 kn= 25  a=   1.000     /
+   &cfp  in= 1 ib=  4 ia=  1 kn= 27  a=   1.000     /
+   &cfp  in= 1 ib=  5 ia=  1 kn= 29  a=   1.000     /
+   &cfp  in= 1 ib=  6 ia=  1 kn= 31  a=   1.000     /
+   &cfp  in= 1 ib=  7 ia=  1 kn= 33  a=   1.000     /
+   &cfp  in= 1 ib=  8 ia=  1 kn= 35  a=   1.000     /
+   &cfp  in= 1 ib=  9 ia=  1 kn= 37  a=   1.000     /
+   &cfp  in= 1 ib= 10 ia=  1 kn= 39  a=   1.000     /
+   &cfp  in=-1 ib= 11 ia=  1 kn= 41  a=   1.000     /
+ &COUPLING /

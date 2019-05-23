@@ -1,4 +1,4 @@
-SFRESCO - FRES 2.9.3: Search Coupled Reaction Channels
+SFRESCO - FRES 3.3: Search Coupled Reaction Channels
 
  Please give search file name
  SFresco search file = na-all.search                                     
@@ -6,7 +6,8 @@ SFRESCO - FRES 2.9.3: Search Coupled Reaction Channels
  Fresco input file = nalpha.frin                                       
    and output file = nalpha.frout                                      
  Search on  2 variables for   3 datasets,
-  MINUIT RELEASE 96.03  INITIALIZED.   DIMENSIONS 100/ 50  EPSMAC=  0.89E-15
+ MNINIT UNABLE TO DETERMINE ARITHMETIC PRECISION. WILL ASSUME:  0.40E-06
+  MINUIT RELEASE 96.03  INITIALIZED.   DIMENSIONS 100/ 50  EPSMAC=  0.80E-06
 
   Define SEARCH VARIABLES:
 
@@ -16,13 +17,12 @@ SFRESCO - FRES 2.9.3: Search Coupled Reaction Channels
    Variable  2=Vso        is potential KP= 1, line= 3 col= 1
      value from Fresco input, step  0.0100, min,max   0.0000  0.0000
 
-  Read definition of data set  1
+  Read definition of data set            1
   Read DATA SET  1 from file =                                                 
     of type  4           with absolute errors, CM  for state/excit  1  1,  idir= 0
 
   Excitation phase shift in channel  1.5- # 1
-  Read data set  1
-   26  data points:
+  Read data set            1
    Energy   Datum     Absolute error
     0.200   2.168      0.3000E-02
     0.400   7.606      0.8000E-02
@@ -50,13 +50,12 @@ SFRESCO - FRES 2.9.3: Search Coupled Reaction Channels
    16.000   101.2      0.8200    
    18.000   98.82      0.9600    
    20.000   96.57       1.100    
-  Read definition of data set  2
+  Read definition of data set            2
   Read DATA SET  2 from file =                                                 
     of type  4           with absolute errors, CM  for state/excit  1  1,  idir= 0
 
   Excitation phase shift in channel  0.5- # 1
-  Read data set  2
-   26  data points:
+  Read data set            2
    Energy   Datum     Absolute error
     0.200  0.4280      0.3000E-02
     0.400   1.236      0.8000E-02
@@ -84,13 +83,12 @@ SFRESCO - FRES 2.9.3: Search Coupled Reaction Channels
    16.000   59.27      0.8300    
    18.000   57.90      0.9200    
    20.000   56.54       1.010    
-  Read definition of data set  3
+  Read definition of data set            3
   Read DATA SET  3 from file =                                                 
     of type  4           with absolute errors, CM  for state/excit  1  1,  idir= 0
 
   Excitation phase shift in channel  0.5+ # 1
-  Read data set  3
-   26  data points:
+  Read data set            3
    Energy   Datum     Absolute error
     0.200  -10.88      0.2000E-01
     0.400  -15.37      0.3000E-01
@@ -118,14 +116,14 @@ SFRESCO - FRES 2.9.3: Search Coupled Reaction Channels
    16.000  -85.81      0.7200    
    18.000  -88.31       1.060    
    20.000  -89.81       1.570    
-
+ 
   FRESCO output to nalpha.frout*
-
+ 
  Calculate scattering at energies
     0.200   0.400   0.600   0.800   1.000   1.200   1.400   1.600   1.800   2.000
     2.500   3.000   3.500   4.000   4.500   5.000   6.000   7.000   8.000   9.000
    10.000  12.000  14.000  16.000  18.000  20.000
-
+ 
     Var   1=V          value    43.000000
     Var   2=Vso        value    10.000000
 
@@ -156,19 +154,29 @@ sfresco>
  **    3 **SET ERRORDEF  0.1282E-01
  **********
 minuit>  **********
- **    4 **MIGRAD 
+ **    4 **SET STRAT    2.000    
+ **********
+
+ NOW USING STRATEGY  2: MAKE SURE MINIMUM TRUE, ERRORS CORRECT  
+
+minuit>  **********
+ **    5 **MIGRAD 
  **********
 
  FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
- START MIGRAD MINIMIZATION.  STRATEGY 0.  CONVERGENCE WHEN EDM .LT. 0.13E-05
+ START MIGRAD MINIMIZATION.  STRATEGY 2.  CONVERGENCE WHEN EDM .LT. 0.13E-05
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+        -0.5248E+00  0.2525E+01
+ MINUIT WARNING IN HESSE   
+ ============== MATRIX FORCED POS-DEF BY ADDING  0.52728     TO DIAGONAL.
 
- FCN=   26021.11     FROM MIGRAD    STATUS=INITIATE       4 CALLS        5 TOTAL
-                     EDM= unknown      STRATEGY= 0      NO ERROR MATRIX       
+ FCN=   26021.11     FROM HESSE     STATUS=NOT POSDEF    12 CALLS       13 TOTAL
+                     EDM=  0.35E+05    STRATEGY= 2      ERR MATRIX NOT POS-DEF
 
-  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
   NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
-   1     V          43.000       0.10000E-01   0.10000E-01   -44119.    
-   2     Vso        10.000       0.10000E-01   0.10000E-01   -30664.    
+   1     V          43.000       0.13523E-01   0.61537       -43747.    
+   2     Vso        10.000       0.20080E-01   0.41912       -30654.    
                                ERR DEF= 0.128E-01
  MINUIT WARNING IN MIGRAD  
  ============== Negative diagonal element  1 in Error Matrix
@@ -177,144 +185,155 @@ minuit>  **********
  MINUIT WARNING IN MIGRAD  
  ==============     0.10E+01 added to diagonal of error matrix
  MIGRAD FAILS TO FIND IMPROVEMENT
- MIGRAD FAILS WITH STRATEGY=0.   WILL TRY WITH STRATEGY=1.
- COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+        -0.3969E+00  0.2397E+01
+ MINUIT WARNING IN HESSE   
+ ============== MATRIX FORCED POS-DEF BY ADDING  0.39926     TO DIAGONAL.
 
- FCN=   392.8047     FROM HESSE     STATUS=OK            14 CALLS       91 TOTAL
-                     EDM=  0.98E-03    STRATEGY= 1      ERROR MATRIX ACCURATE 
-
-  EXT PARAMETER                                   STEP         FIRST   
-  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
-   1     V          44.209       0.47538E-03   0.39602E-04    14.784    
-   2     Vso        9.7270       0.11085E-02   0.75650E-04  -0.74748E-01
-                               ERR DEF= 0.128E-01
- MIGRAD FAILS TO FIND IMPROVEMENT
-
- MIGRAD MINIMIZATION HAS CONVERGED.
-
- MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
- COVARIANCE MATRIX CALCULATED SUCCESSFULLY
- MIGRAD TERMINATED WITHOUT CONVERGENCE.
-
- FCN=   392.8047     FROM MIGRAD    STATUS=FAILED       127 CALLS      128 TOTAL
-                     EDM=  0.30E-03    STRATEGY= 1      ERR MATRIX APPROXIMATE
+ FCN=   18441.99     FROM HESSE     STATUS=NOT POSDEF    10 CALLS       40 TOTAL
+                     EDM=  0.17E+05    STRATEGY= 2      ERR MATRIX NOT POS-DEF
 
   EXT PARAMETER                APPROXIMATE        STEP         FIRST   
   NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
-   1     V          44.209       0.37880E-03   0.26842E-04   -7.4092    
-   2     Vso        9.7271       0.10272E-02   0.76079E-04  -0.20113E-01
+   1     V          41.517       0.12336E-01   0.59415       -38664.    
+   2     Vso        12.393       0.17872E-01   0.17736       -27194.    
+                               ERR DEF= 0.128E-01
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+        -0.4072E+00  0.2407E+01
+ MINUIT WARNING IN HESSE   
+ ============== MATRIX FORCED POS-DEF BY ADDING  0.40956     TO DIAGONAL.
+
+ FCN=   5749.992     FROM HESSE     STATUS=NOT POSDEF    12 CALLS       63 TOTAL
+                     EDM=  0.43E+04    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1     V          39.139       0.89400E-02   0.56011       -10747.    
+   2     Vso        16.533       0.12291E-01   0.23659       -6692.1    
+                               ERR DEF= 0.128E-01
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MIGRAD TERMINATED WITHOUT CONVERGENCE.
+
+ FCN=   414.9362     FROM MIGRAD    STATUS=FAILED        77 CALLS       78 TOTAL
+                     EDM=  0.18E+05    STRATEGY= 2      ERR MATRIX NOT POS-DEF
+
+  EXT PARAMETER                APPROXIMATE        STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1     V          44.007       0.50283E-02    0.0000        2347.0    
+   2     Vso        9.9856       0.69276E-02    0.0000       -738.75    
                                ERR DEF= 0.128E-01
 
  EXTERNAL ERROR MATRIX.    NDIM=  50    NPAR=  2    ERR DEF= 0.128E-01
-  0.143E-06-0.197E-06
- -0.197E-06 0.106E-05
- ERR MATRIX APPROXIMATE
+  0.253E-04-0.346E-04
+ -0.346E-04 0.480E-04
+ ERR MATRIX NOT POS-DEF
 
  PARAMETER  CORRELATION COEFFICIENTS
        NO.  GLOBAL     1     2
-        1  0.50746  1.000-0.507
-        2  0.50746 -0.507 1.000
- ERR MATRIX APPROXIMATE
+        1  0.99447  1.000-0.994
+        2  0.99447 -0.994 1.000
+ ERR MATRIX NOT POS-DEF
 minuit>  **********
- **    5 **END 
+ **    6 **END 
  **********
 
  CALL TO USER FUNCTION WITH IFLAG = 3
 
  END OF MINUIT COMMAND INPUT.    RETURN TO USER PROGRAM.
 
+sfresco>  
+  Dataset            1  <=>
+   Energy   Datum      Abs. error  Theory         Chi
+    0.200  2.1680     0.30000E-02  2.2689       1130.3100
+    0.400  7.6060     0.80000E-02  7.9281       1621.1999
+    0.600  17.950     0.20000E-01  18.575        975.9695
+    0.800  36.040     0.30000E-01  36.793        629.3195
+    1.000  61.630     0.30000E-01  61.730         11.1735
+    1.200  85.440     0.40000E-01  84.523        525.7964
+    1.400  101.00     0.40000E-01  99.541       1330.0273
+    1.600  110.11     0.40000E-01  108.46       1697.0113
+    1.800  115.50     0.40000E-01  113.81       1779.5145
+    2.000  118.79     0.40000E-01  117.12       1742.0868
+    2.500  122.58     0.50000E-01  121.00       1004.6014
+    3.000  123.58     0.50000E-01  122.07        906.8907
+    3.500  123.44     0.60000E-01  122.01        564.8231
+    4.000  122.77     0.80000E-01  121.42        283.8197
+    4.500  121.85     0.10000      120.56        165.1878
+    5.000  120.80     0.12000      119.57        104.6827
+    6.000  118.56     0.16000      117.43         49.9025
+    7.000  116.32     0.21000      115.26         25.3324
+    8.000  114.17     0.26000      113.16         14.9690
+    9.000  112.15     0.33000      111.16          8.9252
+   10.000  110.26     0.39000      109.27          6.4299
+   12.000  106.86     0.53000      105.79          4.0384
+   14.000  103.88     0.67000      102.69          3.1591
+   16.000  101.23     0.82000      99.898          2.6389
+   18.000  98.820     0.96000      97.372          2.2758
+   20.000  96.570      1.1000      95.069          1.8609
+ 
+  Dataset            2  <=>
+   Energy   Datum      Abs. error  Theory         Chi
+    0.200 0.42800     0.30000E-02 0.47383        233.4202
+    0.400  1.2360     0.80000E-02  1.3589        236.0153
+    0.600  2.3140     0.15000E-01  2.5277        202.8804
+    0.800  3.6300     0.20000E-01  3.9337        230.5688
+    1.000  5.1500     0.30000E-01  5.5466        174.7605
+    1.200  6.8800     0.40000E-01  7.3410        132.7972
+    1.400  8.7800     0.50000E-01  9.2925        105.0579
+    1.600  10.840     0.60000E-01  11.376         79.9329
+    1.800  13.040     0.70000E-01  13.567         56.6662
+    2.000  15.360     0.80000E-01  15.837         35.5749
+    2.500  21.510     0.11000      21.682          2.4496
+    3.000  27.800     0.13000      27.448          7.3493
+    3.500  33.840     0.16000      32.808         41.6275
+    4.000  39.300     0.20000      37.562         75.5592
+    4.500  44.040     0.24000      41.630        100.8656
+    5.000  48.020     0.27000      45.021        123.3548
+    6.000  53.900     0.35000      50.033        122.0973
+    7.000  57.610     0.42000      53.217        109.3997
+    8.000  59.820     0.47000      55.137         99.2717
+    9.000  61.020     0.51000      56.200         89.3302
+   10.000  61.560     0.56000      56.680         75.9341
+   12.000  61.450     0.65000      56.569         56.3832
+   14.000  60.530     0.73000      55.670         44.3262
+   16.000  59.270     0.83000      54.394         34.5164
+   18.000  57.900     0.92000      52.949         28.9607
+   20.000  56.540      1.0100      51.446         25.4370
+ 
+  Dataset            3  <=>
+   Energy   Datum      Abs. error  Theory         Chi
+    0.200 -10.880     0.20000E-01 -11.729       1800.8956
+    0.400 -15.370     0.30000E-01 -16.510       1443.0047
+    0.600 -18.800     0.40000E-01 -20.127       1100.7868
+    0.800 -21.690     0.40000E-01 -23.135       1305.8896
+    1.000 -24.230     0.40000E-01 -25.751       1445.2592
+    1.200 -26.520     0.40000E-01 -28.084       1528.9928
+    1.400 -28.620     0.50000E-01 -30.202       1001.5563
+    1.600 -30.570     0.50000E-01 -32.149        997.4666
+    1.800 -32.390     0.50000E-01 -33.955        979.5480
+    2.000 -34.110     0.50000E-01 -35.642        938.7551
+    2.500 -38.040     0.50000E-01 -39.443        787.1254
+    3.000 -41.570     0.50000E-01 -42.780        585.9999
+    3.500 -44.780     0.50000E-01 -45.765        387.8873
+    4.000 -47.740     0.60000E-01 -48.468        147.3969
+    4.500 -50.500     0.60000E-01 -50.942         54.3636
+    5.000 -53.080     0.70000E-01 -53.224          4.2319
+    6.000 -57.790     0.90000E-01 -57.318         27.5144
+    7.000 -62.010     0.12000     -60.913         83.4981
+    8.000 -65.820     0.15000     -64.118        128.7135
+    9.000 -69.290     0.19000     -67.007        144.3268
+   10.000 -72.440     0.24000     -69.636        136.4896
+   12.000 -77.900     0.35000     -74.269        107.6036
+   14.000 -82.340     0.50000     -78.255         66.7590
+   16.000 -85.810     0.72000     -81.745         31.8717
+   18.000 -88.310      1.0600     -84.846         10.6797
+   20.000 -89.810      1.5700     -87.632          1.9250
+
+  Total ChiSq/N =   414.9362 from    561.229    97.098   586.482
 sfresco> 
-  Dataset  1  <=>
-   Energy   Datum      Abs. error  Theory         Chi
-    0.200  2.1680     0.30000E-02  2.2825       1456.2721
-    0.400  7.6060     0.80000E-02  7.9846       2240.2159
-    0.600  17.950     0.20000E-01  18.733       1532.9962
-    0.800  36.040     0.30000E-01  37.141       1347.9852
-    1.000  61.630     0.30000E-01  62.245        420.3068
-    1.200  85.440     0.40000E-01  84.998        122.3099
-    1.400  101.00     0.40000E-01  99.891        767.9833
-    1.600  110.11     0.40000E-01  108.71       1220.5882
-    1.800  115.50     0.40000E-01  114.00       1414.0654
-    2.000  118.79     0.40000E-01  117.26       1465.8222
-    2.500  122.58     0.50000E-01  121.07        912.7897
-    3.000  123.58     0.50000E-01  122.12        858.0859
-    3.500  123.44     0.60000E-01  122.03        548.5732
-    4.000  122.77     0.80000E-01  121.43        281.0775
-    4.500  121.85     0.10000      120.56        166.2299
-    5.000  120.80     0.12000      119.56        106.8073
-    6.000  118.56     0.16000      117.40         52.1378
-    7.000  116.32     0.21000      115.23         27.0090
-    8.000  114.17     0.26000      113.12         16.2394
-    9.000  112.15     0.33000      111.12          9.8133
-   10.000  110.26     0.39000      109.22          7.1373
-   12.000  106.86     0.53000      105.73          4.5150
-   14.000  103.88     0.67000      102.62          3.5259
-   16.000  101.23     0.82000      99.826          2.9316
-   18.000  98.820     0.96000      97.296          2.5195
-   20.000  96.570      1.1000      94.991          2.0602
-
-  Dataset  2  <=>
-   Energy   Datum      Abs. error  Theory         Chi
-    0.200 0.42800     0.30000E-02 0.48462        356.1887
-    0.400  1.2360     0.80000E-02  1.3913        376.7089
-    0.600  2.3140     0.15000E-01  2.5905        339.9005
-    0.800  3.6300     0.20000E-01  4.0357        411.4528
-    1.000  5.1500     0.30000E-01  5.6960        331.3005
-    1.200  6.8800     0.40000E-01  7.5459        277.1162
-    1.400  8.7800     0.50000E-01  9.5603        243.5251
-    1.600  10.840     0.60000E-01  11.714        211.9631
-    1.800  13.040     0.70000E-01  13.979        179.7984
-    2.000  15.360     0.80000E-01  16.327        146.1565
-    2.500  21.510     0.11000      22.373         61.5454
-    3.000  27.800     0.13000      28.325         16.3069
-    3.500  33.840     0.16000      33.838          0.0002
-    4.000  39.300     0.20000      38.702          8.9305
-    4.500  44.040     0.24000      42.842         24.9232
-    5.000  48.020     0.27000      46.273         41.8658
-    6.000  53.900     0.35000      51.301         55.1279
-    7.000  57.610     0.42000      54.461         56.2094
-    8.000  59.820     0.47000      56.343         54.7351
-    9.000  61.020     0.51000      57.365         51.3544
-   10.000  61.560     0.56000      57.808         44.8803
-   12.000  61.450     0.65000      57.636         34.4264
-   14.000  60.530     0.73000      56.692         27.6452
-   16.000  59.270     0.83000      55.383         21.9308
-   18.000  57.900     0.92000      53.915         18.7631
-   20.000  56.540      1.0100      52.395         16.8426
-
-  Dataset  3  <=>
-   Energy   Datum      Abs. error  Theory         Chi
-    0.200 -10.880     0.20000E-01 -11.655       1501.0830
-    0.400 -15.370     0.30000E-01 -16.406       1193.3719
-    0.600 -18.800     0.40000E-01 -20.002        903.1754
-    0.800 -21.690     0.40000E-01 -22.993       1060.7552
-    1.000 -24.230     0.40000E-01 -25.593       1160.9197
-    1.200 -26.520     0.40000E-01 -27.913       1213.0941
-    1.400 -28.620     0.50000E-01 -30.020        783.7626
-    1.600 -30.570     0.50000E-01 -31.956        768.4756
-    1.800 -32.390     0.50000E-01 -33.752        742.3601
-    2.000 -34.110     0.50000E-01 -35.431        697.7014
-    2.500 -38.040     0.50000E-01 -39.213        550.1273
-    3.000 -41.570     0.50000E-01 -42.535        372.3099
-    3.500 -44.780     0.50000E-01 -45.506        210.8558
-    4.000 -47.740     0.60000E-01 -48.199         58.4192
-    4.500 -50.500     0.60000E-01 -50.663          7.3775
-    5.000 -53.080     0.70000E-01 -52.936          4.2136
-    6.000 -57.790     0.90000E-01 -57.017         73.8063
-    7.000 -62.010     0.12000     -60.602        137.6389
-    8.000 -65.820     0.15000     -63.799        181.5060
-    9.000 -69.290     0.19000     -66.682        188.3498
-   10.000 -72.440     0.24000     -69.307        170.4444
-   12.000 -77.900     0.35000     -73.934        128.3749
-   14.000 -82.340     0.50000     -77.917         78.2411
-   16.000 -85.810     0.72000     -81.408         37.3875
-   18.000 -88.310      1.0600     -84.509         12.8557
-   20.000 -89.810      1.5700     -87.297          2.5614
-
-  Total ChiSq/N =   392.8047 from    576.538   131.138   470.737
-sfresco> 
-  ChiSq/N =   392.805 from    576.538   131.138   470.737
+  ChiSq/N =   414.936 from    561.229    97.098   586.482
   xmgr file written: search-na-fit.plot                                
-sfresco>     Var   1=V          value    44.209480, step   0.0100, error   0.0004
-    Var   2=Vso        value     9.727051, step   0.0100, error   0.0010
+sfresco>     Var   1=V          value    44.006926, step   0.0100, error   0.0050
+    Var   2=Vso        value     9.985599, step   0.0100, error   0.0069
 sfresco> 

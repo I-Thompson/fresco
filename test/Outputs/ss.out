@@ -1,4 +1,4 @@
-SFRESCO - FRES 2.9.3: Search Coupled Reaction Channels
+SFRESCO - FRES 3.3: Search Coupled Reaction Channels
 
  Please give search file name
  SFresco search file = ss.search                                         
@@ -6,7 +6,8 @@ SFRESCO - FRES 2.9.3: Search Coupled Reaction Channels
  Fresco input file = p-cd.in                                           
    and output file = p-cd.frout                                        
  Search on  4 variables for   1 datasets,
-  MINUIT RELEASE 96.03  INITIALIZED.   DIMENSIONS 100/ 50  EPSMAC=  0.89E-15
+ MNINIT UNABLE TO DETERMINE ARITHMETIC PRECISION. WILL ASSUME:  0.40E-06
+  MINUIT RELEASE 96.03  INITIALIZED.   DIMENSIONS 100/ 50  EPSMAC=  0.80E-06
 
   Define SEARCH VARIABLES:
 
@@ -22,13 +23,13 @@ SFRESCO - FRES 2.9.3: Search Coupled Reaction Channels
    Variable  4=WD         is potential KP= 1, line= 3 col= 4
      value   8.5000           step  0.1000, min,max   0.0000  0.0000
 
-  Read definition of data set  1
+  Read definition of data set            1
   Read DATA SET  1 from file =                                                 
     of type  0           with absolute errors, CM  for state/excit  1  1,  idir= 1
 
-  Angular cross section T00
-  Read data set  1
-   28  data points:
+  Angular cross section T00 for energy  27.900 MeV
+  Read data set            1
+            28  data points for lab energy    27.90000    
   Angle CM  Datum     Absolute error
    22.000  0.5480      0.4400E-01
    26.000  0.4750      0.2400E-01
@@ -58,12 +59,12 @@ SFRESCO - FRES 2.9.3: Search Coupled Reaction Channels
   122.000  0.2230      0.9000E-02
   126.000  0.1890      0.6000E-02
   130.000  0.1610      0.5000E-02
-
+ 
   FRESCO output to p-cd.frout*
-
+ 
  Calculate scattering at energies
    27.900
-
+ 
 
   Total ChiSq/N =    20.5232 from     20.523
 
@@ -96,53 +97,96 @@ sfresco>
  **    3 **SET ERRORDEF  0.3571E-01
  **********
 minuit>  **********
- **    4 **MIGRAD 
+ **    4 **SET STRAT    2.000    
+ **********
+
+ NOW USING STRATEGY  2: MAKE SURE MINIMUM TRUE, ERRORS CORRECT  
+
+minuit>  **********
+ **    5 **MIGRAD 
  **********
 
  FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
- START MIGRAD MINIMIZATION.  STRATEGY 0.  CONVERGENCE WHEN EDM .LT. 0.36E-05
+ START MIGRAD MINIMIZATION.  STRATEGY 2.  CONVERGENCE WHEN EDM .LT. 0.36E-05
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
 
- FCN=   20.52320     FROM MIGRAD    STATUS=INITIATE      10 CALLS       11 TOTAL
-                     EDM= unknown      STRATEGY= 0      NO ERROR MATRIX       
+ FCN=   20.52320     FROM HESSE     STATUS=OK            27 CALLS       28 TOTAL
+                     EDM=  0.18E+02    STRATEGY= 2      ERROR MATRIX ACCURATE 
 
-  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  EXT PARAMETER                                   STEP         FIRST   
   NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
-   1      r0        1.1710       0.10000E-01   0.10000E-01   -784.14    
-   2      V         52.500       0.10000       0.10000       -8.1024    
-   3      W         3.5000       0.10000       0.10000        18.764    
-   4      WD        8.5000       0.10000       0.10000        9.1249    
+   1      r0        1.1710       0.21178E-02   0.16758E-01   -790.19    
+   2      V         52.500       0.22730       0.75132       -8.0932    
+   3      W         3.5000       0.75183E-01   0.31279        18.752    
+   4      WD        8.5000       0.12584       0.45891        9.1144    
                                ERR DEF= 0.357E-01
  MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
 
  MIGRAD MINIMIZATION HAS CONVERGED.
 
- FCN=   8.935222     FROM MIGRAD    STATUS=CONVERGED    120 CALLS      121 TOTAL
-                     EDM=  0.29E-05  STRATEGY=0  ERROR MATRIX UNCERTAINTY= 11.0%
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+
+ FCN=   8.941875     FROM HESSE     STATUS=OK            31 CALLS      139 TOTAL
+                     EDM=  0.37E-01    STRATEGY= 2      ERROR MATRIX ACCURATE 
+
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1      r0        1.1819       0.53308E-02   0.16915E-01    8.5197    
+   2      V         52.117       0.55343       0.74583      -0.40339E-01
+   3      W         2.8561       0.86072E-01   0.55634E-01   0.30006E-01
+   4      WD        8.2334       0.11708       0.11783       0.13730    
+                               ERR DEF= 0.357E-01
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+
+ FCN=   8.941875     FROM HESSE     STATUS=OK            31 CALLS      171 TOTAL
+                     EDM=  0.65E-02    STRATEGY= 2      ERROR MATRIX ACCURATE 
+
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1      r0        1.1819       0.20238E-02   0.16915E-02    8.5197    
+   2      V         52.117       0.20326       0.74583E-01  -0.40339E-01
+   3      W         2.8561       0.12632       0.40874E-02   0.30006E-01
+   4      WD        8.2334       0.17593       0.11783E-01   0.13730    
+                               ERR DEF= 0.357E-01
+ MIGRAD FAILS TO FIND IMPROVEMENT
+ MACHINE ACCURACY LIMITS FURTHER IMPROVEMENT.
+
+ MIGRAD MINIMIZATION HAS CONVERGED.
+
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ MIGRAD TERMINATED WITHOUT CONVERGENCE.
+
+ FCN=   8.935302     FROM MIGRAD    STATUS=FAILED       213 CALLS      214 TOTAL
+                     EDM=  0.11E-01    STRATEGY= 2      ERR MATRIX APPROXIMATE
 
   EXT PARAMETER                APPROXIMATE        STEP         FIRST   
   NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
-   1      r0        1.1814       0.17903E-02   -0.0000       0.13965    
-   2      V         52.184       0.17900        0.0000      -0.15027E-02
-   3      W         2.8947       0.12733        0.0000      -0.24834E-03
-   4      WD        8.1833       0.17585       -0.0000       0.12949E-02
+   1      r0        1.1814       0.54882E-02   0.16906E-01   -2.2715    
+   2      V         52.187       0.57027       0.74685       0.27978E-01
+   3      W         2.8904       0.85628E-01   0.55636E-01  -0.31724E-01
+   4      WD        8.1890       0.11609       0.11719      -0.90870E-02
                                ERR DEF= 0.357E-01
 
  EXTERNAL ERROR MATRIX.    NDIM=  50    NPAR=  4    ERR DEF= 0.357E-01
-  0.321E-05-0.289E-03 0.115E-04-0.633E-04
- -0.289E-03 0.320E-01 0.445E-02-0.190E-02
-  0.115E-04 0.445E-02 0.162E-01-0.210E-01
- -0.633E-04-0.190E-02-0.210E-01 0.309E-01
+  0.301E-04-0.311E-02-0.108E-03 0.162E-03
+ -0.311E-02 0.325E+00 0.136E-01-0.201E-01
+ -0.108E-03 0.136E-01 0.733E-02-0.868E-02
+  0.162E-03-0.201E-01-0.868E-02 0.135E-01
  ERR MATRIX APPROXIMATE
 
  PARAMETER  CORRELATION COEFFICIENTS
        NO.  GLOBAL     1     2     3     4
-        1  0.93768  1.000-0.901 0.051-0.201
-        2  0.93484 -0.901 1.000 0.195-0.060
-        3  0.94870  0.051 0.195 1.000-0.938
-        4  0.95174 -0.201-0.060-0.938 1.000
+        1  0.99364  1.000-0.992-0.230 0.254
+        2  0.99384 -0.992 1.000 0.279-0.303
+        3  0.87472 -0.230 0.279 1.000-0.873
+        4  0.87751  0.254-0.303-0.873 1.000
  ERR MATRIX APPROXIMATE
 minuit>  **********
- **    5 **END 
+ **    6 **END 
  **********
 
  CALL TO USER FUNCTION WITH IFLAG = 3

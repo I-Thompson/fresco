@@ -27,8 +27,10 @@ fresco > e80f49b-n.out
 del fresco.in
 
 fresco < b8ex.in > b8ex.out
+fresco <  be11r20.frin > be11r20.out
 
-fresco < dex.in > dex.out
+
+fresco < dex.frin > dex.out
 fresco < dexcc.in > dexcc.out
 
 fresco < li7p-EM.in > li7p-EM.out
