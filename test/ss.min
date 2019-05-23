@@ -1,5 +1,6 @@
 ss.search
 plot ss-init.plot
+show
 q
 min
 migrad

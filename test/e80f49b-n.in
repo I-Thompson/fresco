@@ -7,11 +7,13 @@ NAMELIST
      cutl=  0.00 cutr=-10.00 cutc=  0.00
      ips= 0.0100  it0=0 iter= 30 fatal=T iblock= 3 pade=1 nosol=F psiren=T
      iso=' ' nnu= 24 maxl=   0 minl=  0 mtmin= 0 epc= 0.0000
+     erange=  1.2000  dk=  0.0200
      chans= 1 listcc= 0 treneg= 0 cdetr= 0 smats= 2 xstabl= 0 nlpl= 0
      waves= 0 lampl= 0 veff= 1 kfus=20 wdisk= 0 bpm= 0 melfil= 0
-     unitmass= 1.000000
+     unitmass= 1.000000 finec=137.03599
      inh=0 pel=1 exl= 1 lab=0 lin=0 lex= 0
      elab(1)=    80.0000 /
+
  &PARTITION namep='16-O    ' massp= 15.9949 zp=  8 nex= 5 pwf=T
             namet='PB-208  ' masst=207.9770 zt= 82 qval=  0.0000/
  &STATES jp= 0.0 ptyp= 1 ep=  0.0000  cpot=  1
@@ -48,11 +50,14 @@ NAMELIST
             namet='PO-212  ' masst=212.0000 zt= 84 qval=-20.0000/
  &STATES jp= 0.0 ptyp= 1 ep=  0.0000  cpot=  8
          jt= 0.0 ptyt= 1 et=  0.0000/
- &partition /
+ &partition /   ! END OF DEFINING PARTITIONS
+
  &pot kp= 1 type= 0
-      p(1:3)=  208.000  16.000   1.200 /
- &pot kp= 1 type=10
-      p(1:3)=    0.000   0.000  37.600 /
+      p(1:3)=  208.000 16.0000  1.2000 /
+ &pot kp= 1 type=12
+      p(1:3)=    0.000  0.0000 37.6000 /
+   &step ib= 1 ia= 2 k=3 str=  37.60     /
+   &step ib=-2 ia= 1 k=3 str=  37.60     /
  &pot kp= 1 type=13
       p(1:7)=   0.000       54.45       815.0
                 0.000      0.2380E+05   0.000       0.000     /
@@ -63,13 +68,15 @@ NAMELIST
    &step ib= 1 ia= 5 k=5 str= 0.2380E+05 /
    &step ib=-5 ia= 1 k=5 str= 0.2380E+05 /
  &pot kp= 1 type= 1 itt=F shape= 1
-      p(1:7)=    0.000   1.179   0.658  10.000   1.000   0.400   0.000 /
+      p(1:7)=    0.000  1.1790  0.6580 10.0000  1.0000  0.4000  0.0000 /
  &pot kp= 1 type=-1
-      p(1:3)=   60.500   1.179   0.658 /
- &pot kp= 1 type=10 itt=F shape=11
-      p(1:3)=    0.000   0.000   2.150 /
+      p(1:3)=   60.500  1.1790  0.6580 /
+ &pot kp= 1 type=12 itt=F shape=11
+      p(1:3)=    0.000  0.0000  2.1500 /
+   &step ib= 1 ia= 2 k=3 str=  2.150     /
+   &step ib=-2 ia= 1 k=3 str=  2.150     /
  &pot kp= 1 type=13 itt=F shape=11
-      p(1:7)=    0.000   0.400   0.800   0.000   0.468   0.000   0.000 /
+      p(1:7)=    0.000  0.4000  0.8000  0.0000  0.4680  0.0000  0.0000 /
    &step ib= 1 ia= 3 k=3 str= 0.8000     /
    &step ib= 3 ia= 1 k=3 str= 0.8000     /
    &step ib= 1 ia= 4 k=2 str= 0.4000     /
@@ -77,89 +84,91 @@ NAMELIST
    &step ib= 1 ia= 5 k=5 str= 0.4680     /
    &step ib=-5 ia= 1 k=5 str= 0.4680     /
  &pot kp=20 type= 1 itt=F shape= 1
-      p(1:7)=    0.000   1.179   0.658  10.000   1.000   0.400   0.000 /
+      p(1:7)=    0.000  1.1790  0.6580 10.0000  1.0000  0.4000  0.0000 /
  &pot kp= 2 type= 0
-      p(1:3)=  207.000  17.000   1.200 /
+      p(1:3)=  207.000 17.0000  1.2000 /
  &pot kp= 2 type= 1
-      p(1:7)=   78.280   1.215   0.650   0.000   1.162   0.623   0.000 /
+      p(1:7)=   78.280  1.2150  0.6500  0.0000  1.1620  0.6230  0.0000 /
  &pot kp= 2 type= 1 itt=F shape= 1
-      p(1:7)=    0.000   1.179   0.658  10.000   1.000   0.400   0.000 /
+      p(1:7)=    0.000  1.1790  0.6580 10.0000  1.0000  0.4000  0.0000 /
  &pot kp= 3 type= 0
-      p(1:3)=  209.000  15.000   1.200 /
+      p(1:3)=  209.000 15.0000  1.2000 /
  &pot kp= 3 type= 1
-      p(1:7)=   78.280   1.215   0.650   0.000   1.162   0.623   0.000 /
+      p(1:7)=   78.280  1.2150  0.6500  0.0000  1.1620  0.6230  0.0000 /
  &pot kp= 3 type= 1 itt=F shape= 1
-      p(1:7)=    0.000   1.179   0.658  10.000   1.000   0.400   0.000 /
+      p(1:7)=    0.000  1.1790  0.6580 10.0000  1.0000  0.4000  0.0000 /
  &pot kp= 4 type= 0
-      p(1:3)=   16.000   0.000   1.200 /
+      p(1:3)=   16.000  0.0000  1.2000 /
  &pot kp= 4 type= 1
-      p(1:3)=   60.000   1.200   0.600 /
+      p(1:3)=   60.000  1.2000  0.6000 /
  &pot kp= 4 type= 3
-      p(1:3)=    6.000   1.200   0.600 /
+      p(1:3)=    6.000  1.2000  0.6000 /
  &pot kp= 5 type= 0
-      p(1:3)=   15.000   0.000   1.200 /
+      p(1:3)=   15.000  0.0000  1.2000 /
  &pot kp= 5 type= 1
-      p(1:3)=   60.000   1.200   0.600 /
+      p(1:3)=   60.000  1.2000  0.6000 /
  &pot kp= 5 type= 3
-      p(1:3)=    6.000   1.200   0.600 /
+      p(1:3)=    6.000  1.2000  0.6000 /
  &pot kp= 6 type= 0
-      p(1:3)=  207.000   0.000   1.250 /
+      p(1:3)=  207.000  0.0000  1.2500 /
  &pot kp= 6 type= 1
-      p(1:3)=   60.000   1.250   0.650 /
+      p(1:3)=   60.000  1.2500  0.6500 /
  &pot kp= 6 type= 3
-      p(1:3)=    7.000   1.250   0.650 /
+      p(1:3)=    7.000  1.2500  0.6500 /
  &pot kp= 7 type= 0
-      p(1:3)=  208.000   0.000   1.250 /
+      p(1:3)=  208.000  0.0000  1.2500 /
  &pot kp= 7 type= 1
-      p(1:3)=   60.000   1.280   0.760 /
+      p(1:3)=   60.000  1.2800  0.7600 /
  &pot kp= 7 type= 3
-      p(1:3)=    5.000   1.280   0.760 /
+      p(1:3)=    5.000  1.2800  0.7600 /
  &pot kp= 8 type= 0
-      p(1:3)=  212.000  12.000   1.200 /
+      p(1:3)=  212.000 12.0000  1.2000 /
  &pot kp= 8 type= 1
-      p(1:7)=   78.280   1.215   0.650   0.000   1.162   0.623   0.000 /
+      p(1:7)=   78.280  1.2150  0.6500  0.0000  1.1620  0.6230  0.0000 /
  &pot kp= 8 type= 1 itt=F shape= 1
-      p(1:7)=    0.000   1.179   0.658  10.000   1.000   0.400   0.000 /
+      p(1:7)=    0.000  1.1790  0.6580 10.0000  1.0000  0.4000  0.0000 /
  &pot kp=10 type= 0
-      p(1:3)=   12.000   4.000   1.250 /
+      p(1:3)=   12.000  4.0000  1.2500 /
  &pot kp=10 type= 1
-      p(1:3)=   60.000   1.280   0.760 /
+      p(1:3)=   60.000  1.2800  0.7600 /
  &pot kp=11 type= 0
-      p(1:3)=  208.000   0.000   1.250 /
+      p(1:3)=  208.000  0.0000  1.2500 /
  &pot kp=11 type= 1
-      p(1:3)=  110.900   1.464   0.500 /
- &pot /
+      p(1:3)=  110.900  1.4640  0.5000 /
+ &pot /   ! END OF DEFINING POTENTIALS
+
  &OVERLAP kn1=  1 kn2=  0 ic1=1 ic2=2 in= 1
     kind=0 ch1=' ' nn= 1 l=2 lmax=0 sn= 0.5 ia= 1 j= 2.5 ib= 1
-    kbpot= 4 krpot= 0 be=  4.1425 isc=1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
+    kbpot= 4 krpot= 0 be=  4.1425 isc= 1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
  &OVERLAP kn1=  3 kn2=  0 ic1=1 ic2=2 in= 1
     kind=0 ch1=' ' nn= 2 l=0 lmax=0 sn= 0.5 ia= 1 j= 0.5 ib= 2
-    kbpot= 4 krpot= 0 be=  3.2715 isc=1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
+    kbpot= 4 krpot= 0 be=  3.2715 isc= 1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
  &OVERLAP kn1=  9 kn2=  0 ic1=1 ic2=2 in= 2
           kind=0 nn= 3 l=1 sn= 0.5 j= 0.5
-    kbpot= 6 krpot= 0 be=  7.3755 isc=1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
+    kbpot= 6 krpot= 0 be=  7.3755 isc= 1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
  &OVERLAP kn1= 10 kn2=  0 ic1=1 ic2=2 in= 2
           kind=0 nn= 2 l=3 sn= 0.5 j= 2.5
-    kbpot= 6 krpot= 0 be=  7.9465 isc=1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
+    kbpot= 6 krpot= 0 be=  7.9465 isc= 1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
  &OVERLAP kn1= 11 kn2=  0 ic1=1 ic2=2 in= 2
           kind=0 nn= 3 l=1 sn= 0.5 j= 1.5
-    kbpot= 6 krpot= 0 be=  8.2735 isc=1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
+    kbpot= 6 krpot= 0 be=  8.2735 isc= 1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
  &OVERLAP kn1=  2 kn2=  0 ic1=1 ic2=3 in= 1
     kind=0 ch1=' ' nn= 1 l=1 lmax=0 sn= 0.5 ia= 1 j= 0.5 ib= 1
-    kbpot= 5 krpot= 0 be= 12.1259 isc=1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
+    kbpot= 5 krpot= 0 be= 12.1259 isc= 1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
  &OVERLAP kn1=  5 kn2=  0 ic1=1 ic2=3 in= 2
           kind=0 nn= 2 l=3 sn= 0.5 j= 3.5
-    kbpot= 7 krpot= 0 be=  2.9054 isc=1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
+    kbpot= 7 krpot= 0 be=  2.9054 isc= 1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
  &OVERLAP kn1=  7 kn2=  0 ic1=1 ic2=3 in= 2
           kind=0 nn= 3 l=1 sn= 0.5 j= 1.5
-    kbpot= 7 krpot= 0 be=  0.6840 isc=1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
+    kbpot= 7 krpot= 0 be=  0.6840 isc= 1 ipc=0 nfl=  0 nam=  1 ampl=  0.0000 /
  &OVERLAP kn1=  4 kn2=  0 ic1=1 ic2=4 in= 1
           kind=0 nn= 5 l=0 sn= 0.0 j= 0.0
-    kbpot=10 krpot= 0 be=  7.1610 isc=1 ipc=0 nfl=  0 nam=  0 ampl=  0.0000 /
+    kbpot=10 krpot= 0 be=  7.1610 isc= 1 ipc=0 nfl=  0 nam=  0 ampl=  0.0000 /
  &OVERLAP kn1= 12 kn2=  0 ic1=1 ic2=4 in= 2
           kind=0 nn=10 l=0 sn= 0.0 j= 0.0
-    kbpot=11 krpot= 0 be=  1.0000 isc=1 ipc=0 nfl=  0 nam=  0 ampl=  0.0000 /
- &overlap /
+    kbpot=11 krpot= 0 be=  1.0000 isc= 1 ipc=0 nfl=  0 nam=  0 ampl=  0.0000 /
+ &overlap /   ! END OF DEFINING OVERLAPS
+
  &COUPLING icto= 2 icfrom= 1 kind=7 ip1= 1 ip2= 1 ip3= 0 /
    &cfp  in= 1 ib=  1 ia=  1 kn=  1  a=   1.050     /
    &cfp  in= 1 ib=  4 ia=  1 kn=  3  a=   1.015     /
@@ -174,17 +183,3 @@ NAMELIST
    &cfp  in= 1 ib=  1 ia=  1 kn=  4  a=  0.5000     /
    &cfp  in=-2 ib=  1 ia=  1 kn= 12  a=   1.300     /
  &COUPLING icto= 0 icfrom= 1 kind=1 ip1= 0 ip2= 0 ip3= 0 /
-
- Please check that your input numbers have sufficient
- range and accuracy in the formats chosen for the namelists,
- and that 'unitmass' is correct for your masses.
-
-
- To exactly reproduce previous FRESCO runs using 2*amu/hbar^2 = 0.0481960
-  you will need to enter to this version the numbers:
-     unitmass= 1.007335 finec=137.56480
-
- To exactly reproduce previous FRESCO runs using 2*amu/hbar^2 = 0.0478326
-  you will need to enter to this version the numbers:
-     unitmass= 0.999740 finec=137.04550
-

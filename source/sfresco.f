@@ -204,7 +204,7 @@
         do id=1,ndatasets
 	  type=0; angle=0; jtot=-1;par=0;channel=1
           data_file="="; xmin=0;delta=-1;idir=0;iscale=-1;lab=.false.
-          ic=1;ia=1;k=0;q=0; abserr=.false.;  points=-1; 
+          ic=1;ia=1;k=0;q=0; abserr=.false.;  points=-1; ib=0
           energy=elab(1)
 	  pel=peli; exl=exli; labe=labi; lin=lini; lex=lexi
 	  write(6,*) ' Read definition of data set ',id
