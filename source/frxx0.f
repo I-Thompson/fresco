@@ -1260,7 +1260,11 @@ c     	   DM = DM + (QVAL(ICP)-QVAL(ICR))/AMU
 	     alogic = afrac(icp,ib,icr,ia,in,kk)
              !uu = abs(a).gt.1e-10 .or. used(in,kk)
              uu = alogic .or. used(in,kk)
-             if((kind.eq.5.or.kind.eq.2).and.in==1) uu = kk.eq.1
+             if((kind.eq.5.or.kind.eq.2).and.in==1) then
+                 uu = kk.eq.1
+                 kna(1) = 1
+                 knb(1) = 1
+                 endif
 	     used(in,kk) = uu
        	     if(in==in1.and.alogic) then
 		      usedlow(kk) = min(ib,usedlow(kk))
