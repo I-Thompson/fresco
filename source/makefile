@@ -13,7 +13,6 @@ FFLAGS = -O2 		# generic
 #FFLAGS = -O2 -dcfuns -w				# for nag f95
 #FFLAGS = -C=all -C=undefined -dcfuns -w -O0 -gline     # for nag f95 debug
 #FFLAGS = -O2 -qmaxmem=16384                            #   optimisation for xlf
-#FFLAGS = -Wall -g -fbounds-check -ftrace=full          # debug for g95
 #FFLAGS = -g
 #FFLAGS = -g  -C  	 				# generic debug for f90
 #FFLAGS = -g -check all -O0 -debug 			# debug for ifort

@@ -72,7 +72,10 @@
 !                                ia=-2 is total cross section (elastic+reaction)
 !              = 4       excitation phase shift for fixed partial wave
 !              = 5 	 search factor for bound state
-!              = 6 	 value and error for a search parameter 
+!              = 6       value and error for a search parameter
+!              = 7       value and error for pole energy in Brune basis (not yet implemented)
+!              = 8       value and error for total formal width of pole in Brune basis (not yet implemented)
+!              = 9       value and error for ANC of bound state
 
 !    idir      = 0       cross-section data are given in absolute units.
 !              = 1       cross-section data are ratio to rutherford.
@@ -236,6 +239,7 @@
 	  if(type==4) write(6,1034) jtot,psign(par+2),channel
 	  if(type==5) write(6,1035) 
 	  if(type==6) write(6,1036) par,value,error,abserr
+	  if(type==9) write(6,1039) 
 1029	  format('  Angular cross section T',2i1)
 1030	  format('  Angular cross section T',2i1,
      x				' for energy',f8.3,' MeV')
@@ -244,17 +248,40 @@
      x				' for angle',f8.3,' deg ',a3)
 1033      format('  Excitation cross section',:,' for ',a,:,' in',i3)
 1034	  format('  Excitation phase shift in channel',f5.1,a1,' #',i2)
-1035	  format('  Target search parameters for bound states')
-1036	  format('  Value and error for search parameter',i3,' are'/
-     x        2f10.5,' (abserr=',l1,')')
-	  if(type<0.or.type>6) write(6,*) 'Unrecognised data type ',type
+1035	  format('  Known search parameters for bound states kn=x')
+1036	  format('  Bound state search parameter',i3,' value and error',
+     x        ' are',2f10.5,' (abserr=',l1,')')
+1037      format('  R-matrix Brune energy of term ',i3,
+     x        ' value and error are',/2f10.5,' (abserr=',l1,')', i4)
+1038      format('  R-matrix Brune total formal width of','term ',i3,
+     x        ' value and error are',/,2f10.5,' (abserr=',l1,')', i4)
+1039      format('  Known ANC of bound state components kn=x')
+
+	  if(type<0.or.type>9) write(6,*) 'Unrecognised data type ',type
 	  data_type(id) = type
+
 	if(type==6) then
 	      datavals(1,id)=value
 	      if(abserr) error = error*value
  	      dataerr(1,id)=error
  		datalen(id) = 1
  	      ip = 2
+        else if(type==7 .or. type==8) then
+              datavals(1,id)=value
+              if(.not.abserr) error = error*value
+              dataerr(1,id)=error
+              data_term(id) = term
+              rm_Brune(term) = .true.
+              par = 0
+              do ip=1,nparameters
+               if(srch_kind(ip)==3 .and. srch_rterm(ip)==term) par=ip
+              enddo
+              data_par(id) = par
+
+                datalen(id) = 1
+              ip = 2
+          if(type==7) write(6,1037) term,value,error,abserr,par
+          if(type==8) write(6,1038) term,value,error,abserr,par
 	else
               factor=1.0
 	      if(iscale<0) factor=1. 
@@ -273,7 +300,7 @@
           do 10 ip=1,points
 	    if(type==1) then
               read(inf,end=111,fmt=*,err=11) x,a,val,err
-            else if(xvals.or.type==5) then
+            else if(xvals.or.type==5.or.type==9) then
               read(inf,end=111,fmt=*,err=11) x,val,err
             else
               read(inf,end=111,fmt=*,err=11) val,err
@@ -302,7 +329,9 @@
  	      data_energies(ip,id) = x
              else if(type==4) then  ! excitation phase shift
  	      data_energies(ip,id) = x
-             else if(type==5) then  ! bound state search
+             else if(type==5) then  ! bound state search factor
+ 	      bs_no(ip,id) = nint(x)
+             else if(type==9) then  ! bound state ANC
  	      bs_no(ip,id) = nint(x)
 	     endif
   10      continue
@@ -359,7 +388,7 @@
      x			datavals(ip,id),dataerr(ip,id)
   13 	   format(1x,2f8.3,2g12.4)
 	  enddo
-	 else if(type==5) then
+	 else if(type==5.or.type==9) then
           write(6,*) '   Bound state   Target     Absolute error'
 	  do ip=1,datalen(id)
 	  write(6,131) bs_no(ip,id),datavals(ip,id),dataerr(ip,id)
@@ -774,7 +803,7 @@ C			DO IT!
 	  else if(data_type(id)==1) then
           write(iof,*) '   Energy  Angle      Datum   Abs. error  ',
      x               '      Theory         Chi'
-	  else if(data_type(id)==5) then
+	  else if(data_type(id)==5.or.data_type(id)==9) then
           write(iof,*) '   Bound state    Datum      Abs. error  ',
      x               'Theory         Chi'
      	  else
@@ -791,7 +820,7 @@ C			DO IT!
 	  write(iof,1062) data_energies(ip,id),datangles(ip,id),
      x          datanorm*datavals(ip,id),
      X          datanorm*dataerr(ip,id),theoryvals(ip,id),chi**2
-	  else if(data_type(id)==5) then
+	  else if(data_type(id)==5.or.data_type(id)==9) then
 	  write(iof,10621) bs_no(ip,id),datanorm*datavals(ip,id),
      X          datanorm*dataerr(ip,id),theoryvals(ip,id),chi**2
      	  else
@@ -912,6 +941,7 @@ C			DO IT!
 	    if(data_type(id)==0) write(304,1062) datangles(ip,id),d,e
 	    if(data_type(id)==1) write(304,1062) datangles(ip,id),d,e
 	    if(data_type(id)==5) write(304,1062) bs_no(ip,id)+0.,d,e
+	    if(data_type(id)==9) write(304,1062) bs_no(ip,id)+0.,d,e
 	    if(data_type(id)>1.and.data_type(id)<5) then
 	      sfa = 1.
 	      if(data_idir1(id)==-1)  then
@@ -954,7 +984,7 @@ C			DO IT!
 	   do ia=1,NANGL
 !	    write(304,1062) thmin+(ia-1)*abs(THINC),theoryplot(ia,id)
 	   enddo
-	  else if(data_type(id)==5) then
+	  else if(data_type(id)==5.or.data_type(id)==9) then
 	   do ia=1,datalen(id)
 	    write(304,10621) bs_no(ia,id),theoryvals(ia,id)
 	   enddo

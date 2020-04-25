@@ -39,14 +39,12 @@ set PREF='a'
 
 if(! $?ARCH && -X arch) setenv ARCH `arch`
 if( ${ARCH} == 'x86_64' ) then   
-      if( -X g95 )     set COMP = 'g95'
       if( -X pgf90 )   set COMP = 'pgf90'
       if( -X pathf95 ) set COMP = 'pathf95'
       if( -X f90 ) 	set COMP = 'f90'
       set PREF=${ARCH}
 endif
 if( ${ARCH} == 'i686' ) then 	# Linux Intel
-      if( -X g95 )     set COMP = 'g95'
       if( -X pgf90 )   set COMP = 'pgf90'
       if( -X pathf95 ) set COMP = 'pathf95'
       if( -X ifort )   set COMP = 'ifort'
@@ -57,15 +55,12 @@ if( ${ARCH} == 'ia64' ) then    # Linux Itanium
       set PREF=${ARCH}
 endif
 if( ${ARCH} == 'ppc' ) then 	# Mac Powerpc
-      if( -X g95 )     set COMP = 'g95'
       if( -X xlf )     set COMP = 'xlf'
       set PREF=${ARCH}
 endif
 if( ${ARCH} == 'i386' ) then 	# Mac Intel
       if( -X gfortran )     set COMP = 'gfortran'
       if( -X f95 )     set COMP = 'f95'
-      if( -X g95-0.93 )     set COMP = 'g95-0.93'
-      if( -X g95 )     set COMP = 'g95'
 #      if( -X pgf90 )   set COMP = 'pgf90'
       if( -X ifort )   set COMP = 'ifort'
       set PREF=${ARCH}

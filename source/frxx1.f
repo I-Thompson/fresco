@@ -2452,13 +2452,24 @@ C
 	   endif
 
       do id=1,datasets
-           if(data_type(id)==6) then
-            t = (srch_value(data_par(id))-datavals(1,id))/dataerr(1,id)
-            data_chisq(id) = t**2
-            endif
-	   if(data_idir(id)==-1) then
-	     data_idir(id) = 0
-	     endif
+       if(data_type(id)==6) then
+        t = (srch_value(data_par(id))-datavals(1,id))/dataerr(1,id)
+        data_chisq(id) = t**2
+        endif
+       if(data_idir(id)==-1) then
+         data_idir(id) = 0
+         endif
+       if(data_type(id)==7.or.data_type(id)==8) then
+        I = data_term(id)
+         if(pralpha) write(6,*) 'Term',I,'E,W:',E_Brune(I),W_Brune(I)
+         if(pralpha) write(6,*) 'E_Brune(;)',E_Brune
+         if(data_type(id)==7)
+     x       theoryvals(1,id) = E_Brune(data_term(id)) ! Brune energy
+         if(data_type(id)==8)
+     x       theoryvals(1,id) = W_Brune(data_term(id)) ! Brune total observed width
+        t = (theoryvals(1,id)-datavals(1,id))/dataerr(1,id)
+        data_chisq(id) = t**2
+        endif
       enddo
 
       if(final.and.IAME==0) then

@@ -126,6 +126,11 @@
 	integer srch_par(mvars),srch_r_ch(mvars)
 	integer srch_datanorm(mvars),srch_rterm(mvars)
 	logical interactive,srch_nopot(mvars),final
+
+        logical srch_rwa(mvars),srch_Brune(mvars)
+        logical,save,allocatable::  rm_Brune(:)
+        real*8,save,allocatable::  E_Brune(:),W_Brune(:)
+
 	integer number_calls
 	end module searchpar
 	
@@ -136,7 +141,7 @@
 	real*8 theoryvals(mdl,mds),data_energies(mdl,mds),data_jtot(mds)
         real*8,save,allocatable::  theoryplot(:,:)
 	logical data_lab(mds),data_matched(mds),gettheoryplot
-	integer data_type(mds),bs_no(mdl,mds)
+	integer data_type(mds),bs_no(mdl,mds),data_term(mds)
 	integer data_pel(mds),data_exl(mds),data_labe(mds),
      x 	        data_lin(mds),data_lex(mds),data_ib(mds)
 	integer data_ic(mds),data_ia(mds),data_thfile(mds),ndof

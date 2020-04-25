@@ -1,0 +1,45 @@
+
+
+ Partition  1 ***
+   PROJ=8B         MASS=  8.0000 Z=   5.0,        # STATES=    1T, TARG=58Ni     MASS= 58.0000 Z=  28.0,     Q-VALUE =   0.0000 MEV.
+
+     1:  J= 1.5- (B#-1), E=  0.0000, K= 0.5              Potl#  1       J= 0.0+ (B# 1), E=  0.0000, K= 0.0    
+
+
+ Partition  2 ***
+   PROJ=7Be        MASS=  7.0000 Z=   4.0,        # STATES=    1T, TARG=59Cu     MASS= 59.0000 Z=  29.0,     Q-VALUE =   0.0000 MEV.
+
+     1:  J= 0.0+ (B# 1), E=  0.0000, K= 0.0              Potl#  3       J= 0.0+ (B# 1), E=  0.0000, K= 0.0    
+
+    1    0=Coulomb       0=CHARGE (WS)  1    58.000     8.000    1.3000    0.0000    0.0000    0.0000     0.000   202.353
+
+    2    0=Coulomb       0=CHARGE (WS)  2     1.000     0.000    1.2500    0.0000    0.0000    0.0000     0.000     1.000
+
+    2    1=Volume        0=Woods-Saxon  3   44.6750    2.6994    0.6296    0.0000    0.0000    0.0000     0.000     1.000
+
+    2    3=Projtl S.O.   0=Woods-Saxon  4    4.8980    2.3910    0.5200    0.0000    0.0000    0.0000     0.000     1.000
+
+    3    0=Coulomb       0=CHARGE (WS)  5    57.000     7.000    1.3000    0.0000    0.0000    0.0000     0.000   191.246
+
+
+ ************************************************************************************************************************************
+
+ The following SINGLE-PARTICLE FORM FACTORS are constructed :
+
+
+ No.   P1 P2 IN KIND T N  L  S1 IA J/S  IB BIND XFER  BE    SC PC FIL AFRAC Adjust  to  Z  Mass   K     Norm    rms      D0     D   ANC/Gsp
+
+    1:  2  1  1  0     1  1 0.5  1 1.5   0   2   0   0.1370  1  0  0 0.0000 VR  0.8060; 1. 1.000 0.0757 1.0000  4.575  -39.4  -34.2  0.8000
+
+    2:  2  1  1  0     1  1 0.5  1 1.5   0   2   0   0.1370  1  0  0 0.0000 VR  0.8060; 1. 1.000 0.0757 1.0000  4.575  -39.4  -34.2  0.8000
+
+***    1.0000     MeV.
+0CUMULATIVE OUTGOING cross section                 =    0.00000
+ 
+  Dataset            1  <=>
+    Bound state    Datum      Abs. error  Theory         Chi
+        2        0.80000     0.30000E-01 0.80000        0.0000
+
+  Total ChiSq/N =     0.0000 from      0.000
+    Var   1=r          value     2.699391, step   0.0100, error   0.0100
+    Var   2=a          value     0.629590, step   0.0100, error   0.0100

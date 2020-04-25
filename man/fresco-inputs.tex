@@ -2948,9 +2948,14 @@ pel,exl,labe,lin,lex,ib
 KFUS (on Card 5) for inelastic state {\tt ia}--1.
 \\ = 4 excitation phase shift for fixed partial wave
 \\ = 5 desired factor for bound state search (binding energy or potential scale
- according to ISC).
+ according to ISC). The $x$ values of the input data specify the {\tt kn} of the bound state component.
 \\ = 6 specific experimental constraint on a search parameter {\tt par},
     to be {\tt value} with error {\tt error} ({\tt abserr}=T or F).
+%\\ = 7 specific constraint on energy of R-matrix pole {\tt term} in the Brune basis 
+%    to be {\tt value} with error {\tt error} ({\tt abserr}=T or F).
+%\\ = 8 specific constraint on total formal width of R-matrix pole {\tt term} in the Brune basis 
+%    to be {\tt value} with error {\tt error} ({\tt abserr}=T or F).
+\\ = 9 desired ANC for bound states. The $x$ values of the input data specify the {\tt kn} of the bound state component.
 
 
 {\tt data\_file}: name of data file with data, `$=$' for {\tt search\_file},

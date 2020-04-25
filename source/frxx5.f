@@ -1014,10 +1014,11 @@ C
          IF(KM.GT.KN1) WRITE(KO,*) ('-',I=1,132)
       		LAST1 = .TRUE.
 		do id=1,datasets
-		if(data_type(id)==5) then
+		if(data_type(id)==5 .or. data_type(id)==9) then
 		 do ip=1,datalen(id)
  		  if(KN1==bs_no(ip,id)) then
-		   T = VARY
+		   if(data_type(id)==5) T = VARY
+		   if(data_type(id)==9) T = BEE(KM,4)
 	 	   EE = (T-datavals(ip,id))/dataerr(ip,id)
                    data_chisq(id) = data_chisq(id) + EE**2
                    theoryvals(ip,id) = T

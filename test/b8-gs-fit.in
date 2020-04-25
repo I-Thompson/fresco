@@ -1,0 +1,27 @@
+8B = 7Be + p bound state fitting energy and ANC
+NAMELIST
+ &FRESCO  hcm= 0.050 rmatch=  20.0
+  elab(1)=   1 /
+
+ &PARTITION namep='8B' massp=  8.0000 zp=  5 nex=1 namet='58Ni' masst= 58.0000 zt= 28 qval=  0.0000/
+ &STATES jp= 1.5 ptyp=-1 ep=  0.0000  cpot=  1 jt= 0.0 ptyt= 1 et=  0.0000/
+
+ &PARTITION namep='7Be' massp=  7.0000 zp=  4 nex=1 namet='59Cu' masst= 59.0000 zt= 29 qval=  0.0000/
+ &STATES jp= 0.0 ptyp= 1 ep=  0.0000  cpot=  3 jt= 0.0 ptyt= 1 et=  0.0000/
+ &partition /   
+
+ &pot kp= 1 type= 0 p(1:3)=   58.000  8.0000  1.3000 /
+ &pot kp= 1 type= 1 p(1:3)=    0.000  0.0000  0.0000 /
+
+ &pot kp= 2 type= 0 p(1:3)=    1.000  0.0000  1.2500 /
+ &pot kp= 2 type= 1 p(1:3)=   44.675  2.3910  0.5200 /
+ &pot kp= 2 type= 3 p(1:3)=    4.898  2.3910  0.5200 /
+
+ &pot kp= 3 type= 0 p(1:3)=   57.000  7.0000  1.3000 /
+ &pot /  
+
+ &OVERLAP kn1=  1 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.5 j= 1.5 kbpot= 2 be=  0.1370 isc= 1 ipc=0 /
+ &OVERLAP kn1=  2 ic1=1 ic2=2 in= 1 kind=0 nn= 1 l=1 sn= 0.5 j= 1.5 kbpot= 2 be=  0.1370 isc= 1 ipc=0 /
+ &overlap /   
+
+ &COUPLING /

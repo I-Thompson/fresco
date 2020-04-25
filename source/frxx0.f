@@ -1660,7 +1660,7 @@ c        kind = 3 & 4 :    s.p. inelastic form factors of multipole 'ik'
      x     	            nafrac,afrac, energy,jtot,par,channel,width,
      x			    term,nopot
 	
-       	if(nparameters<=0) return
+        if(nparameters<=0) go to 99
 	nvars = nparameters
 
 	nul = -124578   ! 'undefined'
@@ -1725,5 +1725,8 @@ c        kind = 3 & 4 :    s.p. inelastic form factors of multipole 'ik'
 !    X           ', step ',f7.4,', min,max ',2f8.4,' >> IGNORED'/)
 	 endif
        enddo
+
+99     allocate(rm_Brune(0:mterms),E_Brune(0:mterms),W_Brune(0:mterms))
+       rm_Brune(:) = .false.
 
        end

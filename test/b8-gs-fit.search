@@ -1,0 +1,11 @@
+ 'b8-gs-fit.in' 'b8-gs-fit.frout'
+ 2 1
+
+&variable kind=1 name='r' kp=2 pline=2 col=2 /
+&variable kind=1 name='a' kp=2 pline=2 col=3 /
+
+&data type=9 data_file='=' idir=0 iscale=-1 energy=1 abserr=T /
+2 0.800 0.03
+&
+
+

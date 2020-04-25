@@ -28,7 +28,6 @@
 mk gfortran -k -j 5
 mk ifort -k -j 5
 #mk pgf90 -k -j 5
-#mk g95 -k -j 5
 
 echo i386-ifort-g:
 (cd i386-ifort-g; make ; cd ..)
