@@ -1,0 +1,116 @@
+SFRESCO - FRES 3.3: Search Coupled Reaction Channels
+
+ Please give search file name
+ SFresco search file = b8-gs-fit.search                                  
+
+ Fresco input file = b8-gs-fit.in                                      
+   and output file = b8-gs-fit.frout                                   
+ Search on  2 variables for   1 datasets,
+ MNINIT UNABLE TO DETERMINE ARITHMETIC PRECISION. WILL ASSUME:  0.40E-06
+  MINUIT RELEASE 96.03  INITIALIZED.   DIMENSIONS 100/ 50  EPSMAC=  0.80E-06
+
+  Define SEARCH VARIABLES:
+
+   Variable  1=r          is potential KP= 2, line= 2 col= 2
+     value from Fresco input, step  0.0100, min,max   0.0000  0.0000
+
+   Variable  2=a          is potential KP= 2, line= 2 col= 3
+     value from Fresco input, step  0.0100, min,max   0.0000  0.0000
+
+  Read definition of data set            1
+  Read DATA SET  1 from file =                                                 
+    of type  9           with absolute errors, CM  for state/excit  1  1,  idir= 0
+
+  Known ANC of bound state components kn=x
+  Read data set            1
+             1  data points for lab energy    1.000000    
+    Bound state   Target     Absolute error
+        2         0.8000      0.0300
+ 
+  FRESCO output to b8-gs-fit.frout*
+ 
+ Calculate scattering at energies
+    1.000
+ 
+    Var   1=r          value     2.391000
+    Var   2=a          value     0.520000
+
+  Total ChiSq/N =    10.3593 from     10.359
+
+ PARAMETER DEFINITIONS:
+    NO.   NAME         VALUE      STEP SIZE      LIMITS
+     1 'r         '    2.3910      0.10000E-01     no limits
+     2 'a         '   0.52000      0.10000E-01     no limits
+sfresco>  Unrecognised command : 
+                                                                                
+                      
+sfresco>  
+  Dataset            1  <=>
+    Bound state    Datum      Abs. error  Theory         Chi
+        2        0.80000     0.30000E-01 0.70344       10.3593
+
+  Total ChiSq/N =    10.3593 from     10.359
+sfresco>     Var   1=r          value     2.391000, step   0.0100, error   0.0000
+    Var   2=a          value     0.520000, step   0.0100, error   0.0000
+sfresco> 
+   Call MINUIT
+   with NOGradient, STRategy=0, ERRordef=  1.0000
+ **********
+ **    1 **SET NOGRADIENT 
+ **********
+ **********
+ **    2 **SET STRAT    0.000    
+ **********
+
+ NOW USING STRATEGY  0: MINIMIZE THE NUMBER OF CALLS TO FUNCTION
+
+ **********
+ **    3 **SET ERRORDEF   1.000    
+ **********
+minuit>  **********
+ **    4 **MINUIT 
+ **********
+
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY 0.  CONVERGENCE WHEN EDM .LT. 0.10E-03
+
+ FCN=   10.35926     FROM MIGRAD    STATUS=INITIATE       6 CALLS        7 TOTAL
+                     EDM= unknown      STRATEGY= 0      NO ERROR MATRIX       
+
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1      r         2.3910       0.10000E-01   0.10000E-01   -30.055    
+   2      a        0.52000       0.10000E-01   0.10000E-01   -100.39    
+
+ MIGRAD MINIMIZATION HAS CONVERGED.
+
+ FCN=  0.1014354E-07 FROM MIGRAD    STATUS=CONVERGED     18 CALLS       19 TOTAL
+                     EDM=  0.32E-05    STRATEGY= 0      NO ERROR MATRIX       
+
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME        VALUE          ERROR          SIZE      DERIVATIVE 
+   1      r         2.6994       0.10000E-01   0.13971E-01   0.11955E-01
+   2      a        0.62959       0.10000E-01   0.54711E-02   0.87794E-02
+ NO ERROR MATRIX       
+minuit>
+ **********
+ **    5 **END 
+ **********
+
+ CALL TO USER FUNCTION WITH IFLAG = 3
+
+ END OF MINUIT COMMAND INPUT.    RETURN TO USER PROGRAM.
+
+sfresco>  Unrecognised command : 
+                                                                                
+                      
+sfresco>  
+  Dataset            1  <=>
+    Bound state    Datum      Abs. error  Theory         Chi
+        2        0.80000     0.30000E-01 0.80000        0.0000
+
+  Total ChiSq/N =     0.0000 from      0.000
+sfresco>
+    Var   1=r          value     2.699391, step   0.0100, error   0.0100
+    Var   2=a          value     0.629590, step   0.0100, error   0.0100
+sfresco> 
