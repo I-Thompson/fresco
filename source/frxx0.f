@@ -64,6 +64,7 @@
 	logical*1, allocatable:: afrac(:,:,:,:,:,:),usedcc(:,:,:)
         logical*1 alogic
         character*100 line
+        character*20 CCSPLIT
 	character*70 TMP,MASFIL
 	character*10 hscale(0:2),planes(0:3),buttles(0:4)
 	data hscale/'none      ','projectile','target    '/
@@ -145,7 +146,7 @@
 	ko3 = 301
     	
         write(koe,1002) 
- 1002 	format(' FRESCO - FRES 3.3: Coupled Reaction Channels')
+ 1002 	format(' FRESCO - FRES 3.3a: Coupled Reaction Channels')
 	uu = .false.
 	inquire(file='fresco.in',exist=uu)
 	if(uu) then
@@ -320,7 +321,7 @@
 !	endif
  1030 	format(2f4.0,f8.4,l2,1x,a1,1x,a1,i2,6(i4,f4.0),f4.0)
 !1031 	format(f4.0,i4,f8.4,l2,1x,a1,1x,a1,i2,10i4)
-      I = MAX(1, MIN(ABS(NEARFA),3))
+      I = MAX(1, MIN(ABS(NEARFA),13))
       NEARFA = ISIGN(I,NEARFA)
 	if(.not.nml) then
          jset = 0
@@ -337,13 +338,15 @@
 	endif
 
 
-      
+      CCSPLIT = ' '
+      if (abs(NEARFA)>=10) CCSPLIT = '(splitting Coulomb)'
       WRITE(koe,1040) JTMIN,JTMAX,jleast,ABSEND,DRY,PSET,JSET,
-     x                RELA,NEARFA
+     x                RELA,NEARFA,CCSPLIT
  1040 FORMAT(//' Range of total J is',F8.1,' <= J <=',F8.1,
      X ' (at least',f8.1,') and Absorbtion => ',F10.4,' mb.',/,
      X  ' Dry Run =', L2,', CC set limits =',2I3,', ',
-     X  'Relativistic kinematics = ',A1,', Both/Far/Near Analyses =',I3)
+     X  'Relativistic kinematics = ',A1,
+     x  ', Both/Far/Near Analyses =',I3,1x,a)
       IF(index(' abc',RELA)==0) WRITE(*,*) 
      x  'RELATIVISTIC KINEMATICS '''//rela//''' NOT IMPLEMENTED!!'
       NJ = 0

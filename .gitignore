@@ -1,3 +1,5 @@
 i386-*
 i686-*
 x86_64-*
+source/keep
+*.diff
