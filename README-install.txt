@@ -1,4 +1,8 @@
-FRESCO   FRES version 3.2
+FRESCO   FRES version 3.3
+
+Source at https://github.com/I-Thompson/fresco 
+Extract in new directory by command:
+  git clone https://github.com/I-Thompson/fresco .
 
 This directory contains four sub-directories: source, man, test and util.
 

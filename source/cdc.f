@@ -67,6 +67,7 @@ c CDCC NAMELISTS FOR INPUT:
      x		nrbases,nrbmin,pralpha,pcon,meigs,hnl,rnl,centre,pauli,
      x 		lab,lin,lex,remnant,postprior,ipcgs,dry,hktarg,unitmass,
      x          llmax,sumform,qc,la,static,expand,maxcoup,
+     X          hort,rmort, ! AMM
      x          nfus,wdisk,treverse,complexbins,initwf
         namelist/nucleus/ part,name,mass,charge,spin,parity,be,
      X			n,l,j,ia,a,kind,lmax,nch,nce,ampl
@@ -82,6 +83,7 @@ c FRESCO NAMELISTS FOR OUTPUT:
 	namelist/fresco/hcm,rmatch,rintp,rsp,hnl,rnl,centre
      X   rasym,accrcy,switch,ajswtch, sinjmax,hktarg,
      X   jtmin,jtmax,absend,jump,jbord,pset,llmax,msolve,jset,
+     X   hort,rmort, ! AMM
      x   thmin,thmax,thinc,cutl,cutr,cutc,
      x   ips,it0,iter,iblock,nnu, 
      X   nrbases,nrbmin,pralpha,pcon,meigs,rmatr,beta,
@@ -1083,6 +1085,8 @@ C				Transfer to allowed states
 	if(abs(smallchan)+abs(smallcoup)>0) 
      x		write(ko3,202) smallchan,smallcoup
 202	format('     smallchan=',1p,e9.2,'  smallcoup=',e9.2)
+        if(hort>0.) write(koe,2020) hort,rmort
+2020    format('     hort =',f8.4,'  rmort = ',f10.3)
 	if(initwf/=0) write(ko3,2021) initwf
 2021	format('     initwf =',i4)
      	if(msolve/=0) write(ko3,2026) msolve
@@ -1143,7 +1147,7 @@ C				Transfer to allowed states
 	 hnl=0.; rnl=0.; centre=0.; pauli=0; trans=0
          rasym=0; accrcy=0.001; switch=0; ajswtch=0; sinjmax=0 
          jtmin=0; jtmax=0; absend=0.001; pset=0; llmax=-1; jset=0
-	 jump(:)=0; jbord(:)=0; 
+	 jump(:)=0; jbord(:)=0;  hort = 0.0; rmort = 0.0
          thmin=0; thmax=10; thinc=1; nfus=0
          smallchan=1d-12; smallcoup=1d-12; msolve=0
 	 cutl=0; cutr=0; cutc=0;  quasi=-1000.
