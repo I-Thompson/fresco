@@ -44,7 +44,7 @@
 	include 'frxx13.f'
 	include 'frxx16.f'
 	include 'etime.f'
-	include 'flush.f'
+!	include 'flush.f'
 	include 'frxx17.f'
 	include 'lapack.f'
 	include 'nagstub.f'

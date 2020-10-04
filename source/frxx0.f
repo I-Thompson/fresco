@@ -146,7 +146,7 @@
 	ko3 = 301
     	
         write(koe,1002) 
- 1002 	format(' FRESCO - FRES 3.3a: Coupled Reaction Channels')
+ 1002 	format(' FRESCO - FRES 3.3b: Coupled Reaction Channels')
 	uu = .false.
 	inquire(file='fresco.in',exist=uu)
 	if(uu) then
