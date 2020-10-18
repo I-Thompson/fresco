@@ -1,0 +1,2953 @@
+\documentclass[11pt]{article}
+\usepackage{times}
+\usepackage{mathptm}
+\topmargin 0cm
+\oddsidemargin -1.0cm \evensidemargin -1.0cm
+\textheight 22.0cm \textwidth 17.00cm
+%
+\title{\Huge Fresco}
+\date{Version FRES 3.4, October 2020\\  LLNL-SM-485670}
+\author{I.J. Thompson
+%
+\\Nuclear Data and Theory Group
+\\PO Box 808, L-414,
+ Livermore, CA 94551, USA
+\\Telephone + 1 (925) 423 4978
+\\ %
+\\Email: I-Thompson@llnl.gov or Ian@kernz.org
+\\Available: https://github.com/I-Thompson/fresco
+\\More information: http://www.fresco.org.uk }
+
+\parskip 0pt
+\parindent 0pt
+
+\newcommand{\beqn}{\begin{eqnarray}}
+\newcommand{\eeqn}{\end{eqnarray}}
+\newcommand{\upq}{\textsf{'}}
+%
+\begin{document}
+\maketitle
+%\centerline{\large Fresco}
+\tableofcontents
+\newpage
+\section{Introduction}
+
+\parskip 5pt
+\parindent 10pt
+
+FRESCO is a Coupled-Channels program that can have finite-range
+transfer interactions among any number of mass partitions, and any
+number of nuclear excitations in each partition.
+
+This is accomplished by calculating and storing the kernels of the
+non-local interactions, and then solving the coupled-channels set
+iteratively.
+At each iteration the stored kernels are used to integrate the wave
+functions to generate the source terms for the next iteration.
+Pade approximants can be used if the iterations diverge because of
+strong couplings.
+
+The program can also generate local couplings for the rotational
+or single-particle excitations of either the projectile or the
+target in any partition,
+the local form factors for zero-range or local-energy-approximation
+can also be used.
+These various local interactions may also be included iteratively
+(to give multistep DWBA), or alternatively the first few coupled
+channels may be blocked together and solved by exact coupled-channels
+methods.
+
+Special treatment is provided for any long ranged Coulomb multipoles,
+using James Christley's coupled-Coulomb functions CRCWFN,
+and interpolation in partial waves is also possible.
+
+The nonlocal kernels for single-particle transfers are calculated first
+at a much smaller number of interpolation points,
+and then expanded when necessary to calculate the source terms by
+integrating
+\beqn
+S(R _ f ) = \int _ 0 ^ {R _ {match}}
+                K _ {fi} (R _ f , R _ i ) u(R _ i ) dR _ i
+\eeqn
+where RMATCH and HCM, the step size, are given in the \&Fresco namelist.
+Since the kernel function $K_{fi}(R_f,R_i)$ is usually rapidly varying with
+$D_{fi} = R_{f} - R_{i}$ (especially with heavy-ion reactions), and only slowly
+varying with $R_{f}$ (if $D_{fi}$ is constant),  FRESCO calculates and stores
+the function $K_{fi}'(R_{f},D_{fi})$ at intervals of RINTP in $R_{f}$,
+and intervals of HNL in $D_{fi}$. The $D_{fi}$ range considered is
+CENTRE-RNL/2 to CENTRE+RNL/2, i.e. range of RNL centred at CENTRE,
+and FRESCO later suggests improved values for RNL \& CENTRE.
+The HNL reflects to physical variation of $K_{fi}'$ with $D_{fi}$, and can be
+a fraction of HCM (for heavy ion reactions) or a multiple of HCM
+(for light ion reactions especially with `prior' interactions).
+If HNL is a submultiple of HCM, the program anticipates the interpolation
+of $u(R_{i})$ in the equation above, and only stores an effective kernel
+function at intervals of HCM.
+
+The new variable MTMIN in the FRT version controls the method used to
+calculate the form factors of the transfer kernels. If the L-transfer value
+(estimated by $\ell_f + \ell_i$)
+is larger than or equal to MTMIN, then the m-dependent expressions for the
+spherical harmonics are used explicitly.
+Otherwise, the
+angular dependencies of the initial and final transfer states
+are transformed into those of the channel variables $R_{i}$ \& $R_{f}$ using
+Moshinsky's solid-harmonic transformation, as given for example
+in
+%\footnote{
+Austern et al. Phys. Rev. {\bf 133} pp B 3 - 16.
+%}
+%
+By careful control of the numerical approximations, the second method can
+be extended to find heavy-ion transfer form factors, but the maximum
+transferred angular momentum L is still limited by numerical cancellation
+errors arising from the finite roundoff errors in the computer.
+With 8-byte word lengths, the unit roundoff is approximately $10^{-15}$,
+and this limits the transferred L to 6 or less, so the default value
+of MTMIN is set to 6. The Moshinsky method is much faster when it is
+accurate, so the default value of MTMIN has been set as high as practical.
+
+A general description of the formalisms used is given in
+%\footnote{
+I.J. Thompson,
+{\em Coupled Reaction Channels Calculations in Nuclear Physics},
+Computer Physics Reports, {\bf 7} (1988) pp 167 - 212.
+%}
+
+%}
+% .
+\newpage
+\section{Input card-image format}
+Please see document   fresco-inputs.pdf.
+\section{Input NAMELIST format}
+The namelist input has two fixed-format lines to start with, and these followed by the namelists in Fortran style free-format. 
+Variable names may be upper or lower case without distinction, but in this manual they are all capitalized.
+All namelists are terminated by a {\bf /}. Some systems trailing comments begun by a {\bf !}.
+%In this manual, Fresco variable names are written in {\sc bold}, and literal strings are in {\tt monospaced font}.
+
+\subsection{Initial Lines}
+\begin{description}
+\item[Header line] \hfill 
+
+One line of text to describe the nature of this run, for user's information only. (120 characters max)
+\item[NAMELIST] \hfill 
+
+Fixed string to indicate input format using namelists
+\end{description}
+
+\subsection{The \&FRESCO namelist}
+
+\subsubsection*{Complete list of variables}
+
+{\em Radial coordinates:}
+hcm, rmatch, rintp, hnl, rnl, centre, hnn, rnn, rmin, rsp, cutl, cutr, cutc, \\
+rasym, accrcy, switch, sinjmax, ajswtch, 
+
+\noindent
+{\em Partial waves:}
+jtmin, jtmax, absend, jump, jbord, pset, jset,  iso, llmax, 
+
+
+
+\noindent
+{\em Angular distributions:}
+kqmax,  thmin, thmax, thinc, pp, koords,  nearfa,
+
+\noindent
+{\em Defining coupled equations:}
+inh, nnu, maxl, minl, mtmin, epc,  erange, dk,  plane,   rela,  \\
+ccbins, complexbins, sumform,  pluto,  unitmass, finec,  
+
+%  obsolete variables: sock, gscouplonly,  masfil, 
+%  not to be changed; hktarg 
+
+\noindent
+{\em Incident channel:}
+ pel, exl, lab, lin, lex, elab, nlab, 
+
+\noindent
+{\em Solving equations:}
+ips, it0, iter, fatal, iblock, pade, nosol, dry, smallchan, smallcoup, hort, rmort, \\
+psiren, initwf, maxcoup, expand, 
+
+
+\noindent
+{\em R-matrix setup}:
+nrbases, nrbmin, pralpha, pcon, rmatr, btype, ebeta, buttle, weak, \\
+nparameters,   
+
+\noindent
+{\em Trace variables:}
+chans, listcc, treneg, cdetr, smats,    
+
+\noindent
+{\em Output details:}
+xstabl, nlpl, waves, lampl, veff, kfus, nfus, wdisk, bpm, melfil, cdcc, \\
+tmp
+
+
+\subsubsection{Radial coordinates}
+
+\begin{description}
+\item[HCM,  RMATCH, RINTP, HNL, RNL, CENTRE, HNN, RNN, RMIN, RSP, CUTL, CUTR, CUTC] \hfill
+
+%rnn,rmin,rsp, sinjmax,plane,
+%pset,jset,jleast,
+%kqmax,pp,thmin,thmax,thinc,koords,cutl,cutr,cutc,complexbins,
+%ips,it0,iter,fatal,iblock,pade,psiren,iso,nnu,maxl,minl,mtmin,
+%epc,erange,dk, nosol,nrbases,nrbmin,pralpha,pcon,rmatr,bndx,
+%meigs,buttle,weak,llmax,expand,hktarg,mpihelp,eigens,nlagcc,
+%chans,listcc,treneg,cdetr,smats,xstabl,nlpl,waves,ccreal,
+%lampl,veff,kfus,wdisk,bpm,melfil,cdcc,nfus, nparameters,
+%smallchan,smallcoup,sumform,maxcoup,ompform,initwf,pluto,
+%inh,TMP,MASFIL,unitmass,finec,pel,exl,lab,lin,lex,elab,nlab,
+%vsearch,echan,enodes,gscouplonly,ccbins,sock,btype,boldplot,
+%KRM, dist0,tcfile,dgam,eobs,grace,elpmax,relref
+
+Wave functions calculated at intervals of HCM up to abs(RMATCH).
+
+If RMATCH $<$ 0, then use values of RASYM, ACCRCY, SWITCH, AJSWITCH for  coupled Coulomb wave functions.
+
+Non-local kernels $K_{fi}'(R_{f},D_{fi})$ calculated at $R_f$ intervals of RINTP,
+and for a non-local ($D_{fi}$) range of RNL centred at CENTRE in steps of HNL.
+
+RMATCH and RINTP are rounded to multiples of HCM, and HNL is rounded either to
+a multiple or a sub-multiple of HCM.
+
+For two-nucleon transfers, the nucleon-nucleon distance is
+discretized from RMIN to RNN in a multiple of 6 Gaussian quadrature
+points to give step size close to HNN.
+
+RSP is the upper limit of state radius when folding single-particle states (bound states or continuum bins) with
+KIND=3 or 4 couplings.
+
+
+CUTL: set the number of radial points per $\ell$ of the lower radial cutoff when integrating the radial equations. Default = --1.6\\
+When CUTL$>$0, use $\ell=J$ (total angular momentum of CC set),\\
+When CUTL$<$0, use $\ell=L_{in}$ (orbital angular momentum of incoming partial wave). 
+Using  CUTL$<$0 gives more accurate analyzing powers.
+
+CUTR = lower radial cutoff (fm).  Combining with CUTL is to use $R_{\min}$ = max(CUTL*$\ell$*HCM,CUTR).\\
+If CUTR $<$ 0, put cutoff at point-Coulomb turning point $- |$CUTR$|$.
+
+CUTC = lower radial cutoff (in fm) for off-diagonal couplings.
+
+\end{description}
+
+%
+\begin{description}
+\item[RASYM, ACCRCY, SWITCH, SINJMAX, AJSWITCH] \hfill
+
+
+Use coupled Coulomb wave functions from CRCWFN out to asymptotic radius RASYM from
+inner radius abs(RMATCH) for those partitions in which PWF is TRUE.
+% Otherwise, use uncoupled Coulomb wavefunctions at radius abs(RMATCH).
+\\
+If RASYM $<$ 0, then determine the outer radius in order that classical
+Coulomb trajectories reach an angle abs(RASYM) degrees.
+
+
+ACCRCY is an accuracy parameter controlling the piecewise step length.
+Default is 0.01: smaller values give greater accuracy.
+
+
+SWITCH is the radius at which to switch from Airy functions
+to sines and cosines in piecewise method.  Default is 1000 fm.
+If SINJMAX$>0$, then change switchover condition to $J>$ SINJMAX.
+
+
+AJSWITCH
+Normally the Coupled Coulomb wfns are matched to zero
+and the Numerov integration is omitted
+when the Coulomb distance of closest approach is more than 4.5 fm outside
+abs(RMATCH) (or  the  --CUTR distance if   CUTR negative).
+This is only allowed when $J \geq $AJSWITCH.  Default is 0.0
+\end{description}
+
+\subsubsection{Partial waves}
+
+
+\begin{description}
+%\item[JTMIN,JTMAX,ABSEND,DRY,CSET, RELA, NEARFA, JUMP(:),JBORD(:)]
+
+\item[JTMIN, JTMAX, ABSEND, JLEAST]
+Calculate coupled-channels sets with total $J$ in the interval
+max(0,JTMIN) $ < J  <$ JTMAX,
+stopping sooner if the absorption from the elastic channel
+is less than ABSEND millibarns of three successive $J$/parity sets.
+(If ABSEND $<$ 0, this takes the full $J$ interval.)\\
+If JLEAST$>0$, then only stop if $J>$ JLEAST.
+\\
+If JTMIN $<$ 0, then for $J <$ abs(JTMIN) include only the incoming channel
+in the calculations, ignoring transfers and excited states.
+This is needed if the elastic scattering cross sections are to be given
+correctly.
+
+
+
+\item[JUMP(1:), JBORD(1:)]
+Calculate coupled-channels sets not for every $J$
+value, but at intervals of JUMP(i) for  $J\geq$ JBORD(i), for i=1,5.
+(The program sets JUMP(0)=1 \& JBORD(0)=JTMIN, and, 
+if there are NJ non-zero values, also JBORD(NJ+1)=JTMAX.  
+This gives no $J$ jumping if JUMP and JBORD are not set in the namelist.)
+The omitted $J$ values are provided by interpolation on the scattering
+amplitudes $A(m'M':mM; L)$ prior to calculating cross sections.
+
+\item[PSET, JSET] ~\\
+If PSET =  --1 or +1,  restrict parity of CRC sets to that value (0 = no restriction)\\
+% If PSET = --2 or +2, restrict CRC sets to unnatural or natural parities respectively. Here, `natural parity' is defined as parity = (--1)**nint($J+.1$). 
+
+JSET = number of CRC sets to calculate before stopping (0 = all sets)
+
+\item[ISO]
+\ = `A' or `J', for replacing all barriers $L(L+1)$ by that for $L = J$ barrier
+\\ = `B' or `L', for replacing all barriers by $L = L_{in}$ barrier.
+ \\ = 0 or blank, for no isocentrifugal approximations,
+
+Of course, the {\em simplest and fastest} way to use the isocentrifugal
+approximation is to put all spins and parities to $0^+$, and all
+transition multipoles to $k=0$. The ISO variable is not needed then.
+
+\item[LLMAX] Maximum partial wave $L$ in any CRC set.
+\end{description}
+
+
+\subsubsection{Angular distributions}
+
+\begin{description}
+
+\item[KQMAX, THMIN, THMAX, THINC]
+
+Give cross sections (and tensor analyzing powers up to rank K = KQMAX)
+for centre-of-mass scattering angle from THMIN
+to abs(THMAX) in steps of THINC.\\
+Elastic channels normally output the ratio to Rutherford, unless THMAX $< 0$.
+
+\item[PP]
+Calculate analyzing powers/polarizations for projectile (PP=0 or blank),
+target (PP=1), ejectile (PP=2) or residual nucleus (PP=3).
+PP=4 gives projectile (PP=0) analyzing powers, along with Kyy results.
+
+\item[KOORDS ]determines the coordinate systems used for the analyzing powers:
+\\  = 0 : Madison coordinates (default)
+\\  = 1 : Madison + Transverse
+\\  = 2 : Madison + Transverse + Recoil
+\\  = 3 : Madison + Transverse + Recoil + Hooton-Johnson
+
+\item[NEARFA]
+For mod(NEARFA,10) values: 
+\\ = 0 or 1 for the usual cross sections,
+\\  = 2 or --2 for printing `far side' cross sections too,
+\\  = 3 or --3 for printing far and near side cross sections too.
+\\  $>$ 0 for printing far \& near-sides for elastic channel only.
+\\  $<$ 0 for printing far \& near-sides for all channels.\\
+If abs(NEARFA)$>$10, also split the Coulomb amplitude according to Cha, CPC 176 (2007) 318.
+
+\item[COMPLEXBINS, CCBINS]  ~\\
+If COMPLEXBINS=T, allow for complex-valued bins (e.g. from optical potentials)\\
+If CCBINS=T, allow for coupled-channels bins, which are necessarily complex-valued.
+%If SUMFORM = 1, 2 or 3: different methods for sum reductions of core-excitation bins. \\
+%OMPFORM  = 0, 1, 2: different methods of parallel calculation of core-excitation bins.
+
+
+
+
+\end{description}
+
+\subsubsection{Defining coupled equations}
+
+\begin{description}
+
+\item[INH]
+ = 0 : zero-range transfer forms in intervals of HCM exactly
+\\ = 1 : stored in steps of HCM * (proj. core)/(proj. composite mass)
+\\ = 2 : stored in steps of HCM * (targ. core)/(targ. composite mass)\\
+    So INH=2 corrects for longitudinal recoil during transfers with zero-range projectiles.
+
+\item[NNU, MAXL, MINL, MTMIN, EPC] control the accuracy of non-local transfer form factors:
+
+NNU is the number of Gaussian integration points
+in the angular
+integration used for the non-local transfer kernels. NNU should
+be a multiple of 6; NNU = 18 is the minimum, and 24 or 36 give
+acceptable accuracy for all the reactions tried so far.
+
+
+MAXL,MINL are the maximum and minimum $L$ values
+for the non-local
+kernels. If zero, MAXL has the default value JTMAX+6, and
+if MINL $<$ 0 it takes the default value $|$JTMIN$|$-6.
+
+
+MTMIN is the lowest L-transfer for calculating transfer form factors
+using the m-dependent expressions for spherical harmonics.
+Putting MTMIN = 0 gives default value MTMIN = 6 (use MTMIN $<$ 0 to avoid
+invoking default, if all transfers are to use this method).
+
+EPC = percentage cutoff accuracy in the NNU angular integration.
+If zero, the default is (30/NNU)$^2$\%.
+
+\item[ERANGE, DK] set default parameters for continuum bins:
+
+ERANGE = range of energies of the upper and lower boundaries
+of continuum bins:\\
+if ERANGE $>$ 0, then {\em ratio} of these energies;\\
+if ERANGE $<$ 0, then {\em difference} of the energies in MeV.
+
+DK     = step size of $k$ (fm$^{-1}$) for integration over the ERANGE to construct the continuum bin.
+
+ \item[PLANE] ~\\
+      = 1, 3: zero Coulomb potential for elastic channel\\
+      = 2, 3: zero Coulomb potentials for all nonelastic channels.
+%
+%ELPMAX = energy ELAB below which the LPMAX limits in each partition are applied 
+
+\item[RELA, RELREF]
+$\neq$\upq \upq: use relativistic kinematics for the incident projectile:\\
+If RELA contains `a', use Ingemarsson eq(16) for kinematics\\
+If RELA contains `b', use Ingemarsson eq(17) for kinematics\\
+%If RELA contains `h', use kinematics of G. Hale (LANL) with RELREF as the reference partition\\
+%If RELA contains `f', use Ingemarsson eq(19) to scale potentials\\
+%If RELA contains `g', use Ingemarsson eq(21) to scale potentials\\
+%If RELA contains `r', get reduced mass from ratios of total energies
+If RELA contains `c' or `3d', options for knockout reactions\\
+If RELA contains `na' to use potential factor $\gamma$  for inhomogenous terms.
+
+
+\item[PLUTO(:)]
+ =  list of potential numbers KP to be prepared for the Lagrange-mesh method for single-particle eigenstates. 
+
+\item[UNITMASS] : unit (in amu) for MASS values read in.
+Default = 1.000
+
+\item[FINEC]: 1/(fine-structure constant): used to determine electrostatic $e^2$.
+Default = 137.03599.
+
+\end{description}
+
+\subsubsection{Incident channel}
+\begin{description}
+\item[PEL, EXL, LAB, LIN, LEX]
+Incoming plane waves are present in partition PEL with excitation
+pair EXL.  The energies ELAB(:) are the laboratory energies for
+partition LAB's nucleus LIN (1 or 2 for projectile or target)
+in excitation pair LEX.
+
+The defaults for PEL,EXL,LIN \& LEX are all 1, and the default
+for LAB is PEL, so these variables can be normally omitted.
+
+\item[ELAB(:5), NLAB(:4)] :
+Solve at different laboratory energies $E$ until ELAB(i) = 0 is found.\\
+ If NLAB(i) $>$ 1, then the range of $E$ from ELAB(i) to ELAB(i+1) is covered in NLAB(i) linear intervals.\\
+ For just one energy $E$, just specify 'ELAB = $E$'.
+
+\end{description}
+
+
+\subsubsection{Solving equations}
+
+\begin{description}
+\item[IPS, IT0, ITER, FATAL, IBLOCK, PADE]
+
+Solve the coupled channels equations by at least IT0 iterations, and
+up to ITER iterations.
+Stop sooner if the absolute differences between successive $S$-matrix
+elements (scaled by (2$J$+1)/(2.JTMAX+1)) are less than IPS percent.
+(Excited state pairs with IGNORE set in the \&STATE namelist are not counted against IPS).
+
+Putting IT0=ITER zero solves only the elastic channel (along with the
+IBLOCK channels: see below).
+Putting IT0=ITER = 1 or 2 etc. gives 1 or 2-step DWBA.
+
+Normally, a run is terminated if more than ITER steps are required for
+convergence. \\
+Setting FATAL=False allows continuation even after
+convergence has failed after abs(ITER) iterations.
+
+Iterations are normally also stopped if the successive differences are smaller
+than the errors estimated for the numerical integration of the coupled
+equations. Setting IPS $< 0$ uses abs(IPS), without this extra check.
+
+IBLOCK is the number of pairs of excitation levels
+(starting from partition 1, excitation 1) that are coupled exactly by
+blocking together.
+%If IBLOCK$<$1, then read Line 4.5 (see below) for R-matrix solution of the
+%coupled equations.
+%\\
+
+PADE
+ = 0 for no Pade acceleration,
+\\ = 1 for Pade acceleration by the epsilon algorithm,
+\\ = 2 for Pade acceleration by finding the N/D polynomials.
+
+\item[HORT, RMORT]~\\
+HORT = radial interval step at which QR stabilization is performed\\
+RMORT = radius outside classical turning point to which to extend orthogonalizing. \\
+See section \ref{hort} for more details.
+
+\item[NOSOL] : if not to solve the CRC equations, only construct couplings
+
+\item[DRY]
+normally F (false), but if T (true) the code does a `dry run'
+to check that all arrays are of sufficient size.
+All coupled channel sets are generated, but only the elastic
+channels should be non-zero.
+
+ \item[SMALLCHAN, SMALLCOUP] ~\\
+%
+SMALLCHAN = fraction of unitarity to define a 'small channel'. 
+A channel that is `small' for NSMALL=5 times is dropped permanently.
+
+SMALLCOUP: if all nonelastic channels are weaker than the fraction
+SMALLCOUP of unitarity, then permanently change from coupled-channels to DWBA.
+
+%CCREAL = T: assume all potentials and couplings real-valued
+
+\item[PSIREN]: do simple renormalisation of channel wfs after Pade acceleration
+\item[INITWF]: read in external scattering wave functions before iterating couplings.
+$> 0$: read in formatted data from file number INITWF.\\
+$< 0$: read in unformatted data from file number INITWF.\\
+The file format is that which is produced when WAVES$>0$. 
+All channels not read in are set to zero.
+
+%\item[MPIHELP]: number of OPENMP threads allocated to each MPI node
+
+\item[MAXCOUP(:), EXPAND(:)]: fudge limits and factors (respectively) to adjust sizes of generated work arrays.
+
+\end{description}
+
+
+\subsubsection{R-matrix setup}
+\begin{description}
+
+\item[NRBASES] ~\\
+When NRBASES$\neq$0, R-matrix solutions are selected then all channels
+are `blocked' together and solved in a full CRC procedure. All non-local potentials are included to all all orders (not iteratively).
+
+NRBASES = target number of radial basis states in each channel.
+(Use 2*NRBASES for the elastic and first-inelastic channel for more accuracy).\\
+If NRBASES $<$ 0, then use {\em Lagrange mesh} basis with NLAG=--NRBASES basis functions.
+
+%\item[NLAGCC] $>0$: another way to set NLAG = NLAGCC for a Lagrange mesh calculation.
+
+\item[NRBMIN, BUTTLE, PRALPHA, PCON, RMATR, EBETA, WEAK, BES] ~\\
+NRBMIN = minimum number of radial basis states (default NRBASES).
+
+BUTTLE = 4 for none, 0,2 for complex, 1,3 for real
+(2,3 without energy shift) Buttle correction.\\
+(default 0)
+
+PRALPHA = print basis-state eigenvalues to files fort.60,61,62,63
+
+PCON = trace variable for calculation of radial basis states (same
+meaning as IPC for single-particle bound states).
+
+
+RMATR = R-matrix matching radius (default RMATCH ).
+Warning: RMATR will be changed to an even multiple of HCM.
+
+
+Energy EBETA = $\hbar^2k^2/2m$, where $k= f'/f$, the logarithmic derivative
+for all radial basis states at $r$=RMATR, with $k$ having the same
+sign as EBETA. 
+
+If WEAK$>$0, then non-elastic columns of the R-matrix are set to zero,
+  when penetrabilities $<$ WEAK.
+  
+%\item[KRM]
+%Change defined coupling order of R-matrix parameters. Best use default KRM=0.
+ 
+%\item[EIGENS, MEIGS, VSEARCH, ECHAN, ENODES] : if EIGENS, then: \\
+%MEIGS = maximum number of bound states to find, \\
+%VSEARCH =  location of potential form to adjust so that channel ECHAN has ENODES nodes.
+
+\item[NPARAMETERS] Read in this number of R-matrix parameter namelists after the \&FRESCO namelist.
+
+%\item[EOBS] : if EOBS=T, treat input R-matrix widths as `observed' values. Otherwise treat at 'formal' widths.
+\end{description}
+
+\subsubsection{Trace variables}
+A value of 0 gives no trace,
+increasing values give progressively more printed output.\\
+{\em Decremented} variables are decreased by 1 on each use.
+
+\begin{description}
+\item[CHANS] $\geq$ 1 : Print the sets of coupled partial waves for each J,parity.
+Decremented.
+
+\item[LISTCC] = 1 : Print coupling coefficients between these channels. Decremented.
+\\  = 1,2,... Print progressively more detail of couplings.
+\item[TRENEG] $\geq$ 1 : Print all multipole potentials
+\\  $\geq$ 3 : Print all monopole potentials as well
+\item[CDETR]  $\geq$ 1 : Print information on the solving of the coupled equations.
+(decremented).
+\item[SMATS]  $\geq$ 1 : Print absorbtion \& reaction cross sections for successive
+partitions and excitations.
+\\  $\geq$ 2 : Print elastic S-matrix elements ($S_{el}$).
+Also `punch' these elastic $S_{el}$ on output file 7,
+in format (2F15.10,L,J,JTOT) for $S_{el}$ complex, L, J and JTOT.
+See WDISK below for description of these quantum numbers.
+\\  $\geq$ 3 : Print all S-matrix elements for the `grazing partial waves'
+defined by $0.05 < Re(S_{el}) < 0.95$
+\\  $\geq$ 4 : Always print all the S-matrix elements.
+\\  $\geq$ 5 : Print all S-matrix elements at each iteration of the coupled
+equations (or, if PADE  $>$ 0, the Pade approximant)
+\\  $\geq$ 6 : Print all actual S-matrix elements at each iteration (these
+may be divergent before Pade acceleration).
+
+
+\end{description}
+
+\subsubsection{Output details}
+
+\begin{description}
+\item[XSTABL, NLPL, WAVES, LAMPL, VEFF, KFUS, NFUS, WDISK, BPM, MELFIL, CDCC,  TCFILE]
+
+\item[XSTABL] $\neq$ 0 : If XSTABL is non-zero, in file 16 punch output cross sections
+for all excitation levels in all partitions.
+A header line in FORMAT(5I6) gives partition IC, level pair IA,
+number of tensor ranks of analyzing powers 1 $<$ KQ1PR $<$ XSTABL,
+number of angles NANGL, and NEARF.  NEARF=1 for total cross section,
+2 for far-side component, and 3 for near-side component.
+
+Then follow NANGL print operations in
+{\tt FORMAT(1P,6E12.4)}, repeating
+the {\tt FORMAT} for each operation if KQ1PR is large,
+of THETA, elastic xs (mb), $T_{10}$, $iT_{11}$,
+$T_{20}$, $ T_{21}$, $ T_{22}$, $ iT_{30}$, $ iT_{31}$
+etc.
+
+\item[NLPL]   $>$ 0 : print a `contour plot' of the non-local kernels
+$K_{fi}(R_{f},D_{fi})$.  This is useful to determine if the parameters in the \&Fresco namelist
+are adequate.  Decremented.
+
+\item[WAVES]
+  $\pm$1 or $\pm$3 : print out wave function solutions of the coupled
+equations at the end of the iterations.
+(If WAVES$<$0 : print out the RATIO of the w/f to its asymptotic
+form $((G-iF) - S.(G+iF)).i/2$)
+\\  2 or 3     : print out the source terms at
+{\em each} iteration of the coupled equations.
+
+
+
+\item[LAMPL]
+  $\neq$ 0: Print out (on Fortran file 36)
+the coefficients $A(m'M':mM; L)$ for the Legendre
+coefficients in the scattering amplitude for the partition number
+abs(LAMPL),
+{\em and}
+print out the $f(m'M':mM; \theta)$ for each angle $\theta$.
+\\ $<$0 : only print out on file 37 the amplitudes $f$, not the $A$'s,
+for partition abs(LAMPL).
+
+The phase convention here is that there is no Coulomb phase shift
+for $L = 0$ in the Coulomb scattering amplitude : factors such as
+$\exp i(\sigma_L-\sigma_0))$  appear in the $A$'s.
+
+
+\item[VEFF]
+  $\neq$ 0 : Calculate the `coupled channels effective potential'
+found be averaging the `trivially equivalent potential' over all
+the $J,\pi$ sets, with weights of the elastic wave functions
+times the reaction cross section, in each set.
+\\  $<$  0 : Add this effective potential to optical potential
+of the elastic channel before printing.
+\\  = --2 or +2 : Exclude partial waves with elastic $S$-matrix element
+$S_\ell< 0.1$ from the averaging sum.
+\\ The results show the real and imaginary parts for successive
+values of $J-L$, for the projectile only.
+
+\item[KFUS, NFUS]
+If KFUS  $>$ 0 :  Calculate `core fusion' using the imaginary and scalar
+parts of potential number KFUS (i.e.\&pot namelists with TYPE = 1 or 2,
+and KP = KFUS), also for the first NFUS inelastic channels.
+
+
+
+\item[WDISK]
+  = 1 :  Print elastic wave functions on output file 17, FORMATTED
+\\  = 2 :  Print   all   wave functions on output file 17, FORMATTED
+\\  =--1 :  Print elastic wave functions on output file 17, UNFORMATTED
+\\  =--2 :  Print   all   wave functions on output file 17, UNFORMATTED
+
+
+\begin{quotation}
+\noindent
+The following data formats are used when WDISK $>$ 0 :
+\begin{verbatim}
+line A: (I4,2F8.4,F8.1,I3)
+         NR,H,ENLAB,JTOTAL,PARITY,MP,MT,ZP,ZT :
+           number radial points, step size, lab. energy,  J,pi,
+           projectile and target masses and charges
+line B: (2I4,2F6.1,I4,F6.1,2F15.10,f12.8)
+         IT,L,J,JTOT,LIN,JIN,SMAT (complex), ETA
+\end{verbatim}
+where
+
+IT = index to excited state pair, counts lines 7.\\
+L  = partial wave\\
+J  = L + projectile spin\\
+JTOT = total spin = J$_{total}$ = J + target spin\\
+LIN  = incoming partial wave\\
+JIN  = incoming J value.\\
+SMAT = S matrix element for this partial wave.\\
+
+\begin{verbatim}
+line C: (6E12.4)   (psi(I),I=1,NR)   wave function
+line C is repeated until NR complex values given
+NB: the first point psi(1) = 0 always, as at r=0
+\end{verbatim}
+Lines B \& C are repeated for each channel, until IT $<$ 0.
+\\
+When WDISK $<$ 0, successive records contain the two real values
+of psi(I), starting IN THIS CASE, from I=2 (i.e. $r=h$).
+\end{quotation}
+
+\item[BPM]
+  $\geq$ 1 : Calculate fusion cross sections in the Barrier Penetration
+Model using first the bare potential, and then the bare potential + the
+`weighted equivalent potential' calculated when VEFF $\neq$ 0.
+\\  $\geq$ 2 : Print out $L$-distributions of the fusion cross section.
+
+\item[MELFIL]
+  $\ne$ 0 : Write real files 53 and 54 in the `mel' and `spec' format
+        for use e.g. by R-matrix program {\tt sturmxx}.
+\\  = $\pm$2 : Write complex files 53 and 54 in the `mel' and `spec' format.
+\\   $<$ 0 : Write file 53 `mel' in text format format.
+
+\item[CDCC = 1]:
+Print out the $f(m'M':mM; \theta)$ for each angle $\theta$
+on file 57 for partition {\tt PEL}, after the following information for {\em uncoupled} bin states:
+{\footnotesize
+\begin{verbatim}
+line Y:(i2)  1    (indicating CDCC=1 format below)
+line Z: (A120)   HEADNG from Fresco input.
+line A: (F10.4,3F8.4)   ENLAB,Bproj,H2SM,e^2,Btarg,inp, (Qval if inp=1)
+              lab energy,projectile binding energy, hbar^2/2.m, e^2, 
+              target binding energy,inp, Qval if inp=1
+                                                
+line B: (7f8.4)         massp,masst,massc,massv,massr  
+                                         masses: projectile,target,core,valence,residual
+line C: (7f8.4)         Zp,Zt,Zc,Zv,Zr                charges
+line D: (7A8)           namep,namet,namec,namev,namer names
+line E: (7f8.1)         Jp,Jt,Jc,Jv,Jr                g.s. spins
+line F: (7i8)           Pp,Pt,Pc,Pv,Pr                g.s. parities
+   If inp=1, cards B-F (incl) have further #6 and #7 values 
+                for 'initial projectile' and 'initial target' too.
+   
+line G: (4I4)           NBINS,NKMAX,NEXB,NNJMAX no. CDCC bins, max NK,
+                                                no. excited states, max(2*Jex+1)
+line H: (I4,2f8.4)      NANGL,THMIN,THINC       (cm angular range from \&FRESCO)
+for each of the NBINS bins:
+ line I:(i2,2f4.1,3f8.4,2i4)
+         l,j,Emid,kmin,kmax,NK,KN,ISC
+            l,j: quantum numbers  (s==Jv)
+            Emid:  centre of bin with respect to continuum threshold
+            kmin,kmax,NK: Min,max and number of k values in bin integral
+            KN:  original KN index for bin state
+            ISC:  normalisation used for bin
+     for each IK=1,NK
+         line J: (10f8.4) delta(IK): nuclear phase shift used in bin integral (radians)
+
+for each excited state pair in the entrance partition: IA=1,NEXB::
+    line K: (f4.1,i4,f8.4,i4) Jex,Parity,Eex,IBIN:
+            Jex :          spin of this projectile excited state  (not including core spin)
+            Parity:        parity of this projectile state
+            Eex:           excitation energy of this state above g.s.
+            IBIN:          (first) bin defined for this excited state
+    for each IANG=1,NANGL: read complex numbers:
+    line L: (6E12.4): ((FAM(MEX,MP,IANG,IA),MEX=1,2*Jex(IA)+1),MP=1,2*Jp+1)
+\end{verbatim}
+}
+
+The phase convention for all CDCC values is that there is no Coulomb phase shift
+for $L = 0$ in the Coulomb scattering amplitude : factors such as
+$\exp i(\sigma_L-\sigma_0))$  appear in the $A$'s.t
+
+~\\
+Summary of bin normalisation factors for different ISC values:
+
+ISC\\
+\\ = 2:  $\exp(-i\delta(k))$
+\\ = 4:  $\sin(\delta(k))\exp(-i\delta(k))$
+\\ = 12:  $k\exp(-i\delta(k))$
+\\ = 14:  $k\sin(\delta(k))\exp(-i\delta(k))$
+
+\item[CDCC = 2]:
+Print out the $f(m'M':mM; \theta)$ for each angle $\theta$
+on file 57 for partition {\tt PEL}, after the following information for {\em coupled bin states}:
+
+
+{\footnotesize
+\begin{verbatim}
+line Y:(i2)  2    (indicating CDCC=2 format below)
+line Z: (A120)   HEADNG from Fresco input.
+line A: (F10.4,3F8.4)   ENLAB,Bproj,H2SM,e^2,Btarg,inp, Qval if inp=1
+                  lab energy,projectile binding energy, hbar^2/2.m, e^2, 
+                  target binding energy,inp, Qval 
+line B: (7f8.4)         massp,masst,massc,massv,massr  
+                                         masses: projectile,target,core,valence,residual
+line C: (7f8.4)         Zp,Zt,Zc,Zv,Zr                charges
+line D: (7A8)           namep,namet,namec,namev,namer names
+line E: (7f8.1)         Jp,Jt,Jc,Jv,Jr                g.s. spins
+line F: (7i8)           Pp,Pt,Pc,Pv,Pr                g.s. parities
+   If inp=1, cards B-F (incl) have further #6 and #7 values 
+                for 'initial projectile' and 'initial target' too.
+
+line G: (5I4)           NBINS,NKMAX,NEXB,NNJMAX,NCHMAX
+                                                no. CDCC bins, max NK,
+                                                no. excited states, max(2*Jex+1), max nch
+line H: (I4,2f8.4)      NANGL,THMIN,THINC       (cm angular range from \&FRESCO)
+line I: (I4)                NCE              (number of excited states. NCE=0 for only gs).
+for each of the ICE=1...NCE core excited states  (card skipped if NCE=0)
+lines J: (I4,2f8.4)      IPARCE, JCE, ECE    (parity -1,+1; spin; energy of excited states)
+                         (for the gs: parity=Pc, spin=Jc, energy=0.0)
+for each of the NBINS bins:
+ card K:(f4.1,2I4,f4.1,3f8.4,2i4)
+         Jex,Pex,nch,Emid,kmin,kmax,NK,KN,ISC
+            Jex: overall spin  [ (l s)j, JCE(ICE); Jex>
+            Pex: overall parity = parity(ICE) * (-1)**l
+            nch: number of partial wave channels coupled to Jex/Pex.
+            IL: incident channel (1<= IL <= nch)
+            Emid:  centre of bin with respect to continuum threshold
+            kmin,kmax,NK: Min,max and number of k values in bin integral
+            KN:  original KN index for bin state
+            ISC:  normalisation used for bin
+         For each partial wave c=1..nch
+         line L: (i4,f4.1,i4)
+            l,j,ICE: quantum numbers. Use s=Jv.            
+     for each IK=1,NK for    k=kmin+(IK-1)*kinc where kinc = (kmax-kmin)/(NK-1)
+         line M: (2f10.6) delta(IK),k: any nuclear phase shift used in bin integral (radians)
+         line N: (10f10.6) S(:,:)     the full scattering S matrix for nch channels 
+                                        (always nch*nch, so closed channels included)
+
+for each excited state pair in the entrance partition: IA=1,NEXB::
+    line K: (f4.1,i4,f8.4,i4) Jex,Parity,Eex,IBIN:
+            Jex :          spin of this projectile excited state (including core spin)
+            Pex:           parity of this projectile state
+            Eex:           excitation energy of this state above g.s. (including core energy)
+            IBIN:          (first) bin defined for this excited state
+    for each IANG=1,NANGL: read complex numbers:
+    line L: (6E12.4): ((FAM(MEX,MP,IANG,IA),MEX=1,2*Jex(IA)+1),MP=1,2*Jp+1)
+\end{verbatim}
+}
+
+%\item[TCFILE]: 
+%Print in fort.5420 data needed for Hauser-Feshbach code YAHFC. These are penetration probabilities and  all angular distributions.
+
+%\item[DIST0] :
+%If DIST0 $\geq 0$, cut off charged-particle elastic scattering at below DIST0 degrees, for making GNDS or ENDF evaluation files. Default --1.
+
+\item[TMP]:  name of directory for temporary files: `/tmp' or `.'  Default = /tmp/
+%
+%\item[GRACE, BOLDPLOT] : for use after SFRESCO searches.\\
+%If GRACE=T, print plotting metadata for xmgrace, not xmgr. Default=T.\\
+%BOLDPLOT: make width=2 lines in plots, not width=1, and all in monochrome. More suitable for publications.
+
+\end{description}
+%\newpage
+
+
+\subsection{\&PARTITION and \&STATES namelists}
+%
+The \&PARTITION namelists are repeated until an empty \&PARTITION namelist is read in.
+After each non-empty (NEX $> 0$) \&PARTITION, NEX instances of the \&STATES namelist are required.
+
+
+\subsubsection{\&PARTITION namelist}
+%
+\begin{description}
+\item[NAMEP,  MASSP,  ZP,  and NAMET,   MASST,    ZT] ~\\
+NAMEP = name of projectile-like nuclide (string 8 characters max),  \\
+MASSP = mass of projectile (in units of UNITMASS), \\
+ZP = charge of nuclide, \\
+NAMET, MASST, ZT = equivalent properties of target-like nuclide.
+
+\item[NEX,  QVAL, PWF] ~\\
+abs(NEX) = number of excited-state pairs in this partition. \\
+If NEX $<$ 0, then cross sections for this partition are not printed\\
+QVAL = $Q$-value (in MeV) of this partition for Ep+Et=0.0. Only differences in $Q$-values between partitions are significant.\\
+PWF = use asymptotic piecewise methods in this partition (default is True).
+
+\item[READSTATES] ~ \\ %, PRMAX, LPMAX1, MIXPOT]  ~\\
+ read in specification of the NEX states from file number READSTATES. \\
+PRMAX = maximum radius in this partition. Useful for R-matrix calculations, but redefines what `local' interactions mean.\\
+%LPMAX1 = maximum partial wave $L+1$ in this partition if the incident lab energy is below ELPMAX (given in the \&Fresco namelist),
+
+%\item[MIXPOT] governs the couplings that are generated (in this partition) between levels that have {\em different} KP potential indices.
+%It does not affect any couplings when the KP index values are identical.
+%
+% $\leq$ 0: {\em no} couplings (default)
+%\\ = 1:  couplings only to or from the first state in that partition
+%\\ = 2:  couplings only according to the KP value of the destination level
+%\\ = 3:  {\em all} couplings produced by either KP value.
+
+
+\end{description}
+
+
+\subsubsection{\&STATES namelists}
+Repeated IA = 1,..,NEX times before the next \&PARTITION: 
+
+\begin{description}
+
+\item[Jp,  COPYp,  BANDp , Ep,  KKp, Tp, ~~ Jt,  COPYt, BANDt , Et,  KKt, Tt] ~\\
+For both projectile (p) and target (t), the following are read:
+
+J     = spin of the state (Jp and Jt, and similarly below).
+
+BAND  $>$ 0 for positive parity state, and $<$ 0 for negative parity.
+The value of BAND defines the rotational band : all states of the
+same BAND may be coupled by rotational mechanisms.
+Odd multipoles couple BAND values of opposite sign.
+
+If COPY is positive, then this level is a copy of a
+previous level number (COPY $<$ IA) in the same partition.
+
+If COPYp $<$ 0, then this level is an exchange copy of
+{\em the same IA numbered}
+level in the previous partition abs(COPY).
+That is, a copy with projectile and target nuclei exchanged.
+
+If COPYt = -IC, then the target state is an exchanged projectile.
+If that state has spin zero, then only even partial waves are allowed.
+
+COPYs are needed to define identical states of one nucleus in different
+pairings IA.   Spectroscopic amplitudes (in \&cfp namelists) should be defined
+for only the original `copied' level.
+
+E     = excitation energy of state relative to ground state.
+
+KK     = K of rotation band containing this state.
+(If zero, use spin of first level in this band.)
+
+T     = isospin of this state (if zero, use INT((mass-2*charge)/2))
+
+\item[KP, FEXCH,IGNORE, INFAM,OUTFAM] ~\\
+KP = index of optical potential for this pair of excited states.
+If zero, use as default KP = IC, the number of this partition.
+
+If FEXCH = T calculate and write out all cross sections and amplitudes
+for $180-\theta$.
+
+
+If IGNORE = T, ignore the convergence of this  state pair
+(see IPS discussion above).
+
+If INFAM $\ne$ 0,  read in complex amplitudes later to add to
+calculated scattering amplitudes\\
+$<$ 0, read in \underline{only one} amplitude (non spin-flip)
+for each scattering angle, with others zero.
+
+If OUTFAM $\ne$ 0,  write out complex amplitudes later to add to
+calculated scattering amplitudes.\\
+$<$ 0: write out \underline{only one} amplitude 
+for each  angle, namely the average of diagonal amplitudes.
+
+
+The output files are suitable to be reread later as input file
+\end{description}
+
+\newpage
+\subsection{\&POT potential namelists}
+%
+Each potential is started by a \&pot namelist with TYPE=0, defining the radii to be used
+and the diagonal Coulomb potential, followed by any number of further \&pot namelists with TYPE$>$0,
+which cumulatively construct the components of the nuclear potential.
+The KP value in each namelist identifies the potential of which this is to be a component.
+The \&pot namelists are repeated until KP$<0$ indicates the last one to be considered, or an empty namelist is read in.
+
+
+\subsubsection{First kind of \&pot namelist}
+
+\begin{description}
+\item[KP, TYPE,  p1, p2, p3, p4]  with TYPE=0, or 
+\item[KP, TYPE,  AT, AP,  RC, AC] with TYPE=0 : \\
+%
+    All the radii are multiplied by CC. \\
+       CC is updated by a TYPE=0 \&pot namelist to CC = AT$^{1/3}$ + AP$^{1/3}$ where AT$\equiv$p1 and AP$\equiv$p2, \\
+       CC is updated by TYPE$>$0 namelists, if P0 $>$ 0,  to CC = P0$^{1/3}$.
+
+RC$\equiv$p3 = surface radius (when multiplied by CC) of charge distribution\\
+AC$\equiv$p4  = diffuseness of charge distribution
+
+
+
+The values of AT and AP affect {\em only} the conversion from $r_0$ radii
+to R radii in the definition of potentials in these namelists.
+If however you adopt the convention that AT is the target mass number
+and AP the projectile's, then FRESCO can later display the
+fractional $\beta$ values corresponding to given deformation lengths.
+(These are for information only, and do not affect the couplings.)
+
+
+\end{description}
+\subsubsection{Second kind of \&pot namelist: TYPE$>$0}
+
+\begin{description}
+\item[KP, TYPE,  IT, SHAPE, p1, p2, p3, p4, p5, p6, p0] or 
+\item[KP, TYPE,  IT, SHAPE, p(:)] or 
+\item[KP, TYPE, IT, SHAPE,  V,Vr0,Va,   W,Wr0,Wa] 
+\item[{\rm also}: LSHAPE, JL, XLVARY, ALVARY, DATAFILE]
+\end{description}
+
+An empty namelist  ends reading potential parameters, as does a negative KP value in the last namelist.
+%If the namelist is empty or KP $\leq$ 0, this will be the last \&pot namelist. 
+%If KP $<$ 0, use abs(KP) below, and omit the empty namelist.
+%%
+\begin{tabbing}
+\hspace*{5mm} \= \hspace*{1cm} \= \hspace*{2cm} \= \\
+For\>TYPE\\
+\>0\> \>Coulomb potential (see above)\\
+\>1\>SHAPE\>Central potential, Volume\\
+\>2\>SHAPE\>Central potential, Derivative (i.e. surface)\\
+\>3\>SHAPE\>Spin-orbit for projectile\\
+\>4\>SHAPE\>Spin-orbit for target\\
+\>5\>SHAPE\>Tr tensor force for projectile\\
+\>6\>SHAPE\>Tr tensor force for target\\
+\>7\>SHAPE\>Tensor force between L and combined projectile+target spins
+(e.g.~n-p tensor force)\\
+\>8\>SHAPE\>Spin.spin force for target \& projectile spins\\
+\>9\>SHAPE\>Effective mass: reduction from unity\\
+\>10\>SHAPE\>Deformed projectile   (matrix elements from ROTOR)\\
+\>11\>SHAPE\>Deformed target       (matrix elements from ROTOR)\\
+\>12\>SHAPE\>Projectile coupled by matrix elements read in.\\
+\>13\>SHAPE\>Target     coupled by matrix elements read in.\\
+\>14\>SHAPE\>Projectile second-order coupled by matrix elements read in.\\
+\>15\>SHAPE\>Target second-order coupled by matrix elements read in.\\
+\>16\>SHAPE\>Target \& projectile simultaneous second-order coupled by matrix elements read in.\\
+\>17\>     \>Target \& projectile all-order coupled by matrix elements read in.\\
+\>20\>NUM\>Super-soft N-N potl. of de Tourreil \& Sprung (SSC(C))\\
+\>21\>NUM\>User-supplied N-N potential via subroutine NNPOT.
+\end{tabbing}
+%
+
+\noindent
+TYPE indicates type of spin tensor or excitation coupling,
+
+\noindent
+IT is 1 or 3 to make this component included only iteratively,\\
+ \hspace*{8mm} 2 or 3 to NOT subtract this component in KIND=3,4 single-particle  couplings,
+
+\noindent
+SHAPE indicates the radial shape of the form factor,
+
+\noindent
+P1-P3 \& P4-P6  are parameters for the real and imaginary parts (respectively).
+
+\noindent
+P0$\equiv$P7 can give a further parameter.
+
+\medskip
+
+If TYPE $<$ 0, add new potential numerically into previous potential,
+and use abs(TYPE) instead.   This saves space, and is useful if adding
+ components to be deformed by a following namelist with $\leq$ TYPE $\leq$ 13.
+
+
+\bigskip
+
+The SHAPEs for volume potentials (TYPE=1, 8 \& 15) are,
+\\
+with R = P2 * CC, RH = (r - R)/P3, and E = exp(-(r-R)/P3),
+\\
+(replacing (P1,P2,P3) by (P4,P5,P6) throughout for the imaginary parts)\\
+%
+   0: Woods-Saxon  = - P1 / (1 + 1/E)
+\\ 1: WS squared   = - P1 / (1 + 1/E)$^2$.
+\\ 2: Gaussian     = - P1 * exp(-RH$^2$.)
+\\ 3: Yukawa       = - P1 * E / r
+\\ 4: Exponential  = - P1 * E
+\\ 5: Reid soft core for $T$=0, central part
+\\ 6: Reid soft core for $T$=1, central part
+\\ 7: Read Real
+\\ 8: Read Imaginary
+\\ 9: Read Complex
+\\--1: Fourier-Bessel = $j_0$(RH) = $\sin$(RH)/RH
+
+
+For `SHAPE's 7-9, immediately read in free format from from {\em Input File 4}, or from {\bf datafile} if specified:
+First a comment line,\\
+then (free format) NPOINTS, RSTEP, RFIRST, \\
+followed by NPOINTS potential points for the shape in steps of RSTEP starting at r=RFIRST.
+\\
+Rescale the real part by P1, the imaginary part by P2,
+and use radius = P3 * CC for subsequent deformation calculations.
+\\
+If SHAPE = -7, -8, or -9, rewind file 4 before reading from it.
+\bigskip
+
+The SHAPEs for surface potentials (TYPE=2), with R, RH and E as before,
+are the first derivative forms (normalised to --1 when E=1,
+if reasonable):
+
+\noindent
+      0 : Woods-Saxon  = - P1 * 4 * E / (1+E)$^2$ \\
+      1 : WS squared   = - P1 * 8 * E*E / (1+E)$^3$\\
+      2 : Gaussian     = - P1 * 2 * exp(-RH*RH) * RH\\
+      3 : Yukawa       = - P1 * E * (1 + r/P3) / (r*r)\\
+      4 : Exponential  = - P1 * E\\
+      5 : Reid soft core for $T$=0, spin-orbit part $\times r$,\\
+      6 : Reid soft core for $T$=1, spin-orbit part $\times r$,\\
+      7,8,9 : Read from external file, as above.
+\bigskip
+
+The SHAPEs for spin-orbit potentials (TYPE=3 or 4) are the following surface
+shapes, \\ where CONLS = $\hbar^2/(m_\pi^2 c^2)$ = 2.000.
+
+\noindent
+      0 : Woods-Saxon  = -- CONLS * P1 *  E / [(1+E)$^2$ * P3 * r] \\
+      1 : WS squared   = -- CONLS * P1 * E*E / (1+E)$^3$  / (2*r*P3) \\
+      2 : Gaussian     = -- CONLS * P1 * exp(-RH*RH) * RH  / (2*r*P3) \\
+      3 : Yukawa       = -- CONLS * P1 * E * (1 + r/P3) / (4*r$^3$*P3)\\
+      4 : Exponential  = -- CONLS * P1 * E / (4*r*P3)\\
+      5 : Reid soft core for $T$=0, spin-orbit part\\
+      6 : Reid soft core for $T$=1, spin-orbit part\\
+      7,8,9 : Read from external file, as above.
+
+To become interaction potentials,
+these form factors will be multiplied by
+$j(j+1) - l(l+1) - s(s+1)= 2{\bf l}.{\bf s}$, where $s$ = spin of projectile or target
+in each of its ground state and excited levels. There is no option here for
+state-dependent spin-orbit forces.
+\bigskip
+
+The SHAPEs for tensor potentials (TYPE=5, 6 \& 7), with R, RH and E as before,
+are the second derivative forms (normalised to unity when E=1,
+if reasonable):
+
+\noindent
+      0 : Woods-Saxon  = P1 * 8 * E*(E-1) / (1+E)$^3$\\
+      1 : WS squared   = P1 * 4 * E*E / (1+E)$^3$\\
+      2 : Gaussian     = P1 * 2 * exp(-RH*RH) * RH\\
+      3 : Yukawa       = P1 * E * (1/P3$^2$. + 2/r$^2$.) / r\\
+      4 : Exponential  = P1 * E\\
+      5 : Reid soft core, 12 * tensor part\\
+      6 : Vol Gaussian = 12 * P1 * exp(-RH*RH)\\
+      7,8,9 : Read from external file, as above.
+
+\medskip
+
+If SHAPE $\geq$ 30, then use SHAPE-30, and define a
+$J$- or  $L$-dependent potential by a factor defined
+using \\
+{\bf JL, LSHAPE, XLVARY, ALVARY} \\
+so that the potential is multiplied by a form factor depending LSHAPE as 
+
+\noindent
+ =0 : Woods-Saxon  = 1 / (1 + 1/E), \\
+      =1 : WS squared   = 1 / (1 + 1/E)$^2$\\
+      =2 : Gaussian     = exp(-RH$^2$), \\
+where X=L (for JL=`L'), X=J (JL=`J'),
+RH = (X-XLVARY)/ALVARY, and E=exp(-RH).
+
+\medskip
+
+If SHAPE $\geq$ 10 and $<$ 19, then use SHAPE-10, and write out the
+resulting potential to {\em Output file 25} in FORMAT(6E12.4):
+a form suitable for subsequent reading by a SHAPE $\geq$ 20.
+
+\medskip
+
+If SHAPE $\geq$ 20 and $<$ 30, then a $J_{T}/\pi$-dependent
+potential is defined.
+\\
+For each subsequent coupled-channels set with total angular momentum
+$J_{T}$, a form factor is read into this potential from
+{\em Input file \# SHAPE}, reading M = RMATCH/HCM+1 complex numbers
+in FORMAT(6E12.4) from the
+file as a random-access, with (M-1)/3+1 lines for each form factor.
+\\
+For each CC set, form factor number
+$int(J)+1$ (for SHAPE $\geq$ 24) or
+1/2 for +/- parity (for SHAPE $<$ 24) is read.
+
+If SHAPE = 40, then a $\pi$-dependent potential is defined:
+use KP = P1 for + parity CC sets, and P2 for -- parity.
+
+If SHAPE = 41, then a $L$-dependent potential is defined:
+use KP = P($L$+1) for L=0--5, and P0 for L$\geq$6.
+
+If SHAPE = 42, then a $J$-dependent potential is defined:
+use KP = P(Ji+1) for Ji=0--5, and P0 for Ji$\geq$6, with Ji = int($J$).
+%
+%If SHAPE = 43, then a $L$-parity-dependent potential is defined:
+%use KP = P1 for $L$ even, and P2 for $L$ odd.
+\\
+There need only be one \&pot namelist for 40 $\leq$ SHAPE$\leq$43. The values of TYPE
+and P2-P7 are ignored. No files are used. Choices are listed in fort.48
+
+%If SHAPE = 45, then an energy-dependent potential is defined, using linear interpolation of the potential forms.
+%The nodes are KP=P1 at energy P2, P3 at energy P4, etc., up to KP=P9 at energy P10 (MeV).
+
+
+\bigskip
+{\em Nucleon - nucleon Potentials}
+\bigskip
+
+The SHAPEs for the nucleon-nucleon SSC (C) potential (TYPE = 8) are
+taken from the subroutine SSCC in FRESCO.
+The input NUM is the number of angular momentum components stored,
+using the order
+\\
+ $^1S_{0}$, $^3S_{1}$, $^3S-^3D$, $^3D_{1}$, $^1P_{1}$, $^3P_{0}$
+$^3P_{1}$, $^3P_2$, $^3P-^3F$, $^3F_2$, $^1D_2$, and $^3D_2$
+\\
+Note that TYPEs 8 \& 9 can only be used in KIND = 1 ($LS$-coupled)
+single-particle states.
+
+
+The SHAPEs for the user's nucleon-nucleon potential (TYPE = 9) are
+taken from the subroutine NNPOT, with NUM the same meaning as above.
+
+\subsubsection{Deformations}
+
+
+The SHAPEs for deformed potentials (TYPE $\geq$ 10) are constructed either
+by reading external forms (SHAPE = 7, 8 or 9) for each P(k) non-zero
+(the input k-form being multiplied by P(k)),
+or (for SHAPE $\geq$ 10) by deforming the potential on the
+{\em immediately preceding} input namelist.
+This preceding namelist must be of TYPE=0 for Coulomb deformations,
+or TYPE = 1 or 2 for nuclear deformations: deformation of non-central
+forces is not yet implemented.
+\bigskip
+
+For Nuclear deformations P(k) = DEF(k), the deformation lengths (in fm.).
+(P0 = DEF(0) for {\em inelastic} monopoles.)
+%
+
+
+For Coulomb deformations P(k) = Mn(Ek), the intrinsic reduced matrix elements
+in units of $e.fm^k$  (P0 gives Mn(0) for {\em inelastic} monopoles).
+These intrinsic matrix elements Mn(Ek)  use
+the reduced matrix elements $\langle I ' || Ek || I \rangle$ given by the
+definitions of Alder \& Winther (not by those of Brink \& Satchler),
+by assuming a rotational model where $K$ is a good quantum number:
+ \beqn
+  Mn(Ek) = \langle I ' || Ek || I \rangle
+                     / (\sqrt {2I+1}  \langle IK k0 | I ' K \rangle ) \ .
+  \eeqn
+Thus, for (possibly hypothetical) $0 \rightarrow k$ transitions, $ Mn(Ek)= \langle k || Ek || 0 \rangle$.\\
+Mn(E2) is related to the intrinsic quadrupole moment in the rotational model by
+$Mn(Ek) = Q _ 0 ~ \sqrt {5 / {16 \pi}}$.
+For a uniformly charged sphere of radius $R$, to first order in $\beta_k$ we have
+\beqn
+  Mn(Ek) = {{3 ~ Z ~ \beta _ k ~ R^k} \over {4 \pi}}  \ .
+\eeqn
+The Mn(Ek) are thus of the same sign as $\beta$ and $Q_{0}$ for all rotational
+bands.
+\\
+\bigskip
+TYPES 12 \& 13, for detailed and model-independent specifications,
+directly use the reduced matrix element
+\beqn
+  M(Ek) & = &i^{ I-I ' + |I-I ' | } ~ \langle I ' || Ek || I \rangle \\
+     & =& \pm \sqrt{ (2I+1) ~ B(Ek, I \rightarrow I ' ) } \ ,
+\eeqn
+where the sign convention has been chosen to make M(Ek) real and symmetric under $I \leftrightarrow I'$ interchange.
+The diagonal reduced matrix element gives the spectroscopic quadrupole moment
+\beqn
+Q_2 = \sqrt {{16 \pi} /5} ~ (2I+1)^{-1/2} ~ \langle II 20 | II \rangle ~\langle I || E2 || I \rangle \ .
+\eeqn
+The intrinsic and reduced matrix elements are therefore connected by
+\beqn
+ M(Ek) = Mn(Ek) ~ (-1)^{ [I-I ' +|I-I ' |]/2} ~ \sqrt{2I+1}  \langle IK k0 | I ' K \rangle
+\eeqn
+  in the rotational model where $K$ is a good quantum number,
+ for states of spin $I,I'$, projection $K$, charge $Z$, and radius $R$
+(DEF(k) = $\beta_k \times R$ for such states).
+
+So Mn(Ek) is the square root of $B(Ek, 0 \rightarrow k)$ with some sign
+within $K=0$ bands. Mn(Ek) always has the same sign as $\beta$.
+
+{\em
+In Other Cases, Do {\bf Not} Assume That All Transitions Have The Same M(Ek) Values.
+Thus Mn(Ek) Are The Same For All Pure Rotor Transitions, In Contrast To
+M(Ek).}
+ %
+In order to guide the user here,
+effective $\beta$ values are calculated from the given Mn(Ek) or M(Ek), for
+each possible transition.
+{\em From version FRV onward, Mn(Ek) is used in place of M(Ek) for TYPE
+10 \& 11 potentials.}
+
+\subsubsection{Pairwise couplings}
+For TYPEs 12--17, namelists {\bf \&step} are read to determine the details of the
+required couplings between each pair of excited states
+and of the reorientation terms for each individual state.
+\begin{description}
+\item[\&step] \bf IB,I A, k, STR /
+\end{description}
+    to put in a coupling {\em to} state IB {\em from} state IA,
+of multipolarity k and strength STR.
+These are terminated by an empty {\bf \&step} namelist, or by IB$<$0 indicating the last entry.\\
+
+For each k used here, P(k) must have been non-zero,
+and the required coupling has the same form factor but with relative strength
+STR / P(k).   That is, STR is the reduced matrix element $<IB | M(Ek) | IA>$
+= M(Ek, IA$\rightarrow$IB)
+for Coulomb transitions ({\bf NOT} Mn(Ek)),
+and is the `{\em reduced} deformation length'
+RDEF(k) for nuclear transitions.
+
+This `reduced deformation length' in the rotational model is
+\beqn
+   RDEF(k, I \rightarrow I')
+         &=& DEF(k) (-1)^{ [I-I'+|I-I'|]/2}  \sqrt{2I+1} ~ \langle IK k0 | I'K\rangle\\
+         &=& M(Ek) * 4\pi / [ 3 Z R^{k-1} ]
+\eeqn
+but may in general be varied independently of DEF(k) and M(Ek).
+Both these nuclear and Coulomb interactions are thus designed to give
+channel couplings which are {\em in}dependent of
+the projection K values read in the \&state namelists.
+This of course requires making RDEF(k) and M(Ek) dependent on the
+spins of the excited states, not on any simple model.
+Note: monopole potentials are included automatically, even if not listed in a  {\bf \&step} namelist.
+
+\bigskip
+The SHAPEs for deformed potentials (TYPE=10 to 13) are constructed by:
+
+SHAPE
+%\\
+     = 0 to 6 : not used 
+\\
+     = 7,8,9 : Read from external file, as above for TYPE=1.
+The multipoles are then multiplied by P(k) (by 1.0 for k=0), and
+should end up as scaled to replace the form factors calculated
+below:
+\\
+= 10 : Coulomb multipoles have the usual simple form for a
+deformed charged sphere to produce M(Ek) = P(k),
+varying at large distances as
+\beqn
+      F(r) = M(Ek) ~ e^2 ~ {\sqrt{4\pi}   \over  (2k+1)}~  r^{-k-1}
+\eeqn
+where $e^2=1.440$, and where this form factor will later be multiplied
+by the charge number of the opposing nucleus.
+\\
+= 10 : Nuclear multipoles are the deformation length DEF(k) = P(k)
+times the derivative of the undeformed potential times $-1/\sqrt{4\pi}$:
+\beqn
+      F(r) = - DEF(k) ~  \frac{1}{\sqrt{4\pi}} ~ \frac{dU(r)}{dr}
+\eeqn
+The shape is the same for all multipoles k $>$ 0.
+\\
+= 11: Nuclear multipoles calculated by numerically deforming the radii
+of the previous potential, and projecting by Gaussian quadrature
+onto the required multipoles (those k $>$ 0 for which P(k) is non-zero).
+For small deformation lengths, these SHAPEs are the same as for
+SHAPE = 10.
+\\
+= 12: Same as SHAPE = 11, except that the monopole k = 0 part of
+the potential is also recalculated by quadrature. A first order
+correction is made to the radius to improve volume conservation.
+\\
+= 13: Same as SHAPE = 12, except that {\bf no} first order
+correction is made to the radius to improve volume conservation.
+
+\bigskip
+
+For TYPEs 14--17,  {\bf \&step} namelists are again read to determine the details of the
+required couplings between each pair of excited states
+and of the reorientation terms for each individual state.
+Only nuclear couplings are yet implemented.
+Specify values { \bf IB,I A, k, STR} 
+to put in a coupling {\em to} state IB {\em from} state IA,
+of multipolarity $|$k$|$ and strength STR. For TYPEs=14--17, the IB and IA
+can reference any combination of projectile and target states,
+but k$>$0 for projectile and k$<$0 for target states.
+STR refers to the RDEF(k) measure above;
+the factor  $(-1)^{ [I-I'+|I-I'|]/2}$ must be included.
+
+For TYPE=17, couplings, to all orders in RDEF, are calculated between all
+pairs of projectile and target states using the matrix eigensolution
+method of Kermode and Rowley, Phys. Rev. {\bf C48} (1993) 2326.
+The SHAPE and P0-P6 parameters on the TYPE=17 \&pot namelist are not used.
+
+\newpage
+\subsection{\&OVERLAP namelists for one- and two-particle form factors}
+%
+
+
+Read in a namelist for each desired particle-nucleus form factor, then an empty namelist.
+
+\begin{description}
+\item[KN1, KN2, IC1, IC2, IN]  ~\\
+ %
+Each form factor is indexed by a number KN, which may refer to
+a single form, or for two-nucleon form factors will refer to a range
+of forms KN1 - KN2
+(one for each distance and angular momentum between the two nucleons).
+
+Each form factor is the binding of one or two particles to a
+specified nucleus, where the composite system is another specified
+nucleus.
+
+To specify the core and composite nuclei, their partition numbers
+IC1 and IC2 are required (either order), with $|$IN$|$=1 for projectile
+and $|$IN$|$=2 for target nuclei.
+
+The mass of the particle is the strict difference of the masses of
+the core and composite nuclei, except that if IN $<$ 0, then a
+relativistic correction is made for effect of the relative Q-values
+on the mass of the composite nucleus, when extracting by differences
+the mass of the bound fragment.
+
+
+\item[KIND]
+the kind of coupling order (0 to 4 for one-particle states, and
+6 to 9 for two-particle states) :
+
+= 0 for (LN,SN) JN couplings   ~ ~ ~$\leftarrow$ use for typical transfers\\
+= 1 for $|L_{n}, (SN,J_{core})S ; J_{com}\rangle$  (IA \& IB must be given) *\\
+= 2 for eigenstate in deformed potential (fixed SN, K, Parity)  *\\
+= 3 for $|(LN,SN)Jn, J_{core}; J_{com}\rangle$    (IA \& IB must be given)\\
+= 4 for form of leg of the Dalitz-Thacker Triton\\
+= 5  (not used)\\
+= 6 for $|L_{nn}, (\ell,S_{12})j_{12}; J_{12}\rangle$  with isospin $(.5,.5) T$\\
+= 7 for $|(L_{nn},\ell)L_t, (S_{12},J_{core})S_t ;  J_{com}\rangle$ \& $|(.5,.5)T,T_{core};T_{com}\rangle$  *\\
+= 8  (not used)\\
+= 9 for $(L_{nn},(\ell,S_{12})j_{12})J_{12}, J_{core}; J_{com}\rangle$ \&
+$(.5,.5)T,T_{core};T_{com}$
+
+where
+\\  $J_{core}$ = spin of core nucleus (state Ia if given)
+\\  $J_{com}$  = spin of composite nucleus (state IB if given)
+\\  $K_{core}$ = projection K of core nucleus (state IA)
+\\  $K_{com}$  = projection K of composite nucleus (state IB)
+\\  $T_{core}$ = isospin of core nucleus (state IA)
+\\  $T_{com}$  = isospin of composite nucleus (state IB)
+
+
+and  *  signifies that transfers using these KINDs are not yet implemented.
+
+\item[CH1, NN, L, LMAX, SN, IA, JN, IB] ~\\
+%
+CH1 = single-character identifier to distinguish clusters of
+nucleons of different structures that are not further described
+but should not be confused with each other.
+Use A-M for positive parity clusters, and N-Z for negative parities.
+
+NN = number of nodes (include the origin, but not infinity, so NN $>$ 0)
+
+L  = LN = angular momentum of bound cluster relative to the core
+
+LMAX = maximum value of L in states in deformed potential,
+
+SN
+      = intrinsic spin of bound nucleon (one-particle states)
+\\  = total angular momentum (L+S) of bound cluster (KINDs 6 \& 9)
+\\  = combined cluster and core intrinsic spins     (KIND 7)
+
+IA = index (within core partition) of excited state of core,
+or zero if to be specified later.
+
+ JN
+     = vector sum LN + SN,
+\\   but for KIND=1, JN = SN + J$_{core}$  (i.e. S in LS coupling)
+\\    and for KIND=7, JN = $L_{nn} + \ell$     (i.e. L in LS coupling)
+
+
+IB = index (within composite partition) of excited state of composite,
+or zero if to be specified later.
+
+\item[KBPOT, KRPOT, BE,   ISC, NK, ER] ~\\
+%
+KBPOT = index KP of potential in which to bind this state
+
+KRPOT = index KP' of potential with which to multiply this states'
+wave function for transfer interactions. If zero, use KBPOT.
+If the binding potential was adjusted for a specific binding
+energy, then this adjusted potential (not the original) is used
+for transfers.
+
+BE = Binding Energy (positive for bound states, negative for
+continuum bins)
+
+
+\bigskip
+{\bf BOUND STATES:}
+
+
+ ISC
+      = 0 to vary the binding energy for fixed potential,
+\\  $>$ 0 to vary the TYPE = ISC component of the potential KBPOT
+by a scaling factor to give binding energy BE.
+\\  $<$ 0 to vary the TYPE = ISC component of the potential KBPOT,
+as above, but {\bf also} to permanently rescale all the varied potential
+components. This affects all later bound and scattering states using
+the potential KBPOT.
+
+
+
+\bigskip
+{\bf CONTINUUM BINS:}
+
+
+ ISC   (default value 2)\\
+      = --2: no weighting or normalisation,
+\\  = 1, 2 : weight wave functions by $\exp(-i\delta(k))$,
+so they are real, before integrating over bin width.
+\\  = 3, 4 : weight wave functions by $T(k)$* (useful for resonances)
+\\  = --1, 1, 3 : normalise wave functions to unity (by usual square norm).
+{\bf (This option is not recommended, for physics reasons!)}
+\\  $\geq$ 10: use additional $k$ factor in the weighting function, with
+mod(ISC,10) for above choices. Recommended for low-energy  bins.
+
+The values ISC$>$0 give real-valued bins for single-channel states,
+but not, in general, for coupled-channels bins. In that case, Fresco stores
+{\em all} bound and continuum states as complex functions.
+KIND=3 and 4 forward and reverse couplings are both calculated
+explicitly, but not KIND=7 transfer couplings. For transfers, the
+reverse couplings must be put in explicitly.\\
+ %
+{\bf Warning:} imaginary parts of bins give imaginary parts of long-range
+Coulomb couplings that are {\em ignored} between abs(RMATCH) and RASYM
+in the CRCWFN calculations (the values in the \&Fresco namelist).\\
+ %
+In general, ISC=2 is recommended (or ISC=4 for resonances), since then
+the coupled-channels bins will be nearly real. With ISC=--2 (no phase weighting)
+there will be  different results because of different weighting within the
+bin. Note that all channels within a bin have the same scalar
+weighting factor.
+
+
+\item[IPC, NFL] ~\\
+IPC = print control for further information:
+%
+\begin{tabbing}
+\=IPC ~ ~ \=Print Iterations~ ~ \=Print Final Result ~ ~\=Print W/F\\
+ \>0 \>no \>no \>no\\
+ \>1 \>no \>yes \>yes\\
+ \>2 \>no \>yes \>no\\
+ \>3 \>yes \>yes \>yes\\
+ \>4 \>yes \>yes \>no\\
+\end{tabbing}
+For bin states, read this table with `iterations' replaced by `intermediate
+phase shifts'.
+
+
+ NFL
+      $<$ 0    : to write wave-function u(R)/R and potential overlap
+V(R)u(R)/R to file number abs(NFL).
+\\  $>$ 0 : to read a previously-written wave function from file number
+NFL.
+\\ These wave function files contain a comment line,
+then (free format) NPOINTS, RSTEP, RFIRST,
+followed by NPOINTS wf points in steps of RSTEP starting at r=RFIRST,
+and then NPOINTS for the vertex function (potential*wf).
+The file numbers NFL should be in the range 20--33 (see section \ref{files}).
+
+\item[NAM, AMPL]~\\
+If IA and IB are both non-zero, then there is enough
+information to set up the spectroscopic amplitude now,
+to  $\sqrt{NAM} \times AMPL$.
+See discussion for the \&cfp namelists, for further information about these amplitudes.\\
+{\bf Note:} If this is a form factor with mixed core levels,
+then AMPL should be specified {\em here} rather than on a \&cfp namelist
+(as \&cfp namelists require an IA specification, and such a state would
+have multiple IA assignments).
+
+If NAM = --1, then use AMPL for the mass of the bound particle,
+independent of the MASSes in the \&partition namelists.
+(If NAM $\geq$ 0, then the default particle mass is the difference of
+the MASSes of the projectiles (IN=1) or targets (IN=2) for partitions
+IC1 and IC2).
+
+If NAM $<$ --1, then use AMPL instead of ERANGE for the range ER of the
+energies of the upper
+and lower boundaries of the continuum bins, and use at leastgr
+NK=$5\times|NAM|$ integration steps over this range.
+(These ER and NK override the input values.)
+
+\item[DM] Set particle mass specifically, rather than using mass differences.
+
+\item[NK, ER, E] Specific values for this continuum bin.
+
+%\item[KEEP]
+
+%\item[PPOWER]
+
+
+\item[RSMIN, RSMAX] If specified, set the overlap form factors to zero outside the interval [RSMIN,RSMAX]
+
+
+\item[NLAG, PHASE, AUTOWID] Parameters for {\sc Pluto} with bound or resonant states.
+
+
+\end{description}
+
+\subsubsection{One-particle KINDs}
+
+\paragraph{For KIND = 0:}   (LN,SN) JN couplings.
+
+One form factor with LN,SN, \& JN as read in.
+
+LMAX is not used.
+
+IA \& IB are used only if NAM \& AMPL are non-zero, to specify
+spectroscopic amplitudes.
+
+\paragraph{For KIND = 1:}  $L_{n},(SN,J_{core})S; J_{com}$     i.e. LS coupling.
+
+Coupled form factors with sum over $L_{n}$ and $S$.
+
+SN as read in, the intrinsic spin of the bound particle.
+
+IA giving $J_{core}$, spin of core nucleus.
+
+IB giving $J_{com}$,  spin of composite nucleus.
+
+LMAX is maximum $L_{n}$ in summation.
+
+JN   is maximum S  in summation.
+
+NN \& L restrict the number of radial nodes of one component
+wave function in the coupled set :
+
+NN gives the number of radial nodes of the last partial wave of
+angular momentum L$_{n}$ = L input.
+
+\paragraph{For KIND = 2:}  eigenstates in a deformed potential, for fixed
+parity and K projection :
+
+Coupled form factors  $(l_{n},SN) JN,K$ , with sum over $L_{n}$ \& Jn.
+
+SN, LMAX, NN \& L are as for KIND = 1 :
+
+ SN as read in, the intrinsic spin of the bound particle.
+ 
+ LMAX is maximum L$_{n}$ in summation.
+ 
+ NN \& L restrict the number of radial nodes of one component
+wave function in the coupled set.
+
+IA is a core state with correct K$_{core}$ projection quantum number.
+
+IB is a composite state with correct K$_{com}$ projection number, 
+    so $K = K_{com} - K_{core}$
+
+JN is the maximum Jn in the summation.
+
+\paragraph{For KIND = 3:}   sum over coupled core and (ls)j particle states :
+\\
+Coupled form factors (L$_n$,SN)Jn,  J$_{core}$; J$_{com}$
+        (summing over L$_n$,   Jn \& J$_{core}$).
+
+NN is the required number of radial nodes for the component
+wave function with core state IA and partial wave L$_n$ = L.
+
+LMAX is maximum L$_n$ in summation.
+
+SN as read in, the intrinsic spin of the bound particle.
+
+All core states are included that can be coupled to form J$_{com}$,
+using a deformed binding potential.
+%s
+{\em Note that such a deformed potential must be TYPE = 11,
+whether the projectile or target is deformed: not 10 or 12 or 13}.
+
+JN is the maximum Jn in the summation (single particle $l+s$)
+
+IB gives $J_{com}$ (fixed) : spin of composite nucleus.
+
+BE is the single-particle binding energy for core state IA.
+
+\subsubsection{Two-particle KINDs}
+
+\paragraph{For KIND $\geq$ 6:}  two-particle bound states are constructed out of sums
+of pairs of previously-defined one-particle states,
+and input parameters NN through to BE in the \&overlap namelist are given new meanings:
+
+NN    $\rightarrow$ NPAIRS, the number of pair-products to be summed
+
+L     $\rightarrow$ $\ell_{min}$ , minimum orbital angular momentum $\ell$.
+
+LMAX  $\rightarrow$ $\ell_{max}$  , maximum orbital angular momentum $\ell$.
+
+
+SN    $\rightarrow$ S$_{min}$  , minimum sum S$_{12}$ of the two nucleons' intrinsic spins
+                 (S$_{max}$ = 1.0 always).
+
+IA, IB   give core and composite states, as before.
+
+JN    $\rightarrow$ J$_{12}$   , total angular momentum of the two-particle state
+outside J$_{core}$.
+
+KBPOT $\rightarrow$ T     , total Isospin  of the 2-nucleon state (0 or 1)s
+(used to enforce  $\ell$ + S$_{12}$ + T = odd)
+
+KRPOT $\rightarrow$ KNZR, the KN index to a single-particle state $u_{12}(r)$
+of KIND 0 or 1, giving the N-N relative motion in the
+other participating nucleus (usually in the light ion).
+
+If KNZR $>$ 0, then just the overlap $ u(R)  =  <u_{12}(r) | U(r,R) > $ is
+produced, suitable for zero-range two-nucleon transfer calculations.
+
+BE    $\rightarrow$ EPS   , the threshold percentage to define components with
+square norms sufficiently small to be omitted in the final two-nucleon
+state.
+
+      If ISC $\le$ 0, use Gaussian quadrature grid, in blocks of 6th-order
+      positions, for the N-N distance RMIN to RNN ( \&Fresco namelist).
+\\  If ISC $\geq$ 1, use uniform grid for the N-N distances.  Not so accurate.
+\\  If ISC $\neq$ 0, print out numerical values of resulting two-nucleon wavefunction
+U(r,R).
+
+IPC controls the details printed (along with ISC as just above):\\
+      $\geq$ 0 : one-line summary of U(r,R) form factor for each r.
+\\  $\geq$ 1 : overall norm and rms radius of total NN state.
+\\  $\geq$ 2 : contour plot of the L,$\ell$ components included.
+\\  $\geq$ 3 : contour plot of the $U(r,R) \times$ interaction potential
+
+
+
+NFL
+      $<$ 0    : to write two-nucleon wave-function U(r,R) to file
+number abs(NFL).
+\\  $>$ 0 : to read a previously-written wave function from file number
+NFL.  The values of NPAIRS, $l_{min}$, $l_{max}$, $S_{min}$ of
+{\em the present}
+run are ignored.  Thus NPAIRS can be set to zero.
+
+\subsubsection{Namelist \&TWONT}
+This namelist gives the details of the single-particle wave functions and their amplitudes in the sum of pairs.
+%
+\begin{description}
+\item[NT(1:4, :), COEF(:)] ~\\
+The sum over I of  COEF(I) $| (l_1,s_1)j_1, (l_2,s_2)j_2 ; J_{12},T \rangle$,
+\\
+ \mbox{~~~} for  $(l_1,s_1)j_1$  given by state $u_1(r_1)$ of KN1 = NT(1,I) $>$ 0,
+\\
+ \mbox{~~~}    and  $(l_2,s_2)j_2$  given by state $u_2(r_2)$ of KN2 = NT(2,I) $>$ 0,
+\\
+is then transformed into the required KIND = 6 format.
+
+The $(r_1,r_2)$ coordinates become $(r,R)$ coordinates,
+where
+$r$ = distance between the two nucleons (angular spin $\ell$), and
+$R$ = distance from the core to their centre of mass
+     (corresponding angular momentum is L$_{nn}$.
+
+If NT(3,I) $>$ 0, then the wave functions $u_1(r_1)\times u_2(r_2)$ are further
+multiplied by $u_3(r)$ (of KN3 = NT(3,I)) before coordinate transformations.
+Only the radial shape of KN3 is used, not any angular momentum numbers.
+
+If NT(1,I) = --1, then an external form factor is read in from Fortran file
+number NT(2,I), and processed using the subroutine EXTERN1.
+At present, this routine is written to read triton wave functions
+from the Grenoble Faddeev calculations,
+only reading wave functions, {\em not} the potential $\times$
+wavefunction (so for e.g. stripping, only use prior interactions).
+
+If NT(1,I) = --2, then an external form factor is read in from Fortran file
+number NT(2,I), and processed using the subroutine EXTERN2.
+At present, this routine is written to read 3-body wave functions
+from HH calculations, reading wave functions, {\em as well as} the
+potential $\times$ wavefunction. The 'vrr' file format is assumed,
+and the breakup (third) vertex function  is ignored.
+
+If NT(3,I) $<$ 0, then the I'th component of the pair summation is simply
+the product of cluster wave functions $u_1(r)  u_2(R) $
+where $u_{2}$ may be KIND = 0 or 1.
+
+NT(4,I) is not used in this version of FRESCO.
+\end{description}
+
+
+\paragraph{For KIND = 6:} construct components of the form
+$
+              L_{nn}, ((\ell, (s_1,s_2)S_{12})j_{12}; J_{12},T\rangle
+$
+for all different $L_{nn}$, $\ell$, S$_{12}$ \& j$_{12}$ values permitted within the
+limits set by $\ell_{min}$, $\ell_{max}$, S$_{min}$, and S$_{max}$
+(J$_{12}$ and T are fixed)
+by summing over pairs of single-particle wave functions.
+
+\noindent
+For all KINDs, the printout also lists:
+
+DZ = derived charge of the bound particle (always positive).
+
+DM = derived mass of the bound particle
+
+K  = the wave number of the bound state asymptotically
+
+NORM=overall square norm of this bound state.
+The wave functions of the single-particle bound states are always
+normalised to unity.
+
+RMS= root-mean-square radius of this bound state
+
+$D_{0}$ = zero-range stripping strength for transfers from this stare
+
+$D$  = asymptotic stripping strength, as used e.g. in sub-Coulomb
+transfers
+
+\subsection{\&COUPLING namelists}
+%
+Now read in namelists for each kind of coupling between partitions
+and/or between excited states, ending with a namelist which is empty or has ICTO=0.
+Note that if deformed potentials were given as channel optical
+potentials then there will already be some couplings between
+excited states.
+
+\begin{description}
+\item[ICTO, ICFROM] ,KIND,  IP1,IP2,IP3,  P1,P2,  , IP4,IP5
+
+The coupling is from all the states in partition ICFROM
+to all the states in partition ICTO.
+
+Couplings in the reverse direction are also included unless
+ICTO $<$ 0, except for KINDs 1 \& 2 where finer control is allowed.
+
+\item[JMAX, RMX]
+Couplings are only active for J $<$ JMAX and Radius $<$ RMX,
+(if JMAX=0, use JTMAX, and if RMX=0, use  RMATCH).
+
+\item[KIND]
+The couplings can be of 8 KINDs:
+
+            = 1 : general spin transfer for projectile/transfer couplings\\
+            = 2 : electromagnetic one-photon couplings\\
+            = 3 : single-particle excitation of the projectile\\
+            = 4 : single-particle excitation of the target\\
+            = 5 : zero-range or LEA transfer with strength P1 and finite range radius P2 (in fm.)\\
+            = 6 : LEA transfer using $D_0$. \& $D$ from bound states\\
+            = 7 : finite-range transfer\\
+            = 8 : non-orthogonality correction to a KIND 5,6,7 transfer %\\
+%            = 9 : general partial-wave couplings\\
+%            = 10 : (spare)\\
+%            = 11 : Projectile-valence non-orthogonality\\
+%            = 12 : Target-valence non-orthogonality (not implemented)\\
+
+After \&coupling namelists for KINDs 2,3,4,5,6,7 (\& 8 if IP2$>$0),
+spectroscopic amplitudes are read in by means of {\bf \&cfp} namelists.
+These coupling types are those for which ICTO \& ICFROM are
+different, one being a core partition and the other a composite
+nucleus. One table is used for all the amplitudes: it is indexed
+(besides the partition numbers) by IN,IB,IA \& KN (see glossary),
+and stores a real number A.
+
+The table is filled cumulatively,
+starting perhaps with \&overlap namelists, 
+so amplitudes need only be
+entered after the namelist for the first KIND of coupling in which
+they appear.
+(So if all the amplitudes are already entered for a certain KIND
+of coupling, then the following namelist will be blank, to indicate
+no more \&cfp namelists are to be read).
+
+\paragraph{For KIND = 1:} 
+\underline{General Spin Transfer}
+(with local or non-local external form factors on FILE `INFILE' [default 4])
+See section \ref{spintransfers} for more details.
+
+IP1\\
+~~~  = 0 : local form factor
+\\   1 : non-local (two-dimensional) form factor
+
+
+
+IP2\\
+~~~  = 0 : read in real values      (only if IP3 $\geq$ 0)
+\\   1 : read in imaginary values    (only if IP3 $\geq$ 0)
+\\   2 : read in complex values        (only if IP3 $\geq$ 0)
+
+
+
+ IP3\\
+~~~  = 3 : read data from JLM folding program jlmP, for projectile couplings only
+\\  2 : read data from JLM folding program jlmP, for target couplings only
+\\   1 : read data from charge exchange program CHEX2, with appropriate scaling.
+\\   0 : no jlmP or CHEX2 scaling factors, only P1, P2 and FSCALE
+\\  --1 : write out typical non-local grid $(R,R')$ coordinates
+\\  --2 : calculate non-local grid $(R,R')$ coordinates,
+and call subroutine FFNL to calculate form factor.
+\\  --3 : calculate non-local grid $(R,R')$ coordinates,
+call subroutine FNLSET to calculate an initial form factor, and the call
+FNLCC for each pair of coupled partial waves, for L-dependent factors.
+\\ --4 : call subroutine FNLREAD to read in non-local form factor, and multiplying it by the Racah-algebra factor
+in section \ref{spintransfers} (except for the $1/\sqrt{4\pi}$ factor) for given {\tt IB,IA} final and initial excited states. 
+The order of form factors in the file must agree with the order called by a double loop of channels, with the `to' channel number varying more rapidly.
+\\ --5 : call subroutine FNLREAD to read in non-local form factor for given {\tt IB,IA} final and initial excited states. 
+The order of form factors in the file must agree with the order called by a double loop of channels, with the `to' channel number varying more rapidly.
+
+
+
+ P1,P2 : scaling for the real and imaginary parts (respectively).\\
+
+   If IP3 $\geq$  0, read FROM FILE `INFILE'  the following lines
+   (until a blank line):
+\begin{verbatim}
+     Format 16.2: I4, 3F8.4,          I4,  2F4.0,   2I4,   A35
+                NP ,HNP,RFS,FSCALE, LTR, PTR,TTR, IB,IA, COMMENT
+            for NP = number of radial points
+                HNP = step size
+                RFS = radius of first point
+                FSCALE = scaling factor to be applied
+                LTR = L-transfer
+                PTR = projectile spin transfer
+                TTR = target spin transfer
+                IB  = excited-state pair fed by coupling
+                IA  = excited-state pair feeding the coupling
+                COMMENT = comment for display in printout.
+\end{verbatim}
+    ~~~~~~ then free format, repeatedly until sufficient data is read.\\
+
+
+ If IP1 =
+      0, read local form factor from i=1 to N
+\\  1, read successively for j=1,NLO the non-local form factors
+ FNL(i,j), i=1 to NP   [NLO = RNL / max(HNL,HCM)]
+
+
+When IP3=1 for CHEX2 input, the RFS and its F8.4 is omitted from Card 16.2,
+with default value RFS=HNP.
+
+
+\paragraph{For KIND = 2:}
+\underline{Electromagnetic one-photon couplings} (for $E\lambda$ and
+$M\lambda$ processes).
+
+
+
+ ICTO is the gamma partition and ICFROM the particle partition.
+ The photon must be on the `projectile' side, and the bound state between
+ target states.
+
+ IP1 = $\lambda$ : The multipolarity of the radiation.
+ If $\lambda >$ 0, include all multipoles 1,...,$\lambda$
+permitted by parity, whereas if IP1 $<$ 0, include only the multipole
+$\lambda$ = abs(IP1).
+%
+
+IP2\\
+~ ~   = 0,4 : Calculates both electric and magnetic couplings
+(reads $g$-factors from P1\&P2)
+\\    1,5 : for electric only
+\\    2 : for magnetic only (reads $g$-factors from P1\&P2)
+\\    4,5 : include also Siegert remnant for electric transitions
+
+
+ IP3:  {\em not implemented yet}
+%~ ~   = 0 : no intrinsic convection couplings
+%\\    1 : intrinsic convection coupling for projectile only
+%\\    2 : intrinsic convection coupling for target only
+%\\    3 : intrinsic convection coupling for projectile and target
+%\\    4 : turn on magnetization term for electric component
+
+
+ P1  = projectile $g$-factor  \\
+ P2  = target $g$-factor  \\
+
+IP4 \\
+~  ~~   = 0 : direct capture only
+\\    1 : semi-direct capture only
+\\    2 : direct + semi-direct capture mechanisms.
+
+
+\paragraph{For KIND = 3 or 4:} 
+\underline{Single-particle excitations of the projectile (3) or target (4)}
+
+
+ For these KINDs, ICTO is the partition of the nuclei being excited,
+and ICFROM is used to indicate the
+{\em core} partition if the single particle were removed.  No couplings are
+generated to or from the ICFROM partition, only within ICTO partition.
+
+ IP1 = Q : The multipole order of the deforming potential due to
+the colliding nucleus. If Q $>$ 0, include all multipoles 0,1,...,Q
+permitted by parity, whereas if IP1 $<$ 0, include only the multipole
+Q = abs(IP1).
+%
+
+IP2
+\\   = 0 : Coulomb \& nuclear (complex)
+\\  = 1 : nuclear (complex) only
+\\  = 2 : Coulomb only
+
+
+
+IP3
+\\  = 0 or 10 : include all re-orientation terms
+\\  = 1 or 11 : no re-orientation terms for $Q > 0$
+\\  = 2 or 12 : ONLY re-orientation terms
+\\  = 3 or 13 : include only couplings to and from the ground state,
+    but NOT gs reorientation,
+\\  = 4 or 14 : include diagonal couplings,
+                and  couplings to and from the ground state
+\\  = 5 or 15 : include diagonal couplings,
+                and  couplings to and from any bound state
+\\  $\geq$ 10      : read namelist {\bf \&scale} for
+complex factors [QSCALE(Q), Q=max(0,-IP1):abs(IP1)]
+to scale the folded form factors for multipoles Q.
+
+%IP4 = $Q_{\rm max}$, the max deformed core potential multipole\\
+%IP5 = $\Lambda_{\rm max}$, the new multipole order for formfactor reduction
+%(see Appendix III).
+
+ P1  = FLOAT( potential KP index for fragment - target interaction) \\
+ P2  = FLOAT( potential KP index for core     - target interaction) \\
+        (only SCALAR parts of the potentials P1 and P2 are used).
+
+\paragraph{For KIND = 5 or 6:}
+\underline{Zero-range \& LEA transfers}
+
+IP1 and IP2 not used.
+
+For KIND=5,
+\\  P1 = $D_0$    - ZR coupling constant
+\\  P2 = FNRNG - Effective finite-range parameter for use
+in LEA (in units of fm.)
+
+For KIND=6, use $D_0$ and FNRNG = $\sqrt{(D/D_0 - 1)/k^2}$. from the projectile
+bound states.  With unbound states, or if IP3 = 1,
+use $D_0$ from state, but FNRNG = P2
+from this namelist.
+
+ In both KINDs, read in \&cfp namelists, noting that for KIND = 5
+spectroscopic factors for the projectile are not needed, and are ignored.
+
+Users of these interactions kinds should also pay attention to the
+the parameter INH in the \&Fresco namelist.
+
+\paragraph{For KIND = 7:}
+\underline{Finite-range transfers.}
+
+
+IP1 =\\
+~~~  0,-2 : POST interaction
+\\  1,-1 : PRIOR interaction
+ (N.B. meaning of IP1 thus depends on ICTO \& ICFROM!!!)
+\\  $\le$ -1 : Use $\theta$ quadrature from $\theta = \pi$ down to $\theta = 0$.
+ (Useful for finite-range knock-on with light projectiles)
+\\  $\le$ -3 : `VCORE' interaction:
+Use ONLY the core-core interaction potential
+ (Useful for finite-range knock-on with light projectiles)
+\\ 2 : Surface transfer operator, on surface if {\em final} bound state $r' =$ P1. IP2 and IP3 ignored.
+\\ 3 : Surface transfer operator, on surface if {\em initial} bound state $r =$ P1. (Not yet implemented)
+\\ 4 : Surface transfer operator calculated as PRIOR--POST. Need also to set RSMAX for {\em final} bound state to the desired surface radius. 
+   (Implemented, but not yet correctly).
+\\ 5 : Surface transfer operator calculated as POST--PRIOR. Need also to set RSMAX for {\em initial} bound state to the desired surface radius. 
+   (Not yet implemented).
+
+
+IP2 =\\
+~~~  0 : no remnant
+\\  1 : full real remnant
+\\  -1 : full complex remnant
+\\  2 : ``non-orthogonality remnant" - this works by inserting
+a KIND = 8 coupling namelist after this coupling, before any subsequent
+couplings.
+This is does not affect the one-step amplitudes, and is only useful
+if another transfer step follows this coupling.
+
+
+
+ IP3 = KPCORE : the number KP of the potential to use between
+the two cores, in the remnant part of the interaction potential.
+
+       If IP3=0, use as KPCORE the optical potential given for
+the first pair of excited states in the partition of projectile core.
+(this uses the observation that optical potentials tend to depend
+more on the projectile than the target, and must clearly be re-examined
+if the projectile is heavier than the target.)
+
+ P1,P2 : not used.
+
+
+\paragraph{For KIND = 8:}
+\underline{Non-orthogonality supplement}
+appropriate to a previous
+KIND 5,6 or 7 interaction.
+
+
+ IP1 = \\
+~~~  0 : post
+\\  1 : prior
+ (N.B. IP1 should be the same as the previous interaction!)
+
+
+
+IP2
+\\  $>$ 0 : read in spectroscopic factors as \&cfp namelists
+ (Only useful if you did NOT have a previous KIND 5, 6 or s7
+interaction, which would have needed the amplitudes then.)
+\\  = 0 : no \&cfp namelists to read.
+
+
+Note that you should {\em either} use KIND=7, $|$IP2$|$=2,
+{\em or} use  KIND=7, $|$IP2$|$=1  and a KIND=8.
+If you have KIND=7, $|$IP2$|$=2 and a KIND=8 namelist, then this is
+double counting.
+\bigskip
+
+%
+%\paragraph{For KIND = 9:} 
+%\underline{General Partial-Wave Couplings}
+%(local or non-local external interactions from FILE `INFILE' [default 4])
+%
+%IP1 \\
+%~~~  = 0 : local form factor
+%\\   1 : non-local (two-dimensional) form factor
+%
+%IP2\\
+%~~~  = 0 : read in real values   
+%\\   1 : read in imaginary values   
+%\\   2 : read in complex values       
+%
+% P1,P2 : scaling for the real and imaginary parts (respectively).\\
+%
+%For IP1=0 (local), read from file `INFILE' the following lines
+%   (until a blank line):
+%\begin{verbatim}
+%    Line (free format)           NP, sHNP, RFS
+%            for NP = number of radial points
+%                HNP = step size
+%                RFS = radius of first point
+%\end{verbatim}
+%For IP1=1 (nonlocal), read from file `INFILE' the following lines    (until a blank line):
+%\begin{verbatim}
+%    Line (free format)           NLLI, RINTPI, NLOI, HNLI, NLCI
+%            for NLLI = number of radial points in R
+%                RINTPI = step size in R
+%                NLOI = number of radial points in D=R'-R
+%                HNLI= step size in D
+%                NLCI=offset index for D=0
+%\end{verbatim}
+%
+%\begin{verbatim}
+%   Lines:
+%F8.1,I4,       2I4,f6.1,      2I4,F6.1       L2
+%JTOTAL,PARITY, IB,LVAL1,JVAL1,IA,LVAL2,JVAL2,REV
+%\end{verbatim}
+%each with following potential data of Cards 16.6 or 16.7.
+%These are the couplings from partial wave {\em to}  (LVAL1,JVAL1) for excited state pair IB
+%{\em from} partial wave (LVAL2,JVAL2) for excited state pair IA, in coupled channels set JTOTAL of parity PARITY (+1 or --1). 
+%The reverse coupling is also included if REV is true.
+%
+%If IB or IA is zero, match any state. If JVALi $< $0, then match any JVALi. If PARITY=0, match any parity.
+%If JTOTAL$<$0, match any JTOTAL.  If LVALi $<$ 0, then match any LVALi.
+%If LVAL1=LVAL2$<$0, then require partial wave coupling to be diagonal for equal LVAL=--LVALi-1.
+%
+%
+%For IP1=0 (local), \\
+%  \hspace*{8mm} {\tt read (free format) NP values}
+%
+%For IP1=1 (nonlocal), read NLLI loops of:\\
+%      \hspace*{8mm} {\tt read NLOI values (free format)}.
+%
+%Go back to reading the above input files (though subsequent values in those files are ignored).
+%
+%
+%\paragraph{For KIND = 11:}
+%\underline{Projectile-valence non-orthogonality}
+%Construct non-orthogonality overlap, for use in R-matrix or Lagrange-mesh methods,  for the case when a 
+%projectile $p$ scattering on a target consisting of \{core $c$ + valence $v$\} can be rearranged in another partition 
+%to be projectile$'$ $v$ scattering on a target$'$ consisting of \{core $c$ + valence $p$\}.
+%
+%\noindent
+%ICTO, ICFROM are the two partitions with $p$ and $v$ as projectiles (either order).
+%
+%\noindent
+%IP1 = ICORE is the partition in which the target is the bare  core  $c$.
+%
+%Spectroscopic amplitudes need to have been defined for $\langle c | c+v = t \rangle$  and $\langle c | c+p = t'  \rangle$. 
+%%Any amplitudes defined after this KIND=11 \&Coupling are for $\langle$ ICORE $|$ ICTO $\rangle$ overlaps. \\
+%NO amplitudes in \&cfp namelists are to be read in after this coupling.
+%
+%The reverse case (KIND=12), where the projectile is composite rather than the target, is not yet implemented.
+\end{description}
+
+\subsubsection{\&CFP namelists}
+  {\em Spectroscopic amplitudes} {\rm for the overlaps between
+partitions ICTO \& ICFROM already defined by a \&coupling namelist}:
+\begin{description}
+\item[IN, IB, IA, KN,  A] ~\\
+%
+meaning that the overlap of the composite nucleus in excitation
+state IB with the core nucleus in excitation state IA is the
+bound-state form factor KN with amplitude A. The IN=1 specifies
+projectile overlap, and IN=2 target overlap.
+
+ If the form factor KN mixes different IA levels, then the spectroscopic
+ amplitudes should rather be specified in an \&overlap namelist.
+
+N.B. The amplitudes A are signed, and are NOT the spectroscopic
+factors, but will typically be the square roots of these factors.
+For transfers out of or into closed shells of N antisymmetrised nucleons,
+the spectroscopic factors will usually contain factors of N,
+so the spectroscopic amplitudes needed by FRESCO will typically 
+need to already contain factors of $\sqrt{N}$.
+\\
+The sign of A should be consistent with the spin coupling order used in
+the program, which is
+\beqn
+  (\ell,s)j, J_{core}; J_{com}
+\eeqn
+for binding a $\ell sj$ nucleon onto a core of spin $J_{core}$ to form $J_{com}$.
+\\
+ If IN$<$0, use abs(IN) in this the last \&cfp namelist\\
+ If IN=0, no more \&cfp namelists to be read.
+\end{description}
+
+%\subsection{Additional data in Fortran input file 4:}
+%%
+%All these data involve reading real or complex floating point numbers
+%by repeating
+%\begin{verbatim}
+%  FORMAT(6E12.4)
+%\end{verbatim}
+%
+%Line A1 :  External Potential Form Factors (SHAPEs 7-9 on Cards 10)
+%
+%Lines A2 :  External Coupling Potentials for KIND 1 \& 2 couplings
+
+\subsection*{Glossary of Indexing Variables}
+%
+
+IC,IC1,IC2    index to mass partitions
+
+IA,IB         index to projectile-target pairs of excited states
+              within each partition
+
+KP            index to table of potentials, for scattering, binding,
+              and folding
+
+KN            index to single-particle bound states
+
+KN1,KN2       two-particle bound states are given for a range (RMIN to
+              RNN) of internucleon separations, and are stored in the
+              MSP table from KN1 to KN2 inclusive.
+
+CP            index to the coupling set up
+
+\newpage
+\section{Input CDCC format}
+\hangindent 0ex\hangafter 1
+
+{\bf \&CDCC namelist}
+
+{\tt
+hcm, rmatch, rintp, hnl, rnl, centre,  rsp, iter, pset, llmax,  dry,
+rasym, accrcy, switch, ajswtch, sinjmax,  cutl, cutr, cutc,
+absend, jtmin, jump, jbord, nnu,  rmatr, nrbases, nrbmin,  pralpha, pcon,  meigs,
+listcc, smats, veff, chans, xstabl, thmin, thmax, thinc,
+smallchan, smallcoup, melfil, nosol, cdetr, numnode, treneg,
+nlpl, trans, pel, exl, cdccc, qscale, pade, kfus,
+elab,  lab, lin, lex, \\
+hktarg, ncoul, reor, pauli,  nk,
+q, ipc, iscgs, ipcgs,  hat, remnant, postprior, quasi,
+sumform, qc, la, static, expand, maxcoup
+}\\
+
+\vspace{-3mm}
+\hangindent 5ex\hangafter 1
+are all the same as the {\bf \&FRESCO} namelist, except for:\\
+{\tt cdccc} which is an alias for {\tt cdcc} of \&Fresco namelist,\\
+ %
+{\tt q} = {\tt ip1}, multiple for the projectile single-particle couplings,\\
+{\tt ncoul} = {\tt ip2}, selecting nuclear and/or coulomb,\\
+{\tt reor} = {\tt ip3}, selecting diagonal and/or off-diagonal couplings,\\
+{\tt qc} = {\tt ip4}, $Q_{\rm max}$ for the deformed core potential multipoles,\\
+{\tt la} = {\tt ip5}, $\Lambda_{\rm max}$ for the new multipole orders with formfactor reduction,\\
+{\tt hat} (logical, default T) to use mean bin energies (otherwise midpoint),\\
+{\tt quasi}: if assigned, set all channel energies as if for this projectile
+energy (eg -{\tt be} for adiabatic),\\
+{\tt iscgs,ipcgs} = {\tt isc,ipc} (\&overlap) for the projectile ground state wave
+function,\\
+{\tt elab} = {\tt ELAB(1)}, just the one projectile lab energy,\\
+{\tt hktarg} = target value of $h.K$, where $h$={\tt HCM} and $K$ is the elastic wave number.
+(default {\tt hktarg}=0.2). \\
+\hspace*{1cm} If {\tt HCM}=0 in \&Fresco namelist,
+then $h$ is calculated from {\tt elab} and {\tt hktarg}.\\
+
+
+
+{\tt sumform} determines the bin formfactor reductions
+(default 2 if there are any {\tt kind}=3 bin states, else 0):\\
+~ ~   = 0 : no formfactor reduction:
+     $\langle {\tt KN} | K Q \lambda | {\tt KNP} \rangle$
+\\    = 1 : $KQ\lambda$ formfactors summed into new multipole $\Lambda$:
+     $\langle {\tt KN} | \Lambda | {\tt KNP} \rangle$
+\\    = 2 : formfactors summed into composite projectile state:
+     $\langle {\tt IB} | {\Lambda} | {\tt IBP} \rangle$.
+      This is not allowed if have spin-orbit or transfer couplings, and
+      {\tt sumform}=1 will be set in these cases.\\
+
+If have no cc bins, then $K$ multipoles truncated using {\tt ip1=q}.\\
+If have cc bins and $Q_{\rm max}${\tt =qc=ip4} and
+$\Lambda_{\rm max}${\tt =la=ip5} are unset, then
+{\tt q} sets the maximum multipole order of $\Lambda$, and
+ all possible values of  $KQ\lambda$ are used that couple to $\Lambda \le {\tt q}$\\
+If {\tt qc} and {\tt la} are both set, then control each multipole
+individually:\\
+\hspace*{1cm} {\tt q}     = $K_{\rm max}$,  {\tt ip1} set in usual way\\
+\hspace*{1cm} {\tt ip4=qc}  = $Q_{\rm max}$. \\
+\hspace*{1cm} {\tt ip5=la} = $\Lambda_{\rm max}$ maximum order for new
+multipole.\\
+\hspace*{1cm}  Note: $\lambda$ will always run from $0\rightarrow Q$.\\
+
+
+{\tt trans} determines the number of transfer partitions:\\
+~ ~   = 0 : no transfers: no E(jectile) or R(esidue)
+\\    $<$ 0 : only R(esidue): the Ejectile and Core are identical
+\\    $>$ 0 : both E(jectile) and R(esidue) independently of Core nucleus.
+
+{\tt postprior} = {\tt ip1} for finite-range transfer couplings,\\
+{\tt remnant} = {\tt ip2} for finite-range transfer couplings,\\
+{\tt pauli} = attempted Pauli blocking using non-orthogonality couplings.
+
+
+\noindent{\\ \bf \&NUCLEUS namelist}\\
+{\tt part,name,mass,charge,spin,parity,be,n,l,j,ia,a,kind,lmax,nch,nce,ampl
+}\\
+ %
+where this line is repeated for each {\tt part} beginning P: projectile, C:
+core, V: valence, T: target, E: ejectile, R: residue. The number of nuclei
+(4, 5 or 6) depends on {\tt trans}: see above.\\
+ %
+{\tt name,mass,charge} as {\tt name, mass, zp/t} in a \&partition namelist,\\
+{\tt spin,parity} as {\tt Jp/t, Bandp/t} in a \&states namelist.\\
+{\tt be,n,l,j,ia,a,kind,lmax,nch} prescribe the projectile P bound state,
+and with transfers also for residue R.\\
+{\tt nce} is the number of Core excited states.
+
+If {\tt nce}$>$0, then read that number of {\bf
+\&CORESTATES} namelists. \noindent{\\ \bf \&CORESTATES namelist}: {\tt
+spin,parity,ex }\\ for spin, parity ($\pm1$) and excitation energy of each Core
+state above the ground state.
+
+\noindent{\\ \bf \&BIN namelist}\\
+{\tt
+spin,parity, step,start,end,energy, n,l,j,isc,ipc, kind,lmax,nch,ia,il,ampl
+}\\
+These are repeated until an empty  {\bf \&BIN} namelist is encountered
+({\tt step}=0).\\
+Each bin set has the same {\tt spin, parity, l, j, isc, ipc, kind, lmax, nch, ia,
+il, ampl}, but a different energy.
+The energy range is divided into ({\tt end-start})/{\tt step} bins.
+If {\tt energy} then these are evenly spaced in energy, else they
+are evenly spaced in momentum $k \propto \sqrt{E}$.
+Changing or starting partial waves is equivalent to {\tt start}= 0.001.
+\\
+The values of {\tt lmax, nch, ia, il} are only needed coupled channels bins
+{\tt kind}=3, with {\tt il} being the channel number of the incoming partial wave,
+which, if {\tt il}=0, is defined as the channel with quantum numbers
+{\tt l, j} and {\tt ia}. The array {\tt ampl} gives overall multiplicative
+spectroscopic amplitudes to the bin. The values of {\tt isc, ipc, kind, lmax}
+have the same meaning as in a \&overlap namelist, with {\tt j} an alias for {\tt jn}.\\
+If {\tt l,j,ia} are not set then {\tt kind}=3 coupled-channels bins are generated
+using {\tt lmax}, for all incoming waves. Setting {\tt il} will select an
+incoming channel.
+
+\noindent{\\ \bf \&POTENTIAL namelist}\\
+{\tt
+part, a1, a2, rc, ac, v, vr0, a, w, wr0, aw,
+wd, wdr0, awd, vso, rso0, aso, shape, freal, fimag,
+vsot, rsot0, asot, l, parity, nosub, itt,
+beta2, beta3, idef, beta2c, beta3c, beta2m, beta3m
+}\\
+where this namelist is repeated for each {\tt part} beginning
+P: projectile-target  optical potential, C: core-target optical potential,
+V: valence-target  optical potential,
+T: projectile (C+V) ground state,
+B: projectile channels {\em not} containing the ground state,
+T: transfer channel optical potential,
+E: ejectile bound state, R: residue bound state.\\
+Different {\tt part}=B(in) potentials may be defined depending on {\tt parity}
+or partial wave {\tt l}. \\
+{\tt nosub} means that the P(rojectile) optical potential is {\em added} to
+the CDCC couplings as a diagonal in all projectile state channels.\\
+
+For deformations, {\tt beta2m, beta3m} are the nuclear {\em fractional}
+deformations, and {\tt beta2c, beta3c} are the Coulomb equivalents (both with default
+values  {\tt beta2, beta3} respectively).\\
+The Coulomb and nuclear deformations may also be restricted by {\tt idef}:
+\\   = 0 : Coulomb \& nuclear (complex)
+\\  = 1 : nuclear (complex) only
+\\  = 2 : Coulomb only
+
+
+{\bf Sample CDCC input file:}
+\begin{verbatim}
+11Be+4He spdf; 1+5*10+2*5 chs 0-10 MeV, q=0-3 2200 MeV, 30/100 fm
+CDCC
+ &CDCC
+   hcm=0 rmatch=-30 absend=-50 rasym=100 accrcy=0.001
+   elab=2200
+   jbord=  0   60 200 2500
+   jump =  4    5  20
+   thmax=30 thinc=.05 smats=2 xstabl=1  cutr=-10 cutc=0
+   nk=50 ncoul=0 reor=0 q=3
+   /
+ &NUCLEUS part='Proj' name='11Be' spin=0.5 parity=+1 be = 0.500 n=2 l=0 j=0.5 /
+ &NUCLEUS part='Core' name='10Be' charge=4 mass=10 /
+ &NUCLEUS part='Valence' name='neutron' charge=0 mass=1 spin=0.5/
+ &NUCLEUS part='Target' name='4He' charge=2 mass=4 /
+
+ &BIN spin=0.5 parity=+1 step=0.5 end=10. energy=F l=0 j=0.5/
+ &BIN spin=0.5 parity=-1 step=0.5 end=10. energy=F l=1 j=0.5/
+ &BIN spin=1.5 parity=-1 step=0.5 end=10. energy=F l=1 j=1.5/
+ &BIN spin=1.5 parity=+1 step=1.0 end=10. energy=F l=2 j=1.5/
+ &BIN spin=2.5 parity=+1 step=1.0 end=10. energy=F l=2 j=2.5/
+ &BIN spin=2.5 parity=-1 step=2.0 end=10. energy=F l=3 j=2.5/
+ &BIN spin=3.5 parity=-1 step=2.0 end=10. energy=F l=3 j=3.5/
+ &BIN /
+
+ &POTENTIAL part='Proj' a1=11 a2=4 rc=1.0  /
+ &POTENTIAL part='Core' a1=10 a2=4 rc=1.0
+            V=46.92 vr0=1.204 a=0.53 W=23.46 wr0=1.328 aw=0.53 /
+ &POTENTIAL part='Valence' a1=4 rc=1.3
+            V=37.14 vr0=1.17  a=0.75 W=8.12  wr0=1.26  aw=0.58 /
+ &POTENTIAL part='Gs' a1=10 v=51.51 vr0=1.39 a=.52 vso=0.38 rso0=1.39 aso=0.52/
+ &POTENTIAL part='Bi' a1=10 v=28.38 vr0=1.39 a=.52 vso=0.38 rso0=1.39 aso=0.52/
+\end{verbatim}
+\newpage
+\section{Input SFRESCO format}
+
+This is an program which search for a $\chi^2$ minimum when comparing
+the outputs of FRESCO with sets of data, using the {\sc Minuit} search
+routines.
+
+The inputs for {\sc SFresco} specify the FRESCO input and output files,
+the number and types of search variables, and the experimental data sets.
+
+\subsection{Search file}
+A {\tt search\_file} format is defined as follows:
+\begin{verbatim}
+(2*string, 2*integer: free format)
+input_file, output_file, nvariables, ndatasets
+\end{verbatim}
+\smallskip
+
+{\tt input\_file}: name of file (in single quotes) with regular FRESCO input\\
+{\tt output\_file}: name of file for the final FRESCO output\\
+{\tt nvariables}: number of search variables\\
+{\tt ndatasets}:  number of experimental data sets.\\
+
+Repeated {\tt nvariables} times, a namelist with some of the following variables:
+\begin{verbatim}
+namelist  &variable:
+name,kind,step,valmin,valmax, kp,pline,col,potential,nopot,
+dataset,datanorm, nafrac,afrac,
+energy, jtot,par,channel,width,
+\end{verbatim}
+{\tt name} is name of variable (up to 10 characters),\\
+{\tt kind}: 0=ignore, 1=potential, 2=afrac, 3=R-matrix energy,\\
+   \hspace*{10mm} 4=R-mat partial width, 5=dataset normalisation\\
+{\tt step}: step size for finding derivatives etc, zero for fixed. (default 0.01)\\
+{\tt valmin}: strict lower bound (if non-zero),\\
+{\tt valmax}: strict upper bound (if non-zero), \\
+{\tt null}: (default -124578) `undefined' value,\\
+
+{\tt kind=}{\bf 1: Variable potential parameter:}\\
+{\tt kp}: number of potential as in \&pot namelist,\\
+{\tt pline}: order of which \&pot namelist within potential definition,\\
+{\tt col}:   number within namelist: selecting P0--P7 ,\\
+{\tt potential}: value of this potential parameter (default {\tt null}: use {\tt input\_file})\\
+
+{\tt kind=}{\bf 2: Variable spectroscopic amplitude:}\\
+{\tt nafrac}: order number of \&cfp namelist in {\tt input\_file}\\
+{\tt afrac}: spectroscopic amplitude A (default {\tt null}: use {\tt input\_file})\\
+
+{\tt kind=}{\bf 3: Variable energy of R-matrix term:}\\
+{\tt term}: term number (default 1)\\
+{\tt jtot}: J value for additional R-matrix term\\
+{\tt par}: parity (+1 or --1)\\
+{\tt energy}: energy (cm MeV in entrance channel) of additional R-matrix term (default 0)\\
+%{\tt damp}: energy (cm MeV in entrance channel) of imaginary width of this R-matrix term (default 0). The actual  imaginary part is {\tt damp}/2\\
+{\tt nopot}: Disable potential \& Buttle correction for this J/pi set (logical T or F, default F)\\
+
+{\tt kind=}{\bf 4: Variable partial width of R-matrix term:}\\
+{\tt channel}: channel number (in order generated by FRESCO)\\
+{\tt term}: term number (default 1)\\
+%{\tt rwa}: the {\tt width} is reduced width amplitude $\gamma$, else $\Gamma=2\gamma^2 P$.  (default T)\\
+%{\tt B}: the boundary condition {\tt B}. (Default: from {\tt BNDX}).\\
+{\tt width}: width for this channel (MeV$^{1/2}$ if {\tt rwa} or energy subthreshold, else MeV(cm)) (default 0)\\
+
+
+{\tt kind=}{\bf 5: Variable dataset normalisation:}\\
+{\tt dataset(1:2)}: index (or, first and last, inclusive) of which dataset (1 to {\tt ndatasets}) (default 1), or\\
+{\tt reffile}: filename of dataset. If has a `*', renorm all sets with names matching up to that character,\\ 
+{\tt datanorm}: search on absolute normalisation factor of this dataset and its error (default: 1.0)\\
+
+%
+%{\tt kind=}{\bf 6: Variable dataset energy shift:}\\
+%{\tt dataset(1:2)}: index (or, first and last, inclusive) of which dataset (1 to {\tt ndatasets}) (default 1), or\\
+%{\tt reffile}: filename of dataset. If has a  `*', shift all sets with names matching  up to that character,\\ 
+%{\tt dataEshift}: search on absolute energy incremental shift of this dataset  (default: 0.0)\\
+%
+%{\tt kind=}{\bf 7: Variable damping width of R-matrix term:}\\
+%{\tt term}: term (default 1). For the real energy there should be a {\tt kind}=3 variable with the same {\tt term}.\\
+%{\tt damp}:  Imaginary width (cm MeV in entrance channel) of this R-matrix term (default 0). \\%he actual  imaginary part is {\tt damp}/2\\
+%When {\tt energy} is  set, use the (real)  {\tt leff} to rescale the damping width according to energy above threshold {\tt energy} 
+%    by the penetrability ratio $P_{\rm leff}(E - {\tt energy})/P_{\rm leff}(e_{\rm pole} - {\tt energy})$, with elastic Coulomb. 
+%    If not set, use constant damping widths as  2*imaginary parts of the pole energies. \\
+%The {\tt damp} variable in {\tt kind}=3 is fixed, but those in {\tt kind}=7 can be varied in searches.\\
+
+
+
+Repeated {\tt ndatasets} times, namelist with some of the following variables, then the
+corresponding data:
+\begin{verbatim}
+namelist \&data:
+type,data_file,points,delta,xmin,lab,energy,angle,
+idir,iscale,abserr,ic,ia,k,q,jtot,par,channel,value,error,  % leg,
+pel,exl,labe,lin,lex, % ib % term
+\end{verbatim}
+
+{\tt type} (default 0)
+%\\ = --3 Legendre coefficient for input energy and fixed order {\tt leg}
+%\\ = --2 Legendre coefficient (integer order {\tt leg}) for input energy: double distribution
+%\\ = --1 Legendre coefficient for varying integer order {\tt leg}, for fixed energy
+\\ = 0 angular distribution for fixed energy
+\\ = 1 excitation and angular cross section double distributions
+\\ = 2 excitation cross section for fixed angle
+\\ = 3 excitation total cross section. Also: ic=0: {\tt ia}=0 is total reaction cross section;
+{\tt ia}=1 is total fusion cross section; 1$<${\tt ia}$<$NFUS+1 are fusion from potential
+KFUS (in \&Fresco namelist) for inelastic state {\tt ia}--1.
+\\ = 4 excitation phase shift for fixed partial wave
+\\ = 5 desired factor for bound state search (binding energy or potential scale
+ according to ISC).
+\\ = 6 specific experimental constraint on a search parameter {\tt par},
+    to be {\tt value} with error {\tt error} ({\tt abserr}=T or F).
+%\\ = 7 specific constraint on energy of R-matrix pole {\tt term} in the Brune basis 
+%    to be {\tt value} with error {\tt error} ({\tt abserr}=T or F).
+%\\ = 8 specific constraint on total formal width of R-matrix pole {\tt term} in the Brune basis 
+%    to be {\tt value} with error {\tt error} ({\tt abserr}=T or F).
+
+
+{\tt data\_file}: name of data file with data, `$=$' for {\tt search\_file},
+ `$<$' for stdin (default `$=$')\\
+{\tt points}: number of data points (default: keep reading as many as possible),
+\\
+{\tt delta}: if non-zero, construct linear x-scale from {\tt xmin} in steps of {\tt delta},
+ (default 0)\\
+{\tt lab}: T  for lab angles and cross sections (default F for cm frame).\\
+%{\tt Aflip}: T to change cm calculated angles to $180-\theta$ (default F).\\
+{\tt energy}: lab energy for this {\tt type}=0 dataset (default: use {\tt ELAB(1)} from Card 19)\\{\tt pel,exl,labe,lin,lex}: specify input channels for this data set, as in Card 18
+
+{\tt idir} (default 0)
+\\ =-1 cross-section data are given as astrophysical S-factors, but will be converted to absolute,
+\\ = 0 cross-section data are given in absolute units,
+\\ = 1 cross-section data are ratio to Rutherford
+\\ = 2 cross sections are given in absolute units but will be
+         converted to ratio to Rutherford.
+
+
+
+{\tt iscale} (default 2)
+\\ = -1 dimensionless (eg ratio to Rutherford if {\tt idir}=1),
+\\ = 0 absolute cross-section units are fermi-squared/sr.
+\\ = 1 absolute scale is barn/sr
+\\ = 2 absolute scale is mb/sr
+\\ = 3 absolute scale is micro-b/sr
+
+
+{\tt abserr}: T or F for absolute error (default F)\\
+{\tt ic}: partition number of cross section channel (index of Cards 6)  (default 1)\\
+{\tt ia}: excitation pair number of cross section (index of Cards 7)  (default 1)\\
+{\tt k}: tensor rank of cross section (0, 1, 2,..) (default 0). \\
+{\tt q}: index for tensor $T_{kq}$ of cross section (0, 1, 2,..) (default 0).
+    $T_{00}$ = angular distribution $\sigma(\theta)$.\\
+{\tt jtot}: The {\tt J} value (as on Card 2) for phase shift\\
+{\tt par}: The parity (--1 or +1) for phase shift, for {\tt type}=4\\
+{\tt par}~~~~~~ or number of search parameter, for {\tt type}=6.\\
+{\tt channel}: Channel number of entrance channel in coupled channels set (default 1),
+for phase shift\\
+{\tt value}: Value of search parameter, for {\tt type}=6\\
+{\tt error}: Error in value of search parameter, for {\tt type}=6\\
+~\\
+
+{\bf Data input} (free format):
+\\ if {\tt type}=1 or --2, read:  {\tt energy, angle, value, error}
+\\ if {\tt type}=5, read:  {\tt kn, target, error}
+\\ ~~~~otherwise:
+\\ if {\tt delta}$\ne$0, read:  {\tt value, error}
+\\ if {\tt delta}=0, read:  {\tt x, value, error}
+
+
+~~~~~ where {\tt x} is angle for {\tt type}=0, is {\tt leg} for {\tt type}=--1 or --2, and lab energy for {\tt type}=--3, 2, 3 and 4.\\
+
+\subsection{Sfresco commands}
+
+%\subsection*{{\tt SFresco} Input}
+The inputs to {\tt SFresco} are\\
+Card 1: name of {\tt search\_file}\\
+
+Lines 2: repeatedly one of (in all upper or all lower case):
+\\ EX: exit
+\\ Q: query status of search variables
+%\\ V: query status of unfixed search variables
+%\\ CHA: query status of changed search variables
+%\\ CHI: list $\chi^2$ status by dataset
+\\ SET {\tt var val}: set variable number {\tt var} to value {\tt val}.
+\\ FIX {\tt var}: fix variable number {\tt var} (set {\tt step}=0).
+%\\ FXWID : fix all R-matrix widths variables.
+%\\ FXRPE : fix all R-matrix pole energy variables.
+%\\ FXPBG : fix all pole energies variables with 'BG' in their name.
+%\\ FXBG : fix all variables with 'BG' in their name.
+%\\ FXNOR : fix all dataset norm variables (kind=5)
+%\\ FXSHF : fix all dataset energy shift variables (kind=6)
+%\\ FREE : free all R-matrix energies and widths variables.
+\\ STEP {\tt var step}: unfix variable number {\tt var} with step {\tt step}.
+\\ SCAN {\tt var val1 val2 step}: scan variable number {\tt var}
+from value {\tt val1} to value {\tt val2} in steps of {\tt step}.
+\\ SHOW: list all datasets with current predictions and $\chi$ values.
+\\ PLOT {\tt plotfile}: write file (default: {\tt search.plot}) for reading by {\tt xmgr, xvgr},
+ with data and theoretical curves.
+%\\ DONE  {\tt search\_file}: write single new search file (default: {\tt done.fresco}) for rereading by {\sc Sfresco} as a combination of {\sc Fresco} {\tt input\_file} and current parameter values.  Data specifications are  however not included.
+% \\ LINE {\tt plotfile}: write file (default: {\tt search.plot}) for reading by {\tt xmgr, xvgr}, with theoretical curves only.
+\\ READ {\tt file}: read plot output {\tt file} for further searches, if not:
+\\ READ {\tt snapfile}: if the input string {\tt file} contains the string 'snap',
+read to the end of previous snap output {\tt snapfile}, for further searches.
+%\\ ELIM {\tt emin emax}: restrict data scans to this energy range for plots and $\chi^2$ sums
+%\\ POLES {\tt emin emax}: vary only R-matrix poles in this energy range (others are fixed)
+\\ ESCAN {\tt emin emax estep}: scan lab. energy in incident channel, to give
+phase shifts in fort.71, fusion \& reaction cross sections in fort.40,
+ and S-factors in fort.35 and 75.
+This is to look for/at resonances, or at behaviour out of data's energy range,
+not for $\chi^2$ fitting.\\
+\\ MIN: call {\tt minuit} interactively, to read from stdin.
+Return to {\tt SFresco} by {\tt minuit} command {\tt end}.
+
+
+~\\
+%\newpage
+A example of this {\tt search\_file} input is:
+%\small
+\begin{verbatim}
+'6hep.in' '6hep.out' 7 1
+ &variable kind=1 name='V' kp=1 pline=2 col=1 /
+ &variable kind=1 name='r0' kp=1 pline=2 col=2 valmin=.7 valmax=2.0/
+ &variable kind=1 name='a' kp=1 pline=2 col=3 /
+ &variable kind=1 name='W' kp=1 pline=2 col=4 /
+ &variable kind=1 name='rw' kp=1 pline=2 col=5 valmin=.7 valmax=2.0/
+ &variable kind=1 name='aw' kp=1 pline=2 col=6 /
+ &variable kind=5 name='exptnorm' /
+ &data type=0 iscale=2  idir=0 lab=F  abserr=T/
+ 13.99     565.7     28.3
+ 17.59     478.19    23.91
+ 21.22     425.41    21.28
+ 24.92     338.44    16.93
+ 28.68     284.71    14.24
+ 36.48     168.59    8.43
+ 40.56     137.9     6.86
+ 44.8      104.75    5.24
+ 53.       30.0      9.14
+ 53.94     38.45     2.71
+ 59.       25.62     2.55
+ &
+\end{verbatim}
+\normalsize
+A example of the full {\tt SFresco} input, suitable for batch running, is:
+%\small
+\begin{verbatim}
+search4.in
+min
+fix 4
+migrad
+end
+q
+show
+plot
+\end{verbatim}
+\normalsize
+where {\tt search4.in} is the above {\tt search\_file} input file name.
+
+\newpage
+\section{Test run: a CCBA calculation}
+
+
+The following test case calculates the inelastic and transfer cross sections
+for the reactions induced by $^{19}$F on $^{28}$Si at 60.0 MeV.   A Triton-Oxygen
+cluster structure is assumed for $^{19}$F, with the potentials for the triton
+and the oxygen core being folded together to give a diagonal Watanabe
+potential for elastic $^{19}$F scattering as well as the couplings to the
+inelastic 1/2+ state.
+These elastic and inelastic channels are coupled together to all orders,
+then a finite-range transfer step is calculated for the $^{16}$O + $^{31}$P channel,
+thus performing a CCBA calculation.
+
+{\small
+\begin{verbatim}
+Test run: CCBA calculation 28Si(19F,16O) 31P, cluster form factors.
+NAMELIST
+ &FRESCO
+ hcm=.10 rmatch=25 rintp=0.50  hnl=0.100  rnl=3.
+ jtmin=0. jtmax=80 absend=.01 kqmax=1  thmin=0. thmax=60.0  thinc=2.5
+ iter=1   iblock=2 nnu=30 chans=1  listcc=2 smats=1 elab=60.0
+ /
+ &PARTITION
+   namep='19-F' massp=19. zp=9 nex=2 namet='28-SI' masst=28 zt=14 /
+ &states Jp=0.5   Bandp=+1 Ep=0.0  cpot=1          Jt=0.0   bandt=+1 Et=0.0 /
+ &states Jp=2.5   Bandp=+1 Ep=0.2 /
+
+ &PARTITION
+   namep='16-O' massp=16. zp=8 nex=1  namet='31-P' masst=31 zt=15 qval=6.199/
+ &states Jp=0.0   Bandp=+1 Ep=0.0  cpot=2          Jt=0.5   bandt=+1 Et=0.0 /
+ &partition /
+
+ &pot kp=1 At=28.0     Ap=19.0   Rc=1.2 /
+ &pot kp=2 At=31.0     Ap=16.0   Rc=1.35
+           V=31.20  rv=1.45    av=0.47    W=15.10   rw=1.270   aw=0.310
+           Vso=0.75 rso=1.24    aso=0.37 /
+ &pot kp=3 At=19.0     Rc=1.25    ac=0.65
+           V=115.00 rv=1.250   av=0.650 Vso=6.30 rso=1.25    aso=0.650 /
+ &pot kp=4 At=31.0     Rc=1.25    ac=0.65 V=99.000 rv=1.250   av=0.650
+           Vso=6.30 rso=1.25    aso=0.650 /
+ &pot kp=5 At=28.0     Rc=1.2
+           V=27.00  rv=2.42452 av=0.460   W=11.66   rw=2.14456 aw=0.238 /
+ &pot kp=6 At=28.0     Rc=1.25    ac=0.65
+           V=160.00 rv=1.07    av=0.72    W=37.0    rw=1.35    aw=0.88
+           Vso=10.0 rso=0.85    aso=0.850 /
+ &pot  /
+ &OVERLAP kn1=1 ic1=1 ic2=2 in=1 kind=0 nn=4 l=0 sn=.5 j=0.5 kbpot=3 be=11.73 isc=1 /
+ &OVERLAP kn1=2 ic1=1 ic2=2 in=2 kind=0 nn=4 l=0 sn=.5 j=0.5 kbpot=4 be=17.899 isc=1 /
+ &OVERLAP kn1=3 ic1=1 ic2=2 in=1 kind=0 nn=3 l=2 sn=.5 j=2.5 kbpot=3 be=11.53 isc=1 /
+ &overlap /
+ &COUPLING icto=2   icfrom=1   kind=7 ip1=0 ip2=0 ip3=0/
+ &cfp     in=1   ib=1   ia=1   kn=1  a=1.00 /
+ &cfp     in=1   ib=2   ia=1   kn=3  a=1.00 /
+ &cfp     in=2   ib=1   ia=1   kn=2  a=1.00 /
+ &cfp     /
+ &COUPLING icto=1   icfrom=2   kind=3 ip1=4 ip2=1 ip3=0 kfrag=6 kcore=5/
+\end{verbatim}
+}
+\newpage
+
+\section{File allocations}
+\label{files}
+{\small 
+\begin{tabular}{|l | c c c | l | l|}
+\hline
+File & Format & LRECL  & Common & Routines & Use \\
+ no. & (Fix/Var) & (bytes) &suffix &  &  \\
+\hline
+1    &  V &             &     &     SFRESCO& FRESCO input when searching\\
+2    &  V &             &    &     SFRESCO& Search specification file\\
+3    &  V &             &    &     FREADF, FR& Temporary namelist file\\
+4    &  F &     80      &    &     INTER & default for external KIND=1,9 couplings\\
+     &    &             &    &     POTENT &external potentials\\
+5    &  F &     80      & in  &         &   standard input\\
+6    &  V &    133      & out  &          &  standard output\\
+7    &  F &     80      & smats &     DISPX & elastic S-matrix elements\\
+8  \# &  F &   sector    &   (tmp) &     FR,INTER & s/p wfs, channel wfs\\
+9  \# &  F &  NLL*NLO*16    &  (tmp)& Q/KERNEL &  complex transfer multipoles\\
+10  @ &  V &             &  (tmp)  &     FR,CRISS & S-matrix elements (cfs)\\
+11  \# &  F & NLL*NLO*8 &  (tmp) & Q/KERNEL &  real transfer multipole\\
+12  \# &  V &NLL*NLO*16 & (tmp)  &   KERNEL/SOURCE&transfer kernels\\
+13    &  F &    80      & xst  &      FR   &    total cross sections for each Elab\\
+14  \#  & V &             &    &   INTER/CPAIR &interaction potentials\\
+15    &  V &           & (tmp)  &       FR   &   local equivalent potent\\
+16    &  F &     80      & xsec  &       CRISS &  tables of cross sections\\
+17    &  F &     80      & swf  &       FR  &    output scattering waves\\
+18  \# &  V &             & (tmp)  &       FR  &    wfns of 'best' iterate\\
+19    &  F &    N      &    &     FR  &   Local couplings\\
+     &  & & & &\\
+20--33&    &            &    &     Available for users & (eg bound states, amplitudes, potentials)\\
+     &  & & & &\\
+34    &  F &    80      &    &     POTENT &   output potentials\\
+35    &  F &    80      & sf  &     FR & Astrophysical S-factors for Ecm\\
+36    &    &            &    &     CRISS & output scattering AMPL amplitudes\\
+37    &    &            &    &     CRISS & output scattering FAM amplitudes\\
+38    &  F &    80      &    &     DISPX &    cross sections for each J/pi\\
+39    &  F &    80      & efus  &      FR   &    2 cross sections for each Elab\\
+40    &  F &    80      & fus  &      FR   &    all cross sections for each Elab\\
+41    &  F &    80      &    &     SOURCE &   source terms at each iteration\\
+42    &  F &    80      &    &     SOURCE &   bin wavefunctions for each E\\
+43    &  F &    80      &    &     INFORM &   bin phase shifts as k functions\\
+44    &  F &    80      & phe  &     INFORM &   bin phase shifts as E functions\\
+45    &  F &    80      &    &     ERWIN   &  scat phase shift as E functions\\
+46    &  F &    80      &    &     INFORM &   bs wave functions \& Whit ratios\\
+47    &  F &    80      &   mek &           &   reduced matrix elements \\
+48  \#  & V &   133      &    &       FR  & concurrency log file\\
+49  \#  & V &        &    &     FR,CRISS & S-matrix elements concurrent$\rightarrow$10\\
+\hline
+\end{tabular}
+
+\begin{tabular}{|l | c c c | l | l|}
+\hline
+File & Format & LRECL  & Access & Routines & Use \\
+ no. & (Fix/Var) & (bytes) & (Seq/Ran) &  &  \\
+\hline
+50  \#  & V &   133  &    &    &    tmp standard output concurrent$\rightarrow$6\\
+51,52 \#  & V &   133  &    &  & unwanted standard output for node N$>$0\\
+53    &   V &            &  mel  &     WRITEMEL & mel file for sturmx(x)\\
+54    &   V &            &   spec  &     WRITESPEC & spec file for sturmx(x)\\
+55    &   F &            &    &     INFORM & Single-particle wave functions\\
+56    &   F &            &  fusl  &     FR & Jtotal fusion \& reaction cross\\
+57    &   F &            &   cdcc &     FR & Output of CDCC amplitudes\\
+58    &   F &            &  wfs  &     INFORM & Bound state wave functions \\
+59    &   F &            &   vrt &     INFORM & Bound state vertex functions \\
+60-62 &   F &            &  imp  &     RMATRIX & Trace of R-matrix calculations\\
+63    &   F &            &    &     WRITEMEL& Asymptotic coupling coefficients\\
+64    &   F &            &    &     RMATRIX& Coupled eigenstates\\
+65 \# &  F  &   NLO*2*8  & (tmp)   &     QNN  &  two-particle multipoles\\
+66    &  V  &NLL*NLO*16  & &     INTER & KIND=1 nonlocal formfactor\\
+70    &   F &            &    &     RMATRIX& Basis state wfs\\
+71    &   F &    132     &phs &     FR   &  20 pw phase shifts as Elab functions\\
+79+CP  &  V &\{N,NLN*NLO\}*16 & (tmp)  &   INTER/KERNEL &(non)local partial-wave couplings\\
+87    &   V &            &   pnl &     KERNEL & Non-local couplings\\
+88    &   F &            &    &     RMATRIX& Bound state wfs\\
+89    &   F &            &    &     MULTIP& Folded coupling potentials\\
+90    &  V &           &veff &       FR   &   average local equivalent potential\\
+91    &  V &           &vpol &       FR   &   average LEP for rereadingl\\
+92    &   F &            &    &     FR& Partial fusion cross sections\\
+% 93    &   F &            &    &     FR& Data for PVM distributions\\
+99     & F &    80   & &     CRISS   &  input J/L rescaling factors\\
+105     & V &         & &     FCN   &  $\chi^2$ progress during fitting\\
+200 & F & 80     &xsel &     CRISS   & Elastic cross section if not fort.201 \\
+201-210 & F & 80     &xs[1-9] &     CRISS   & Cross sections (cf 14) for states 1-10\\
+301 & V &      & &     CDCIN   & New Fresco input \\
+302 & V &      & &     CDCIN   & New Fresco input  (temp) \\
+303 & V &      & &     SFRESCO   & Input search file \\
+304 & V &      & &     SFRESCO   & Output plot file \\
+305 & V &      & &     CDCIN   & New Fresco input from cdcin, col format \\
+306 & V &      & &     SFRESCO/FRXX0   & Input Fresco file \\
+307 & V &      & &     SFRESCO/FRXX0   & Initial Output Fresco file \\
+308 & V &      & &     SFRESCO/FRXX0   & Main Output Fresco file \\
+470+$i$ & V &       & &     erwinmpi   & Log files from MPI process $i$ \\
+\hline
+\end{tabular}
+}
+% no. & (Fix/Var) & (bytes) & (Seq/Ran) &  &  \\
+
+where  for MACH=8 we have\\
+\#  = distributed file: distinct file name on each node\\
+@  = shared concurrent file: single file, with writes from each node
+
+The use of files 19 and 35 have recently changed.
+
+\newpage
+\section{KIND=1 Spin Transfer Couplings}
+\label{spintransfers}
+The definition of the KIND=1 spin transfer couplings is not given
+in the Computer Physics Reports article, so in versions after March 1998 these
+are redefined for IP3=0 or 1, and new Racah algebra factors included.
+
+\bigskip
+
+We want to calculate the coupling interactions of the monopole operator
+$   {\bf S}([\ell,s_p]s_t,s_t)  $, where $s_p$ is the spin transfer of the
+projectile $I_p$,  $s_t$ is the spin transfer of the
+target $I_t$, and $\ell$ is the orbital angular momentum transfer.
+ %
+These coupled operators are defined following in Bohr \& Mottelson, Vol.
+1, section 1A-5c, as
+\begin{equation}
+(F_{\lambda_1} G_{\lambda_2})_{\lambda \mu}
+  = \sum_{\mu_1 \mu_2} \langle \lambda_1 \mu_1 ,  \lambda_2 \mu_2
+  |  \lambda \mu \rangle F_{\lambda_1\mu_1} G_{\lambda_2\mu_2} \ ,
+\end{equation}
+applied for the case of $F_{s_t} = [\ell,s_p]s_t$ and $ G_{s_t}=s_t$.
+The overall ${\bf S}$ operator is a monopole (scalar), for which the tensor
+product is thus of the kind
+\begin{equation}
+(F_{\lambda} G_{\lambda})_{00}
+  = (2\lambda+1)^{-1/2} \sum_{\mu} (-1)^{\lambda-\mu} ~ F_{\lambda\mu}
+  G_{\lambda-\mu} \ .
+\end{equation}
+This differs from common definitions (eg of Satchler) by a factor of
+$ (-1)^\lambda (2\lambda+1)^{-1/2} $.
+
+\bigskip
+
+Reduced matrix elements are defined everywhere in {\sc Fresco} by:
+\begin{equation}
+% <j_f m_f | \hat{O}_{j m} | J_i m_i > = { <j_i m_i \ j m |\ j_f m_f > \over
+% \hat{j}_f } < j_f || \hat{O}_j || j_i>
+\langle j_f m_f | \hat{O}_{\lambda \mu} | J_i m_i \rangle
+ = (2j_f+1)^{-1/2} ~ \langle j_i m_i ,\lambda \mu | j_f m_f \rangle ~
+\langle j_f || \hat{O}_\lambda || j_i\rangle
+\end{equation}
+\bigskip
+
+The  matrix elements of this operator are
+\begin{eqnarray}
+&& \langle(LI_p)J,I_t;J_TM_T | ~{\bf S}([\ell,s_p]s_t,s_t) ~| (L'I_p')J',I_t';J_TM_T \rangle
+   \nonumber \\
+& = &  (-1)^{s_t+J_T+J'+I_t}
+   \left\{ \begin{array}{ccc}
+    J'  & I_t' & J_T \\
+    I_t & J    & s_t \\
+    \end{array} \right\}   \hat{J} \hat{J'}
+    \left\{ \begin{array}{ccc}
+    L' & I_p' & J'  \\
+    \ell & s_p & s_t  \\
+    L & I_p & J'  \\
+    \end{array} \right\}  ~
+     \frac{1}{\sqrt{4\pi}} ~ \hat{\ell} \hat{L} \langle L 0 \ \ell 0 | L'0 \rangle   \nonumber \\
+    &  &   \times \langle I_p||s_p||I_p'\rangle \langle I_t||s_t||I_t'\rangle
+\end{eqnarray}
+In using KIND=1 couplings with IP3=0, the first line of these factors is generated automatically. \\
+The product of the
+reduced matrix elements for the intrinsic nuclear states,
+$\langle I_p||s_p||I_p'\rangle \langle I_t||s_t||I_t'\rangle$,
+%:
+ has to be included explicitly in the factor FSCALE,
+ or in the radial form factors.
+The radial shapes have to be read in from data files.\\
+
+With IP3=2, implying jlmP input for target-only couplings,
+\begin{itemize}
+\item
+ the projectile diagonal reduced matrix element
+$\langle I_p||s_p=0||I_p\rangle = \hat{I_p}$ is supplied by Fresco,
+\item
+the factor $1/\sqrt{4\pi}$ is omitted above,
+\item
+and an additional symmetric factor of
+%$\sqrt{\hat{I_t'}\hat{I_t}}$
+$((2I_t'+1)(2I_t+1))^{1/4}$
+is supplied to allow the
+monopole radial form factors to have their physical
+values for any target spin.
+\item
+The forward and reverse form factors should be identical for Hermitian couplings.
+
+\end{itemize}
+With IP3=3, implying a similar input for projectile-only couplings,
+\begin{itemize}
+\item
+ the target diagonal reduced matrix element
+ $\langle I_t||s_t=0||I_t\rangle = \hat{I_t}$ is supplied by Fresco,
+ \item
+ the factor $1/\sqrt{4\pi}$ is omitted above,
+ \item
+ and an additional symmetric factor of $((2I_t'+1)(2I_t+1))^{1/4}$
+ is supplied to allow the monopole radial form factors to have their physical
+ values for any target spin.
+ The forward and reverse form factors should be identical for Hermitian couplings.
+\end{itemize}
+
+%~\\
+%The reduced matrix elements are defined by:
+%\begin{equation}
+%<j_f m_f | \hat{O}_{j m} | J_i m_i > = { <j_i m_i \ j m |\ j_f m_f > \over
+%\hat{j}_f } < j_f || \hat{O}_j || j_i>
+%\end{equation}
+%
+
+\newpage
+\section{Stabilization method for coupled channels solutions}
+\label{hort}
+
+Antonio Moro has contributed a 
+a stabilization algorithm to solve or, at least, palliate, the common problem of loss of linear dependence of the coupled channels solutions. Following the suggestion of some Japanese researchers, he implemented a method of re-orthogonalization similar to that described in the papers of Baylis {\em et al}, but using a QR orthogonalization procedure instead of the Gram-Schmidt method used by them.
+
+Thanks to this implementation, we are now able to solve efficiently problems which were otherwise not feasible, for example, CDCC calculations with high-lying breakup states, including closed-channels. His group to extend this to the case of transfer reactions, but only with limited success, so in practice it works only for pure coupled channels equations.
+
+A test case {\tt dNi-cdcc-QR.in} is included in the test/ folder, corresponding to a d+$^{58}$Ni reaction at 20 MeV, including closed channels. In this case, the standard Numerov method fails for JT$>$3, whereas with the stabilization procedure the calculation runs smoothly for all required partial waves. 
+
+To activate this option we added a variable {\tt hort} to the \&Fresco namelist, which corresponds to the radial interval step at which stabilization is performed. Typically, try {\tt hort} = 5 fm. 
+This orthogonalizing continues out to the largest classical turning radius for any open channel, but can continued further by setting the radius variable {\tt rmort} also in the FRESCO namelist.
+
+WE. Baylis and S.J. Peel, Computer Physics Communications {\bf 25} (1982), 7-19, 
+
+\end{document}

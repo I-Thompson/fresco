@@ -104,6 +104,7 @@ C               (Inelastic monopole = Def0)
 C
 C   20  MAX#    Super-soft core of de Tourreil & Sprung (SSC (C))
 C   21  MAX#    User-supplied N-N potential via subroutine NNPOT
+C   30  SHAPE  VLL   VLLr0 VLLa  WLL   WLLr0 WLLa  Central L(L+1) 
 C
 C If -8 < TYPE < 0, then merge with the previous form,
 C                   to make a summed form of type abs(TYPE).
@@ -113,8 +114,6 @@ C  KP<0 indicates this is the last data card, use abs(KP) for this one.
 C
 C  all the r0 radii are multiplied by CC,
 C   which is updated by a TYPE=0 card  to CC =  A#1**1/3 + A#2**1/3
-C   30  SHAPE  VLL   VLLr0 VLLa  WLL   WLLr0 WLLa  Central L(L+1) 
-C
 C         & by other cards if P0.gt.0  to CC =  P0**1/3
 C
 C    IT = blank  : only off-diagonal potentialsiterated.
