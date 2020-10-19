@@ -1925,7 +1925,7 @@ C   algorithm: rk nesbet, 82.10.27, to be published
 C
 C*******************************************************************
 C
-      DIMENSION G(N),A(N),C(1),D(1)
+      DIMENSION G(N),A(N),C(N+1),D(N+1)
       REAL*8 ZERO,ONE
       DATA ZERO/0.0D0/,ONE/1.0D0/
 C

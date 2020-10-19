@@ -34,6 +34,7 @@
 
 set COMP = 'f90'
 set PREF='a'
+set FCOPT = ''
 # change to any local preferences: 
 #  copy & edit these lines yourself
 
@@ -60,8 +61,8 @@ if( ${ARCH} == 'ppc' ) then 	# Mac Powerpc
       set PREF=${ARCH}
 endif
 if( ${ARCH} == 'i386' ) then 	# Mac Intel
-      if( -X ifort )   set COMP = 'ifort'
       if( -X gfortran )     set COMP = 'gfortran'
+      if( -X ifort )   set COMP = 'ifort'
       if( -X f95 )     set COMP = 'f95'
       if( -X pgf90 )   set COMP = 'pgf90'
       set PREF=${ARCH}
@@ -82,7 +83,6 @@ echo From arch=${ARCH}, expect compiler ${COMP}
 
  if ($#argv != 0)  then
  set try=$1
-#if (-X ${try} && ${try} != 'fresco' && ${try} != 'sfresco' && ${try} != 'install' && ${try} !~ '-.*')  then
  if (-X ${try} && ${try} != 'fresco' && ${try} != 'sfresco' && ${try} != 'install' ) then
 	set COMP = $try
 	shift
@@ -97,7 +97,12 @@ echo ln -s ../*.f . >& /dev/null
 ln -s ../*.f . >& /dev/null
 echo \cp -f ../makefile . 
 \cp -f ../makefile . 
-echo make ${argv}  FC=${COMP}
-# if(#{COMP} == gfortran )  then   set COMP = 'gfortran -Wtabs'  endif
 
-make ${argv} FC=${COMP}
+set FCOPT = ''
+if ( ${COMP} == 'ifort')     set FCOPT = '-fast'   # link step is slow!
+if ( ${COMP} == 'ifort')     set FCOPT = '-O3'
+if ( ${COMP} == 'gfortran')  set FCOPT = '-O3 -std=legacy'
+
+echo make ${argv}  FC=${COMP} FFLAGS="${FCOPT}"
+
+make ${argv} FC=${COMP} FFLAGS="${FCOPT}"

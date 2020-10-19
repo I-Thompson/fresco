@@ -1,0 +1,927 @@
+ FRESCO - FRES 3.4: Coupled Reaction Channels
+ Assuming NAMELIST input.
+
+ 9Li(t,p) with s^2 triton & Yabana 11Li. Sim+seq                                 
+
+   0.100  25.000   0.500   0.300  12.000   0.000   0.500  20.000   0.500   0.000
+
+ Centre-of-mass Range is    252 * 0.1000 fm., Maximum at  25.00 fm., Interpolating NL forms every  0.50 fm.
+ Non - locality width is     41 * 0.3000 fm., Maximum of  12.00 fm., Centred at  0.00 fm.
+ 2-Nucleon Separation of     39 * 0.5000 fm., Maximum of  20.00 fm., Minimum at  0.50 fm.
+ Maximum single particle bins of 25.0000 fm.
+               M,Mint =          251         251
+
+
+ Range of total J is     0.0 <= J <=    30.0 (at least     0.0) and Absorbtion =>     0.0100 mb.
+ Dry Run = F, CC set limits =  0  0, Relativistic kinematics =  , Both/Far/Near Analyses =  1                     
+
+ Cross Sections (and up to T0 for 0=projectile) for Theta from   0.0 to  90.0 in steps of  2.0 degrees, DGAM=0,  Coordinates = 0 (Mads)
+
+ Lower Radial Cutoff = maximum of -1.60*L*h &       0.0 fm.,  Lower Cutoff for Couplings =   0.0  fm.
+
+
+ Iterate Couplings between   0 and   2 times, to  0.000 % if sooner.                                          
+  Block solved exactly =   0 chs., with Pade = 0 & Isocen =  =0, NOSOL = F, initwf =  0
+  NL quadrature with   24 Gaussian points, Calculate multipoles up to    36 from   0
+  M-transfers for lp+lt greater than or equal to  6, Angular Integration Cutoff below  1.5625 %
+
+
+ Trace switches are :  CHANS =  1, LISTCC =  0, TRENEG =  0, CDETR =  0, SMATS =  1, XSTABL =  1, NLPL =  0
+
+                       WAVES =  0, LAMPL =  0, VEFF =  0, KFUS =  0, WDISK =  0, BPM =  0, MELFIL =  0
+
+                       CDCC =  0, NFUS =  0
+
+ Using unit mass = 1.000000 amu and 1/fine-structure constant = 137.03599 ( 1.000000 * true ) with hc = 197.32705 MeV.fm,
+  thus 2*amu/hbar^2 = 0.0478450 = 1/20.9008 and Coulomb constant = 0.1574855 so e^2 = 1.43997, and nuclear magneton= 0.1261183
+
+ Now pre-scan input and save to file 3
+
+  WARNING: target longitudinal recoil NOT included in the ZR coupling #            2
+
+
+ *********** PARTITION NUMBER  1 ******************************************************************************************
+
+   PROJ=Triton     MASS=  3.0160 Z=   1.0,        # STATES=    1T, TARG=9Li      MASS=  9.0000 Z=   3.0,     Q-VALUE =   0.0000 MEV.
+
+     1:  J= 0.5+ (B# 1), E=  0.0000, K= 0.5              Potl#  1       J= 0.0+ (B# 1), E=  0.0000, K= 0.0    
+
+
+ *********** PARTITION NUMBER  2 ******************************************************************************************
+
+   PROJ=Deuteron   MASS=  2.0141 Z=   1.0,        # STATES=   -1T, TARG=10Li     MASS= 10.0000 Z=   3.0,     Q-VALUE =  -6.1570 MEV.
+
+     1:  J= 1.0+ (B# 1), E=  0.0000, K= 0.0              Potl#  2       J= 0.5- (B#-1), E=  0.0000, K= 0.5    
+0****** WARNING : COMPARED WITH PARTITION  1, THIS PARTITION HAS TOTAL MASS & CHARGE EXCESSES  -0.00851 &   0.0000
+
+
+ *********** PARTITION NUMBER  3 ******************************************************************************************
+
+   PROJ=Proton     MASS=  1.0078 Z=   1.0,        # STATES=    1T, TARG=11Li     MASS= 11.0000 Z=   3.0,     Q-VALUE =  -8.2800 MEV.
+
+     1:  J= 0.5+ (B# 1), E=  0.0000, K= 0.5              Potl#  3       J= 0.0+ (B# 1), E=  0.0000, K= 0.0    
+0****** WARNING : COMPARED WITH PARTITION  1, THIS PARTITION HAS TOTAL MASS & CHARGE EXCESSES  -0.01709 &   0.0000
+
+
+ ************************************************************************************************************************************
+
+ The following POTENTIALS are defined :
+
+  KP#       TYPE      IT    SHAPE      at     V1        r1        a1        V2        r2        a2        A-in     A-used
+
+
+                                            A#1       A#2        r0c       ac                                                h @ 1
+    1    0=Coulomb       0=CHARGE (WS)  1     9.000     0.000    1.2500    0.0000    0.0000    0.0000     0.000     9.000   0.10000
+
+    1    1=Volume        0=Woods-Saxon  2  146.0000    1.2400    0.6780   25.0000    1.4500    0.8410     0.000     9.000
+   --------------------------------------------------------------------------------------------------------------------
+
+                                            A#1       A#2        r0c       ac                                                h @ 2
+    2    0=Coulomb       0=CHARGE (WS)  3    10.000     0.000    1.2500    0.0000    0.0000    0.0000     0.000    10.000   0.10000
+
+    2    1=Volume        0=Woods-Saxon  4   85.8000    1.1700    0.7600    1.1170    1.3250    0.7310     0.000    10.000
+
+    2    2=Surface       0=Woods-Saxon  5    0.0000    0.0000    0.0000   11.8630    1.3250    0.7310     0.000    10.000
+   --------------------------------------------------------------------------------------------------------------------
+
+                                            A#1       A#2        r0c       ac                                                h @ 3
+    3    0=Coulomb       0=CHARGE (WS)  6    11.000     0.000    1.2500    0.0000    0.0000    0.0000     0.000    11.000   0.10000
+
+    3    1=Volume        0=Woods-Saxon  7   44.2000    1.1700    0.7500    6.1000    1.3200    0.5400     0.000    11.000
+
+    3    2=Surface       0=Woods-Saxon  8    0.0000    0.0000    0.0000    2.4000    1.3200    0.5400     0.000    11.000
+   --------------------------------------------------------------------------------------------------------------------
+
+    4    1=Volume        0=Woods-Saxon  9  100.0000    0.4000    0.6000    0.0000    0.0000    0.0000     1.000     1.000
+   --------------------------------------------------------------------------------------------------------------------
+
+    5    1=Volume        0=Woods-Saxon 10  100.0000    0.9500    0.6500    0.0000    0.0000    0.0000     1.000     1.000
+   --------------------------------------------------------------------------------------------------------------------
+
+                                            A#1       A#2        r0c       ac                                                h @ 0
+    7    0=Coulomb       0=CHARGE (WS) 11     1.000     0.000    1.2000    0.0000    0.0000    0.0000     0.000     1.000   0.10000
+
+    7    1=Volume        0=Woods-Saxon 12   80.0000    2.6700    0.6000    0.0000    0.0000    0.0000     0.000     1.000
+
+    7    3=Projtl S.O.   0=Woods-Saxon 13   10.0000    2.6700    0.6000    0.0000    0.0000    0.0000     0.000     1.000
+
+
+ ************************************************************************************************************************************
+
+ The following SINGLE-PARTICLE FORM FACTORS are constructed :
+
+
+ No.   P1 P2 IN KIND T N  L  S1 IA J/S  IB BIND XFER  BE    SC PC FIL AFRAC Adjust  to  Z  Mass   K     Norm    rms      D0     D   ANC/Gsp
+
+    1:  2  1  1  0     1  0 0.5  1 0.5   0   5   0   6.2570  1  0  0 0.0000 VR  0.8727; 0. 1.002 0.4475 1.0000  2.543 -167.1 -186.6  1.6849
+
+    2:  3  2  1  0     1  0 0.5  1 0.5   0   4   0   2.2245  1  0  0 0.0000 VR  1.6554; 0. 1.006 0.2315 1.0000  3.900 -126.8 -130.1  0.8840
+
+    3:  2  1  1  0     1  0 0.5  1 0.5   0   5   0   4.2400  1  0  0 0.0000 VR  0.7783; 0. 1.002 0.3684 1.0000  2.896 -141.9 -153.5  1.3861
+
+ The following TWO-PARTICLE FORM FACTORS are constructed :
+
+  KN1 KN2  P1  P2  IN KIND TYP J12,T  PAIRS KNZR LMIN LMAX SMIN FILE ISC IPC  EP2%  AMPL
+
+   10  90   1   3   1   9      0.0,1    1    0    0      1  0.0 -21   0   2  0.10%  1.0000
+
+   3   3   0   0  1.0000,
+ SP state :           3
+   0.6890   0.6369   0.5246   0.3980   0.2890   0.2069   0.1484   0.1076   0.0789   0.0585
+
+ TWO-PARTICLE FORM FACTOR for LL,l,s,j =   0   0 0.0 0.0  : Sq. Norm =  0.945781
+ Full scale =     0.36958
+
+ I 355 3  11++++++                                   I
+ I  7 75 3 11+++++++                                 I
+ I 59T975 3 11+++++++                                I
+ I   99  53  11+++++++                               I
+ I 3   7  33 11++++++++                              I
+ I 35 7 5 3  111+++++++                              I
+ I  5   5 3  111+++++++                              I
+ I   555  3  111+++++++                              I
+ I 1 3  33  111+++++++++                             I
+ I 11 333  1111+++++++++                             I
+ I +11    1111++++++++++                             I
+ I +111  1111+++++++++++                             I
+ I ++11111111+++++++++++                             I
+ I ++1111111+++++++++++                              I
+ I ++++1111++++++++++++                              I
+ I +++++++++++++++++++                               I
+ I ++++++++++++++++++                                I
+ I  ++++++++++++++++                                 I
+ I  ++++++++++++++++                                 I
+ I  +++++++++++++++                                  I
+ I   ++++++++++++++                                  I
+ I    ++++++++++++                                   I
+ I     ++++++++++                                    I
+ I       +++++++                                     I
+ I        ++++++                                     I
+ I           +                                       I
+ I                                                   I
+ I                                                   I
+ I                                                   I
+ I                                                   I
+ I                                                   I
+ I                                                   I
+ I                                                   I
+ I                                                   I
+ I                                                   I
+ I                                                   I
+ I                                                   I
+ I                                                   I
+ I                                                   I
+0Total square norm of all form factors calculated =   0.94578,   and of all those stored =   0.94578
+  Overall rms radius of the two nucleons relative to the c.m. of the Triton   =   1.7747 fm., and of the core =   1.7001 fm.
+
+                             10: NN LL,(n l s)j; J12 =  1  0,( 1 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.2813, 2.016  -160.4 -207.0
+                             11: NN LL,(n l s)j; J12 =  1  0,( 2 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.4257, 2.068  -230.4 -303.7
+                             12: NN LL,(n l s)j; J12 =  1  0,( 3 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.5442, 2.191  -261.3 -364.9
+                             13: NN LL,(n l s)j; J12 =  1  0,( 4 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.5464, 2.376  -222.2 -345.0
+                             14: NN LL,(n l s)j; J12 =  1  0,( 5 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.4841, 2.565  -169.4 -300.0
+                             15: NN LL,(n l s)j; J12 =  1  0,( 6 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.4323, 2.691  -138.5 -271.1
+                             16: NN LL,(n l s)j; J12 =  1  0,( 7 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.4057, 2.755  -124.6 -257.6
+                             17: NN LL,(n l s)j; J12 =  1  0,( 8 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.3534, 2.883  -100.2 -232.5
+                             18: NN LL,(n l s)j; J12 =  1  0,( 9 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.2794, 3.080   -71.3 -201.0
+                             19: NN LL,(n l s)j; J12 =  1  0,(10 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.2105, 3.298   -49.0 -174.8
+                             20: NN LL,(n l s)j; J12 =  1  0,(11 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.1623, 3.487   -35.3 -156.5
+                             21: NN LL,(n l s)j; J12 =  1  0,(12 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.1370, 3.607   -28.9 -147.0
+                             22: NN LL,(n l s)j; J12 =  1  0,(13 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.1259, 3.666   -26.1 -142.8
+                             23: NN LL,(n l s)j; J12 =  1  0,(14 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.1060, 3.785   -21.5 -134.8
+                             24: NN LL,(n l s)j; J12 =  1  0,(15 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0810, 3.971   -16.0 -124.2
+                             25: NN LL,(n l s)j; J12 =  1  0,(16 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0596, 4.181   -11.6 -113.4
+                             26: NN LL,(n l s)j; J12 =  1  0,(17 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0454, 4.370    -8.8 -103.5
+                             27: NN LL,(n l s)j; J12 =  1  0,(18 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0382, 4.492    -7.4  -94.4
+                             28: NN LL,(n l s)j; J12 =  1  0,(19 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0350, 4.553    -6.8  -90.5
+                             29: NN LL,(n l s)j; J12 =  1  0,(20 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0294, 4.677    -5.7  -76.2
+                             30: NN LL,(n l s)j; J12 =  1  0,(21 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0224, 4.873    -4.4  -58.6
+                             31: NN LL,(n l s)j; J12 =  1  0,(22 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0164, 5.098    -3.2  -26.3
+                             32: NN LL,(n l s)j; J12 =  1  0,(23 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0125, 5.301    -2.5  -16.7
+                             33: NN LL,(n l s)j; J12 =  1  0,(24 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0105, 5.433    -2.1  -11.4
+                             34: NN LL,(n l s)j; J12 =  1  0,(25 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0096, 5.499    -2.0  -10.4
+                             35: NN LL,(n l s)j; J12 =  1  0,(26 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0081, 5.632    -1.7   -8.4
+                             36: NN LL,(n l s)j; J12 =  1  0,(27 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0061, 5.843    -1.3   -7.1
+                             37: NN LL,(n l s)j; J12 =  1  0,(28 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0045, 6.083    -1.0   -6.1
+                             38: NN LL,(n l s)j; J12 =  1  0,(29 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0034, 6.297    -0.8   -5.4
+                             39: NN LL,(n l s)j; J12 =  1  0,(30 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0029, 6.430    -0.7   -5.0
+                             40: NN LL,(n l s)j; J12 =  1  0,(31 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0027, 6.501    -0.6   -4.9
+                             41: NN LL,(n l s)j; J12 =  1  0,(32 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0022, 6.644    -0.5   -4.5
+                             42: NN LL,(n l s)j; J12 =  1  0,(33 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0017, 6.850    -0.4   -4.1
+                             43: NN LL,(n l s)j; J12 =  1  0,(34 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0012, 7.023    -0.3   -3.5
+                             44: NN LL,(n l s)j; J12 =  1  0,(35 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0009, 7.228    -0.3   -3.1
+                             45: NN LL,(n l s)j; J12 =  1  0,(36 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0008, 7.264    -0.2   -2.7
+                             46: NN LL,(n l s)j; J12 =  1  0,(37 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0007, 7.321    -0.2   -2.5
+                             47: NN LL,(n l s)j; J12 =  1  0,(38 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0006, 7.274    -0.1   -1.8
+                             48: NN LL,(n l s)j; J12 =  1  0,(39 0 0.0) 0.0; 0.0  BE,Norm =   8.480  0.0004, 7.158    -0.1   -0.9
+ ------------------------------------------------------------------------------------------------------------------------------------
+
+ No.   P1 P2 IN KIND T N  L  S1 IA J/S  IB BIND XFER  BE    SC PC FIL AFRAC Adjust  to  Z  Mass   K     Norm    rms      D0     D   ANC/Gsp
+
+    6:  1  2  2  0     1  1 0.5  1 0.5   0   7   0   0.1000  1  0  0 1.0000 VR  0.5317; 0. 1.000 0.0656 0.9999  6.300  -70.2  -70.6  0.1123
+
+    7:  2  3  2  0     1  1 0.5  1 0.5   0   7   0   0.1000  1  0  0 1.0000 VR  0.5277; 0. 1.000 0.0660 0.9999  6.290  -69.5  -69.9  0.1129
+
+ The following TWO-PARTICLE FORM FACTORS are constructed :
+
+  KN1 KN2  P1  P2  IN KIND TYP J12,T  PAIRS KNZR LMIN LMAX SMIN FILE ISC IPC  EP2%  AMPL
+
+   90 170   1   3   2   6      0.0,1    1    0    0      1  0.0 -22   0   2 -0.10%  1.0000
+
+   6   6   0   0  1.0000,
+ SP state :           6
+   0.2245   0.2001   0.1765   0.1432   0.1077   0.0763   0.0524   0.0359   0.0250   0.0178
+
+ TWO-PARTICLE FORM FACTOR for LL,l,s,j =   0   0 0.0 0.0  : Sq. Norm =  0.275564
+ Full scale =     0.12048
+
+ I -ac   c aa-----------                             I
+ I  a  g ec  aa-------------                         I
+ I 1-  iige c aaa--------------                      I
+ I 3 a iJ ge c  aaa---------------                   I
+ I  51cgi g ecc  aaa----------------                 I
+ I 57 ae  g e c  aaaa----------------                I
+ I   5- g g e c  aaaa----------------                I
+ I  97  egg e cc  aaa-----------------               I
+ I  9 5+ce  e cc  aaaa-----------------              I
+ I 59973-c ee cc  aaaaa-----------------             I
+ I 5 9 51-c   cc   aaaa------------------            I
+ I  7  5 +acc cc   aaaa-------------------           I
+ I  7   3+a cccc   aaaa-------------------           I
+ I 3  7  1- cccc   aaaaa------------------           I
+ I 35 7   +-  c    aaaaa-------------------          I
+ I   5  531+-a     aaaaa------------------           I
+ I 13 555  1 aa    aaaaa------------------           I
+ I 13 55   1+-aa  aaaaaa-----------------            I
+ I 13  5  31+-aaa aaaaaa-----------------            I
+ I 1 3    3 1 -aaaaaaaaa----------------             I
+ I 1 33  33 1+--aaaaaaaa----------------             I
+ I +1 33333  1+--aaaaaaa---------------              I
+ I +1  3333  1++--aaaaaa--------------               I
+ I +11   3   11+---aaaaa--------------               I
+ I +11       11+ --aaaaa--------------               I
+ I +11       11++---aaaa-------------                I
+ I +111      111+ ------------------                 I
+ I ++111     111++ -----------------                 I
+ I ++11111111111+++----------------                  I
+ I ++111111111111++ ---------------                  I
+ I +++11111111111++ --------------                   I
+ I +++11111111111+++ -------------                   I
+ I ++++1111111111+++ ------------                    I
+ I ++++1111111111++++ ----------                     I
+ I +++++111111111+++++ ---------                     I
+ I ++++++11111111+++++ --------                      I
+ I ++++++11111111+++++  -------                      I
+ I +++++++1111111++++++ -------                      I
+ I ++++++++++11+++++++++ -----                       I
+
+ TWO-PARTICLE FORM FACTOR for LL,l,s,j =   1   1 1.0 1.0  : Sq. Norm =  0.548217
+ Full scale =     0.20146
+
+ I ---------                                         I
+ I -aaaaa------                                      I
+ I -   c aa-------                                   I
+ I a  g ec aa--------                                I
+ I ae i   c aa---------                              I
+ I ae iige   aa---------                             I
+ I ae Jig  c aa---------                             I
+ I ae ii   c aaa---------                            I
+ I a gii ge c aa-----------                          I
+ I ac    ge c  aa-----------                         I
+ I -   ggg  cc aaa-----------                        I
+ I -  e g e  c aaa------------                       I
+ I - ce   ee c  aa------------                       I
+ I -ac e  e  c  aaa------------                      I
+ I -a c eee  c  aaa-------------                     I
+ I --a c     c  aaaa-------------                    I
+ I --a cc   cc   aaa--------------                   I
+ I --a  cccccc   aaa--------------                   I
+ I --aa cccccc   aaa--------------                   I
+ I ---a  ccccc   aaaa--------------                  I
+ I  --aa   cc    aaaa--------------                  I
+ I  --aaa        aaaa---------------                 I
+ I  ---aaa       aaaa----------------                I
+ I  ---aaaa     aaaaaa---------------                I
+ I  ----aaaa    aaaaaa---------------                I
+ I  ----aaaaaaaaaaaaaa---------------                I
+ I  -----aaaaaaaaaaaaa--------------                 I
+ I  ------aaaaaaaaaaaa--------------                 I
+ I   ------aaaaaaaaaaa-------------                  I
+ I   ------aaaaaaaaaaa-------------                  I
+ I   -------aaaaaaaaaa------------                   I
+ I   --------aaaaaaaa-------------                   I
+ I   ---------aaaaaaa------------                    I
+ I   ------------aa-------------                     I
+ I    --------------------------                     I
+ I    -------------------------                      I
+ I    -------------------------                      I
+ I    -------------------------                      I
+ I    ------------------------                       I
+0Total square norm of all form factors calculated =   0.82378,   and of all those stored =   0.82378
+  Overall rms radius of the two nucleons relative to the c.m. of the 11Li     =   4.7687 fm., and of the core =   0.7216 fm.
+
+                             90: NN LL,(n l s)j; J12 =  1  0,( 1 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0816, 2.958    40.9   41.6
+                             91: NN LL,(n l s)j; J12 =  2  0,( 2 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1264, 3.040    61.4   62.5
+                             92: NN LL,(n l s)j; J12 =  2  0,( 3 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1700, 3.249    74.9   76.4
+                             93: NN LL,(n l s)j; J12 =  2  0,( 4 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1849, 3.555    65.7   67.4
+                             94: NN LL,(n l s)j; J12 =  2  0,( 5 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1840, 3.763    46.6   48.3
+                             95: NN LL,(n l s)j; J12 =  2  0,( 6 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1832, 3.807    33.9   35.6
+                             96: NN LL,(n l s)j; J12 =  2  0,( 7 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1833, 3.803    28.1   29.8
+                             97: NN LL,(n l s)j; J12 =  2  0,( 8 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1839, 3.760    18.4   20.0
+                             98: NN LL,(n l s)j; J12 =  2  0,( 9 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1839, 3.677     8.2    9.7
+                             99: NN LL,(n l s)j; J12 =  2  0,(10 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1794, 3.645     2.3    3.8
+                            100: NN LL,(n l s)j; J12 =  2  0,(11 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1712, 3.690     0.1    1.5
+                            101: NN LL,(n l s)j; J12 =  2  0,(12 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1646, 3.748    -0.6    0.8
+                            102: NN LL,(n l s)j; J12 =  2  0,(13 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1610, 3.785    -0.8    0.6
+                            103: NN LL,(n l s)j; J12 =  2  0,(14 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1535, 3.870    -1.1    0.3
+                            104: NN LL,(n l s)j; J12 =  2  0,(15 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1415, 4.026    -1.2    0.1
+                            105: NN LL,(n l s)j; J12 =  2  0,(16 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1284, 4.224    -1.3    0.1
+                            106: NN LL,(n l s)j; J12 =  2  0,(17 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1175, 4.414    -1.2    0.1
+                            107: NN LL,(n l s)j; J12 =  2  0,(18 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1110, 4.535    -1.2    0.1
+                            108: NN LL,(n l s)j; J12 =  2  0,(19 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1079, 4.598    -1.2    0.1
+                            109: NN LL,(n l s)j; J12 =  2  0,(20 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.1019, 4.720    -1.2    0.1
+                            110: NN LL,(n l s)j; J12 =  2  0,(21 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0934, 4.918    -1.1    0.1
+                            111: NN LL,(n l s)j; J12 =  2  0,(22 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0847, 5.131    -1.1    0.2
+                            112: NN LL,(n l s)j; J12 =  2  0,(23 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0777, 5.310    -1.0    0.2
+                            113: NN LL,(n l s)j; J12 =  2  0,(24 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0737, 5.432    -1.0    0.2
+                            114: NN LL,(n l s)j; J12 =  2  0,(25 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0717, 5.492    -1.0    0.2
+                            115: NN LL,(n l s)j; J12 =  2  0,(26 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0680, 5.589    -1.0    0.2
+                            116: NN LL,(n l s)j; J12 =  2  0,(27 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0627, 5.737    -0.9    0.2
+                            117: NN LL,(n l s)j; J12 =  2  0,(28 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0573, 5.928    -0.9    0.2
+                            118: NN LL,(n l s)j; J12 =  2  0,(29 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0529, 6.045    -0.8    0.3
+                            119: NN LL,(n l s)j; J12 =  2  0,(30 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0503, 6.143    -0.8    0.3
+                            120: NN LL,(n l s)j; J12 =  2  0,(31 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0490, 6.131    -0.8    0.3
+                            121: NN LL,(n l s)j; J12 =  2  0,(32 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0467, 6.221    -0.8    0.3
+                            122: NN LL,(n l s)j; J12 =  2  0,(33 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0432, 6.273    -0.7    0.3
+                            123: NN LL,(n l s)j; J12 =  2  0,(34 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0395, 6.304    -0.7    0.2
+                            124: NN LL,(n l s)j; J12 =  2  0,(35 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0367, 6.404    -0.7    0.2
+                            125: NN LL,(n l s)j; J12 =  2  0,(36 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0349, 6.334    -0.9   -0.1
+                            126: NN LL,(n l s)j; J12 =  2  0,(37 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0340, 6.360    -0.9   -0.1
+                            127: NN LL,(n l s)j; J12 =  2  0,(38 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0325, 6.411    -1.0   -0.3
+                            128: NN LL,(n l s)j; J12 =  2  0,(39 0 0.0) 0.0; 0.0  BE,Norm =   0.200  0.0300, 6.340    -1.6   -1.4
+
+                            129: NN LL,(n l s)j; J12 =  1  1,( 1 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0202, 2.246     7.6    7.8
+                            130: NN LL,(n l s)j; J12 =  1  1,( 2 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0540, 2.263    20.1   20.4
+                            131: NN LL,(n l s)j; J12 =  1  1,( 3 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.1257, 2.310    45.1   45.9
+                            132: NN LL,(n l s)j; J12 =  1  1,( 4 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.2095, 2.396    70.9   72.3
+                            133: NN LL,(n l s)j; J12 =  1  1,( 5 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.2659, 2.506    84.7   86.5
+                            134: NN LL,(n l s)j; J12 =  1  1,( 6 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.2892, 2.596    88.5   90.4
+                            135: NN LL,(n l s)j; J12 =  1  1,( 7 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.2969, 2.646    89.0   91.1
+                            136: NN LL,(n l s)j; J12 =  1  1,( 8 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.3053, 2.757    88.0   90.2
+                            137: NN LL,(n l s)j; J12 =  1  1,( 9 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.3030, 2.958    82.8   85.2
+                            138: NN LL,(n l s)j; J12 =  1  1,(10 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.2860, 3.220    74.6   77.2
+                            139: NN LL,(n l s)j; J12 =  1  1,(11 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.2647, 3.477    67.3   70.0
+                            140: NN LL,(n l s)j; J12 =  1  1,(12 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.2500, 3.650    62.9   65.7
+                            141: NN LL,(n l s)j; J12 =  1  1,(13 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.2426, 3.738    60.8   63.7
+                            142: NN LL,(n l s)j; J12 =  1  1,(14 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.2280, 3.919    57.0   59.9
+                            143: NN LL,(n l s)j; J12 =  1  1,(15 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.2064, 4.208    51.6   54.6
+                            144: NN LL,(n l s)j; J12 =  1  1,(16 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.1841, 4.541    46.4   49.6
+                            145: NN LL,(n l s)j; J12 =  1  1,(17 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.1664, 4.840    42.4   45.7
+                            146: NN LL,(n l s)j; J12 =  1  1,(18 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.1561, 5.032    40.1   43.5
+                            147: NN LL,(n l s)j; J12 =  1  1,(19 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.1513, 5.128    39.0   42.5
+                            148: NN LL,(n l s)j; J12 =  1  1,(20 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.1420, 5.320    37.1   40.6
+                            149: NN LL,(n l s)j; J12 =  1  1,(21 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.1290, 5.620    34.2   37.8
+                            150: NN LL,(n l s)j; J12 =  1  1,(22 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.1160, 5.955    31.4   35.1
+                            151: NN LL,(n l s)j; J12 =  1  1,(23 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.1058, 6.249    29.1   33.0
+                            152: NN LL,(n l s)j; J12 =  1  1,(24 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0998, 6.438    27.8   31.8
+                            153: NN LL,(n l s)j; J12 =  1  1,(25 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0970, 6.532    27.2   31.2
+                            154: NN LL,(n l s)j; J12 =  1  1,(26 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0916, 6.714    26.0   30.1
+                            155: NN LL,(n l s)j; J12 =  1  1,(27 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0840, 6.995    24.3   28.5
+                            156: NN LL,(n l s)j; J12 =  1  1,(28 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0763, 7.314    22.6   26.8
+                            157: NN LL,(n l s)j; J12 =  1  1,(29 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0701, 7.578    21.1   25.5
+                            158: NN LL,(n l s)j; J12 =  1  1,(30 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0665, 7.753    20.2   24.6
+                            159: NN LL,(n l s)j; J12 =  1  1,(31 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0648, 7.818    19.8   24.2
+                            160: NN LL,(n l s)j; J12 =  1  1,(32 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0615, 7.987    19.0   23.4
+                            161: NN LL,(n l s)j; J12 =  1  1,(33 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0567, 8.212    17.8   22.3
+                            162: NN LL,(n l s)j; J12 =  1  1,(34 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0517, 8.443    16.5   21.0
+                            163: NN LL,(n l s)j; J12 =  1  1,(35 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0477, 8.673    15.4   20.0
+                            164: NN LL,(n l s)j; J12 =  1  1,(36 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0452, 8.746    14.7   19.2
+                            165: NN LL,(n l s)j; J12 =  1  1,(37 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0441, 8.813    14.3   18.9
+                            166: NN LL,(n l s)j; J12 =  1  1,(38 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0419, 8.944    13.7   18.2
+                            167: NN LL,(n l s)j; J12 =  1  1,(39 1 1.0) 1.0; 0.0  BE,Norm =   0.200  0.0384, 9.034    12.3   16.5
+ ------------------------------------------------------------------------------------------------------------------------------------
+
+ ************************************************************************************************************************************
+
+ TWO-way COUPLING # 1 for partitions  2 <-  1 of KIND  7,   1  1  0 -1 -1 & P1,P2 = -163.2000   0.0000 : for J <=    30.5 & R <  24.5 fm.
+
+
+ data =  1  1  1  1  1.1760,  so  < [Triton   #  1] / [Deuteron #  1]  * Eigen-form #  1>  =   1.1760            BE =  6.257     1
+
+ data = -2  1  1  6  1.0000,  so  < [10Li     #  1] / [9Li      #  1]  * Eigen-form #  6>  =   1.0000            BE =  0.100     6
+ KNT =   6, KNP =   1: NK,NG,loc=   1   1   1  14  T  T  F
+
+     So FINITE-RANGE TRANSFER : IP1 = 1 (PRIOR   ), IP2= 1 =FULL REAL   ,  for   1 pairs of bound states summed into   1 pairs
+      The main coupling potential is that binding the transferred particle to the 9Li      core.
+
+          Using between Deuteron & 9Li      the potential No.   2, and subtracting optical potential No.  1
+
+   A real*8 is            8  bytes
+   NLL,NLN,NLO =          50          51          41
+0File  11 needs RL =    2050    REAL*8 numbers, and NR =    38. i.e.     0.62 Megabytes
+   File           11  RECL =       16400
+0RECOMMENDED NON-LOCAL WIDTH IS GREATER THAN    6.60 FM.,  RECOMMENDED CENTRATION  -0.60, after    0.00 secs.
+0Relative non-local usages (rms) are
+    0.004   0.007   0.012   0.021   0.037   0.062   0.113   0.199   0.351   0.651   1.148   2.175   4.028   7.175  13.052
+   20.911  35.580  54.460  75.075 100.000  99.519  73.291  41.302  17.998   6.220   1.846   0.620   0.401   0.295   0.198
+    0.125   0.076   0.045   0.026   0.015   0.009   0.005   0.003   0.002   0.001   0.001
+
+ ************************************************************************************************************************************
+
+ TWO-way COUPLING # 2 for partitions  3 <-  2 of KIND  6,   0  1  0 -1 -1 & P1,P2 = -125.7000   0.0000 : for J <=    30.5 & R <  24.5 fm.
+
+
+ data =  1  1  1  2  1.0000,  so  < [Deuteron #  1] / [Proton   #  1]  * Eigen-form #  2>  =   1.0000            BE =  2.224     2
+
+ data = -2  1  1  7  1.0000,  so  < [11Li     #  1] / [10Li     #  1]  * Eigen-form #  7>  =   1.0000            BE =  0.100     7
+ KNT =   7, KNP =   2: NK,NG,loc=   1   1   1  14  T  T  F
+
+     So ZERO-RANGE TRANSFER, with D0 derived from projectile states.
+     If bound, derive finite-range effective radiifrom the "D" values of those states;If unbound or IP3=1, use E.R. =   0.0000
+   7  2  1 14     2.224  -126.776  -130.075     1.006     0.504     0.688     0.100
+0Binding Energies: (Deuteron # 1 / Proton   # 1)(BE =  2.224)-(11Li     # 1 / 10Li     # 1)(BE =  0.100)- DISCREPANCY = -0.0015
+
+ ************************************************************************************************************************************
+
+ TWO-way COUPLING # 3 for partitions  3 <-  1 of KIND  7,   1  1  0 -1 -1 & P1,P2 =    0.0000   0.0000 : for J <=    30.5 & R <  24.5 fm.
+
+
+ data = -2  1  1 90  1.0000,  so  < [11Li     #  1] / [9Li      #  1]  * Eigen-form # 90>  =   1.0000            BE =  0.200   167
+ KNT =  90, KNP =  10: NK,NG,loc=   1   1   1  15  T  T  F
+ KNT =  91, KNP =  11: NK,NG,loc=   2   1   1  15  T  T  F
+ KNT =  92, KNP =  12: NK,NG,loc=   3   1   1  15  T  T  F
+ KNT =  93, KNP =  13: NK,NG,loc=   4   1   1  15  T  T  F
+ KNT =  94, KNP =  14: NK,NG,loc=   5   1   1  15  T  T  F
+ KNT =  95, KNP =  15: NK,NG,loc=   6   1   1  15  T  T  F
+ KNT =  96, KNP =  16: NK,NG,loc=   7   1   1  15  T  T  F
+ KNT =  97, KNP =  17: NK,NG,loc=   8   1   1  15  T  T  F
+ KNT =  98, KNP =  18: NK,NG,loc=   9   1   1  15  T  T  F
+ KNT =  99, KNP =  19: NK,NG,loc=  10   1   1  15  T  T  F
+ KNT = 100, KNP =  20: NK,NG,loc=  11   1   1  15  T  T  F
+ KNT = 101, KNP =  21: NK,NG,loc=  12   1   1  15  T  T  F
+ KNT = 102, KNP =  22: NK,NG,loc=  13   1   1  15  T  T  F
+ KNT = 103, KNP =  23: NK,NG,loc=  14   1   1  15  T  T  F
+ KNT = 104, KNP =  24: NK,NG,loc=  15   1   1  15  T  T  F
+ KNT = 105, KNP =  25: NK,NG,loc=  16   1   1  15  T  T  F
+ KNT = 106, KNP =  26: NK,NG,loc=  17   1   1  15  T  T  F
+ KNT = 107, KNP =  27: NK,NG,loc=  18   1   1  15  T  T  F
+ KNT = 108, KNP =  28: NK,NG,loc=  19   1   1  15  T  T  F
+ KNT = 109, KNP =  29: NK,NG,loc=  20   1   1  15  T  T  F
+ KNT = 110, KNP =  30: NK,NG,loc=  21   1   1  15  T  T  F
+ KNT = 111, KNP =  31: NK,NG,loc=  22   1   1  15  T  T  F
+ KNT = 112, KNP =  32: NK,NG,loc=  23   1   1  15  T  T  F
+ KNT = 113, KNP =  33: NK,NG,loc=  24   1   1  15  T  T  F
+ KNT = 114, KNP =  34: NK,NG,loc=  25   1   1  15  T  T  F
+ KNT = 115, KNP =  35: NK,NG,loc=  26   1   1  15  T  T  F
+ KNT = 116, KNP =  36: NK,NG,loc=  27   1   1  15  T  T  F
+ KNT = 117, KNP =  37: NK,NG,loc=  28   1   1  15  T  T  F
+ KNT = 118, KNP =  38: NK,NG,loc=  29   1   1  15  T  T  F
+ KNT = 119, KNP =  39: NK,NG,loc=  30   1   1  15  T  T  F
+ KNT = 120, KNP =  40: NK,NG,loc=  31   1   1  15  T  T  F
+ KNT = 121, KNP =  41: NK,NG,loc=  32   1   1  15  T  T  F
+ KNT = 122, KNP =  42: NK,NG,loc=  33   1   1  15  T  T  F
+ KNT = 123, KNP =  43: NK,NG,loc=  34   1   1  15  T  T  F
+ KNT = 124, KNP =  44: NK,NG,loc=  35   1   1  15  T  T  F
+ KNT = 125, KNP =  45: NK,NG,loc=  36   1   1  15  T  T  F
+ KNT = 126, KNP =  46: NK,NG,loc=  37   1   1  15  T  T  F
+ KNT = 127, KNP =  47: NK,NG,loc=  38   1   1  15  T  T  F
+ KNT = 128, KNP =  48: NK,NG,loc=  39   1   1  15  T  T  F
+
+     So FINITE-RANGE TRANSFER : IP1 = 1 (PRIOR   ), IP2= 1 =FULL REAL   ,  for  39 pairs of bound states summed into   1 pairs
+      The main coupling potential is that binding the transferred particle to the 9Li      core.
+
+          Using between Proton   & 9Li      the potential No.   3, and subtracting optical potential No.  1
+
+0RECOMMENDED NON-LOCAL WIDTH IS GREATER THAN   12.60 FM.,  RECOMMENDED CENTRATION  -0.90, after    0.57 secs.
+0Relative non-local usages (rms) are
+    0.858   1.220   1.742   2.494   3.586   5.078   7.320  10.382  14.348  20.245  26.097  36.244  46.610  57.499  72.110
+   77.919  93.993  98.208 100.000  94.640  82.532  56.375  32.698  22.815  20.732  16.311  10.100   5.277   3.282   2.999
+    2.729   2.240   1.708   1.241   0.877   0.609   0.419   0.287   0.196   0.134   0.092
+
+ Incoming partition  1 in excitation state # 1,   Laboratory Energy given for partition  1 Nucleus 1 in Excitation pair 1
+
+0Lab. ENERGY ranges :
+
+   from    39.8000     to   0.00000     in     0 intervals
+   from    0.00000     to   0.00000     in     0 intervals
+   from    0.00000     to   0.00000     in     0 intervals
+
+ Largest real,imaginary parts of any form factor at R=   24.00 are   2.05E-01  3.65E-10 MeV
+ Finished all Couplings @   0.593681991              14
+
+ Symmetric Hamiltonian
+1***********************************************************************************************************************************
+************************************************************************************************************************************
+
+        INCOMING Triton   ;    LABORATORY Triton   ENERGY =   39.800     MeV.
+
+ ***********************************************************************************************************************************
+ ***********************************************************************************************************************************
+
+ Allocate arrays for            4  channels, of which            4  need wfs.
+
+ Total SPIN, PARITY =     0.5 +,      4 chs,      0 cc.  Rmin & Coul turning =    0.0    0.1
+
+
+    C Projectl Target   #   EX.   (L  Proj) J  + Targ = Jtotal     E-cm      Re K     Re Eta     RM*K            CH
+    1 Triton   9Li      #    1: I   0 0.5    0.5  0.0     0.5    29.81025   1.79497   0.13006   44.8744  -0.11570   0.48718 1 1 1   1
+    2 Deuteron 10Li     #    1:     1 1.0    0.0  0.5     0.5    23.65325   1.37740   0.12578   34.4349  -0.42127   0.27142 2 1 2   1
+    3 Deuteron 10Li     #    1:     1 1.0    1.0  0.5     0.5    23.65325   1.37740   0.12578   34.4349  -0.42127   0.27142 2 1 2   1
+    4 Proton   11Li     #    1:     0 0.5    0.5  0.0     0.5    21.53025   0.97520   0.09783   24.3801   0.46491   0.18672 3 1 3   1
+ Reaction Xsec     0.5+/ 0 @ 1 =   9.667 , Out:   0.000#   3.662/   4.680/   9.659f
+
+ Total SPIN, PARITY =     0.5 -,      4 chs,      0 cc.  Rmin & Coul turning =    0.0    0.1
+ Reaction Xsec     0.5-/ 1 @ 1 =   9.664 , Out:   0.000#   2.835/   4.755/   9.656f
+ Allocate arrays for            5  channels, of which            5  need wfs.
+
+ Total SPIN, PARITY =     1.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    0.1    0.9
+ Reaction Xsec     1.5+/ 2 @ 1 =  19.335 , Out:   0.000#   5.626/   2.971/  19.326f
+
+ Total SPIN, PARITY =     1.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    0.1    0.9
+ Reaction Xsec     1.5-/ 1 @ 1 =  19.326 , Out:   0.000#   7.084/   9.535/  19.310f
+
+ Total SPIN, PARITY =     2.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    0.3    1.4
+ Reaction Xsec     2.5+/ 2 @ 1 =  28.999 , Out:   0.000#   0.013    4.896/  28.981f
+
+ Total SPIN, PARITY =     2.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    0.3    1.4
+ Reaction Xsec     2.5-/ 3 @ 1 =  28.992 , Out:   0.000#   0.011    8.776/  28.972f
+
+ Total SPIN, PARITY =     3.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    0.4    2.0
+ Reaction Xsec     3.5+/ 4 @ 1 =  38.705 , Out:   0.000#   7.487/   8.382/  38.689f
+
+ Total SPIN, PARITY =     3.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    0.4    2.0
+ Reaction Xsec     3.5-/ 3 @ 1 =  38.648 , Out:   0.000#   0.021    0.013   38.615f
+
+ Total SPIN, PARITY =     4.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    0.6    2.6
+ Reaction Xsec     4.5+/ 4 @ 1 =  48.373 , Out:   0.000#   0.020    0.012   48.341f
+
+ Total SPIN, PARITY =     4.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    0.6    2.6
+ Reaction Xsec     4.5-/ 5 @ 1 =  48.324 , Out:   0.000#   0.028    5.769/  48.290f
+
+ Total SPIN, PARITY =     5.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    0.8    3.1
+ Reaction Xsec     5.5+/ 6 @ 1 =  58.284 , Out:   0.000#   0.020    1.943/  58.262f
+
+ Total SPIN, PARITY =     5.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    0.8    3.1
+ Reaction Xsec     5.5-/ 5 @ 1 =  57.980 , Out:   0.000#   0.054    8.891/  57.916f
+
+ Total SPIN, PARITY =     6.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    0.9    3.7
+ Reaction Xsec     6.5+/ 6 @ 1 =  67.984 , Out:   0.000#   0.016    2.908/  67.964f
+
+ Total SPIN, PARITY =     6.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    0.9    3.7
+ Reaction Xsec     6.5-/ 7 @ 1 =  66.912 , Out:   0.000#   0.170    0.502/  66.741f
+
+ Total SPIN, PARITY =     7.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    1.1    4.2
+ Reaction Xsec     7.5+/ 8 @ 1 =  73.104 , Out:   0.000#   0.322    0.204/  72.782f
+
+ Total SPIN, PARITY =     7.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    1.1    4.2
+ Reaction Xsec     7.5-/ 7 @ 1 =  76.520 , Out:   0.000#   0.400    1.137/  76.119f
+
+ Total SPIN, PARITY =     8.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    1.2    4.8
+ Reaction Xsec     8.5+/ 8 @ 1 =  82.343 , Out:   0.000#   0.758    0.570/  81.584f
+
+ Total SPIN, PARITY =     8.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    1.2    4.8
+ Reaction Xsec     8.5-/ 9 @ 1 =  51.259 , Out:   0.000#   0.530    0.073/  50.729f
+
+ Total SPIN, PARITY =     9.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    1.4    5.4
+ Reaction Xsec     9.5+/10 @ 1 =  29.935 , Out:   0.000#   0.357    0.031/  29.578f
+
+ Total SPIN, PARITY =     9.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    1.4    5.4
+ Reaction Xsec     9.5-/ 9 @ 1 =  57.417 , Out:   0.000#   1.243    0.296/  56.174f
+
+ Total SPIN, PARITY =    10.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    1.6    5.9
+ Reaction Xsec    10.5+/10 @ 1 =  33.311 , Out:   0.000#   0.826    0.132/  32.485f
+
+ Total SPIN, PARITY =    10.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    1.6    5.9
+ Reaction Xsec    10.5-/11 @ 1 =  17.525 , Out:   0.000#   0.193    7.796#  17.332f
+
+ Total SPIN, PARITY =    11.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    1.7    6.5
+ Reaction Xsec    11.5+/12 @ 1 =  10.266 , Out:   0.000#   0.097    2.116#  10.169f
+
+ Total SPIN, PARITY =    11.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    1.7    6.5
+ Reaction Xsec    11.5-/11 @ 1 =  19.335 , Out:   0.000#   0.440    0.036/  18.895f
+
+ Total SPIN, PARITY =    12.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    1.9    7.0
+ Reaction Xsec    12.5+/12 @ 1 =  11.233 , Out:   0.000#   0.219    0.011/  11.013f
+
+ Total SPIN, PARITY =    12.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    1.9    7.0
+ Reaction Xsec    12.5-/13 @ 1 =   5.987 , Out:   0.000#   0.048    0.706#   5.939f
+
+ Total SPIN, PARITY =    13.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    2.0    7.6
+ Reaction Xsec    13.5+/14 @ 1 =   3.469 , Out:   0.000#   0.023    0.146#   3.446f
+
+ Total SPIN, PARITY =    13.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    2.0    7.6
+ Reaction Xsec    13.5-/13 @ 1 =   6.502 , Out:   0.000#   0.107    4.189#   6.395f
+
+ Total SPIN, PARITY =    14.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    2.2    8.1
+ Reaction Xsec    14.5+/14 @ 1 =   3.744 , Out:   0.000#   0.051    0.979#   3.692f
+
+ Total SPIN, PARITY =    14.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    2.2    8.1
+ Reaction Xsec    14.5-/15 @ 1 =   1.998 , Out:   0.000#   0.011    0.059#   1.987f
+
+ Total SPIN, PARITY =    15.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    2.4    8.7
+ Reaction Xsec    15.5+/16 @ 1 =   1.143 , Out:   0.000#   5.344/   0.036#   1.138f
+
+ Total SPIN, PARITY =    15.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    2.4    8.7
+ Reaction Xsec    15.5-/15 @ 1 =   2.143 , Out:   0.000#   0.025    0.395#   2.119f
+
+ Total SPIN, PARITY =    16.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    2.5    9.3
+ Reaction Xsec    16.5+/16 @ 1 =   1.221 , Out:   0.000#   0.012    0.211#   1.209f
+
+ Total SPIN, PARITY =    16.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    2.5    9.3
+ Reaction Xsec    16.5-/17 @ 1 =   0.651 , Out:   0.000#   2.574/   0.011#   0.648f
+
+ Total SPIN, PARITY =    17.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    2.7    9.8
+ Reaction Xsec    17.5+/18 @ 1 =   0.369 , Out:   0.000#   1.249/   0.002#   0.367f
+
+ Total SPIN, PARITY =    17.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    2.7    9.8
+ Reaction Xsec    17.5-/17 @ 1 =   0.692 , Out:   0.000#   5.612/   0.059#   0.686f
+
+ Total SPIN, PARITY =    18.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    2.8   10.4
+ Reaction Xsec    18.5+/18 @ 1 =   0.391 , Out:   0.000#   2.710/   0.012#   0.388f
+
+ Total SPIN, PARITY =    18.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    2.8   10.4
+ Reaction Xsec    18.5-/19 @ 1 =   0.208 , Out:   0.000#   0.615/   0.002#   0.207f
+
+ Total SPIN, PARITY =    19.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    3.0   10.9
+ Reaction Xsec    19.5+/20 @ 1 =   0.117 , Out:   0.000#   0.308/   0.001#   0.117f
+
+ Total SPIN, PARITY =    19.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    3.0   10.9
+ Reaction Xsec    19.5-/19 @ 1 =   0.220 , Out:   0.000#   1.326/   0.008#   0.218f
+
+ Total SPIN, PARITY =    20.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    3.2   11.5
+ Reaction Xsec    20.5+/20 @ 1 =   0.123 , Out:   0.000#   0.659/   0.005#   0.122f
+
+ Total SPIN, PARITY =    20.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    3.2   11.5
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+ Reaction Xsec    20.5-/21 @ 1 =   0.065 , Out:   0.000#   0.154/   0.001#   0.065f
+
+ Total SPIN, PARITY =    21.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    3.3   12.0
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.2 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.2 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+ Reaction Xsec    21.5+/22 @ 1 =   0.036 , Out:   0.000#   0.075/   0.000#   0.036f
+
+ Total SPIN, PARITY =    21.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    3.3   12.0
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+ Reaction Xsec    21.5-/21 @ 1 =   0.069 , Out:   0.000#   0.326/   0.003#   0.068f
+
+ Total SPIN, PARITY =    22.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    3.5   12.6
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+ Reaction Xsec    22.5+/22 @ 1 =   0.038 , Out:   0.000#   0.156/   0.001#   0.038f
+
+ Total SPIN, PARITY =    22.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    3.5   12.6
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+ Reaction Xsec    22.5-/23 @ 1 =   0.020 , Out:   0.000#   0.034/   0.000#   0.020f
+
+ Total SPIN, PARITY =    23.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    3.6   13.2
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.3 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+ Reaction Xsec    23.5+/24 @ 1 =   0.011 , Out:   0.000#   0.014/   0.000#   0.011f
+
+ Total SPIN, PARITY =    23.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    3.6   13.2
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.9 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.9 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+ Reaction Xsec    23.5-/23 @ 1 =   0.021 , Out:   0.000#   0.070/   0.000#   0.021f
+
+ Total SPIN, PARITY =    24.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    3.8   13.7
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.9 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+0****** WARNING : ACCURACY LOSS IN ERWIN = 14.9 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+ Reaction Xsec    24.5+/24 @ 1 =   0.012 , Out:   0.000#   0.028/   0.000#   0.012f
+
+ Total SPIN, PARITY =    24.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    3.8   13.7
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.4 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+ Reaction Xsec    24.5-/25 @ 1 =   6.233/, Out:   0.000#   4.987#   0.000#   0.006f
+
+ Total SPIN, PARITY =    25.5 +,      5 chs,      0 cc.  Rmin & Coul turning =    4.0   14.3
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.0 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.0 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+ Reaction Xsec    25.5+/26 @ 1 =   3.442/, Out:   0.000#   1.579#   0.000#   0.003f
+
+ Total SPIN, PARITY =    25.5 -,      5 chs,      0 cc.  Rmin & Coul turning =    4.0   14.3
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.5 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+0****** WARNING : ACCURACY LOSS IN ERWIN = 15.5 DIGITS, SO EXPECT ERRORS OF   0.0000 % OF UNITARITY
+
+ Reaction Xsec    25.5-/25 @ 1 =   6.487/, Out:   0.000#   0.010/   0.000#   0.006f
+ Finished all CC sets @   0.695784986    
+0CUMULATIVE REACTION cross section                 = 1032.70505  <L> =     6.74  <L**2> =     54.1
+0CUMULATIVE outgoing cross sections in partition 1 :    0.00000
+0CUMULATIVE outgoing cross sections in partition 2 :    6.06173
+0CUMULATIVE outgoing cross sections in partition 3 :    0.09114
+0Cumulative ABSORBTION by Imaginary Potentials     = 1026.55218  <L> =     6.72  <L**2> =     53.9
+   Fusion for specific Triton   M-states : 1026.552182 1026.552182
+0CUMULATIVE OUTGOING cross section                 =    6.15287
+ To convert to S-factors (MeV.mb = keV.b),  multiply by  6.7493E+01
+
+
+ CROSS SECTIONS FOR OUTGOING Triton   & 9Li      in state #   1 with spins & parities 0.5  + &  0.0  +;  0
+
+     0.01 deg.: X-S =   2.2631E+14 mb/sr,
++                                         /R =   9.9999E-01
+     2.00 deg.: X-S =   1.1306E+05 mb/sr,
++                                         /R =   7.9915E-01
+     4.00 deg.: X-S =  8920.971995 mb/sr,
++                                         /R =   1.0083E+00
+     6.00 deg.: X-S =  5046.684595 mb/sr,
++                                         /R =   2.8848E+00
+     8.00 deg.: X-S =  3895.817990 mb/sr,
++                                         /R =   7.0282E+00
+    10.00 deg.: X-S =  2868.259292 mb/sr,
++                                         /R =   1.2610E+01
+    12.00 deg.: X-S =  1925.924390 mb/sr,
++                                         /R =   1.7518E+01
+    14.00 deg.: X-S =  1156.957786 mb/sr,
++                                         /R =   1.9445E+01
+    16.00 deg.: X-S =   603.538973 mb/sr,
++                                         /R =   1.7252E+01
+    18.00 deg.: X-S =   257.701243 mb/sr,
++                                         /R =   1.1758E+01
+    20.00 deg.: X-S =    78.927454 mb/sr,
++                                         /R =   5.4678E+00
+    22.00 deg.: X-S =    13.738211 mb/sr,
++                                         /R =   1.3875E+00
+    24.00 deg.: X-S =    11.261934 mb/sr,
++                                         /R =   1.6034E+00
+    26.00 deg.: X-S =    32.497783 mb/sr,
++                                         /R =   6.3403E+00
+    28.00 deg.: X-S =    53.380006 mb/sr,
++                                         /R =   1.3931E+01
+    30.00 deg.: X-S =    63.256791 mb/sr,
++                                         /R =   2.1627E+01
+    32.00 deg.: X-S =    60.941333 mb/sr,
++                                         /R =   2.6802E+01
+    34.00 deg.: X-S =    50.268563 mb/sr,
++                                         /R =   2.7986E+01
+    36.00 deg.: X-S =    36.445692 mb/sr,
++                                         /R =   2.5321E+01
+    38.00 deg.: X-S =    23.757397 mb/sr,
++                                         /R =   2.0336E+01
+    40.00 deg.: X-S =    14.608019 mb/sr,
++                                         /R =   1.5230E+01
+    42.00 deg.: X-S =     9.549593 mb/sr,
++                                         /R =   1.2001E+01
+    44.00 deg.: X-S =     7.843823 mb/sr,
++                                         /R =   1.1769E+01
+    46.00 deg.: X-S =     8.165628 mb/sr,
++                                         /R =   1.4501E+01
+    48.00 deg.: X-S =     9.190727 mb/sr,
++                                         /R =   1.9165E+01
+    50.00 deg.: X-S =     9.952185 mb/sr,
++                                         /R =   2.4189E+01
+    52.00 deg.: X-S =     9.961611 mb/sr,
++                                         /R =   2.8029E+01
+    54.00 deg.: X-S =     9.155607 mb/sr,
++                                         /R =   2.9633E+01
+    56.00 deg.: X-S =     7.750063 mb/sr,
++                                         /R =   2.8684E+01
+    58.00 deg.: X-S =     6.076241 mb/sr,
++                                         /R =   2.5576E+01
+    60.00 deg.: X-S =     4.448143 mb/sr,
++                                         /R =   2.1182E+01
+    62.00 deg.: X-S =     3.083450 mb/sr,
++                                         /R =   1.6531E+01
+    64.00 deg.: X-S =     2.078381 mb/sr,
++                                         /R =   1.2487E+01
+    66.00 deg.: X-S =     1.423431 mb/sr,
++                                         /R =   9.5428E+00
+    68.00 deg.: X-S =     1.041528 mb/sr,
++                                         /R =   7.7593E+00
+    70.00 deg.: X-S =     0.830996 mb/sr,
++                                         /R =   6.8528E+00
+    72.00 deg.: X-S =     0.700329 mb/sr,
++                                         /R =   6.3692E+00
+    74.00 deg.: X-S =     0.588186 mb/sr,
++                                         /R =   5.8786E+00
+    76.00 deg.: X-S =     0.467986 mb/sr,
++                                         /R =   5.1228E+00
+    78.00 deg.: X-S =     0.340867 mb/sr,
++                                         /R =   4.0736E+00
+    80.00 deg.: X-S =     0.222734 mb/sr,
++                                         /R =   2.8971E+00
+    82.00 deg.: X-S =     0.131079 mb/sr,
++                                         /R =   1.8502E+00
+    84.00 deg.: X-S =     0.075781 mb/sr,
++                                         /R =   1.1575E+00
+    86.00 deg.: X-S =     0.055783 mb/sr,
++                                         /R =   9.1947E-01
+    88.00 deg.: X-S =     0.061294 mb/sr,
++                                         /R =   1.0874E+00
+    90.00 deg.: X-S =     0.079326 mb/sr,
++                                         /R =   1.5110E+00
+                                           Integrated********** mb, over [   0.000,  90.000] at    39.8000 MeV 
+
+ CROSS SECTIONS FOR OUTGOING Deuteron & 10Li     in state #   1 with spins & parities 1.0  + &  0.5  -;  0
+
+
+ CROSS SECTIONS FOR OUTGOING Proton   & 11Li     in state #   1 with spins & parities 0.5  + &  0.0  +;  0
+
+     0.00 deg.: X-S =     0.284863 mb/sr,
++                                         REAC   9.1143E-02 mb
+     2.00 deg.: X-S =     0.280051 mb/sr,
+     4.00 deg.: X-S =     0.266125 mb/sr,
+     6.00 deg.: X-S =     0.244514 mb/sr,
+     8.00 deg.: X-S =     0.217276 mb/sr,
+    10.00 deg.: X-S =     0.186727 mb/sr,
+    12.00 deg.: X-S =     0.155087 mb/sr,
+    14.00 deg.: X-S =     0.124244 mb/sr,
+    16.00 deg.: X-S =     0.095644 mb/sr,
+    18.00 deg.: X-S =     0.070295 mb/sr,
+    20.00 deg.: X-S =     0.048836 mb/sr,
+    22.00 deg.: X-S =     0.031595 mb/sr,
+    24.00 deg.: X-S =     0.018636 mb/sr,
+    26.00 deg.: X-S =     0.009776 mb/sr,
+    28.00 deg.: X-S =     0.004607 mb/sr,
+    30.00 deg.: X-S =     0.002530 mb/sr,
+    32.00 deg.: X-S =     0.002821 mb/sr,
+    34.00 deg.: X-S =     0.004709 mb/sr,
+    36.00 deg.: X-S =     0.007451 mb/sr,
+    38.00 deg.: X-S =     0.010397 mb/sr,
+    40.00 deg.: X-S =     0.013036 mb/sr,
+    42.00 deg.: X-S =     0.015021 mb/sr,
+    44.00 deg.: X-S =     0.016165 mb/sr,
+    46.00 deg.: X-S =     0.016436 mb/sr,
+    48.00 deg.: X-S =     0.015916 mb/sr,
+    50.00 deg.: X-S =     0.014767 mb/sr,
+    52.00 deg.: X-S =     0.013187 mb/sr,
+    54.00 deg.: X-S =     0.011373 mb/sr,
+    56.00 deg.: X-S =     0.009499 mb/sr,
+    58.00 deg.: X-S =     0.007696 mb/sr,
+    60.00 deg.: X-S =     0.006059 mb/sr,
+    62.00 deg.: X-S =     0.004638 mb/sr,
+    64.00 deg.: X-S =     0.003456 mb/sr,
+    66.00 deg.: X-S =     0.002505 mb/sr,
+    68.00 deg.: X-S =     0.001767 mb/sr,
+    70.00 deg.: X-S =     0.001210 mb/sr,
+    72.00 deg.: X-S =     0.000802 mb/sr,
+    74.00 deg.: X-S =     0.000515 mb/sr,
+    76.00 deg.: X-S =     0.000323 mb/sr,
+    78.00 deg.: X-S =     0.000206 mb/sr,
+    80.00 deg.: X-S =     0.000146 mb/sr,
+    82.00 deg.: X-S =     0.000128 mb/sr,
+    84.00 deg.: X-S =     0.000142 mb/sr,
+    86.00 deg.: X-S =     0.000178 mb/sr,
+    88.00 deg.: X-S =     0.000228 mb/sr,
+    90.00 deg.: X-S =     0.000285 mb/sr,
+                                           Integrated    0.0888 mb, over [   0.000,  90.000] at    39.8000 MeV 
+ Finished all xsecs @   0.697475016    
+
+  The following files have been created:
+   3:local copy of User input.            6:standard output.                   
+  12:transfer kernels.                   13:total cross sections/state.        
+  16:tables of cross sections.           35:Astrophysics S-factors  / Ecm.     
+  39:cross sections for each Ecm.        40:all cross sectns. for each Elab.   
+  46:bs wave functions & ANC ratios.     56:Fusion for each Jtotal.            
+  75:S-factors for lab energies.        201:Separate cross sections.           
+ 203:Separate cross sections.           
+
+ PARAMETERS : MAXQRN   MFNL   MLOC  LMAX1 MCLIST
+    ALLOWED :     83     25     15     50      5
+    REQUIRED:     39      4     14     28      3
+
+
+ ACCURACY ANALYSIS at    39.800 MeV :
+
+  Elastic h*k = 0.179 so OK       compared with 0.200
+
+   Real(S-el) > 0.01 first at J =       2.5
+   Real(S-el) > 0.10 first at J =       6.5
+   Real(S-el) > 0.50 first at J =       8.5
+   Real(S-el) > 0.90 first at J =      10.5
+   Real(S-el) > 0.99 first at J =      14.5
+   R-turn =    14.28 fm    at J =      25.5
+
+ Forward-angle excitation cut off below   0.573 deg by max JT =      25.5
+                              and below   0.332 deg by max R.
+
+
+ 1: Recommended RNL: non-local width >   6.60 cf:  12.00 fm: OK      
+    Recommended CENTRE: centration   ~  -0.60 cf:   0.00 fm
+
+
+ 3: Recommended RNL: non-local width >  12.60 cf:  12.00 fm: OK      
+    Recommended CENTRE: centration   ~  -0.90 cf:   0.00 fm
+
+ Total CPU  0 time =       0.70 seconds

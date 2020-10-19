@@ -2228,7 +2228,6 @@ CP            index to the coupling set up
 
 \newpage
 \section{Input CDCC format}
-\hangindent 0ex\hangafter 1
 
 {\bf \&CDCC namelist}
 
@@ -2246,7 +2245,6 @@ sumform, qc, la, static, expand, maxcoup
 }\\
 
 \vspace{-3mm}
-\hangindent 5ex\hangafter 1
 are all the same as the {\bf \&FRESCO} namelist, except for:\\
 {\tt cdccc} which is an alias for {\tt cdcc} of \&Fresco namelist,\\
  %
@@ -2726,48 +2724,57 @@ NAMELIST
 {\small 
 \begin{tabular}{|l | c c c | l | l|}
 \hline
-File & Format & LRECL  & Common & Routines & Use \\
- no. & (Fix/Var) & (bytes) &suffix &  &  \\
+File & Format & LRECL  & Access & Routines & Use \\
+ no. & (Fix/Var) & (bytes) & (Seq/Ran) &  &  \\
 \hline
-1    &  V &             &     &     SFRESCO& FRESCO input when searching\\
-2    &  V &             &    &     SFRESCO& Search specification file\\
-3    &  V &             &    &     FREADF, FR& Temporary namelist file\\
-4    &  F &     80      &    &     INTER & default for external KIND=1,9 couplings\\
+1    &  V &             & S  &     SFRESCO& FRESCO input when searching\\
+2    &  V &             & S  &     SFRESCO& Search specification file\\
+3    &  V &             & S  &     FREADF, FR& Temporary namelists: file\\
+4    &  F &     80      & S  &     INTER & external KIND=1,2 form factors\\
      &    &             &    &     POTENT &external potentials\\
-5    &  F &     80      & in  &         &   standard input\\
-6    &  V &    133      & out  &          &  standard output\\
-7    &  F &     80      & smats &     DISPX & elastic S-matrix elements\\
-8  \# &  F &   sector    &   (tmp) &     FR,INTER & s/p wfs, channel wfs\\
-9  \# &  F &  NLL*NLO*16    &  (tmp)& Q/KERNEL &  complex transfer multipoles\\
-10  @ &  V &             &  (tmp)  &     FR,CRISS & S-matrix elements (cfs)\\
-11  \# &  F & NLL*NLO*8 &  (tmp) & Q/KERNEL &  real transfer multipole\\
-12  \# &  V &NLL*NLO*16 & (tmp)  &   KERNEL/SOURCE&transfer kernels\\
-13    &  F &    80      & xst  &      FR   &    total cross sections for each Elab\\
-14  \#  & V &             &    &   INTER/CPAIR &interaction potentials\\
-15    &  V &           & (tmp)  &       FR   &   local equivalent potent\\
-16    &  F &     80      & xsec  &       CRISS &  tables of cross sections\\
-17    &  F &     80      & swf  &       FR  &    output scattering waves\\
-18  \# &  V &             & (tmp)  &       FR  &    wfns of 'best' iterate\\
-19    &  F &    N      &    &     FR  &   Local couplings\\
+5    &  F &     80      & S  &         &   standard input\\
+6    &  V &    142      & S  &          &  standard output\\
+7    &  F &     80      & S  &     DISPX & elastic S-matrix elements\\
+8 &  F &   sector    & R  &     FR,INTER & s/p wfs, channel wfs\\
+9 &  F &  NLL*NLO*16    & R& Q/KERNEL &  complex transfer multipoles\\
+10 &  V &             & S  &     FR,CRISS & S-matrix elements (cfs)\\
+11 &  F & NLL*NLO*8 &  R & Q/KERNEL &  real transfer multipole\\
+12 &  V &NLL*NLO*16 & S  &   KERNEL/SOURCE&transfer kernels\\
+13    &  F &    80      & S  &      FR   &    total cross sections for each Elab\\
+14  & V &             & S  &   INTER/CPAIR &interaction potentials\\
+16    &  F &     80      & S  &       CRISS &  tables of cross sections\\
+17    &  F &     80      & S  &       FR  &    output scattering waves\\
+18 &  V &             & S  &       FR  &    wfns of 'best' iterate\\
+19    &  F &    N      & S  &     FR  &   Local couplings\\
      &  & & & &\\
-20--33&    &            &    &     Available for users & (eg bound states, amplitudes, potentials)\\
+20--33&    &            &    &     Available for users & (eg bound states, amplitudes)\\
      &  & & & &\\
-34    &  F &    80      &    &     POTENT &   output potentials\\
-35    &  F &    80      & sf  &     FR & Astrophysical S-factors for Ecm\\
+34    &  F &    80      & S  &     POTENT &   output potentials\\
+35    &  F &    80      & S  &     FR & Astrophysical S-factors for Ecm\\
 36    &    &            &    &     CRISS & output scattering AMPL amplitudes\\
 37    &    &            &    &     CRISS & output scattering FAM amplitudes\\
-38    &  F &    80      &    &     DISPX &    cross sections for each J/pi\\
-39    &  F &    80      & efus  &      FR   &    2 cross sections for each Elab\\
-40    &  F &    80      & fus  &      FR   &    all cross sections for each Elab\\
-41    &  F &    80      &    &     SOURCE &   source terms at each iteration\\
-42    &  F &    80      &    &     SOURCE &   bin wavefunctions for each E\\
-43    &  F &    80      &    &     INFORM &   bin phase shifts as k functions\\
-44    &  F &    80      & phe  &     INFORM &   bin phase shifts as E functions\\
-45    &  F &    80      &    &     ERWIN   &  scat phase shift as E functions\\
-46    &  F &    80      &    &     INFORM &   bs wave functions \& Whit ratios\\
-47    &  F &    80      &   mek &           &   reduced matrix elements \\
-48  \#  & V &   133      &    &       FR  & concurrency log file\\
-49  \#  & V &        &    &     FR,CRISS & S-matrix elements concurrent$\rightarrow$10\\
+38    &  F &    80      & S  &     DISPX &    cross sections for each J/pi\\
+39    &  F &    80      & S  &      FR   &    2 cross sections for each Elab\\
+40    &  F &    80      & S  &      FR   &    all cross sections for each Elab\\
+41    &  F &    80      & S  &     SOURCE &   source terms at each iteration\\
+42    &  F &    80      & S  &     SOURCE &   bin wavefunctions for each E\\
+43    &  F &    80      & S  &     INFORM &   bin phase shifts as k functions\\
+44    &  F &    80      & S  &     INFORM &   bin phase shifts as E functions\\
+45    &  F &    80      & S  &     ERWIN   &  scat phase shift as E functions\\
+46    &  F &    80      & S  &     INFORM &   bs wave functions \& Whit ratios\\
+47    &  F &    80      & S  &            &   reduced matrix elements \\
+48    & V &   133      & S  &       FR  & misc log file\\
+55    &   F &            &    &     INFORM & Single-particle wave functions\\
+56    &   F &            &    &     FR & Jtotal fusion \& reaction cross\\
+57    &   F &            &    &     FR & Output of CDCC amplitudes\\
+58    &   F &            &    &     INFORM & Bound state wave functions \\
+59    &   F &            &    &     INFORM & Bound state vertex functions \\
+60-62 &   F &            &    &     RMATRIX & Trace of R-matrix calculations\\
+65   & V &                 &  & RMATRIX & Diagonalization results \\
+66    &  V  &NLL*NLO*16  & S  &     INTER & KIND=1 nonlocal formfactor\\
+71    &   F &    132     & S  &     FR   &  20 pw phase shifts as Elab functions\\
+75    &  F &            & S  &     FR & Astrophysical S-factors for Elab\\
+
 \hline
 \end{tabular}
 
@@ -2776,53 +2783,29 @@ File & Format & LRECL  & Common & Routines & Use \\
 File & Format & LRECL  & Access & Routines & Use \\
  no. & (Fix/Var) & (bytes) & (Seq/Ran) &  &  \\
 \hline
-50  \#  & V &   133  &    &    &    tmp standard output concurrent$\rightarrow$6\\
-51,52 \#  & V &   133  &    &  & unwanted standard output for node N$>$0\\
-53    &   V &            &  mel  &     WRITEMEL & mel file for sturmx(x)\\
-54    &   V &            &   spec  &     WRITESPEC & spec file for sturmx(x)\\
-55    &   F &            &    &     INFORM & Single-particle wave functions\\
-56    &   F &            &  fusl  &     FR & Jtotal fusion \& reaction cross\\
-57    &   F &            &   cdcc &     FR & Output of CDCC amplitudes\\
-58    &   F &            &  wfs  &     INFORM & Bound state wave functions \\
-59    &   F &            &   vrt &     INFORM & Bound state vertex functions \\
-60-62 &   F &            &  imp  &     RMATRIX & Trace of R-matrix calculations\\
-63    &   F &            &    &     WRITEMEL& Asymptotic coupling coefficients\\
-64    &   F &            &    &     RMATRIX& Coupled eigenstates\\
-65 \# &  F  &   NLO*2*8  & (tmp)   &     QNN  &  two-particle multipoles\\
-66    &  V  &NLL*NLO*16  & &     INTER & KIND=1 nonlocal formfactor\\
-70    &   F &            &    &     RMATRIX& Basis state wfs\\
-71    &   F &    132     &phs &     FR   &  20 pw phase shifts as Elab functions\\
-79+CP  &  V &\{N,NLN*NLO\}*16 & (tmp)  &   INTER/KERNEL &(non)local partial-wave couplings\\
-87    &   V &            &   pnl &     KERNEL & Non-local couplings\\
-88    &   F &            &    &     RMATRIX& Bound state wfs\\
+
 89    &   F &            &    &     MULTIP& Folded coupling potentials\\
-90    &  V &           &veff &       FR   &   average local equivalent potential\\
-91    &  V &           &vpol &       FR   &   average LEP for rereadingl\\
-92    &   F &            &    &     FR& Partial fusion cross sections\\
-% 93    &   F &            &    &     FR& Data for PVM distributions\\
-99     & F &    80   & &     CRISS   &  input J/L rescaling factors\\
-105     & V &         & &     FCN   &  $\chi^2$ progress during fitting\\
-200 & F & 80     &xsel &     CRISS   & Elastic cross section if not fort.201 \\
-201-210 & F & 80     &xs[1-9] &     CRISS   & Cross sections (cf 14) for states 1-10\\
-301 & V &      & &     CDCIN   & New Fresco input \\
-302 & V &      & &     CDCIN   & New Fresco input  (temp) \\
-303 & V &      & &     SFRESCO   & Input search file \\
-304 & V &      & &     SFRESCO   & Output plot file \\
-305 & V &      & &     CDCIN   & New Fresco input from cdcin, col format \\
-306 & V &      & &     SFRESCO/FRXX0   & Input Fresco file \\
-307 & V &      & &     SFRESCO/FRXX0   & Initial Output Fresco file \\
-308 & V &      & &     SFRESCO/FRXX0   & Main Output Fresco file \\
-470+$i$ & V &       & &     erwinmpi   & Log files from MPI process $i$ \\
+90   & F &              &   &  & Mean elastic optical potential xys\\
+91   & F &              &   & &  Mean elastic optical potential for re-reading\\
+
+105     & V &         & S  &     FCN   &  $\chi^2$ progress during fitting\\
+156    &   F &            &    &     FR & Jtotal fusion \& reaction cross \& parity\\
+200 & F & 80     & S  &     CRISS   & Elastic cross section if not fort.201 \\
+201-210 & F & 80     & S  &     CRISS   & Cross sections (cf 14) for states 1-10\\
+301 & V &      & S  &     CDCIN   & New Fresco input \\
+302 & V &      & S  &     CDCIN   & New Fresco input  (temp) \\
+303 & V &      & S  &     SFRESCO   & Input search file \\
+304 & V &      & S  &     SFRESCO   & Output plot file \\
+305 & V &      & S  &     CDCIN   & New Fresco input from cdcin, col format \\
+306 & V &      & S  &     SFRESCO/FRXX0   & Input Fresco file \\
+307 & V &      & S  &     SFRESCO/FRXX0   & Initial Output Fresco file \\
+308 & V &      & S  &     SFRESCO/FRXX0   & Main Output Fresco file \\
 \hline
 \end{tabular}
+
+
 }
-% no. & (Fix/Var) & (bytes) & (Seq/Ran) &  &  \\
 
-where  for MACH=8 we have\\
-\#  = distributed file: distinct file name on each node\\
-@  = shared concurrent file: single file, with writes from each node
-
-The use of files 19 and 35 have recently changed.
 
 \newpage
 \section{KIND=1 Spin Transfer Couplings}

@@ -1,4 +1,4 @@
- 'b8-gs-fit.in' 'b8-gs-fit.frout'
+ 'b8-gs-fit.nin' 'b8-gs-fit.frout'
  2 1
 
 &variable kind=1 name='r' kp=2 pline=2 col=2 /

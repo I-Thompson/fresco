@@ -886,7 +886,7 @@ C    ----------------------------------------------------------------
 	CALL NUMCC(NCH,IEX,MINTL,MEL,JTOTAL,PARITY,JTMIN,KINTL,
      X        NEX,NCHAN,GIVEXS,PEL,EXL,LMAX,JEX,COPY,NFUSCH,
      X        RMASS,MAL1,ITC,IBLOCK,BAND,SMALLS,NSMALL,CHPRES)
-          WRITE(48,*) JTOTAL,PSIGN(PARITY+2),'NUMCC:',NCH,MINTL
+!          WRITE(48,*) JTOTAL,PSIGN(PARITY+2),'NUMCC:',NCH,MINTL
         IF(NCH.EQ.0) go to 350 
         IF(MINTL==0.and.melfil==0) go to 350 
 !        NICH = max(IEX,MEL)
@@ -972,7 +972,7 @@ C    ----------------------------------------------------------------
      X        MINTL,INITL,ITC,IBLOCK,IEX,NCH,NCHPART,CHBASE,
      X        K,ETA,CHL,NAME,BAND,N,ISOCEN,RTURN,SMALLS,NSMALL,DROPPED)
 !		write(6,*)  ' CCSET: IEX,MAXB =',IEX,MAXB
-          WRITE(48,*) JTOTAL,PSIGN(PARITY+2),'CCSET:',NCH,MINTL,IEX
+!          WRITE(48,*) JTOTAL,PSIGN(PARITY+2),'CCSET:',NCH,MINTL,IEX
 C
 C    READ IN ANY J/P-DEPENDENT POTENTIALS
 C    ----------------------------------

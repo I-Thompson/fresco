@@ -3,9 +3,8 @@
 #	Ian J. Thompson,     I-Thompson@llnl.gov
 #	Dec 2012
 
-FFLAGS = -O2 		# generic
+FFLAGS = -O3 		# generic
 #FFLAGS = -O2 -Wall -ftrace=full	# generic
-#FFLAGS = -O2 -Wtabs	# gfortran 
 #FFLAGS = -O2  -Wall	# generic
 #FFLAGS = -O2 -m32	# 32-bit machines generic
 #FFLAGS = -O2 -m64	# 64-bit machines generic
@@ -17,8 +16,8 @@ FFLAGS = -O2 		# generic
 #FFLAGS = -g  -C  	 				# generic debug for f90
 #FFLAGS = -g -check all -O0 -debug 			# debug for ifort
 #FFLAGS = -g -fbacktrace -O0 -fcheck=all  		# debug for gfortran
-FC=gfortran
-F90C=$(FC)
+FC=gfortran 
+# F90C=$(FC)
 
 #   Use NAG library if available for 2D interpolationm of external 3-body wave functions
 # NAG = -lnag
@@ -52,9 +51,26 @@ OBJS = $(COMMON) sfresco.o minuit.o
 sfresco: $(OBJS)
 	$(FC) $(FFLAGS) -o sfresco $(OBJS) $(NAG)
 
+frxx0.o: globx7.o frxx0.f 
 frxx1.o: globx7.o frxx1.f usescatwf.f veffpot.f bpmfus.f
-frxx17.o: globx7.o frxx17.f usescatwf.f
+frxx2.o: globx7.o frxx2.f 
 frxx3.o: globx7.o frxx3.f 
+frxx4.o: globx7.o frxx4.f 
+frxx5.o: globx7.o frxx5.f 
+frxx6.o: globx7.o frxx6.f 
+frxx7a.o: globx7.o frxx7a.f 
+frxx7b.o: globx7.o frxx7b.f 
+frxx8.o: globx7.o frxx8.f 
+frxx9.o: globx7.o frxx9.f 
+frxx10.o: globx7.o frxx10.f 
+frxx11.o: globx7.o frxx11.f 
+frxx16.o: globx7.o frxx16.f 
+frxx17.o: globx7.o frxx17.f usescatwf.f
+cdc.o: globx7.o cdc.f 
+coulfg.o: globx7.o coulfg.f 
+lanecoup.o: globx7.o lanecoup.f 
+sfresco.o: globx7.o sfresco.f 
+fresco.o: globx7.o fresco.f 
 
 .f.o:	globx7.o
 	$(FC) $(FORM) -c $(FFLAGS)  $<

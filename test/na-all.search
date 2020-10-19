@@ -1,4 +1,4 @@
-'nalpha.frin' 'nalpha.frout' 
+'nalpha.nin' 'nalpha.frout' 
 2 3
  &variable kind=1 name='V' kp=1 pline=2 col=1 /
  &variable kind=1 name='Vso' kp=1 pline=3 col=1 /

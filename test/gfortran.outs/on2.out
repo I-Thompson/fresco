@@ -1,0 +1,1912 @@
+ FRESCO - FRES 3.4: Coupled Reaction Channels
+ Assuming NAMELIST input.
+
+ 16O+58Ni  48.00 MeV, no transfer                                                
+
+   0.050  30.000   0.500   0.000   0.000   0.000   0.000   0.000   0.000   0.000
+   -5.00 0.01000    0.00    0.00    0.00
+
+ Centre-of-mass Range is    602 * 0.0500 fm., Maximum at  30.00 fm., Interpolating NL forms every  0.50 fm.
+ Non - locality width is      4 * 0.0500 fm., Maximum of   0.15 fm., Centred at  0.00 fm.
+ 2-Nucleon Separation of      0 * 0.5000 fm., Maximum of   0.00 fm., Minimum at  0.00 fm.
+ Maximum single particle bins of 30.0000 fm.
+               M,Mint =          601         601
+
+
+ Range of total J is     0.0 <= J <=   400.0 (at least     0.0) and Absorbtion =>    -0.0010 mb.
+ Dry Run = F, CC set limits =  0  0, Relativistic kinematics =  , Both/Far/Near Analyses =  1                     
+
+ Cross Sections (and up to T0 for 0=projectile) for Theta from   2.0 to 180.0 in steps of  2.0 degrees, DGAM=0,  Coordinates = 0 (Mads)
+
+ Lower Radial Cutoff = maximum of -1.60*L*h &       0.0 fm.,  Lower Cutoff for Couplings =   0.0  fm.
+
+
+ Iterate Couplings between   0 and   0 times, to  0.000 % if sooner.                                          
+  Block solved exactly =   2 chs., with Pade = 0 & Isocen =  =0, NOSOL = F, initwf =  0
+
+ CRCWFN  -Theta-min =    -5.00 deg,  Accur = 0.010000,   Switch =  1000.00 fm.,   L switch =    10.00,   SinJmax =    0.00
+  NL quadrature with   18 Gaussian points, Calculate multipoles up to   406 from   0
+  M-transfers for lp+lt greater than or equal to  6, Angular Integration Cutoff below  2.7778 %
+
+
+ Trace switches are :  CHANS =  1, LISTCC =  0, TRENEG =  0, CDETR =  0, SMATS =  1, XSTABL =  0, NLPL =  0
+
+                       WAVES =  0, LAMPL =  0, VEFF =  0, KFUS =  0, WDISK =  0, BPM =  0, MELFIL =  0
+
+                       CDCC =  0, NFUS =  0
+
+ Using unit mass = 1.000000 amu and 1/fine-structure constant = 137.03599 ( 1.000000 * true ) with hc = 197.32705 MeV.fm,
+  thus 2*amu/hbar^2 = 0.0478450 = 1/20.9008 and Coulomb constant = 0.1574855 so e^2 = 1.43997, and nuclear magneton= 0.1261183
+
+ Now pre-scan input and save to file 3
+
+
+
+ *********** PARTITION NUMBER  1 ******************************************************************************************
+
+   PROJ=16-O       MASS= 15.9949 Z=   8.0,        # STATES=    2T, TARG=NI-58    MASS= 57.9350 Z=  28.0,     Q-VALUE =   0.0000 MEV.
+
+     1:  J= 0.0+ (B# 1), E=  0.0000, K= 0.0              Potl#  1       J= 0.0+ (B# 1), E=  0.0000, K= 0.0    
+
+     2:  J= 0.0+ (B# 1), E=  0.0000, K= 0.0              Potl#  1       J= 2.0+ (B# 1), E=  1.4500, K= 0.0    
+                                  (Just State  1)
+0Acceleration of long-range Coulomb couplings in this partition using CRCWFN
+
+
+ ************************************************************************************************************************************
+
+ The following POTENTIALS are defined :
+
+  KP#       TYPE      IT    SHAPE      at     V1        r1        a1        V2        r2        a2        A-in     A-used
+
+
+                                            A#1       A#2        r0c       ac                                                h @ 1
+    1    0=Coulomb       0=CHARGE (WS)  1    58.000    16.000    1.2000    0.0000    0.0000    0.0000     0.000   261.005   0.05000
+
+                                           Mn(E1)    Mn(E2)    Mn(E3)  .....
+    1   13=Targ. table  10=derivatives  2    0.0000    9.2200    0.0000    0.0000    0.0000    0.0000     0.000     7.669= RADIUS
+
+          Coulomb reduced matrix element   1 <-  2 of k = 2 (at   2 from   1 p)  ==   25.9700
+          Coulomb reduced matrix element   2 <-  1 of k = 2 (at   2 from   1 p)  ==   25.9700
+          Coulomb reduced matrix element   2 <-  2 of k = 2 (at   2 from   1 p)  ==  -31.0400
+              Step 2 <- 1 of k =  2 (Potl. beta = 0.06606)  1 @   2
+                                     Beta of targ. = 0.18006 (using radius of 4.645 fm.).
+              Step 1 <- 2 of k =  2 (Potl. beta = 0.06606)  1 @   2
+                                     Beta of targ. = 0.18006 (using radius of 4.645 fm.).
+              Step 2 <- 2 of k =  2 (Potl. beta = 0.06606)  1 @   2
+                                     Beta of targ. = 0.18006 (using radius of 4.645 fm.).
+
+    1    1=Volume        1=WS squared   3    0.0000    1.1790    0.6580   10.0000    1.0000    0.4000     0.000   261.005
+
+    1    1=Volume        0=Woods-Saxon  3   53.7500    1.1640    0.6300    0.0000    0.0000    0.0000     0.000   261.005
+
+                                            Def1      Def2      Def3   .....
+    1   13=Targ. table  10=derivatives  4    0.0000    0.4000    0.0000    0.0000    0.0000    0.0000     0.000     7.439= RADIUS
+
+          Nuclear reduced matrix element   1 <-  2 of k = 2 (at   4 from   3 p)  ==    0.9925
+          Nuclear reduced matrix element   2 <-  1 of k = 2 (at   4 from   3 p)  ==    0.9925
+          Nuclear reduced matrix element   2 <-  2 of k = 2 (at   4 from   3 p)  ==   -1.1860
+              Step 2 <- 1 of k =  2 (Potl. beta = 0.13342)  1 @   4
+                                     Beta of targ. = 0.22028 (using radius of 4.506 fm.).
+              Step 1 <- 2 of k =  2 (Potl. beta = 0.13342)  1 @   4
+                                     Beta of targ. = 0.22028 (using radius of 4.506 fm.).
+              Step 2 <- 2 of k =  2 (Potl. beta = 0.13339)  1 @   4
+                                     Beta of targ. = 0.22023 (using radius of 4.506 fm.).
+
+ Incoming partition  1 in excitation state # 1,   Laboratory Energy given for partition  1 Nucleus 1 in Excitation pair 1
+
+0Lab. ENERGY ranges :
+
+   from    48.0000     to   0.00000     in     0 intervals
+   from    0.00000     to   0.00000     in     0 intervals
+   from    0.00000     to   0.00000     in     0 intervals
+
+ Largest real,imaginary parts of any form factor at R=   29.50 are   4.88E-02  0.00E+00 MeV
+ Finished all Couplings @    8.99000093E-04           4
+
+ Non-symmetric Hamiltonian
+1***********************************************************************************************************************************
+************************************************************************************************************************************
+
+        INCOMING 16-O     ;    LABORATORY 16-O     ENERGY =   48.000     MeV.
+
+ ***********************************************************************************************************************************
+ ***********************************************************************************************************************************
+
+
+ Accuracy analysis at    48.000 MeV in ch.  1:  Elastic h*k = 0.237 so NOT OK   compared with 0.200
+
+
+ Accuracy analysis at    48.000 MeV in ch.  2:  Elastic h*k = 0.233 so NOT OK   compared with 0.200
+
+
+  NOTE: Coulomb excitation cut off below   5.827 deg by JTMAX, and below   5.000 deg by Rmax
+
+ To get scattering to  5.0 deg, integrating to    98. fm., and JTMAX should be at least  467.
+
+ Allocate arrays for            2  channels, of which            1  need wfs.
+
+ Total SPIN, PARITY =     0.0 +,      2 chs,      2 cc.  Rmin & Coul turning =    0.0    8.6
+
+
+    C Projectl Target   #   EX.   (L  Proj) J  + Targ = Jtotal     E-cm      Re K     Re Eta     RM*K            CH
+    1 16-O     NI-58    #    1: I   0 0.0    0.0  0.0     0.0    37.61509   4.74953  20.36379  142.4859   0.43739   0.26528 1 1 1   1
+    2 16-O     NI-58    #    2:     2 0.0    2.0  2.0     0.0    36.16509   4.65709  20.76801  139.7127  -0.47975   0.17896 1 1 1   2
+ Reaction Xsec     0.0+/ 0 @ 1 =   1.392 , Out:   0.000#   0.938/   1.391f
+ Allocate arrays for            3  channels, of which            1  need wfs.
+
+ Total SPIN, PARITY =     1.0 -,      3 chs,      3 cc.  Rmin & Coul turning =    0.1    8.6
+ Reaction Xsec     1.0-/ 1 @ 1 =   4.174 , Out:   0.000#   2.875/   4.172f
+ Allocate arrays for            4  channels, of which            1  need wfs.
+
+ Total SPIN, PARITY =     2.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    0.2    8.6
+ Reaction Xsec     2.0+/ 2 @ 1 =   6.957 , Out:   0.000#   5.464/   6.951f
+
+ Total SPIN, PARITY =     3.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    0.2    8.6
+ Reaction Xsec     3.0-/ 3 @ 1 =   9.738 , Out:   0.000#   8.687/   9.729f
+
+ Total SPIN, PARITY =     4.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    0.3    8.7
+ Reaction Xsec     4.0+/ 4 @ 1 =  12.516 , Out:   0.000#   0.014   12.502f
+
+ Total SPIN, PARITY =     5.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    0.4    8.7
+ Reaction Xsec     5.0-/ 5 @ 1 =  15.291 , Out:   0.000#   0.022   15.269f
+
+ Total SPIN, PARITY =     6.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    0.5    8.8
+ Reaction Xsec     6.0+/ 6 @ 1 =  18.057 , Out:   0.000#   0.035   18.021f
+
+ Total SPIN, PARITY =     7.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    0.6    8.9
+ Reaction Xsec     7.0-/ 7 @ 1 =  20.809 , Out:   0.000#   0.059   20.750f
+
+ Total SPIN, PARITY =     8.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    0.6    8.9
+ Reaction Xsec     8.0+/ 8 @ 1 =  23.531 , Out:   0.000#   0.099   23.432f
+
+ Total SPIN, PARITY =     9.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    0.7    9.0
+ Reaction Xsec     9.0-/ 9 @ 1 =  26.194 , Out:   0.000#   0.177   26.017f
+
+ Total SPIN, PARITY =    10.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    0.8    9.1
+ Reaction Xsec    10.0+/10 @ 1 =  28.746 , Out:   0.000#   0.313   28.433f
+
+ Total SPIN, PARITY =    11.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    0.9    9.2
+ Reaction Xsec    11.0-/11 @ 1 =  31.052 , Out:   0.000#   0.565   30.487f
+
+ Total SPIN, PARITY =    12.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    1.0    9.3
+ Reaction Xsec    12.0+/12 @ 1 =  32.943 , Out:   0.000#   0.961   31.982f
+
+ Total SPIN, PARITY =    13.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    1.0    9.4
+ Reaction Xsec    13.0-/13 @ 1 =  34.065 , Out:   0.000#   1.488   32.577f
+
+ Total SPIN, PARITY =    14.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    1.1    9.5
+ Reaction Xsec    14.0+/14 @ 1 =  33.954 , Out:   0.000#   1.995   31.958f
+
+ Total SPIN, PARITY =    15.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    1.2    9.7
+ Reaction Xsec    15.0-/15 @ 1 =  31.841 , Out:   0.000#   2.281   29.560f
+
+ Total SPIN, PARITY =    16.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    1.2    9.8
+ Reaction Xsec    16.0+/16 @ 1 =  26.961 , Out:   0.000#   2.146   24.815f
+
+ Total SPIN, PARITY =    17.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    1.4    9.9
+ Reaction Xsec    17.0-/17 @ 1 =  19.680 , Out:   0.000#   1.497   18.183f
+
+ Total SPIN, PARITY =    18.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    1.4   10.1
+ Reaction Xsec    18.0+/18 @ 1 =  11.799 , Out:   0.000#   0.690   11.109f
+
+ Total SPIN, PARITY =    19.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    1.5   10.2
+ Reaction Xsec    19.0-/19 @ 1 =   5.726 , Out:   0.000#   0.214    5.512f
+
+ Total SPIN, PARITY =    20.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    1.6   10.4
+ Reaction Xsec    20.0+/20 @ 1 =   2.441 , Out:   0.000#   0.180    2.261f
+
+ Total SPIN, PARITY =    21.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    1.7   10.5
+ Reaction Xsec    21.0-/21 @ 1 =   1.173 , Out:   0.000#   0.359    0.815f
+
+ Total SPIN, PARITY =    22.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    1.8   10.7
+ Reaction Xsec    22.0+/22 @ 1 =   0.834 , Out:   0.000#   0.572    0.262f
+
+ Total SPIN, PARITY =    23.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    1.8   10.8
+ Reaction Xsec    23.0-/23 @ 1 =   0.831 , Out:   0.000#   0.753    0.077f
+
+ Total SPIN, PARITY =    24.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    1.9   11.0
+ Reaction Xsec    24.0+/24 @ 1 =   0.913 , Out:   0.000#   0.892    0.021f
+
+ Total SPIN, PARITY =    25.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    2.0   11.2
+ Reaction Xsec    25.0-/25 @ 1 =   0.997 , Out:   0.000#   0.992    0.005f
+
+ Total SPIN, PARITY =    26.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    2.1   11.3
+ Reaction Xsec    26.0+/26 @ 1 =   1.062 , Out:   0.000#   1.060    0.001f
+
+ Total SPIN, PARITY =    27.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    2.1   11.5
+ Reaction Xsec    27.0-/27 @ 1 =   1.104 , Out:   0.000#   1.104    0.000f
+
+ Total SPIN, PARITY =    28.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    2.2   11.7
+ Reaction Xsec    28.0+/28 @ 1 =   1.128 , Out:   0.000#   1.128    0.000f
+
+ Total SPIN, PARITY =    29.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    2.3   11.8
+ Reaction Xsec    29.0-/29 @ 1 =   1.136 , Out:   0.000#   1.136    0.000f
+
+ Total SPIN, PARITY =    30.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    2.4   12.0
+ Reaction Xsec    30.0+/30 @ 1 =   1.133 , Out:   0.000#   1.133    0.000f
+
+ Total SPIN, PARITY =    31.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    2.5   12.2
+ Reaction Xsec    31.0-/31 @ 1 =   1.119 , Out:   0.000#   1.119   -0.000f
+
+ Total SPIN, PARITY =    32.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    2.6   12.4
+ Reaction Xsec    32.0+/32 @ 1 =   1.099 , Out:   0.000#   1.099    0.000f
+
+ Total SPIN, PARITY =    33.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    2.6   12.5
+ Reaction Xsec    33.0-/33 @ 1 =   1.074 , Out:   0.000#   1.074    0.000f
+
+ Total SPIN, PARITY =    34.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    2.7   12.7
+ Reaction Xsec    34.0+/34 @ 1 =   1.045 , Out:   0.000#   1.045    0.000f
+
+ Total SPIN, PARITY =    35.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    2.8   12.9
+ Reaction Xsec    35.0-/35 @ 1 =   1.013 , Out:   0.000#   1.013   -0.000f
+
+ Total SPIN, PARITY =    36.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    2.9   13.1
+ Reaction Xsec    36.0+/36 @ 1 =   0.980 , Out:   0.000#   0.980    0.000f
+
+ Total SPIN, PARITY =    37.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    3.0   13.3
+ Reaction Xsec    37.0-/37 @ 1 =   0.946 , Out:   0.000#   0.946    0.000f
+
+ Total SPIN, PARITY =    38.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    3.0   13.5
+ Reaction Xsec    38.0+/38 @ 1 =   0.911 , Out:   0.000#   0.911    0.000f
+
+ Total SPIN, PARITY =    39.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    3.1   13.6
+ Reaction Xsec    39.0-/39 @ 1 =   0.876 , Out:   0.000#   0.876    0.000f
+
+ Total SPIN, PARITY =    40.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    3.2   13.8
+ Reaction Xsec    40.0+/40 @ 1 =   0.842 , Out:   0.000#   0.842    0.000f
+
+ Total SPIN, PARITY =    41.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    3.2   14.0
+ Reaction Xsec    41.0-/41 @ 1 =   0.808 , Out:   0.000#   0.808    0.000f
+
+ Total SPIN, PARITY =    42.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    3.4   14.2
+ Reaction Xsec    42.0+/42 @ 1 =   0.775 , Out:   0.000#   0.775    0.000f
+
+ Total SPIN, PARITY =    43.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    3.4   14.4
+ Reaction Xsec    43.0-/43 @ 1 =   0.743 , Out:   0.000#   0.743    0.000f
+
+ Total SPIN, PARITY =    44.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    3.5   14.6
+ Reaction Xsec    44.0+/44 @ 1 =   0.712 , Out:   0.000#   0.712    0.000f
+
+ Total SPIN, PARITY =    45.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    3.6   14.8
+ Reaction Xsec    45.0-/45 @ 1 =   0.682 , Out:   0.000#   0.682    0.000f
+
+ Total SPIN, PARITY =    46.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    3.7   15.0
+ Reaction Xsec    46.0+/46 @ 1 =   0.653 , Out:   0.000#   0.653    0.000f
+
+ Total SPIN, PARITY =    47.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    3.8   15.2
+ Reaction Xsec    47.0-/47 @ 1 =   0.625 , Out:   0.000#   0.625    0.000f
+
+ Total SPIN, PARITY =    48.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    3.8   15.4
+ Reaction Xsec    48.0+/48 @ 1 =   0.598 , Out:   0.000#   0.598    0.000f
+
+ Total SPIN, PARITY =    49.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    3.9   15.6
+ Reaction Xsec    49.0-/49 @ 1 =   0.573 , Out:   0.000#   0.573    0.000f
+
+ Total SPIN, PARITY =    50.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    4.0   15.8
+ Reaction Xsec    50.0+/50 @ 1 =   0.548 , Out:   0.000#   0.548    0.000f
+
+ Total SPIN, PARITY =    51.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    4.0   15.9
+ Reaction Xsec    51.0-/51 @ 1 =   0.524 , Out:   0.000#   0.524    0.000f
+
+ Total SPIN, PARITY =    52.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    4.2   16.1
+ Reaction Xsec    52.0+/52 @ 1 =   0.501 , Out:   0.000#   0.501   -0.000f
+
+ Total SPIN, PARITY =    53.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    4.2   16.3
+ Reaction Xsec    53.0-/53 @ 1 =   0.480 , Out:   0.000#   0.480    0.000f
+
+ Total SPIN, PARITY =    54.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    4.3   16.5
+ Reaction Xsec    54.0+/54 @ 1 =   0.459 , Out:   0.000#   0.459    0.000f
+
+ Total SPIN, PARITY =    55.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    4.4   16.7
+ Reaction Xsec    55.0-/55 @ 1 =   0.439 , Out:   0.000#   0.439   -0.000f
+
+ Total SPIN, PARITY =    56.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    4.5   16.9
+ Reaction Xsec    56.0+/56 @ 1 =   0.420 , Out:   0.000#   0.420    0.000f
+
+ Total SPIN, PARITY =    57.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    4.5   17.1
+ Reaction Xsec    57.0-/57 @ 1 =   0.401 , Out:   0.000#   0.401    0.000f
+
+ Total SPIN, PARITY =    58.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    4.6   17.3
+ Reaction Xsec    58.0+/58 @ 1 =   0.384 , Out:   0.000#   0.384    0.000f
+
+ Total SPIN, PARITY =    59.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    4.7   17.5
+ Reaction Xsec    59.0-/59 @ 1 =   0.367 , Out:   0.000#   0.367    0.000f
+
+ Total SPIN, PARITY =    60.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    4.8   17.7
+ Reaction Xsec    60.0+/60 @ 1 =   0.351 , Out:   0.000#   0.351    0.000f
+
+ Total SPIN, PARITY =    61.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    4.9   17.9
+ Reaction Xsec    61.0-/61 @ 1 =   0.336 , Out:   0.000#   0.336    0.000f
+
+ Total SPIN, PARITY =    62.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    5.0   18.1
+ Reaction Xsec    62.0+/62 @ 1 =   0.322 , Out:   0.000#   0.321    0.000f
+
+ Total SPIN, PARITY =    63.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    5.0   18.3
+ Reaction Xsec    63.0-/63 @ 1 =   0.308 , Out:   0.000#   0.308    0.000f
+
+ Total SPIN, PARITY =    64.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    5.1   18.5
+ Reaction Xsec    64.0+/64 @ 1 =   0.294 , Out:   0.000#   0.294    0.000f
+
+ Total SPIN, PARITY =    65.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    5.2   18.7
+ Reaction Xsec    65.0-/65 @ 1 =   0.282 , Out:   0.000#   0.282    0.000f
+
+ Total SPIN, PARITY =    66.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    5.2   18.9
+ Reaction Xsec    66.0+/66 @ 1 =   0.269 , Out:   0.000#   0.269    0.000f
+
+ Total SPIN, PARITY =    67.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    5.4   19.1
+ Reaction Xsec    67.0-/67 @ 1 =   0.258 , Out:   0.000#   0.258   -0.000f
+
+ Total SPIN, PARITY =    68.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    5.4   19.3
+ Reaction Xsec    68.0+/68 @ 1 =   0.247 , Out:   0.000#   0.247    0.000f
+
+ Total SPIN, PARITY =    69.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    5.5   19.5
+ Reaction Xsec    69.0-/69 @ 1 =   0.236 , Out:   0.000#   0.236    0.000f
+
+ Total SPIN, PARITY =    70.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    5.6   19.7
+ Reaction Xsec    70.0+/70 @ 1 =   0.226 , Out:   0.000#   0.226    0.000f
+
+ Total SPIN, PARITY =    71.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    5.7   19.9
+ Reaction Xsec    71.0-/71 @ 1 =   0.216 , Out:   0.000#   0.216    0.000f
+
+ Total SPIN, PARITY =    72.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    5.8   20.1
+ Reaction Xsec    72.0+/72 @ 1 =   0.207 , Out:   0.000#   0.207    0.000f
+
+ Total SPIN, PARITY =    73.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    5.8   20.3
+ Reaction Xsec    73.0-/73 @ 1 =   0.198 , Out:   0.000#   0.198    0.000f
+
+ Total SPIN, PARITY =    74.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    5.9   20.5
+ Reaction Xsec    74.0+/74 @ 1 =   0.190 , Out:   0.000#   0.190    0.000f
+
+ Total SPIN, PARITY =    75.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    6.0   20.8
+ Reaction Xsec    75.0-/75 @ 1 =   0.182 , Out:   0.000#   0.182   -0.000f
+
+ Total SPIN, PARITY =    76.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    6.1   21.0
+ Reaction Xsec    76.0+/76 @ 1 =   0.174 , Out:   0.000#   0.174    0.000f
+
+ Total SPIN, PARITY =    77.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    6.2   21.2
+ Reaction Xsec    77.0-/77 @ 1 =   0.166 , Out:   0.000#   0.166    0.000f
+
+ Total SPIN, PARITY =    78.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    6.2   21.4
+ Reaction Xsec    78.0+/78 @ 1 =   0.159 , Out:   0.000#   0.159    0.000f
+
+ Total SPIN, PARITY =    79.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    6.3   21.6
+ Reaction Xsec    79.0-/79 @ 1 =   0.153 , Out:   0.000#   0.153   -0.000f
+
+ Total SPIN, PARITY =    80.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    6.4   21.8
+ Reaction Xsec    80.0+/80 @ 1 =   0.146 , Out:   0.000#   0.146    0.000f
+
+ Total SPIN, PARITY =    81.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    6.5   22.0
+ Reaction Xsec    81.0-/81 @ 1 =   0.140 , Out:   0.000#   0.140    0.000f
+
+ Total SPIN, PARITY =    82.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    6.6   22.2
+ Reaction Xsec    82.0+/82 @ 1 =   0.134 , Out:   0.000#   0.134   -0.000f
+
+ Total SPIN, PARITY =    83.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    6.6   22.4
+ Reaction Xsec    83.0-/83 @ 1 =   0.128 , Out:   0.000#   0.128    0.000f
+
+ Total SPIN, PARITY =    84.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    6.7   22.6
+ Reaction Xsec    84.0+/84 @ 1 =   0.123 , Out:   0.000#   0.123    0.000f
+
+ Total SPIN, PARITY =    85.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    6.8   22.8
+ Reaction Xsec    85.0-/85 @ 1 =   0.118 , Out:   0.000#   0.118    0.000f
+
+ Total SPIN, PARITY =    86.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    6.9   23.0
+ Reaction Xsec    86.0+/86 @ 1 =   0.113 , Out:   0.000#   0.113    0.000f
+
+ Total SPIN, PARITY =    87.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    7.0   23.2
+ Reaction Xsec    87.0-/87 @ 1 =   0.108 , Out:   0.000#   0.108    0.000f
+
+ Total SPIN, PARITY =    88.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    7.0   23.4
+ Reaction Xsec    88.0+/88 @ 1 =   0.104 , Out:   0.000#   0.104    0.000f
+
+ Total SPIN, PARITY =    89.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    7.1   23.6
+ Reaction Xsec    89.0-/89 @ 1 =   0.099 , Out:   0.000#   0.099    0.000f
+
+ Total SPIN, PARITY =    90.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    7.2   23.8
+ Reaction Xsec    90.0+/90 @ 1 =   0.095 , Out:   0.000#   0.095    0.000f
+
+ Total SPIN, PARITY =    91.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    7.2   24.0
+ Reaction Xsec    91.0-/91 @ 1 =   0.091 , Out:   0.000#   0.091    0.000f
+
+ Total SPIN, PARITY =    92.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    7.4   24.2
+ Reaction Xsec    92.0+/92 @ 1 =   0.087 , Out:   0.000#   0.087   -0.000f
+
+ Total SPIN, PARITY =    93.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    7.4   24.4
+ Reaction Xsec    93.0-/93 @ 1 =   0.084 , Out:   0.000#   0.084   -0.000f
+
+ Total SPIN, PARITY =    94.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    7.5   24.6
+ Reaction Xsec    94.0+/94 @ 1 =   0.080 , Out:   0.000#   0.080    0.000f
+
+ Total SPIN, PARITY =    95.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    7.6   24.8
+ Reaction Xsec    95.0-/95 @ 1 =   0.077 , Out:   0.000#   0.077    0.000f
+
+ Total SPIN, PARITY =    96.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    7.7   25.1
+ Reaction Xsec    96.0+/96 @ 1 =   0.074 , Out:   0.000#   0.074    0.000f
+
+ Total SPIN, PARITY =    97.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    7.8   25.3
+ Reaction Xsec    97.0-/97 @ 1 =   0.071 , Out:   0.000#   0.071    0.000f
+
+ Total SPIN, PARITY =    98.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    7.8   25.5
+ Reaction Xsec    98.0+/98 @ 1 =   0.068 , Out:   0.000#   0.068   -0.000f
+
+ Total SPIN, PARITY =    99.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    7.9   25.7
+ Reaction Xsec    99.0-/99 @ 1 =   0.065 , Out:   0.000#   0.065   -0.000f
+
+ Total SPIN, PARITY =   100.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    8.0   25.9
+ Reaction Xsec   100.0+/ 0 @ 1 =   0.062 , Out:   0.000#   0.062    0.000f
+
+ Total SPIN, PARITY =   101.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    8.1   26.1
+ Reaction Xsec   101.0-/ 1 @ 1 =   0.060 , Out:   0.000#   0.060    0.000f
+
+ Total SPIN, PARITY =   102.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    8.2   26.3
+ Reaction Xsec   102.0+/ 2 @ 1 =   0.057 , Out:   0.000#   0.057    0.000f
+
+ Total SPIN, PARITY =   103.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    8.2   26.5
+ Reaction Xsec   103.0-/ 3 @ 1 =   0.055 , Out:   0.000#   0.055   -0.000f
+
+ Total SPIN, PARITY =   104.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    8.3   26.7
+ Reaction Xsec   104.0+/ 4 @ 1 =   0.053 , Out:   0.000#   0.053   -0.000f
+
+ Total SPIN, PARITY =   105.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    8.4   26.9
+ Reaction Xsec   105.0-/ 5 @ 1 =   0.050 , Out:   0.000#   0.050   -0.000f
+
+ Total SPIN, PARITY =   106.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    8.5   27.1
+ Reaction Xsec   106.0+/ 6 @ 1 =   0.048 , Out:   0.000#   0.048    0.000f
+
+ Total SPIN, PARITY =   107.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    8.6   27.3
+ Reaction Xsec   107.0-/ 7 @ 1 =   0.046 , Out:   0.000#   0.046    0.000f
+
+ Total SPIN, PARITY =   108.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    8.6   27.5
+ Reaction Xsec   108.0+/ 8 @ 1 =   0.044 , Out:   0.000#   0.044    0.000f
+
+ Total SPIN, PARITY =   109.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    8.7   27.7
+ Reaction Xsec   109.0-/ 9 @ 1 =   0.043 , Out:   0.000#   0.043    0.000f
+
+ Total SPIN, PARITY =   110.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    8.8   27.9
+ Reaction Xsec   110.0+/10 @ 1 =   0.041 , Out:   0.000#   0.041    0.000f
+
+ Total SPIN, PARITY =   111.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    8.8   28.2
+ Reaction Xsec   111.0-/11 @ 1 =   0.039 , Out:   0.000#   0.039   -0.000f
+
+ Total SPIN, PARITY =   112.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    9.0   28.4
+ Reaction Xsec   112.0+/12 @ 1 =   0.038 , Out:   0.000#   0.038    0.000f
+
+ Total SPIN, PARITY =   113.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    9.0   28.6
+ Reaction Xsec   113.0-/13 @ 1 =   0.036 , Out:   0.000#   0.036    0.000f
+
+ Total SPIN, PARITY =   114.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    9.1   28.8
+ Reaction Xsec   114.0+/14 @ 1 =   0.035 , Out:   0.000#   0.035    0.000f
+
+ Total SPIN, PARITY =   115.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    9.2   29.0
+ Reaction Xsec   115.0-/15 @ 1 =   0.033 , Out:   0.000#   0.033    0.000f
+
+ Total SPIN, PARITY =   116.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    9.2   29.2
+ Reaction Xsec   116.0+/16 @ 1 =   0.032 , Out:   0.000#   0.032    0.000f
+
+ Total SPIN, PARITY =   117.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    9.3   29.4
+ Reaction Xsec   117.0-/17 @ 1 =   0.031 , Out:   0.000#   0.031    0.000f
+
+ Total SPIN, PARITY =   118.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    9.4   29.6
+ Reaction Xsec   118.0+/18 @ 1 =   0.029 , Out:   0.000#   0.029    0.000f
+
+ Total SPIN, PARITY =   119.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    9.5   29.8
+ Reaction Xsec   119.0-/19 @ 1 =   0.028 , Out:   0.000#   0.028    0.000f
+
+ Total SPIN, PARITY =   120.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    9.6   30.0
+ Reaction Xsec   120.0+/20 @ 1 =   0.027 , Out:   0.000#   0.027    0.000f
+
+ Total SPIN, PARITY =   121.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    9.7   30.2
+ Reaction Xsec   121.0-/21 @ 1 =   0.026 , Out:   0.000#   0.026    0.000f
+
+ Total SPIN, PARITY =   122.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    9.8   30.4
+ Reaction Xsec   122.0+/22 @ 1 =   0.025 , Out:   0.000#   0.025    0.000f
+
+ Total SPIN, PARITY =   123.0 -,      4 chs,      4 cc.  Rmin & Coul turning =    9.8   30.6
+ Reaction Xsec   123.0-/23 @ 1 =   0.024 , Out:   0.000#   0.024    0.000f
+
+ Total SPIN, PARITY =   124.0 +,      4 chs,      4 cc.  Rmin & Coul turning =    9.9   30.8
+ Reaction Xsec   124.0+/24 @ 1 =   0.023 , Out:   0.000#   0.023    0.000f
+
+ Total SPIN, PARITY =   125.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   10.0   31.1
+ Reaction Xsec   125.0-/25 @ 1 =   0.022 , Out:   0.000#   0.022    0.000f
+
+ Total SPIN, PARITY =   126.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   10.1   31.3
+ Reaction Xsec   126.0+/26 @ 1 =   0.021 , Out:   0.000#   0.021    0.000f
+
+ Total SPIN, PARITY =   127.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   10.2   31.5
+ Reaction Xsec   127.0-/27 @ 1 =   0.020 , Out:   0.000#   0.020    0.000f
+
+ Total SPIN, PARITY =   128.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   10.2   31.7
+ Reaction Xsec   128.0+/28 @ 1 =   0.019 , Out:   0.000#   0.019    0.000f
+
+ Total SPIN, PARITY =   129.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   10.3   31.9
+ Reaction Xsec   129.0-/29 @ 1 =   0.019 , Out:   0.000#   0.019    0.000f
+
+ Total SPIN, PARITY =   130.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   10.4   32.1
+ Reaction Xsec   130.0+/30 @ 1 =   0.018 , Out:   0.000#   0.018    0.000f
+
+ Total SPIN, PARITY =   131.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   10.5   32.3
+ Reaction Xsec   131.0-/31 @ 1 =   0.017 , Out:   0.000#   0.017    0.000f
+
+ Total SPIN, PARITY =   132.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   10.6   32.5
+ Reaction Xsec   132.0+/32 @ 1 =   0.016 , Out:   0.000#   0.016    0.000f
+
+ Total SPIN, PARITY =   133.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   10.6   32.7
+ Reaction Xsec   133.0-/33 @ 1 =   0.016 , Out:   0.000#   0.016    0.000f
+
+ Total SPIN, PARITY =   134.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   10.7   32.9
+ Reaction Xsec   134.0+/34 @ 1 =   0.015 , Out:   0.000#   0.015    0.000f
+
+ Total SPIN, PARITY =   135.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   10.8   33.1
+ Reaction Xsec   135.0-/35 @ 1 =   0.015 , Out:   0.000#   0.014    0.000f
+
+ Total SPIN, PARITY =   136.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   10.9   33.3
+ Reaction Xsec   136.0+/36 @ 1 =   0.014 , Out:   0.000#   0.014    0.000f
+
+ Total SPIN, PARITY =   137.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   11.0   33.6
+ Reaction Xsec   137.0-/37 @ 1 =   0.013 , Out:   0.000#   0.013    0.000f
+
+ Total SPIN, PARITY =   138.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   11.0   33.8
+ Reaction Xsec   138.0+/38 @ 1 =   0.013 , Out:   0.000#   0.013    0.000f
+
+ Total SPIN, PARITY =   139.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   11.1   34.0
+ Reaction Xsec   139.0-/39 @ 1 =   0.012 , Out:   0.000#   0.012    0.000f
+
+ Total SPIN, PARITY =   140.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   11.2   34.2
+ Reaction Xsec   140.0+/40 @ 1 =   0.012 , Out:   0.000#   0.012    0.000f
+
+ Total SPIN, PARITY =   141.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   11.2   34.4
+ Reaction Xsec   141.0-/41 @ 1 =   0.011 , Out:   0.000#   0.011    0.000f
+
+ Total SPIN, PARITY =   142.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   11.4   34.6
+ Rturn=   35.01 fm: match CRCWFN to zero at   30.51 fm., in partition 1
+ Reaction Xsec   142.0+/42 @ 1 =   0.011 , Out:   0.000#   0.011    0.000f
+
+ Total SPIN, PARITY =   143.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   11.4   34.8
+ Rturn=   35.22 fm: match CRCWFN to zero at   30.72 fm., in partition 1
+ Reaction Xsec   143.0-/43 @ 1 =   0.010 , Out:   0.000#   0.010    0.000f
+
+ Total SPIN, PARITY =   144.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   11.5   35.0
+ Rturn=   35.43 fm: match CRCWFN to zero at   30.93 fm., in partition 1
+ Reaction Xsec   144.0+/44 @ 1 =   0.010 , Out:   0.000#   0.010    0.000f
+
+ Total SPIN, PARITY =   145.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   11.6   35.2
+ Rturn=   35.64 fm: match CRCWFN to zero at   31.14 fm., in partition 1
+ Reaction Xsec   145.0-/45 @ 1 =   9.639/, Out:   0.000#   9.609/   0.000f
+
+ Total SPIN, PARITY =   146.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   11.7   35.4
+ Rturn=   35.85 fm: match CRCWFN to zero at   31.35 fm., in partition 1
+ Reaction Xsec   146.0+/46 @ 1 =   9.241/, Out:   0.000#   9.211/   0.000f
+
+ Total SPIN, PARITY =   147.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   11.8   35.6
+ Rturn=   36.05 fm: match CRCWFN to zero at   31.55 fm., in partition 1
+ Reaction Xsec   147.0-/47 @ 1 =   8.881/, Out:   0.000#   8.851/   0.000f
+
+ Total SPIN, PARITY =   148.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   11.8   35.8
+ Rturn=   36.26 fm: match CRCWFN to zero at   31.76 fm., in partition 1
+ Reaction Xsec   148.0+/48 @ 1 =   8.514/, Out:   0.000#   8.483/   0.000f
+
+ Total SPIN, PARITY =   149.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   11.9   36.1
+ Rturn=   36.47 fm: match CRCWFN to zero at   31.97 fm., in partition 1
+ Reaction Xsec   149.0-/49 @ 1 =   8.165/, Out:   0.000#   8.135/   0.000f
+
+ Total SPIN, PARITY =   150.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   12.0   36.3
+ Rturn=   36.68 fm: match CRCWFN to zero at   32.18 fm., in partition 1
+ Reaction Xsec   150.0+/50 @ 1 =   7.851/, Out:   0.000#   7.821/   0.000f
+
+ Total SPIN, PARITY =   151.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   12.1   36.5
+ Rturn=   36.89 fm: match CRCWFN to zero at   32.39 fm., in partition 1
+ Reaction Xsec   151.0-/51 @ 1 =   7.529/, Out:   0.000#   7.499/   0.000f
+
+ Total SPIN, PARITY =   152.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   12.2   36.7
+ Rturn=   37.10 fm: match CRCWFN to zero at   32.60 fm., in partition 1
+ Reaction Xsec   152.0+/52 @ 1 =   7.227/, Out:   0.000#   7.198/   0.000f
+
+ Total SPIN, PARITY =   153.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   12.2   36.9
+ Rturn=   37.31 fm: match CRCWFN to zero at   32.81 fm., in partition 1
+ Reaction Xsec   153.0-/53 @ 1 =   6.945/, Out:   0.000#   6.916/   0.000f
+
+ Total SPIN, PARITY =   154.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   12.3   37.1
+ Rturn=   37.52 fm: match CRCWFN to zero at   33.02 fm., in partition 1
+ Reaction Xsec   154.0+/54 @ 1 =   6.654/, Out:   0.000#   6.624/   0.000f
+
+ Total SPIN, PARITY =   155.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   12.4   37.3
+ Rturn=   37.72 fm: match CRCWFN to zero at   33.22 fm., in partition 1
+ Reaction Xsec   155.0-/55 @ 1 =   6.390/, Out:   0.000#   6.360/   0.000f
+
+ Total SPIN, PARITY =   156.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   12.5   37.5
+ Rturn=   37.93 fm: match CRCWFN to zero at   33.43 fm., in partition 1
+ Reaction Xsec   156.0+/56 @ 1 =   6.143/, Out:   0.000#   6.113/   0.000f
+
+ Total SPIN, PARITY =   157.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   12.6   37.7
+ Rturn=   38.14 fm: match CRCWFN to zero at   33.64 fm., in partition 1
+ Reaction Xsec   157.0-/57 @ 1 =   5.884/, Out:   0.000#   5.854/   0.000f
+
+ Total SPIN, PARITY =   158.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   12.6   37.9
+ Rturn=   38.35 fm: match CRCWFN to zero at   33.85 fm., in partition 1
+ Reaction Xsec   158.0+/58 @ 1 =   5.654/, Out:   0.000#   5.623/   0.000f
+
+ Total SPIN, PARITY =   159.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   12.7   38.1
+ Rturn=   38.56 fm: match CRCWFN to zero at   34.06 fm., in partition 1
+ Reaction Xsec   159.0-/59 @ 1 =   5.433/, Out:   0.000#   5.403/   0.000f
+
+ Total SPIN, PARITY =   160.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   12.8   38.4
+ Rturn=   38.77 fm: match CRCWFN to zero at   34.27 fm., in partition 1
+ Reaction Xsec   160.0+/60 @ 1 =   5.202/, Out:   0.000#   5.171/   0.000f
+
+ Total SPIN, PARITY =   161.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   12.9   38.6
+ Rturn=   38.98 fm: match CRCWFN to zero at   34.48 fm., in partition 1
+ Reaction Xsec   161.0-/61 @ 1 =   5.000/, Out:   0.000#   4.968/   0.000f
+
+ Total SPIN, PARITY =   162.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   13.0   38.8
+ Rturn=   39.19 fm: match CRCWFN to zero at   34.69 fm., in partition 1
+ Reaction Xsec   162.0+/62 @ 1 =   4.803/, Out:   0.000#   4.772/   0.000f
+
+ Total SPIN, PARITY =   163.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   13.0   39.0
+ Rturn=   39.40 fm: match CRCWFN to zero at   34.90 fm., in partition 1
+ Reaction Xsec   163.0-/63 @ 1 =   4.601/, Out:   0.000#   4.571/   0.000f
+
+ Total SPIN, PARITY =   164.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   13.1   39.2
+ Rturn=   39.60 fm: match CRCWFN to zero at   35.10 fm., in partition 1
+ Reaction Xsec   164.0+/64 @ 1 =   4.425/, Out:   0.000#   4.396/   0.000f
+
+ Total SPIN, PARITY =   165.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   13.2   39.4
+ Rturn=   39.81 fm: match CRCWFN to zero at   35.31 fm., in partition 1
+ Reaction Xsec   165.0-/65 @ 1 =   4.249/, Out:   0.000#   4.222/   0.000f
+
+ Total SPIN, PARITY =   166.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   13.2   39.6
+ Rturn=   40.02 fm: match CRCWFN to zero at   35.52 fm., in partition 1
+ Reaction Xsec   166.0+/66 @ 1 =   4.071/, Out:   0.000#   4.044/   0.000f
+
+ Total SPIN, PARITY =   167.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   13.4   39.8
+ Rturn=   40.23 fm: match CRCWFN to zero at   35.73 fm., in partition 1
+ Reaction Xsec   167.0-/67 @ 1 =   3.917/, Out:   0.000#   3.893/   0.000f
+
+ Total SPIN, PARITY =   168.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   13.4   40.0
+ Rturn=   40.44 fm: match CRCWFN to zero at   35.94 fm., in partition 1
+ Reaction Xsec   168.0+/68 @ 1 =   3.761/, Out:   0.000#   3.738/   0.000f
+
+ Total SPIN, PARITY =   169.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   13.5   40.2
+ Rturn=   40.65 fm: match CRCWFN to zero at   36.15 fm., in partition 1
+ Reaction Xsec   169.0-/69 @ 1 =   3.601/, Out:   0.000#   3.579/   0.000f
+
+ Total SPIN, PARITY =   170.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   13.6   40.4
+ Rturn=   40.86 fm: match CRCWFN to zero at   36.36 fm., in partition 1
+ Reaction Xsec   170.0+/70 @ 1 =   3.464/, Out:   0.000#   3.443/   0.000f
+
+ Total SPIN, PARITY =   171.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   13.7   40.6
+ Rturn=   41.07 fm: match CRCWFN to zero at   36.57 fm., in partition 1
+ Reaction Xsec   171.0-/71 @ 1 =   3.321/, Out:   0.000#   3.301/   0.000f
+
+ Total SPIN, PARITY =   172.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   13.8   40.9
+ Rturn=   41.28 fm: match CRCWFN to zero at   36.78 fm., in partition 1
+ Reaction Xsec   172.0+/72 @ 1 =   3.180/, Out:   0.000#   3.160/   0.000f
+
+ Total SPIN, PARITY =   173.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   13.8   41.1
+ Rturn=   41.49 fm: match CRCWFN to zero at   36.99 fm., in partition 1
+ Reaction Xsec   173.0-/73 @ 1 =   3.061/, Out:   0.000#   3.042/   0.000f
+
+ Total SPIN, PARITY =   174.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   13.9   41.3
+ Rturn=   41.70 fm: match CRCWFN to zero at   37.20 fm., in partition 1
+ Reaction Xsec   174.0+/74 @ 1 =   2.935/, Out:   0.000#   2.918/   0.000f
+
+ Total SPIN, PARITY =   175.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   14.0   41.5
+ Rturn=   41.90 fm: match CRCWFN to zero at   37.40 fm., in partition 1
+ Reaction Xsec   175.0-/75 @ 1 =   2.809/, Out:   0.000#   2.793/   0.000f
+
+ Total SPIN, PARITY =   176.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   14.1   41.7
+ Rturn=   42.11 fm: match CRCWFN to zero at   37.61 fm., in partition 1
+ Reaction Xsec   176.0+/76 @ 1 =   2.703/, Out:   0.000#   2.688/   0.000f
+
+ Total SPIN, PARITY =   177.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   14.2   41.9
+ Rturn=   42.32 fm: match CRCWFN to zero at   37.82 fm., in partition 1
+ Reaction Xsec   177.0-/77 @ 1 =   2.591/, Out:   0.000#   2.576/   0.000f
+
+ Total SPIN, PARITY =   178.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   14.2   42.1
+ Rturn=   42.53 fm: match CRCWFN to zero at   38.03 fm., in partition 1
+ Reaction Xsec   178.0+/78 @ 1 =   2.480/, Out:   0.000#   2.466/   0.000f
+
+ Total SPIN, PARITY =   179.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   14.3   42.3
+ Rturn=   42.74 fm: match CRCWFN to zero at   38.24 fm., in partition 1
+ Reaction Xsec   179.0-/79 @ 1 =   2.386/, Out:   0.000#   2.373/   0.000f
+
+ Total SPIN, PARITY =   180.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   14.4   42.5
+ Rturn=   42.95 fm: match CRCWFN to zero at   38.45 fm., in partition 1
+ Reaction Xsec   180.0+/80 @ 1 =   2.286/, Out:   0.000#   2.273/   0.000f
+
+ Total SPIN, PARITY =   181.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   14.5   42.7
+ Rturn=   43.16 fm: match CRCWFN to zero at   38.66 fm., in partition 1
+ Reaction Xsec   181.0-/81 @ 1 =   2.188/, Out:   0.000#   2.177/   0.000f
+
+ Total SPIN, PARITY =   182.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   14.6   43.0
+ Rturn=   43.37 fm: match CRCWFN to zero at   38.87 fm., in partition 1
+ Reaction Xsec   182.0+/82 @ 1 =   2.107/, Out:   0.000#   2.096/   0.000f
+
+ Total SPIN, PARITY =   183.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   14.6   43.2
+ Rturn=   43.58 fm: match CRCWFN to zero at   39.08 fm., in partition 1
+ Reaction Xsec   183.0-/83 @ 1 =   2.018/, Out:   0.000#   2.008/   0.000f
+
+ Total SPIN, PARITY =   184.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   14.7   43.4
+ Rturn=   43.79 fm: match CRCWFN to zero at   39.29 fm., in partition 1
+ Reaction Xsec   184.0+/84 @ 1 =   1.930/, Out:   0.000#   1.921/   0.000f
+
+ Total SPIN, PARITY =   185.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   14.8   43.6
+ Rturn=   44.00 fm: match CRCWFN to zero at   39.50 fm., in partition 1
+ Reaction Xsec   185.0-/85 @ 1 =   1.859/, Out:   0.000#   1.850/   0.000f
+
+ Total SPIN, PARITY =   186.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   14.9   43.8
+ Rturn=   44.21 fm: match CRCWFN to zero at   39.71 fm., in partition 1
+ Reaction Xsec   186.0+/86 @ 1 =   1.780/, Out:   0.000#   1.771/   0.000f
+
+ Total SPIN, PARITY =   187.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   15.0   44.0
+ Rturn=   44.42 fm: match CRCWFN to zero at   39.92 fm., in partition 1
+ Reaction Xsec   187.0-/87 @ 1 =   1.701/, Out:   0.000#   1.693/   0.000f
+
+ Total SPIN, PARITY =   188.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   15.0   44.2
+ Rturn=   44.63 fm: match CRCWFN to zero at   40.13 fm., in partition 1
+ Reaction Xsec   188.0+/88 @ 1 =   1.638/, Out:   0.000#   1.629/   0.000f
+
+ Total SPIN, PARITY =   189.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   15.1   44.4
+ Rturn=   44.83 fm: match CRCWFN to zero at   40.33 fm., in partition 1
+ Reaction Xsec   189.0-/89 @ 1 =   1.568/, Out:   0.000#   1.559/   0.000f
+
+ Total SPIN, PARITY =   190.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   15.2   44.6
+ Rturn=   45.04 fm: match CRCWFN to zero at   40.54 fm., in partition 1
+ Reaction Xsec   190.0+/90 @ 1 =   1.496/, Out:   0.000#   1.487/   0.000f
+
+ Total SPIN, PARITY =   191.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   15.2   44.8
+ Rturn=   45.25 fm: match CRCWFN to zero at   40.75 fm., in partition 1
+ Reaction Xsec   191.0-/91 @ 1 =   1.440/, Out:   0.000#   1.431/   0.000f
+
+ Total SPIN, PARITY =   192.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   15.4   45.0
+ Rturn=   45.46 fm: match CRCWFN to zero at   40.96 fm., in partition 1
+ Reaction Xsec   192.0+/92 @ 1 =   1.379/, Out:   0.000#   1.370/   0.000f
+
+ Total SPIN, PARITY =   193.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   15.4   45.3
+ Rturn=   45.67 fm: match CRCWFN to zero at   41.17 fm., in partition 1
+ Reaction Xsec   193.0-/93 @ 1 =   1.317/, Out:   0.000#   1.308/   0.000f
+
+ Total SPIN, PARITY =   194.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   15.5   45.5
+ Rturn=   45.88 fm: match CRCWFN to zero at   41.38 fm., in partition 1
+ Reaction Xsec   194.0+/94 @ 1 =   1.268/, Out:   0.000#   1.259/   0.000f
+
+ Total SPIN, PARITY =   195.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   15.6   45.7
+ Rturn=   46.09 fm: match CRCWFN to zero at   41.59 fm., in partition 1
+ Reaction Xsec   195.0-/95 @ 1 =   1.215/, Out:   0.000#   1.206/   0.000f
+
+ Total SPIN, PARITY =   196.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   15.7   45.9
+ Rturn=   46.30 fm: match CRCWFN to zero at   41.80 fm., in partition 1
+ Reaction Xsec   196.0+/96 @ 1 =   1.159/, Out:   0.000#   1.150/   0.000f
+
+ Total SPIN, PARITY =   197.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   15.8   46.1
+ Rturn=   46.51 fm: match CRCWFN to zero at   42.01 fm., in partition 1
+ Reaction Xsec   197.0-/97 @ 1 =   1.115/, Out:   0.000#   1.106/   0.000f
+
+ Total SPIN, PARITY =   198.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   15.8   46.3
+ Rturn=   46.72 fm: match CRCWFN to zero at   42.22 fm., in partition 1
+ Reaction Xsec   198.0+/98 @ 1 =   1.069/, Out:   0.000#   1.060/   0.000f
+
+ Total SPIN, PARITY =   199.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   15.9   46.5
+ Rturn=   46.93 fm: match CRCWFN to zero at   42.43 fm., in partition 1
+ Reaction Xsec   199.0-/99 @ 1 =   1.019/, Out:   0.000#   1.010/   0.000f
+
+ Total SPIN, PARITY =   200.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   16.0   46.7
+ Rturn=   47.14 fm: match CRCWFN to zero at   42.64 fm., in partition 1
+ Reaction Xsec   200.0+/ 0 @ 1 =   0.980/, Out:   0.000#   0.971/   0.000f
+
+ Total SPIN, PARITY =   201.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   16.1   46.9
+ Rturn=   47.35 fm: match CRCWFN to zero at   42.85 fm., in partition 1
+ Reaction Xsec   201.0-/ 1 @ 1 =   0.941/, Out:   0.000#   0.932/   0.000f
+
+ Total SPIN, PARITY =   202.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   16.2   47.1
+ Rturn=   47.56 fm: match CRCWFN to zero at   43.06 fm., in partition 1
+ Reaction Xsec   202.0+/ 2 @ 1 =   0.895/, Out:   0.000#   0.886/   0.000f
+
+ Total SPIN, PARITY =   203.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   16.2   47.3
+ Rturn=   47.77 fm: match CRCWFN to zero at   43.27 fm., in partition 1
+ Reaction Xsec   203.0-/ 3 @ 1 =   0.861/, Out:   0.000#   0.852/   0.000f
+
+ Total SPIN, PARITY =   204.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   16.3   47.6
+ Rturn=   47.98 fm: match CRCWFN to zero at   43.48 fm., in partition 1
+ Reaction Xsec   204.0+/ 4 @ 1 =   0.828/, Out:   0.000#   0.819/   0.000f
+
+ Total SPIN, PARITY =   205.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   16.4   47.8
+ Rturn=   48.19 fm: match CRCWFN to zero at   43.69 fm., in partition 1
+ Reaction Xsec   205.0-/ 5 @ 1 =   0.787/, Out:   0.000#   0.778/   0.000f
+
+ Total SPIN, PARITY =   206.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   16.4   48.0
+ Rturn=   48.40 fm: match CRCWFN to zero at   43.90 fm., in partition 1
+ Reaction Xsec   206.0+/ 6 @ 1 =   0.754/, Out:   0.000#   0.746/   0.000f
+
+ Total SPIN, PARITY =   207.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   16.6   48.2
+ Rturn=   48.60 fm: match CRCWFN to zero at   44.10 fm., in partition 1
+ Reaction Xsec   207.0-/ 7 @ 1 =   0.726/, Out:   0.000#   0.718/   0.000f
+
+ Total SPIN, PARITY =   208.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   16.6   48.4
+ Rturn=   48.81 fm: match CRCWFN to zero at   44.31 fm., in partition 1
+ Reaction Xsec   208.0+/ 8 @ 1 =   0.690/, Out:   0.000#   0.682/   0.000f
+
+ Total SPIN, PARITY =   209.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   16.7   48.6
+ Rturn=   49.02 fm: match CRCWFN to zero at   44.52 fm., in partition 1
+ Reaction Xsec   209.0-/ 9 @ 1 =   0.660/, Out:   0.000#   0.652/   0.000f
+
+ Total SPIN, PARITY =   210.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   16.8   48.8
+ Rturn=   49.23 fm: match CRCWFN to zero at   44.73 fm., in partition 1
+ Reaction Xsec   210.0+/10 @ 1 =   0.636/, Out:   0.000#   0.628/   0.000f
+
+ Total SPIN, PARITY =   211.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   16.9   49.0
+ Rturn=   49.44 fm: match CRCWFN to zero at   44.94 fm., in partition 1
+ Reaction Xsec   211.0-/11 @ 1 =   0.605/, Out:   0.000#   0.597/   0.000f
+
+ Total SPIN, PARITY =   212.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   16.9   49.2
+ Rturn=   49.65 fm: match CRCWFN to zero at   45.15 fm., in partition 1
+ Reaction Xsec   212.0+/12 @ 1 =   0.576/, Out:   0.000#   0.568/   0.000f
+
+ Total SPIN, PARITY =   213.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   17.0   49.4
+ Rturn=   49.86 fm: match CRCWFN to zero at   45.36 fm., in partition 1
+ Reaction Xsec   213.0-/13 @ 1 =   0.555/, Out:   0.000#   0.547/   0.000f
+
+ Total SPIN, PARITY =   214.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   17.1   49.7
+ Rturn=   50.07 fm: match CRCWFN to zero at   45.57 fm., in partition 1
+ Reaction Xsec   214.0+/14 @ 1 =   0.529/, Out:   0.000#   0.521/   0.000f
+
+ Total SPIN, PARITY =   215.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   17.2   49.9
+ Rturn=   50.28 fm: match CRCWFN to zero at   45.78 fm., in partition 1
+ Reaction Xsec   215.0-/15 @ 1 =   0.502/, Out:   0.000#   0.495/   0.000f
+
+ Total SPIN, PARITY =   216.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   17.2   50.1
+ Rturn=   50.49 fm: match CRCWFN to zero at   45.99 fm., in partition 1
+ Reaction Xsec   216.0+/16 @ 1 =   0.484/, Out:   0.000#   0.477/   0.000f
+
+ Total SPIN, PARITY =   217.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   17.4   50.3
+ Rturn=   50.70 fm: match CRCWFN to zero at   46.20 fm., in partition 1
+ Reaction Xsec   217.0-/17 @ 1 =   0.463/, Out:   0.000#   0.456/   0.000f
+
+ Total SPIN, PARITY =   218.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   17.4   50.5
+ Rturn=   50.91 fm: match CRCWFN to zero at   46.41 fm., in partition 1
+ Reaction Xsec   218.0+/18 @ 1 =   0.439/, Out:   0.000#   0.432/   0.000f
+
+ Total SPIN, PARITY =   219.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   17.5   50.7
+ Rturn=   51.12 fm: match CRCWFN to zero at   46.62 fm., in partition 1
+ Reaction Xsec   219.0-/19 @ 1 =   0.422/, Out:   0.000#   0.416/   0.000f
+
+ Total SPIN, PARITY =   220.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   17.6   50.9
+ Rturn=   51.33 fm: match CRCWFN to zero at   46.83 fm., in partition 1
+ Reaction Xsec   220.0+/20 @ 1 =   0.405/, Out:   0.000#   0.399/   0.000f
+
+ Total SPIN, PARITY =   221.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   17.7   51.1
+ Rturn=   51.54 fm: match CRCWFN to zero at   47.04 fm., in partition 1
+ Reaction Xsec   221.0-/21 @ 1 =   0.382/, Out:   0.000#   0.377/   0.000f
+
+ Total SPIN, PARITY =   222.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   17.8   51.3
+ Rturn=   51.75 fm: match CRCWFN to zero at   47.25 fm., in partition 1
+ Reaction Xsec   222.0+/22 @ 1 =   0.366/, Out:   0.000#   0.361/   0.000f
+
+ Total SPIN, PARITY =   223.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   17.8   51.5
+ Rturn=   51.96 fm: match CRCWFN to zero at   47.46 fm., in partition 1
+ Reaction Xsec   223.0-/23 @ 1 =   0.352/, Out:   0.000#   0.347/   0.000f
+
+ Total SPIN, PARITY =   224.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   17.9   51.7
+ Rturn=   52.17 fm: match CRCWFN to zero at   47.67 fm., in partition 1
+ Reaction Xsec   224.0+/24 @ 1 =   0.333/, Out:   0.000#   0.328/   0.000f
+
+ Total SPIN, PARITY =   225.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   18.0   52.0
+ Rturn=   52.38 fm: match CRCWFN to zero at   47.88 fm., in partition 1
+ Reaction Xsec   225.0-/25 @ 1 =   0.317/, Out:   0.000#   0.312/   0.000f
+
+ Total SPIN, PARITY =   226.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   18.1   52.2
+ Rturn=   52.59 fm: match CRCWFN to zero at   48.09 fm., in partition 1
+ Reaction Xsec   226.0+/26 @ 1 =   0.305/, Out:   0.000#   0.301/   0.000f
+
+ Total SPIN, PARITY =   227.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   18.2   52.4
+ Rturn=   52.80 fm: match CRCWFN to zero at   48.30 fm., in partition 1
+ Reaction Xsec   227.0-/27 @ 1 =   0.290/, Out:   0.000#   0.285/   0.000f
+
+ Total SPIN, PARITY =   228.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   18.2   52.6
+ Rturn=   53.01 fm: match CRCWFN to zero at   48.51 fm., in partition 1
+ Reaction Xsec   228.0+/28 @ 1 =   0.274/, Out:   0.000#   0.270/   0.000f
+
+ Total SPIN, PARITY =   229.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   18.3   52.8
+ Rturn=   53.22 fm: match CRCWFN to zero at   48.72 fm., in partition 1
+ Reaction Xsec   229.0-/29 @ 1 =   0.264/, Out:   0.000#   0.260/   0.000f
+
+ Total SPIN, PARITY =   230.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   18.4   53.0
+ Rturn=   53.43 fm: match CRCWFN to zero at   48.93 fm., in partition 1
+ Reaction Xsec   230.0+/30 @ 1 =   0.252/, Out:   0.000#   0.248/   0.000f
+
+ Total SPIN, PARITY =   231.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   18.4   53.2
+ Rturn=   53.64 fm: match CRCWFN to zero at   49.14 fm., in partition 1
+ Reaction Xsec   231.0-/31 @ 1 =   0.236/, Out:   0.000#   0.233/   0.000f
+
+ Total SPIN, PARITY =   232.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   18.6   53.4
+ Rturn=   53.85 fm: match CRCWFN to zero at   49.35 fm., in partition 1
+ Reaction Xsec   232.0+/32 @ 1 =   0.226/, Out:   0.000#   0.223/   0.000f
+
+ Total SPIN, PARITY =   233.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   18.6   53.6
+ Rturn=   54.06 fm: match CRCWFN to zero at   49.56 fm., in partition 1
+ Reaction Xsec   233.0-/33 @ 1 =   0.217/, Out:   0.000#   0.214/   0.000f
+
+ Total SPIN, PARITY =   234.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   18.7   53.8
+ Rturn=   54.27 fm: match CRCWFN to zero at   49.77 fm., in partition 1
+ Reaction Xsec   234.0+/34 @ 1 =   0.204/, Out:   0.000#   0.201/   0.000f
+
+ Total SPIN, PARITY =   235.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   18.8   54.1
+ Rturn=   54.48 fm: match CRCWFN to zero at   49.98 fm., in partition 1
+ Reaction Xsec   235.0-/35 @ 1 =   0.193/, Out:   0.000#   0.191/   0.000f
+
+ Total SPIN, PARITY =   236.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   18.9   54.3
+ Rturn=   54.69 fm: match CRCWFN to zero at   50.19 fm., in partition 1
+ Reaction Xsec   236.0+/36 @ 1 =   0.186/, Out:   0.000#   0.184/   0.000f
+
+ Total SPIN, PARITY =   237.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   18.9   54.5
+ Rturn=   54.90 fm: match CRCWFN to zero at   50.40 fm., in partition 1
+ Reaction Xsec   237.0-/37 @ 1 =   0.176/, Out:   0.000#   0.173/   0.000f
+
+ Total SPIN, PARITY =   238.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   19.0   54.7
+ Rturn=   55.11 fm: match CRCWFN to zero at   50.61 fm., in partition 1
+ Reaction Xsec   238.0+/38 @ 1 =   0.165/, Out:   0.000#   0.163/   0.000f
+
+ Total SPIN, PARITY =   239.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   19.1   54.9
+ Rturn=   55.31 fm: match CRCWFN to zero at   50.81 fm., in partition 1
+ Reaction Xsec   239.0-/39 @ 1 =   0.159/, Out:   0.000#   0.157/   0.000f
+
+ Total SPIN, PARITY =   240.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   19.2   55.1
+ Rturn=   55.52 fm: match CRCWFN to zero at   51.02 fm., in partition 1
+ Reaction Xsec   240.0+/40 @ 1 =   0.151/, Out:   0.000#   0.149/   0.000f
+
+ Total SPIN, PARITY =   241.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   19.2   55.3
+ Rturn=   55.73 fm: match CRCWFN to zero at   51.23 fm., in partition 1
+ Reaction Xsec   241.0-/41 @ 1 =   0.141/, Out:   0.000#   0.139/   0.000f
+
+ Total SPIN, PARITY =   242.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   19.4   55.5
+ Rturn=   55.94 fm: match CRCWFN to zero at   51.44 fm., in partition 1
+ Reaction Xsec   242.0+/42 @ 1 =   0.134/, Out:   0.000#   0.132/   0.000f
+
+ Total SPIN, PARITY =   243.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   19.4   55.7
+ Rturn=   56.15 fm: match CRCWFN to zero at   51.65 fm., in partition 1
+ Reaction Xsec   243.0-/43 @ 1 =   0.129/, Out:   0.000#   0.127/   0.000f
+
+ Total SPIN, PARITY =   244.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   19.5   55.9
+ Rturn=   56.36 fm: match CRCWFN to zero at   51.86 fm., in partition 1
+ Reaction Xsec   244.0+/44 @ 1 =   0.121/, Out:   0.000#   0.119/   0.000f
+
+ Total SPIN, PARITY =   245.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   19.6   56.2
+ Rturn=   56.57 fm: match CRCWFN to zero at   52.07 fm., in partition 1
+ Reaction Xsec   245.0-/45 @ 1 =   0.114/, Out:   0.000#   0.112/   0.000f
+
+ Total SPIN, PARITY =   246.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   19.7   56.4
+ Rturn=   56.78 fm: match CRCWFN to zero at   52.28 fm., in partition 1
+ Reaction Xsec   246.0+/46 @ 1 =   0.110/, Out:   0.000#   0.108/   0.000f
+
+ Total SPIN, PARITY =   247.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   19.8   56.6
+ Rturn=   56.99 fm: match CRCWFN to zero at   52.49 fm., in partition 1
+ Reaction Xsec   247.0-/47 @ 1 =   0.104/, Out:   0.000#   0.102/   0.000f
+
+ Total SPIN, PARITY =   248.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   19.8   56.8
+ Rturn=   57.20 fm: match CRCWFN to zero at   52.70 fm., in partition 1
+ Reaction Xsec   248.0+/48 @ 1 =   0.097/, Out:   0.000#   0.095/   0.000f
+
+ Total SPIN, PARITY =   249.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   19.9   57.0
+ Rturn=   57.41 fm: match CRCWFN to zero at   52.91 fm., in partition 1
+ Reaction Xsec   249.0-/49 @ 1 =   0.093/, Out:   0.000#   0.091/   0.000f
+
+ Total SPIN, PARITY =   250.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   20.0   57.2
+ Rturn=   57.62 fm: match CRCWFN to zero at   53.12 fm., in partition 1
+ Reaction Xsec   250.0+/50 @ 1 =   0.088/, Out:   0.000#   0.087/   0.000f
+
+ Total SPIN, PARITY =   251.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   20.1   57.4
+ Rturn=   57.83 fm: match CRCWFN to zero at   53.33 fm., in partition 1
+ Reaction Xsec   251.0-/51 @ 1 =   0.082/, Out:   0.000#   0.081/   0.000f
+
+ Total SPIN, PARITY =   252.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   20.2   57.6
+ Rturn=   58.04 fm: match CRCWFN to zero at   53.54 fm., in partition 1
+ Reaction Xsec   252.0+/52 @ 1 =   0.078/, Out:   0.000#   0.077/   0.000f
+
+ Total SPIN, PARITY =   253.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   20.2   57.8
+ Rturn=   58.25 fm: match CRCWFN to zero at   53.75 fm., in partition 1
+ Reaction Xsec   253.0-/53 @ 1 =   0.075/, Out:   0.000#   0.074/   0.000f
+
+ Total SPIN, PARITY =   254.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   20.3   58.0
+ Rturn=   58.46 fm: match CRCWFN to zero at   53.96 fm., in partition 1
+ Reaction Xsec   254.0+/54 @ 1 =   0.070/, Out:   0.000#   0.069/   0.000f
+
+ Total SPIN, PARITY =   255.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   20.4   58.3
+ Rturn=   58.67 fm: match CRCWFN to zero at   54.17 fm., in partition 1
+ Reaction Xsec   255.0-/55 @ 1 =   0.065/, Out:   0.000#   0.064/   0.000f
+
+ Total SPIN, PARITY =   256.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   20.5   58.5
+ Rturn=   58.88 fm: match CRCWFN to zero at   54.38 fm., in partition 1
+ Reaction Xsec   256.0+/56 @ 1 =   0.063/, Out:   0.000#   0.062/   0.000f
+
+ Total SPIN, PARITY =   257.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   20.6   58.7
+ Rturn=   59.09 fm: match CRCWFN to zero at   54.59 fm., in partition 1
+ Reaction Xsec   257.0-/57 @ 1 =   0.060/, Out:   0.000#   0.059/   0.000f
+
+ Total SPIN, PARITY =   258.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   20.6   58.9
+ Rturn=   59.30 fm: match CRCWFN to zero at   54.80 fm., in partition 1
+ Reaction Xsec   258.0+/58 @ 1 =   0.056/, Out:   0.000#   0.055/   0.000f
+
+ Total SPIN, PARITY =   259.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   20.7   59.1
+ Rturn=   59.51 fm: match CRCWFN to zero at   55.01 fm., in partition 1
+ Reaction Xsec   259.0-/59 @ 1 =   0.053/, Out:   0.000#   0.052/   0.000f
+
+ Total SPIN, PARITY =   260.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   20.8   59.3
+ Rturn=   59.72 fm: match CRCWFN to zero at   55.22 fm., in partition 1
+ Reaction Xsec   260.0+/60 @ 1 =   0.051/, Out:   0.000#   0.050/   0.000f
+
+ Total SPIN, PARITY =   261.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   20.9   59.5
+ Rturn=   59.93 fm: match CRCWFN to zero at   55.43 fm., in partition 1
+ Reaction Xsec   261.0-/61 @ 1 =   0.048/, Out:   0.000#   0.047/   0.000f
+
+ Total SPIN, PARITY =   262.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   21.0   59.7
+ Rturn=   60.14 fm: match CRCWFN to zero at   55.64 fm., in partition 1
+ Reaction Xsec   262.0+/62 @ 1 =   0.045/, Out:   0.000#   0.044/   0.000f
+
+ Total SPIN, PARITY =   263.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   21.0   59.9
+ Rturn=   60.35 fm: match CRCWFN to zero at   55.85 fm., in partition 1
+ Reaction Xsec   263.0-/63 @ 1 =   0.043/, Out:   0.000#   0.042/   0.000f
+
+ Total SPIN, PARITY =   264.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   21.1   60.1
+ Rturn=   60.56 fm: match CRCWFN to zero at   56.06 fm., in partition 1
+ Reaction Xsec   264.0+/64 @ 1 =   0.041/, Out:   0.000#   0.040/   0.000f
+
+ Total SPIN, PARITY =   265.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   21.2   60.4
+ Rturn=   60.77 fm: match CRCWFN to zero at   56.27 fm., in partition 1
+ Reaction Xsec   265.0-/65 @ 1 =   0.038/, Out:   0.000#   0.037/   0.000f
+
+ Total SPIN, PARITY =   266.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   21.2   60.6
+ Rturn=   60.98 fm: match CRCWFN to zero at   56.48 fm., in partition 1
+ Reaction Xsec   266.0+/66 @ 1 =   0.037/, Out:   0.000#   0.036/   0.000f
+
+ Total SPIN, PARITY =   267.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   21.4   60.8
+ Rturn=   61.19 fm: match CRCWFN to zero at   56.69 fm., in partition 1
+ Reaction Xsec   267.0-/67 @ 1 =   0.036/, Out:   0.000#   0.035/   0.000f
+
+ Total SPIN, PARITY =   268.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   21.4   61.0
+ Rturn=   61.40 fm: match CRCWFN to zero at   56.90 fm., in partition 1
+ Reaction Xsec   268.0+/68 @ 1 =   0.034/, Out:   0.000#   0.033/   0.000f
+
+ Total SPIN, PARITY =   269.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   21.5   61.2
+ Rturn=   61.61 fm: match CRCWFN to zero at   57.11 fm., in partition 1
+ Reaction Xsec   269.0-/69 @ 1 =   0.032/, Out:   0.000#   0.031/   0.000f
+
+ Total SPIN, PARITY =   270.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   21.6   61.4
+ Rturn=   61.82 fm: match CRCWFN to zero at   57.32 fm., in partition 1
+ Reaction Xsec   270.0+/70 @ 1 =   0.031/, Out:   0.000#   0.030/   0.000f
+
+ Total SPIN, PARITY =   271.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   21.7   61.6
+ Rturn=   62.03 fm: match CRCWFN to zero at   57.53 fm., in partition 1
+ Reaction Xsec   271.0-/71 @ 1 =   0.030/, Out:   0.000#   0.029/   0.000f
+
+ Total SPIN, PARITY =   272.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   21.8   61.8
+ Rturn=   62.24 fm: match CRCWFN to zero at   57.74 fm., in partition 1
+ Reaction Xsec   272.0+/72 @ 1 =   0.028/, Out:   0.000#   0.027/   0.000f
+
+ Total SPIN, PARITY =   273.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   21.8   62.0
+ Rturn=   62.45 fm: match CRCWFN to zero at   57.95 fm., in partition 1
+ Reaction Xsec   273.0-/73 @ 1 =   0.027/, Out:   0.000#   0.027/   0.000f
+
+ Total SPIN, PARITY =   274.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   21.9   62.2
+ Rturn=   62.66 fm: match CRCWFN to zero at   58.16 fm., in partition 1
+ Reaction Xsec   274.0+/74 @ 1 =   0.027/, Out:   0.000#   0.026/   0.000f
+
+ Total SPIN, PARITY =   275.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   22.0   62.5
+ Rturn=   62.87 fm: match CRCWFN to zero at   58.37 fm., in partition 1
+ Reaction Xsec   275.0-/75 @ 1 =   0.026/, Out:   0.000#   0.025/   0.000f
+
+ Total SPIN, PARITY =   276.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   22.1   62.7
+ Rturn=   63.08 fm: match CRCWFN to zero at   58.58 fm., in partition 1
+ Reaction Xsec   276.0+/76 @ 1 =   0.024/, Out:   0.000#   0.024/   0.000f
+
+ Total SPIN, PARITY =   277.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   22.2   62.9
+ Rturn=   63.29 fm: match CRCWFN to zero at   58.79 fm., in partition 1
+ Reaction Xsec   277.0-/77 @ 1 =   0.024/, Out:   0.000#   0.024/   0.000f
+
+ Total SPIN, PARITY =   278.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   22.2   63.1
+ Rturn=   63.50 fm: match CRCWFN to zero at   59.00 fm., in partition 1
+ Reaction Xsec   278.0+/78 @ 1 =   0.024/, Out:   0.000#   0.024/   0.000f
+
+ Total SPIN, PARITY =   279.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   22.3   63.3
+ Rturn=   63.71 fm: match CRCWFN to zero at   59.21 fm., in partition 1
+ Reaction Xsec   279.0-/79 @ 1 =   0.023/, Out:   0.000#   0.023/   0.000f
+
+ Total SPIN, PARITY =   280.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   22.4   63.5
+ Rturn=   63.92 fm: match CRCWFN to zero at   59.42 fm., in partition 1
+ Reaction Xsec   280.0+/80 @ 1 =   0.023/, Out:   0.000#   0.022/   0.000f
+
+ Total SPIN, PARITY =   281.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   22.5   63.7
+ Rturn=   64.13 fm: match CRCWFN to zero at   59.63 fm., in partition 1
+ Reaction Xsec   281.0-/81 @ 1 =   0.023/, Out:   0.000#   0.023/   0.000f
+
+ Total SPIN, PARITY =   282.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   22.6   63.9
+ Rturn=   64.34 fm: match CRCWFN to zero at   59.84 fm., in partition 1
+ Reaction Xsec   282.0+/82 @ 1 =   0.023/, Out:   0.000#   0.023/   0.000f
+
+ Total SPIN, PARITY =   283.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   22.6   64.1
+ Rturn=   64.55 fm: match CRCWFN to zero at   60.05 fm., in partition 1
+ Reaction Xsec   283.0-/83 @ 1 =   0.022/, Out:   0.000#   0.021/   0.000f
+
+ Total SPIN, PARITY =   284.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   22.7   64.3
+ Rturn=   64.76 fm: match CRCWFN to zero at   60.26 fm., in partition 1
+ Reaction Xsec   284.0+/84 @ 1 =   0.022/, Out:   0.000#   0.022/   0.000f
+
+ Total SPIN, PARITY =   285.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   22.8   64.6
+ Rturn=   64.97 fm: match CRCWFN to zero at   60.47 fm., in partition 1
+ Reaction Xsec   285.0-/85 @ 1 =   0.023/, Out:   0.000#   0.023/   0.000f
+
+ Total SPIN, PARITY =   286.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   22.9   64.8
+ Rturn=   65.18 fm: match CRCWFN to zero at   60.68 fm., in partition 1
+ Reaction Xsec   286.0+/86 @ 1 =   0.022/, Out:   0.000#   0.022/   0.000f
+
+ Total SPIN, PARITY =   287.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   23.0   65.0
+ Rturn=   65.39 fm: match CRCWFN to zero at   60.89 fm., in partition 1
+ Reaction Xsec   287.0-/87 @ 1 =   0.022/, Out:   0.000#   0.021/   0.000f
+
+ Total SPIN, PARITY =   288.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   23.0   65.2
+ Rturn=   65.60 fm: match CRCWFN to zero at   61.10 fm., in partition 1
+ Reaction Xsec   288.0+/88 @ 1 =   0.023/, Out:   0.000#   0.023/  -0.000f
+
+ Total SPIN, PARITY =   289.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   23.1   65.4
+ Rturn=   65.81 fm: match CRCWFN to zero at   61.31 fm., in partition 1
+ Reaction Xsec   289.0-/89 @ 1 =   0.024/, Out:   0.000#   0.024/  -0.000f
+
+ Total SPIN, PARITY =   290.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   23.2   65.6
+ Rturn=   66.02 fm: match CRCWFN to zero at   61.52 fm., in partition 1
+ Reaction Xsec   290.0+/90 @ 1 =   0.023/, Out:   0.000#   0.023/  -0.000f
+
+ Total SPIN, PARITY =   291.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   23.2   65.8
+ Rturn=   66.23 fm: match CRCWFN to zero at   61.73 fm., in partition 1
+ Reaction Xsec   291.0-/91 @ 1 =   0.022/, Out:   0.000#   0.022/  -0.000f
+
+ Total SPIN, PARITY =   292.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   23.4   66.0
+ Rturn=   66.44 fm: match CRCWFN to zero at   61.94 fm., in partition 1
+ Reaction Xsec   292.0+/92 @ 1 =   0.024/, Out:   0.000#   0.024/  -0.000f
+
+ Total SPIN, PARITY =   293.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   23.4   66.2
+ Rturn=   66.65 fm: match CRCWFN to zero at   62.15 fm., in partition 1
+ Reaction Xsec   293.0-/93 @ 1 =   0.025/, Out:   0.000#   0.025/  -0.000f
+
+ Total SPIN, PARITY =   294.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   23.5   66.4
+ Rturn=   66.86 fm: match CRCWFN to zero at   62.36 fm., in partition 1
+ Reaction Xsec   294.0+/94 @ 1 =   0.024/, Out:   0.000#   0.024/  -0.000f
+
+ Total SPIN, PARITY =   295.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   23.6   66.7
+ Rturn=   67.07 fm: match CRCWFN to zero at   62.57 fm., in partition 1
+ Reaction Xsec   295.0-/95 @ 1 =   0.023/, Out:   0.000#   0.024/  -0.000f
+
+ Total SPIN, PARITY =   296.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   23.7   66.9
+ Rturn=   67.28 fm: match CRCWFN to zero at   62.78 fm., in partition 1
+ Reaction Xsec   296.0+/96 @ 1 =   0.025/, Out:   0.000#   0.026/  -0.000f
+
+ Total SPIN, PARITY =   297.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   23.8   67.1
+ Rturn=   67.49 fm: match CRCWFN to zero at   62.99 fm., in partition 1
+ Reaction Xsec   297.0-/97 @ 1 =   0.026/, Out:   0.000#   0.027/  -0.000f
+
+ Total SPIN, PARITY =   298.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   23.8   67.3
+ Rturn=   67.70 fm: match CRCWFN to zero at   63.20 fm., in partition 1
+ Reaction Xsec   298.0+/98 @ 1 =   0.025/, Out:   0.000#   0.026/  -0.000f
+
+ Total SPIN, PARITY =   299.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   23.9   67.5
+ Rturn=   67.91 fm: match CRCWFN to zero at   63.41 fm., in partition 1
+ Reaction Xsec   299.0-/99 @ 1 =   0.025/, Out:   0.000#   0.025/  -0.000f
+
+ Total SPIN, PARITY =   300.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   24.0   67.7
+ Rturn=   68.12 fm: match CRCWFN to zero at   63.62 fm., in partition 1
+ Reaction Xsec   300.0+/ 0 @ 1 =   0.027/, Out:   0.000#   0.027/  -0.000f
+
+ Total SPIN, PARITY =   301.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   24.1   67.9
+ Rturn=   68.33 fm: match CRCWFN to zero at   63.83 fm., in partition 1
+ Reaction Xsec   301.0-/ 1 @ 1 =   0.028/, Out:   0.000#   0.029/  -0.000f
+
+ Total SPIN, PARITY =   302.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   24.2   68.1
+ Rturn=   68.54 fm: match CRCWFN to zero at   64.04 fm., in partition 1
+ Reaction Xsec   302.0+/ 2 @ 1 =   0.027/, Out:   0.000#   0.028/  -0.000f
+
+ Total SPIN, PARITY =   303.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   24.2   68.3
+ Rturn=   68.75 fm: match CRCWFN to zero at   64.25 fm., in partition 1
+ Reaction Xsec   303.0-/ 3 @ 1 =   0.026/, Out:   0.000#   0.027/  -0.000f
+
+ Total SPIN, PARITY =   304.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   24.3   68.5
+ Rturn=   68.96 fm: match CRCWFN to zero at   64.46 fm., in partition 1
+ Reaction Xsec   304.0+/ 4 @ 1 =   0.028/, Out:   0.000#   0.029/  -0.000f
+
+ Total SPIN, PARITY =   305.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   24.4   68.8
+ Rturn=   69.17 fm: match CRCWFN to zero at   64.67 fm., in partition 1
+ Reaction Xsec   305.0-/ 5 @ 1 =   0.030/, Out:   0.000#   0.031/  -0.000f
+
+ Total SPIN, PARITY =   306.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   24.5   69.0
+ Rturn=   69.38 fm: match CRCWFN to zero at   64.88 fm., in partition 1
+ Reaction Xsec   306.0+/ 6 @ 1 =   0.029/, Out:   0.000#   0.030/  -0.000f
+
+ Total SPIN, PARITY =   307.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   24.6   69.2
+ Rturn=   69.59 fm: match CRCWFN to zero at   65.09 fm., in partition 1
+ Reaction Xsec   307.0-/ 7 @ 1 =   0.028/, Out:   0.000#   0.029/  -0.000f
+
+ Total SPIN, PARITY =   308.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   24.6   69.4
+ Rturn=   69.80 fm: match CRCWFN to zero at   65.30 fm., in partition 1
+ Reaction Xsec   308.0+/ 8 @ 1 =   0.030/, Out:   0.000#   0.031/  -0.000f
+
+ Total SPIN, PARITY =   309.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   24.7   69.6
+ Rturn=   70.01 fm: match CRCWFN to zero at   65.51 fm., in partition 1
+ Reaction Xsec   309.0-/ 9 @ 1 =   0.032/, Out:   0.000#   0.033/  -0.000f
+
+ Total SPIN, PARITY =   310.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   24.8   69.8
+ Rturn=   70.22 fm: match CRCWFN to zero at   65.72 fm., in partition 1
+ Reaction Xsec   310.0+/10 @ 1 =   0.031/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   311.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   24.9   70.0
+ Rturn=   70.43 fm: match CRCWFN to zero at   65.93 fm., in partition 1
+ Reaction Xsec   311.0-/11 @ 1 =   0.029/, Out:   0.000#   0.030/  -0.000f
+
+ Total SPIN, PARITY =   312.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   25.0   70.2
+ Rturn=   70.64 fm: match CRCWFN to zero at   66.14 fm., in partition 1
+ Reaction Xsec   312.0+/12 @ 1 =   0.031/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   313.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   25.0   70.4
+ Rturn=   70.85 fm: match CRCWFN to zero at   66.35 fm., in partition 1
+ Reaction Xsec   313.0-/13 @ 1 =   0.034/, Out:   0.000#   0.035/  -0.000f
+
+ Total SPIN, PARITY =   314.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   25.1   70.6
+ Rturn=   71.06 fm: match CRCWFN to zero at   66.56 fm., in partition 1
+ Reaction Xsec   314.0+/14 @ 1 =   0.033/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   315.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   25.2   70.9
+ Rturn=   71.27 fm: match CRCWFN to zero at   66.77 fm., in partition 1
+ Reaction Xsec   315.0-/15 @ 1 =   0.031/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   316.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   25.2   71.1
+ Rturn=   71.48 fm: match CRCWFN to zero at   66.98 fm., in partition 1
+ Reaction Xsec   316.0+/16 @ 1 =   0.032/, Out:   0.000#   0.033/  -0.000f
+
+ Total SPIN, PARITY =   317.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   25.4   71.3
+ Rturn=   71.69 fm: match CRCWFN to zero at   67.19 fm., in partition 1
+ Reaction Xsec   317.0-/17 @ 1 =   0.034/, Out:   0.000#   0.036/  -0.000f
+
+ Total SPIN, PARITY =   318.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   25.4   71.5
+ Rturn=   71.90 fm: match CRCWFN to zero at   67.40 fm., in partition 1
+ Reaction Xsec   318.0+/18 @ 1 =   0.035/, Out:   0.000#   0.036/  -0.000f
+
+ Total SPIN, PARITY =   319.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   25.5   71.7
+ Rturn=   72.11 fm: match CRCWFN to zero at   67.61 fm., in partition 1
+ Reaction Xsec   319.0-/19 @ 1 =   0.032/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   320.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   25.6   71.9
+ Rturn=   72.32 fm: match CRCWFN to zero at   67.82 fm., in partition 1
+ Reaction Xsec   320.0+/20 @ 1 =   0.032/, Out:   0.000#   0.033/  -0.000f
+
+ Total SPIN, PARITY =   321.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   25.7   72.1
+ Rturn=   72.53 fm: match CRCWFN to zero at   68.03 fm., in partition 1
+ Reaction Xsec   321.0-/21 @ 1 =   0.034/, Out:   0.000#   0.036/  -0.000f
+
+ Total SPIN, PARITY =   322.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   25.8   72.3
+ Rturn=   72.74 fm: match CRCWFN to zero at   68.24 fm., in partition 1
+ Reaction Xsec   322.0+/22 @ 1 =   0.036/, Out:   0.000#   0.037/  -0.000f
+
+ Total SPIN, PARITY =   323.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   25.8   72.5
+ Rturn=   72.95 fm: match CRCWFN to zero at   68.45 fm., in partition 1
+ Reaction Xsec   323.0-/23 @ 1 =   0.034/, Out:   0.000#   0.035/  -0.000f
+
+ Total SPIN, PARITY =   324.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   25.9   72.7
+ Rturn=   73.16 fm: match CRCWFN to zero at   68.66 fm., in partition 1
+ Reaction Xsec   324.0+/24 @ 1 =   0.032/, Out:   0.000#   0.033/  -0.000f
+
+ Total SPIN, PARITY =   325.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   26.0   73.0
+ Rturn=   73.37 fm: match CRCWFN to zero at   68.87 fm., in partition 1
+ Reaction Xsec   325.0-/25 @ 1 =   0.033/, Out:   0.000#   0.035/  -0.000f
+
+ Total SPIN, PARITY =   326.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   26.1   73.2
+ Rturn=   73.58 fm: match CRCWFN to zero at   69.08 fm., in partition 1
+ Reaction Xsec   326.0+/26 @ 1 =   0.036/, Out:   0.000#   0.037/  -0.000f
+
+ Total SPIN, PARITY =   327.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   26.2   73.4
+ Rturn=   73.80 fm: match CRCWFN to zero at   69.30 fm., in partition 1
+ Reaction Xsec   327.0-/27 @ 1 =   0.036/, Out:   0.000#   0.037/  -0.000f
+
+ Total SPIN, PARITY =   328.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   26.2   73.6
+ Rturn=   74.01 fm: match CRCWFN to zero at   69.51 fm., in partition 1
+ Reaction Xsec   328.0+/28 @ 1 =   0.033/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   329.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   26.3   73.8
+ Rturn=   74.22 fm: match CRCWFN to zero at   69.72 fm., in partition 1
+ Reaction Xsec   329.0-/29 @ 1 =   0.032/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   330.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   26.4   74.0
+ Rturn=   74.43 fm: match CRCWFN to zero at   69.93 fm., in partition 1
+ Reaction Xsec   330.0+/30 @ 1 =   0.035/, Out:   0.000#   0.036/  -0.000f
+
+ Total SPIN, PARITY =   331.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   26.5   74.2
+ Rturn=   74.64 fm: match CRCWFN to zero at   70.14 fm., in partition 1
+ Reaction Xsec   331.0-/31 @ 1 =   0.036/, Out:   0.000#   0.038/  -0.000f
+
+ Total SPIN, PARITY =   332.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   26.6   74.4
+ Rturn=   74.85 fm: match CRCWFN to zero at   70.35 fm., in partition 1
+ Reaction Xsec   332.0+/32 @ 1 =   0.034/, Out:   0.000#   0.035/  -0.000f
+
+ Total SPIN, PARITY =   333.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   26.6   74.6
+ Rturn=   75.06 fm: match CRCWFN to zero at   70.56 fm., in partition 1
+ Reaction Xsec   333.0-/33 @ 1 =   0.032/, Out:   0.000#   0.033/  -0.000f
+
+ Total SPIN, PARITY =   334.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   26.7   74.8
+ Rturn=   75.27 fm: match CRCWFN to zero at   70.77 fm., in partition 1
+ Reaction Xsec   334.0+/34 @ 1 =   0.033/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   335.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   26.8   75.1
+ Rturn=   75.48 fm: match CRCWFN to zero at   70.98 fm., in partition 1
+ Reaction Xsec   335.0-/35 @ 1 =   0.036/, Out:   0.000#   0.037/  -0.000f
+
+ Total SPIN, PARITY =   336.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   26.9   75.3
+ Rturn=   75.69 fm: match CRCWFN to zero at   71.19 fm., in partition 1
+ Reaction Xsec   336.0+/36 @ 1 =   0.036/, Out:   0.000#   0.036/  -0.000f
+
+ Total SPIN, PARITY =   337.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   27.0   75.5
+ Rturn=   75.90 fm: match CRCWFN to zero at   71.40 fm., in partition 1
+ Reaction Xsec   337.0-/37 @ 1 =   0.033/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   338.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   27.0   75.7
+ Rturn=   76.11 fm: match CRCWFN to zero at   71.61 fm., in partition 1
+ Reaction Xsec   338.0+/38 @ 1 =   0.031/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   339.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   27.1   75.9
+ Rturn=   76.32 fm: match CRCWFN to zero at   71.82 fm., in partition 1
+ Reaction Xsec   339.0-/39 @ 1 =   0.033/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   340.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   27.2   76.1
+ Rturn=   76.53 fm: match CRCWFN to zero at   72.03 fm., in partition 1
+ Reaction Xsec   340.0+/40 @ 1 =   0.035/, Out:   0.000#   0.036/  -0.000f
+
+ Total SPIN, PARITY =   341.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   27.2   76.3
+ Rturn=   76.74 fm: match CRCWFN to zero at   72.24 fm., in partition 1
+ Reaction Xsec   341.0-/41 @ 1 =   0.034/, Out:   0.000#   0.035/  -0.000f
+
+ Total SPIN, PARITY =   342.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   27.4   76.5
+ Rturn=   76.95 fm: match CRCWFN to zero at   72.45 fm., in partition 1
+ Reaction Xsec   342.0+/42 @ 1 =   0.031/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   343.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   27.4   76.7
+ Rturn=   77.16 fm: match CRCWFN to zero at   72.66 fm., in partition 1
+ Reaction Xsec   343.0-/43 @ 1 =   0.031/, Out:   0.000#   0.031/  -0.000f
+
+ Total SPIN, PARITY =   344.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   27.5   76.9
+ Rturn=   77.37 fm: match CRCWFN to zero at   72.87 fm., in partition 1
+ Reaction Xsec   344.0+/44 @ 1 =   0.033/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   345.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   27.6   77.2
+ Rturn=   77.58 fm: match CRCWFN to zero at   73.08 fm., in partition 1
+ Reaction Xsec   345.0-/45 @ 1 =   0.035/, Out:   0.000#   0.035/  -0.000f
+
+ Total SPIN, PARITY =   346.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   27.7   77.4
+ Rturn=   77.79 fm: match CRCWFN to zero at   73.29 fm., in partition 1
+ Reaction Xsec   346.0+/46 @ 1 =   0.033/, Out:   0.000#   0.033/  -0.000f
+
+ Total SPIN, PARITY =   347.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   27.8   77.6
+ Rturn=   78.00 fm: match CRCWFN to zero at   73.50 fm., in partition 1
+ Reaction Xsec   347.0-/47 @ 1 =   0.030/, Out:   0.000#   0.031/  -0.000f
+
+ Total SPIN, PARITY =   348.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   27.8   77.8
+ Rturn=   78.21 fm: match CRCWFN to zero at   73.71 fm., in partition 1
+ Reaction Xsec   348.0+/48 @ 1 =   0.030/, Out:   0.000#   0.031/  -0.000f
+
+ Total SPIN, PARITY =   349.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   27.9   78.0
+ Rturn=   78.42 fm: match CRCWFN to zero at   73.92 fm., in partition 1
+ Reaction Xsec   349.0-/49 @ 1 =   0.033/, Out:   0.000#   0.033/  -0.000f
+
+ Total SPIN, PARITY =   350.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   28.0   78.2
+ Rturn=   78.63 fm: match CRCWFN to zero at   74.13 fm., in partition 1
+ Reaction Xsec   350.0+/50 @ 1 =   0.034/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   351.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   28.1   78.4
+ Rturn=   78.84 fm: match CRCWFN to zero at   74.34 fm., in partition 1
+ Reaction Xsec   351.0-/51 @ 1 =   0.032/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   352.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   28.2   78.6
+ Rturn=   79.05 fm: match CRCWFN to zero at   74.55 fm., in partition 1
+ Reaction Xsec   352.0+/52 @ 1 =   0.029/, Out:   0.000#   0.030/  -0.000f
+
+ Total SPIN, PARITY =   353.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   28.2   78.8
+ Rturn=   79.26 fm: match CRCWFN to zero at   74.76 fm., in partition 1
+ Reaction Xsec   353.0-/53 @ 1 =   0.030/, Out:   0.000#   0.030/  -0.000f
+
+ Total SPIN, PARITY =   354.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   28.3   79.0
+ Rturn=   79.47 fm: match CRCWFN to zero at   74.97 fm., in partition 1
+ Reaction Xsec   354.0+/54 @ 1 =   0.032/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   355.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   28.4   79.3
+ Rturn=   79.68 fm: match CRCWFN to zero at   75.18 fm., in partition 1
+ Reaction Xsec   355.0-/55 @ 1 =   0.033/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   356.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   28.5   79.5
+ Rturn=   79.89 fm: match CRCWFN to zero at   75.39 fm., in partition 1
+ Reaction Xsec   356.0+/56 @ 1 =   0.031/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   357.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   28.6   79.7
+ Rturn=   80.10 fm: match CRCWFN to zero at   75.60 fm., in partition 1
+ Reaction Xsec   357.0-/57 @ 1 =   0.029/, Out:   0.000#   0.029/  -0.000f
+
+ Total SPIN, PARITY =   358.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   28.6   79.9
+ Rturn=   80.31 fm: match CRCWFN to zero at   75.81 fm., in partition 1
+ Reaction Xsec   358.0+/58 @ 1 =   0.029/, Out:   0.000#   0.030/  -0.000f
+
+ Total SPIN, PARITY =   359.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   28.7   80.1
+ Rturn=   80.52 fm: match CRCWFN to zero at   76.02 fm., in partition 1
+ Reaction Xsec   359.0-/59 @ 1 =   0.032/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   360.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   28.8   80.3
+ Rturn=   80.73 fm: match CRCWFN to zero at   76.23 fm., in partition 1
+ Reaction Xsec   360.0+/60 @ 1 =   0.033/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   361.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   28.9   80.5
+ Rturn=   80.94 fm: match CRCWFN to zero at   76.44 fm., in partition 1
+ Reaction Xsec   361.0-/61 @ 1 =   0.032/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   362.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   29.0   80.7
+ Rturn=   81.15 fm: match CRCWFN to zero at   76.65 fm., in partition 1
+ Reaction Xsec   362.0+/62 @ 1 =   0.030/, Out:   0.000#   0.030/  -0.000f
+
+ Total SPIN, PARITY =   363.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   29.0   80.9
+ Rturn=   81.36 fm: match CRCWFN to zero at   76.86 fm., in partition 1
+ Reaction Xsec   363.0-/63 @ 1 =   0.030/, Out:   0.000#   0.030/  -0.000f
+
+ Total SPIN, PARITY =   364.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   29.1   81.2
+ Rturn=   81.57 fm: match CRCWFN to zero at   77.07 fm., in partition 1
+ Reaction Xsec   364.0+/64 @ 1 =   0.032/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   365.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   29.2   81.4
+ Rturn=   81.78 fm: match CRCWFN to zero at   77.28 fm., in partition 1
+ Reaction Xsec   365.0-/65 @ 1 =   0.035/, Out:   0.000#   0.035/  -0.000f
+
+ Total SPIN, PARITY =   366.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   29.2   81.6
+ Rturn=   81.99 fm: match CRCWFN to zero at   77.49 fm., in partition 1
+ Reaction Xsec   366.0+/66 @ 1 =   0.034/, Out:   0.000#   0.034/  -0.000f
+
+ Total SPIN, PARITY =   367.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   29.4   81.8
+ Rturn=   82.20 fm: match CRCWFN to zero at   77.70 fm., in partition 1
+ Reaction Xsec   367.0-/67 @ 1 =   0.032/, Out:   0.000#   0.032/  -0.000f
+
+ Total SPIN, PARITY =   368.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   29.4   82.0
+ Rturn=   82.41 fm: match CRCWFN to zero at   77.91 fm., in partition 1
+ Reaction Xsec   368.0+/68 @ 1 =   0.031/, Out:   0.000#   0.031/  -0.000f
+
+ Total SPIN, PARITY =   369.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   29.5   82.2
+ Rturn=   82.62 fm: match CRCWFN to zero at   78.12 fm., in partition 1
+ Reaction Xsec   369.0-/69 @ 1 =   0.033/, Out:   0.000#   0.033/  -0.000f
+
+ Total SPIN, PARITY =   370.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   29.6   82.4
+ Rturn=   82.83 fm: match CRCWFN to zero at   78.33 fm., in partition 1
+ Reaction Xsec   370.0+/70 @ 1 =   0.036/, Out:   0.000#   0.036/  -0.000f
+
+ Total SPIN, PARITY =   371.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   29.7   82.6
+ Rturn=   83.04 fm: match CRCWFN to zero at   78.54 fm., in partition 1
+ Reaction Xsec   371.0-/71 @ 1 =   0.037/, Out:   0.000#   0.037/  -0.000f
+
+ Total SPIN, PARITY =   372.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   29.8   82.8
+ Rturn=   83.25 fm: match CRCWFN to zero at   78.75 fm., in partition 1
+ Reaction Xsec   372.0+/72 @ 1 =   0.036/, Out:   0.000#   0.036/  -0.000f
+
+ Total SPIN, PARITY =   373.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   29.8   83.0
+ Rturn=   83.46 fm: match CRCWFN to zero at   78.96 fm., in partition 1
+ Reaction Xsec   373.0-/73 @ 1 =   0.033/, Out:   0.000#   0.033/  -0.000f
+
+ Total SPIN, PARITY =   374.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   29.9   83.3
+ Rturn=   83.67 fm: match CRCWFN to zero at   79.17 fm., in partition 1
+ Reaction Xsec   374.0+/74 @ 1 =   0.033/, Out:   0.000#   0.033/  -0.000f
+
+ Total SPIN, PARITY =   375.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   30.0   83.5
+ Rturn=   83.88 fm: match CRCWFN to zero at   79.38 fm., in partition 1
+ Reaction Xsec   375.0-/75 @ 1 =   0.037/, Out:   0.000#   0.037/  -0.000f
+
+ Total SPIN, PARITY =   376.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   30.1   83.7
+ Rturn=   84.09 fm: match CRCWFN to zero at   79.59 fm., in partition 1
+ Reaction Xsec   376.0+/76 @ 1 =   0.040/, Out:   0.000#   0.040/  -0.000f
+
+ Total SPIN, PARITY =   377.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   30.2   83.9
+ Rturn=   84.31 fm: match CRCWFN to zero at   79.81 fm., in partition 1
+ Reaction Xsec   377.0-/77 @ 1 =   0.041/, Out:   0.000#   0.041/  -0.000f
+
+ Total SPIN, PARITY =   378.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   30.2   84.1
+ Rturn=   84.52 fm: match CRCWFN to zero at   80.02 fm., in partition 1
+ Reaction Xsec   378.0+/78 @ 1 =   0.038/, Out:   0.000#   0.038/  -0.000f
+
+ Total SPIN, PARITY =   379.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   30.3   84.3
+ Rturn=   84.73 fm: match CRCWFN to zero at   80.23 fm., in partition 1
+ Reaction Xsec   379.0-/79 @ 1 =   0.036/, Out:   0.000#   0.036/  -0.000f
+
+ Total SPIN, PARITY =   380.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   30.4   84.5
+ Rturn=   84.94 fm: match CRCWFN to zero at   80.44 fm., in partition 1
+ Reaction Xsec   380.0+/80 @ 1 =   0.036/, Out:   0.000#   0.036/  -0.000f
+
+ Total SPIN, PARITY =   381.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   30.5   84.7
+ Rturn=   85.15 fm: match CRCWFN to zero at   80.65 fm., in partition 1
+ Reaction Xsec   381.0-/81 @ 1 =   0.040/, Out:   0.000#   0.040/  -0.000f
+
+ Total SPIN, PARITY =   382.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   30.6   84.9
+ Rturn=   85.36 fm: match CRCWFN to zero at   80.86 fm., in partition 1
+ Reaction Xsec   382.0+/82 @ 1 =   0.044/, Out:   0.000#   0.044/  -0.000f
+
+ Total SPIN, PARITY =   383.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   30.6   85.1
+ Rturn=   85.57 fm: match CRCWFN to zero at   81.07 fm., in partition 1
+ Reaction Xsec   383.0-/83 @ 1 =   0.044/, Out:   0.000#   0.044/  -0.000f
+
+ Total SPIN, PARITY =   384.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   30.7   85.4
+ Rturn=   85.78 fm: match CRCWFN to zero at   81.28 fm., in partition 1
+ Reaction Xsec   384.0+/84 @ 1 =   0.042/, Out:   0.000#   0.042/  -0.000f
+
+ Total SPIN, PARITY =   385.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   30.8   85.6
+ Rturn=   85.99 fm: match CRCWFN to zero at   81.49 fm., in partition 1
+ Reaction Xsec   385.0-/85 @ 1 =   0.038/, Out:   0.000#   0.038/  -0.000f
+
+ Total SPIN, PARITY =   386.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   30.9   85.8
+ Rturn=   86.20 fm: match CRCWFN to zero at   81.70 fm., in partition 1
+ Reaction Xsec   386.0+/86 @ 1 =   0.038/, Out:   0.000#   0.038/  -0.000f
+
+ Total SPIN, PARITY =   387.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   31.0   86.0
+ Rturn=   86.41 fm: match CRCWFN to zero at   81.91 fm., in partition 1
+ Reaction Xsec   387.0-/87 @ 1 =   0.042/, Out:   0.000#   0.042/  -0.000f
+
+ Total SPIN, PARITY =   388.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   31.0   86.2
+ Rturn=   86.62 fm: match CRCWFN to zero at   82.12 fm., in partition 1
+ Reaction Xsec   388.0+/88 @ 1 =   0.046/, Out:   0.000#   0.046/  -0.000f
+
+ Total SPIN, PARITY =   389.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   31.1   86.4
+ Rturn=   86.83 fm: match CRCWFN to zero at   82.33 fm., in partition 1
+ Reaction Xsec   389.0-/89 @ 1 =   0.048/, Out:   0.000#   0.048/  -0.000f
+
+ Total SPIN, PARITY =   390.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   31.2   86.6
+ Rturn=   87.04 fm: match CRCWFN to zero at   82.54 fm., in partition 1
+ Reaction Xsec   390.0+/90 @ 1 =   0.046/, Out:   0.000#   0.046/  -0.000f
+
+ Total SPIN, PARITY =   391.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   31.2   86.8
+ Rturn=   87.25 fm: match CRCWFN to zero at   82.75 fm., in partition 1
+ Reaction Xsec   391.0-/91 @ 1 =   0.042/, Out:   0.000#   0.042/  -0.000f
+
+ Total SPIN, PARITY =   392.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   31.4   87.0
+ Rturn=   87.46 fm: match CRCWFN to zero at   82.96 fm., in partition 1
+ Reaction Xsec   392.0+/92 @ 1 =   0.039/, Out:   0.000#   0.039/  -0.000f
+
+ Total SPIN, PARITY =   393.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   31.4   87.2
+ Rturn=   87.67 fm: match CRCWFN to zero at   83.17 fm., in partition 1
+ Reaction Xsec   393.0-/93 @ 1 =   0.040/, Out:   0.000#   0.040/  -0.000f
+
+ Total SPIN, PARITY =   394.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   31.5   87.5
+ Rturn=   87.88 fm: match CRCWFN to zero at   83.38 fm., in partition 1
+ Reaction Xsec   394.0+/94 @ 1 =   0.044/, Out:   0.000#   0.044/   0.000f
+
+ Total SPIN, PARITY =   395.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   31.6   87.7
+ Rturn=   88.09 fm: match CRCWFN to zero at   83.59 fm., in partition 1
+ Reaction Xsec   395.0-/95 @ 1 =   0.048/, Out:   0.000#   0.048/  -0.000f
+
+ Total SPIN, PARITY =   396.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   31.7   87.9
+ Rturn=   88.30 fm: match CRCWFN to zero at   83.80 fm., in partition 1
+ Reaction Xsec   396.0+/96 @ 1 =   0.049/, Out:   0.000#   0.049/   0.000f
+
+ Total SPIN, PARITY =   397.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   31.8   88.1
+ Rturn=   88.51 fm: match CRCWFN to zero at   84.01 fm., in partition 1
+ Reaction Xsec   397.0-/97 @ 1 =   0.046/, Out:   0.000#   0.046/   0.000f
+
+ Total SPIN, PARITY =   398.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   31.8   88.3
+ Rturn=   88.72 fm: match CRCWFN to zero at   84.22 fm., in partition 1
+ Reaction Xsec   398.0+/98 @ 1 =   0.041/, Out:   0.000#   0.041/   0.000f
+
+ Total SPIN, PARITY =   399.0 -,      4 chs,      4 cc.  Rmin & Coul turning =   31.9   88.5
+ Rturn=   88.93 fm: match CRCWFN to zero at   84.43 fm., in partition 1
+ Reaction Xsec   399.0-/99 @ 1 =   0.038/, Out:   0.000#   0.038/   0.000f
+
+ Total SPIN, PARITY =   400.0 +,      4 chs,      4 cc.  Rmin & Coul turning =   32.0   88.7
+ Rturn=   89.14 fm: match CRCWFN to zero at   84.64 fm., in partition 1
+ Reaction Xsec   400.0+/ 0 @ 1 =   0.039/, Out:   0.000#   0.039/   0.000f
+ Finished all CC sets @   0.118322000    
+0CUMULATIVE REACTION cross section                 =  437.08684  <L> =    14.26  <L**2> =    374.7
+0CUMULATIVE outgoing cross sections in partition 1 :    0.00000   50.79113
+0Cumulative ABSORBTION by Imaginary Potentials     =  386.29572  <L> =    11.00  <L**2> =    140.4
+   Fusion for specific 16-O     M-states :  386.295716
+0CUMULATIVE OUTGOING cross section                 =   50.79113
+ To convert to S-factors (MeV.mb = keV.b),  multiply by  1.3903E+57
+
+
+ CROSS SECTIONS FOR OUTGOING 16-O     & NI-58    in state #   1 with spins & parities 0.0  + &  0.0  +;  0
+
+     2.00 deg.: X-S =   4.9537E+08 mb/sr,
++                                         /R =   1.0000E+00
+     4.00 deg.: X-S =   3.0980E+07 mb/sr,
++                                         /R =   1.0000E+00
+     6.00 deg.: X-S =   6.1258E+06 mb/sr,
++                                         /R =   1.0000E+00
+     8.00 deg.: X-S =   1.9410E+06 mb/sr,
++                                         /R =   1.0000E+00
+    10.00 deg.: X-S =   7.9641E+05 mb/sr,
++                                         /R =   9.9993E-01
+    12.00 deg.: X-S =   3.8508E+05 mb/sr,
++                                         /R =   1.0003E+00
+    14.00 deg.: X-S =   2.0836E+05 mb/sr,
++                                         /R =   1.0001E+00
+    16.00 deg.: X-S =   1.2244E+05 mb/sr,
++                                         /R =   9.9955E-01
+    18.00 deg.: X-S =   7.6745E+04 mb/sr,
++                                         /R =   1.0001E+00
+    20.00 deg.: X-S =   5.0560E+04 mb/sr,
++                                         /R =   1.0003E+00
+    22.00 deg.: X-S =   3.4649E+04 mb/sr,
++                                         /R =   9.9937E-01
+    24.00 deg.: X-S =   2.4584E+04 mb/sr,
++                                         /R =   9.9958E-01
+    26.00 deg.: X-S =   1.7964E+04 mb/sr,
++                                         /R =   1.0009E+00
+    28.00 deg.: X-S =   1.3369E+04 mb/sr,
++                                         /R =   9.9641E-01
+    30.00 deg.: X-S =   1.0265E+04 mb/sr,
++                                         /R =   1.0023E+00
+    32.00 deg.: X-S =  7967.231414 mb/sr,
++                                         /R =   1.0007E+00
+    34.00 deg.: X-S =  6241.451377 mb/sr,
++                                         /R =   9.9236E-01
+    36.00 deg.: X-S =  5025.765448 mb/sr,
++                                         /R =   9.9719E-01
+    38.00 deg.: X-S =  4122.327558 mb/sr,
++                                         /R =   1.0078E+00
+    40.00 deg.: X-S =  3365.995999 mb/sr,
++                                         /R =   1.0022E+00
+    42.00 deg.: X-S =  2744.402174 mb/sr,
++                                         /R =   9.8494E-01
+    44.00 deg.: X-S =  2286.884090 mb/sr,
++                                         /R =   9.7992E-01
+    46.00 deg.: X-S =  1964.154190 mb/sr,
++                                         /R =   9.9617E-01
+    48.00 deg.: X-S =  1712.137734 mb/sr,
++                                         /R =   1.0196E+00
+    50.00 deg.: X-S =  1480.052059 mb/sr,
++                                         /R =   1.0273E+00
+    52.00 deg.: X-S =  1257.379714 mb/sr,
++                                         /R =   1.0104E+00
+    54.00 deg.: X-S =  1055.296778 mb/sr,
++                                         /R =   9.7545E-01
+    56.00 deg.: X-S =   893.211715 mb/sr,
++                                         /R =   9.4414E-01
+    58.00 deg.: X-S =   777.026367 mb/sr,
++                                         /R =   9.3404E-01
+    60.00 deg.: X-S =   702.888306 mb/sr,
++                                         /R =   9.5590E-01
+    62.00 deg.: X-S =   657.838101 mb/sr,
++                                         /R =   1.0072E+00
+    64.00 deg.: X-S =   627.784567 mb/sr,
++                                         /R =   1.0772E+00
+    66.00 deg.: X-S =   600.890475 mb/sr,
++                                         /R =   1.1505E+00
+    68.00 deg.: X-S =   569.499365 mb/sr,
++                                         /R =   1.2117E+00
+    70.00 deg.: X-S =   531.201813 mb/sr,
++                                         /R =   1.2510E+00
+    72.00 deg.: X-S =   485.858272 mb/sr,
++                                         /R =   1.2619E+00
+    74.00 deg.: X-S =   435.260147 mb/sr,
++                                         /R =   1.2424E+00
+    76.00 deg.: X-S =   382.289901 mb/sr,
++                                         /R =   1.1951E+00
+    78.00 deg.: X-S =   329.714426 mb/sr,
++                                         /R =   1.1253E+00
+    80.00 deg.: X-S =   279.850067 mb/sr,
++                                         /R =   1.0395E+00
+    82.00 deg.: X-S =   234.330177 mb/sr,
++                                         /R =   9.4459E-01
+    84.00 deg.: X-S =   193.180798 mb/sr,
++                                         /R =   8.4266E-01
+    86.00 deg.: X-S =   157.904040 mb/sr,
++                                         /R =   7.4331E-01
+    88.00 deg.: X-S =   127.670871 mb/sr,
++                                         /R =   6.4688E-01
+    90.00 deg.: X-S =   102.438689 mb/sr,
++                                         /R =   5.5725E-01
+    92.00 deg.: X-S =    81.597903 mb/sr,
++                                         /R =   4.7540E-01
+    94.00 deg.: X-S =    64.555604 mb/sr,
++                                         /R =   4.0187E-01
+    96.00 deg.: X-S =    50.832235 mb/sr,
++                                         /R =   3.3735E-01
+    98.00 deg.: X-S =    39.874883 mb/sr,
++                                         /R =   2.8149E-01
+   100.00 deg.: X-S =    31.198184 mb/sr,
++                                         /R =   2.3377E-01
+   102.00 deg.: X-S =    24.358489 mb/sr,
++                                         /R =   1.9333E-01
+   104.00 deg.: X-S =    19.003168 mb/sr,
++                                         /R =   1.5944E-01
+   106.00 deg.: X-S =    14.813731 mb/sr,
++                                         /R =   1.3113E-01
+   108.00 deg.: X-S =    11.524846 mb/sr,
++                                         /R =   1.0743E-01
+   110.00 deg.: X-S =     8.983435 mb/sr,
++                                         /R =   8.8013E-02
+   112.00 deg.: X-S =     7.016046 mb/sr,
++                                         /R =   7.2116E-02
+   114.00 deg.: X-S =     5.487383 mb/sr,
++                                         /R =   5.9071E-02
+   116.00 deg.: X-S =     4.293976 mb/sr,
++                                         /R =   4.8327E-02
+   118.00 deg.: X-S =     3.391428 mb/sr,
++                                         /R =   3.9837E-02
+   120.00 deg.: X-S =     2.668190 mb/sr,
++                                         /R =   3.2658E-02
+   122.00 deg.: X-S =     2.102359 mb/sr,
++                                         /R =   2.6769E-02
+   124.00 deg.: X-S =     1.676717 mb/sr,
++                                         /R =   2.2174E-02
+   126.00 deg.: X-S =     1.341955 mb/sr,
++                                         /R =   1.8404E-02
+   128.00 deg.: X-S =     1.074607 mb/sr,
++                                         /R =   1.5259E-02
+   130.00 deg.: X-S =     0.870174 mb/sr,
++                                         /R =   1.2775E-02
+   132.00 deg.: X-S =     0.707406 mb/sr,
++                                         /R =   1.0721E-02
+   134.00 deg.: X-S =     0.572473 mb/sr,
++                                         /R =   8.9434E-03
+   136.00 deg.: X-S =     0.468736 mb/sr,
++                                         /R =   7.5377E-03
+   138.00 deg.: X-S =     0.392992 mb/sr,
++                                         /R =   6.4958E-03
+   140.00 deg.: X-S =     0.329695 mb/sr,
++                                         /R =   5.5937E-03
+   142.00 deg.: X-S =     0.274110 mb/sr,
++                                         /R =   4.7670E-03
+   144.00 deg.: X-S =     0.230604 mb/sr,
++                                         /R =   4.1052E-03
+   146.00 deg.: X-S =     0.201135 mb/sr,
++                                         /R =   3.6603E-03
+   148.00 deg.: X-S =     0.167238 mb/sr,
++                                         /R =   3.1070E-03
+   150.00 deg.: X-S =     0.145083 mb/sr,
++                                         /R =   2.7481E-03
+   152.00 deg.: X-S =     0.130488 mb/sr,
++                                         /R =   2.5167E-03
+   154.00 deg.: X-S =     0.114408 mb/sr,
++                                         /R =   2.2439E-03
+   156.00 deg.: X-S =     0.099394 mb/sr,
++                                         /R =   1.9798E-03
+   158.00 deg.: X-S =     0.090235 mb/sr,
++                                         /R =   1.8231E-03
+   160.00 deg.: X-S =     0.082628 mb/sr,
++                                         /R =   1.6911E-03
+   162.00 deg.: X-S =     0.075589 mb/sr,
++                                         /R =   1.5653E-03
+   164.00 deg.: X-S =     0.066742 mb/sr,
++                                         /R =   1.3965E-03
+   166.00 deg.: X-S =     0.061008 mb/sr,
++                                         /R =   1.2883E-03
+   168.00 deg.: X-S =     0.063797 mb/sr,
++                                         /R =   1.3580E-03
+   170.00 deg.: X-S =     0.057046 mb/sr,
++                                         /R =   1.2225E-03
+   172.00 deg.: X-S =     0.055816 mb/sr,
++                                         /R =   1.2027E-03
+   174.00 deg.: X-S =     0.051922 mb/sr,
++                                         /R =   1.1236E-03
+   176.00 deg.: X-S =     0.049098 mb/sr,
++                                         /R =   1.0657E-03
+   178.00 deg.: X-S =     0.055097 mb/sr,
++                                         /R =   1.1981E-03
+   179.99 deg.: X-S =     0.073376 mb/sr,
++                                         /R =   1.5966E-03
+                                           Integrated********** mb, over [   2.000, 180.000] at    48.0000 MeV 
+
+ CROSS SECTIONS FOR OUTGOING 16-O     & NI-58    in state #   2 with spins & parities 0.0  + &  2.0  +;  0
+
+     2.00 deg.: X-S =     0.047021 mb/sr,
++                                         REAC   5.0791E+01 mb
+     4.00 deg.: X-S =     0.064209 mb/sr,
+     6.00 deg.: X-S =     0.132952 mb/sr,
+     8.00 deg.: X-S =     0.090617 mb/sr,
+    10.00 deg.: X-S =     0.324982 mb/sr,
+    12.00 deg.: X-S =     1.076365 mb/sr,
+    14.00 deg.: X-S =     1.917801 mb/sr,
+    16.00 deg.: X-S =     2.401000 mb/sr,
+    18.00 deg.: X-S =     3.760602 mb/sr,
+    20.00 deg.: X-S =     5.282186 mb/sr,
+    22.00 deg.: X-S =     5.186321 mb/sr,
+    24.00 deg.: X-S =     7.091087 mb/sr,
+    26.00 deg.: X-S =     6.976699 mb/sr,
+    28.00 deg.: X-S =     7.154561 mb/sr,
+    30.00 deg.: X-S =     9.365595 mb/sr,
+    32.00 deg.: X-S =     7.719239 mb/sr,
+    34.00 deg.: X-S =     7.534344 mb/sr,
+    36.00 deg.: X-S =    10.109748 mb/sr,
+    38.00 deg.: X-S =    10.032014 mb/sr,
+    40.00 deg.: X-S =     7.479110 mb/sr,
+    42.00 deg.: X-S =     7.066635 mb/sr,
+    44.00 deg.: X-S =     9.359261 mb/sr,
+    46.00 deg.: X-S =    11.340243 mb/sr,
+    48.00 deg.: X-S =    10.647755 mb/sr,
+    50.00 deg.: X-S =     7.946519 mb/sr,
+    52.00 deg.: X-S =     5.699828 mb/sr,
+    54.00 deg.: X-S =     5.518328 mb/sr,
+    56.00 deg.: X-S =     7.340566 mb/sr,
+    58.00 deg.: X-S =    10.000344 mb/sr,
+    60.00 deg.: X-S =    12.112224 mb/sr,
+    62.00 deg.: X-S =    12.804007 mb/sr,
+    64.00 deg.: X-S =    11.947214 mb/sr,
+    66.00 deg.: X-S =    10.035901 mb/sr,
+    68.00 deg.: X-S =     7.673928 mb/sr,
+    70.00 deg.: X-S =     5.424081 mb/sr,
+    72.00 deg.: X-S =     3.693399 mb/sr,
+    74.00 deg.: X-S =     2.629185 mb/sr,
+    76.00 deg.: X-S =     2.210555 mb/sr,
+    78.00 deg.: X-S =     2.286992 mb/sr,
+    80.00 deg.: X-S =     2.678199 mb/sr,
+    82.00 deg.: X-S =     3.217332 mb/sr,
+    84.00 deg.: X-S =     3.755933 mb/sr,
+    86.00 deg.: X-S =     4.199381 mb/sr,
+    88.00 deg.: X-S =     4.491201 mb/sr,
+    90.00 deg.: X-S =     4.625571 mb/sr,
+    92.00 deg.: X-S =     4.619844 mb/sr,
+    94.00 deg.: X-S =     4.481590 mb/sr,
+    96.00 deg.: X-S =     4.235547 mb/sr,
+    98.00 deg.: X-S =     3.930457 mb/sr,
+   100.00 deg.: X-S =     3.577962 mb/sr,
+   102.00 deg.: X-S =     3.211729 mb/sr,
+   104.00 deg.: X-S =     2.853033 mb/sr,
+   106.00 deg.: X-S =     2.511005 mb/sr,
+   108.00 deg.: X-S =     2.186264 mb/sr,
+   110.00 deg.: X-S =     1.888608 mb/sr,
+   112.00 deg.: X-S =     1.624721 mb/sr,
+   114.00 deg.: X-S =     1.387889 mb/sr,
+   116.00 deg.: X-S =     1.181818 mb/sr,
+   118.00 deg.: X-S =     1.008541 mb/sr,
+   120.00 deg.: X-S =     0.858442 mb/sr,
+   122.00 deg.: X-S =     0.727616 mb/sr,
+   124.00 deg.: X-S =     0.616990 mb/sr,
+   126.00 deg.: X-S =     0.523794 mb/sr,
+   128.00 deg.: X-S =     0.444616 mb/sr,
+   130.00 deg.: X-S =     0.378987 mb/sr,
+   132.00 deg.: X-S =     0.324878 mb/sr,
+   134.00 deg.: X-S =     0.278616 mb/sr,
+   136.00 deg.: X-S =     0.238659 mb/sr,
+   138.00 deg.: X-S =     0.206031 mb/sr,
+   140.00 deg.: X-S =     0.179199 mb/sr,
+   142.00 deg.: X-S =     0.155918 mb/sr,
+   144.00 deg.: X-S =     0.136227 mb/sr,
+   146.00 deg.: X-S =     0.120225 mb/sr,
+   148.00 deg.: X-S =     0.106430 mb/sr,
+   150.00 deg.: X-S =     0.094248 mb/sr,
+   152.00 deg.: X-S =     0.084861 mb/sr,
+   154.00 deg.: X-S =     0.076779 mb/sr,
+   156.00 deg.: X-S =     0.069671 mb/sr,
+   158.00 deg.: X-S =     0.063382 mb/sr,
+   160.00 deg.: X-S =     0.058467 mb/sr,
+   162.00 deg.: X-S =     0.054191 mb/sr,
+   164.00 deg.: X-S =     0.051053 mb/sr,
+   166.00 deg.: X-S =     0.047945 mb/sr,
+   168.00 deg.: X-S =     0.045198 mb/sr,
+   170.00 deg.: X-S =     0.043314 mb/sr,
+   172.00 deg.: X-S =     0.042143 mb/sr,
+   174.00 deg.: X-S =     0.040956 mb/sr,
+   176.00 deg.: X-S =     0.040005 mb/sr,
+   178.00 deg.: X-S =     0.039300 mb/sr,
+   180.00 deg.: X-S =     0.038280 mb/sr,
+                                           Integrated   50.8076 mb, over [   2.000, 180.000] at    48.0000 MeV 
+ Finished all xsecs @   0.125745013    
+
+  The following files have been created:
+   3:local copy of User input.            6:standard output.                   
+  13:total cross sections/state.         35:Astrophysics S-factors  / Ecm.     
+  39:cross sections for each Ecm.        40:all cross sectns. for each Elab.   
+  56:Fusion for each Jtotal.             75:S-factors for lab energies.        
+
+ PARAMETERS : MAXQRN   MFNL   MLOC  LMAX1 MCLIST
+    ALLOWED :      1     16      4    420      9
+    REQUIRED:      0      0      4    403      4
+
+
+ ACCURACY ANALYSIS at    48.000 MeV :
+
+  Elastic h*k = 0.237 so NOT OK   compared with 0.200
+
+   Real(S-el) > 0.01 first at J =       1.0
+   Real(S-el) > 0.10 first at J =      14.0
+   Real(S-el) > 0.50 first at J =      17.0
+   Real(S-el) > 0.90 first at J =      20.0
+   Real(S-el) > 0.99 first at J =      27.0
+   R-turn =    34.50 fm    at J =     142.0
+   R-turn =    88.72 fm    at J =     400.0
+
+ Forward-angle excitation cut off below   5.827 deg by max JT =     400.0
+                              and below   5.000 deg by max R.
+
+ Total CPU  0 time =       0.13 seconds

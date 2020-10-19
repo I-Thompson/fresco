@@ -1,0 +1,42 @@
+39Ca(d,p)40Ca finite-range dp with deuteron d-state by RSC
+NAMELIST
+ &FRESCO  hcm= 0.050 rmatch=  12.000 rintp=  0.50
+     hnl= 0.100 rnl=  3.00 centre=  0.00
+     jtmin=  0.0 jtmax=    12.0 absend= -1.0000 
+     thmin=  5.00 thmax=180.00 thinc=  5.00 
+     ips= 0.0500  it0=0 iter=  1 iblock= 0 
+     chans= 1 listcc= 0 treneg= 3 cdetr= 0 smats= 2 xstabl= 0 veff= 1 
+     elab(1)=    30.3000 /
+
+ &PARTITION namep='DEUTERON' massp=  2.0141 zp=  1 nex= 1 pwf=T
+            namet='CA-39   ' masst= 39.0000 zt= 20 qval=-13.4100/
+ &STATES jp= 1.0 ptyp= 1 ep=  0.0000  cpot=  2                                  jt= 0.5 ptyt= 1 et=  2.4700/
+ &PARTITION namep='PROTON  ' massp=  1.0078 zp=  1 nex= 1 pwf=T                 namet='CA-40   ' masst= 40.0000 zt= 20 qval=  0.0000/
+ &STATES jp= 0.5 ptyp= 1 ep=  0.0000  cpot=  1                                  jt= 0.0 ptyt= 1 et=  0.0000/
+ &partition /
+
+ &pot kp= 1 type= 0 p(1:3)=   40.000   0.000   1.150 /
+ &pot kp= 1 type= 1 p(1:7)=   56.900   1.194   0.640   1.000   1.375   0.540   0.000 /
+ &pot kp= 1 type= 2 p(1:7)=    0.000   1.194   0.600   3.420   1.375   0.540   0.000 /
+ &pot kp= 1 type= 3 p(1:7)=    6.000   1.060   0.630   0.000   1.000   0.500   0.000 /
+ &pot kp= 2 type= 0 p(1:3)=   39.000   0.000   1.250 /
+ &pot kp= 2 type= 1 p(1:7)=   98.800   1.213   0.648   0.000   1.237   0.540   0.000 /
+ &pot kp= 2 type= 2 p(1:7)=    0.000   1.213   0.648  17.700   1.237   0.540   0.000 /
+ &pot kp= 2 type= 3 p(1:7)=    2.275   1.180   0.650   0.000   1.237   0.540   0.000 /
+ &pot kp= 3 type= 0 p(1:3)=   40.000   0.000   1.100 /
+ &pot kp= 3 type= 1 p(1:3)=   50.000   1.250   0.650 /
+ &pot kp= 3 type= 3 p(1:3)=    7.000   1.250   0.650 /
+ &pot kp= 4 type= 0 p(1:3)=    1.000   0.000   1.250 /
+ &pot kp= 4 type= 1 itt=F shape= 5 p(1:3)=    1.000   0.000   1.000 /
+ &pot kp= 4 type= 3 itt=F shape= 5 p(1:3)=    1.000   0.000   1.000 /
+ &pot kp= 4 type= 4 itt=F shape= 5 p(1:3)=    1.000   0.000   1.000 /
+ &pot kp=-4 type= 7 itt=F shape= 5 p(1:3)=    1.000   0.000   1.000 /
+ &OVERLAP kn1=  4 kn2=  5 ic1=1 ic2=2 in=-1 kind=3 ch1=' ' nn= 1 l=0 lmax=2 sn= 0.5 ia= 0 j= 0.5 ib= 0
+    kbpot= 4 krpot= 0 be=  2.2260 isc=0 ipc=3 nfl=  0 nam=  0 ampl=  0.0000 /
+ &OVERLAP kn1=  2 kn2=  0 ic1=1 ic2=2 in= 2 kind=0 nn= 2 l=0 sn= 0.5 j= 0.5
+    kbpot= 3 krpot= 0 be= 18.1060 isc=1 ipc=1 nfl=  0 nam=  0 ampl=  0.0000 /
+ &overlap /
+ &COUPLING icto= 2 icfrom= 1 kind=7 ip1= 0 ip2= 0 ip3= 0 /
+   &cfp  in= 1 ib=  1 ia=  1 kn=  4  a=   1.000     /
+   &cfp  in=-2 ib=  1 ia=  1 kn=  2  a=   1.344     /
+ &COUPLING /

@@ -1,5 +1,5 @@
-!***********************************************************************
-!     
+**********************************************************************
+    
 !    Copyright 2017, I.J. Thompson
 !     
 !    This file is part of FRESCO.
@@ -531,7 +531,7 @@ C
 20    READ(NFL,530) (TNQ(IA,IQ),IQ=1,5)
 540   FORMAT(8E10.3)
 C
-      CALL GRIPOL(NR,DR,AC,NT,JC1,JC2,JC3, DT,R(1),THET(1),CO(1),SI(1))
+      CALL GRIPOL(NR,DR,AC,NT,JC1,JC2,JC3, DT,R,THET,CO,SI)
 C
       SUM = 0.0
       DO 25 IA=1,MA
@@ -582,9 +582,9 @@ c     X       real(RHO(1)), real(XLA(4)), real(XLA(IPX-4)),real(VAL)
       END
       SUBROUTINE GRIPOL(NR,DR,AC,NT,JC1,JC2,JC3,DT,R,TET,CO,SI)
       IMPLICIT REAL*8(A-H,O-Z)
-      REAL*8 R(1)
-      REAL*8 TET(1)
-      REAL*8 CO(1),SI(1)
+      REAL*8 R(0:NR)
+      REAL*8 TET(0:NT)
+      REAL*8 CO(0:NT),SI(0:NT)
       DATA PIS2/1.570796327/
       NULL=0
 C****

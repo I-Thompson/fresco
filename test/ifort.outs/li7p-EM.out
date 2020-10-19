@@ -1,0 +1,560 @@
+ FRESCO - FRES 3.4: Coupled Reaction Channels
+ Assuming NAMELIST input.
+
+ 7Li(p,g)8Be with surface repulsion - Sampaio                                    
+
+   0.100  30.000   0.300   0.100   0.000   0.000   0.000   0.000   0.000   0.000
+
+ Centre-of-mass Range is    302 * 0.1000 fm., Maximum at  30.00 fm., Interpolating NL forms every  0.30 fm.
+ Non - locality width is      4 * 0.1000 fm., Maximum of   0.30 fm., Centred at  0.00 fm.
+ 2-Nucleon Separation of      0 * 0.3000 fm., Maximum of   0.00 fm., Minimum at  0.00 fm.
+ Maximum single particle bins of 30.0000 fm.
+               M,Mint =          301         301
+
+
+ Range of total J is     0.5 <= J <=     1.5 (at least     0.0) and Absorbtion =>    -1.0000 mb.
+ Dry Run = F, CC set limits =  0  0, Relativistic kinematics =  , Both/Far/Near Analyses =  1                     
+
+ Cross Sections (and up to T0 for 0=projectile) for Theta from   0.0 to 180.0 in steps of 45.0 degrees, DGAM=0,  Coordinates = 0 (Mads)
+
+ Lower Radial Cutoff = maximum of -1.60*L*h &       0.0 fm.,  Lower Cutoff for Couplings =   0.0  fm.
+
+
+ Iterate Couplings between   0 and   1 times, to  0.000 % if sooner.                                          
+  Block solved exactly =   0 chs., with Pade = 0 & Isocen =  =0, NOSOL = F, initwf =  0
+  NL quadrature with   18 Gaussian points, Calculate multipoles up to     7 from   0
+  M-transfers for lp+lt greater than or equal to  6, Angular Integration Cutoff below  2.7778 %
+
+
+ Trace switches are :  CHANS =  5, LISTCC =  2, TRENEG =  0, CDETR =  0, SMATS =  4, XSTABL =  2, NLPL =  0
+
+                       WAVES =  0, LAMPL =  0, VEFF =  0, KFUS =  0, WDISK =  1, BPM =  0, MELFIL =  0
+
+                       CDCC =  0, NFUS =  0
+
+ Using unit mass = 1.000000 amu and 1/fine-structure constant = 137.03599 ( 1.000000 * true ) with hc = 197.32705 MeV.fm,
+  thus 2*amu/hbar^2 = 0.0478450 = 1/20.9008 and Coulomb constant = 0.1574855 so e^2 = 1.43997, and nuclear magneton= 0.1261183
+
+ Now pre-scan input and save to file 3
+
+
+
+ *********** PARTITION NUMBER  1 ******************************************************************************************
+
+   PROJ=proton     MASS=  1.0078 Z=   1.0,        # STATES=    1T, TARG=7LI      MASS=  7.0160 Z=   3.0,     Q-VALUE =   0.0000 MEV.
+
+     1:  J= 0.5+ (B# 1), E=  0.0000, K= 0.5              Potl#  1       J= 1.5- (B#-1), E=  0.0000, K= 0.5    
+
+
+ *********** PARTITION NUMBER  2 ******************************************************************************************
+
+   PROJ=Gamma      MASS=  0.0000 Z=   0.0,        # STATES=    1T, TARG=8Be      MASS=  8.0053 Z=   4.0,     Q-VALUE =  17.2500 MEV.
+
+     1:  J= 1.0+ (B# 1), E=  0.0000, K= 0.0              Potl#  3       J= 0.0+ (B# 1), E=  0.0000, K= 0.0    
+
+
+ ************************************************************************************************************************************
+
+ The following POTENTIALS are defined :
+
+  KP#       TYPE      IT    SHAPE      at     V1        r1        a1        V2        r2        a2        A-in     A-used
+
+
+                                            A#1       A#2        r0c       ac                                                h @ 1
+    1    0=Coulomb       0=CHARGE (WS)  1     7.000     0.000    1.1500    0.0000    0.0000    0.0000     0.000     7.000   0.10000
+
+    1    1=Volume        0=Woods-Saxon  2   71.4000    1.1500    0.6000    0.0000    0.0000    0.0000     0.000     7.000
+
+    1    2=Surface       0=Woods-Saxon  3   -9.9600    1.9500    0.7000    0.0000    0.0000    0.0000     0.000     7.000
+
+    1    3=Projtl S.O.   0=Woods-Saxon  4    5.5800    1.1500    0.6000    0.0000    0.0000    0.0000     0.000     7.000
+   --------------------------------------------------------------------------------------------------------------------
+
+                                            A#1       A#2        r0c       ac                                                h @ 2
+    3    0=Coulomb       0=CHARGE (WS)  5     8.000     0.000    1.1600    0.0000    0.0000    0.0000     0.000     8.000   0.10000
+
+
+ ************************************************************************************************************************************
+
+ The following SINGLE-PARTICLE FORM FACTORS are constructed :
+
+
+ No.   P1 P2 IN KIND T N  L  S1 IA J/S  IB BIND XFER  BE    SC PC FIL AFRAC Adjust  to  Z  Mass   K     Norm    rms      D0     D   ANC/Gsp
+
+    Parameters      Mismatch   Nodes -> 1 in ch  1
+
+      1.000000    -0.94745269     1    24
+      1.445638     0.62527860     1    24
+      1.348768     0.10423141     1    24
+      1.325657     0.00368778     1    24
+      1.324779     0.00000485     1    24
+
+ No.   P1 P2 IN KIND T N  L  S1 IA J/S  IB BIND XFER  BE    SC PC FIL AFRAC Adjust  to  Z  Mass   K     Norm    rms      D0     D   ANC/Gsp
+
+    1:  1  2  2  0     1  1 0.5  1 1.5   0   1   0  17.2500  1  4-21 0.0000 VR  1.3248; 1. 1.008 0.8528 1.0000  2.118 -128.7  -46.2  3.8406
+
+ ************************************************************************************************************************************
+
+ TWO-way COUPLING # 1 for partitions  2 <-  1 of KIND  2,   2  0  0 -1 -1 & P1,P2 =    0.0000   0.0000 : for J <=     2.0 & R <  29.7 fm.
+
+
+ data = -2  1  1  1  1.0000,  so  < [8Be      #  1] / [7LI      #  1]  * Eigen-form #  1>  =   1.0000            BE = 17.250     1
+  LOCF =            5
+ Need:           1  uses bs           1           1  q=           1
+ Need:           2  uses bs           1           1  q=           2
+
+     Electromagnetic coupling : IP1 = 2, IP2= 0, IP3= 0
+      Particle g factor =     0.000 and target g factor   0.0000
+      All Electric and Magnetic multipoles up to  2
+   1  1  1  6     0.100
+  Form factor at            6  from            0  is :
+   0.00:  0.000E+00  0.000E+00   0.30:  1.915E-01  0.000E+00   0.60:  3.516E-01  0.000E+00   0.90:  4.589E-01  0.000E+00
+   1.20:  5.035E-01  0.000E+00   1.50:  4.893E-01  0.000E+00   1.80:  4.317E-01  0.000E+00   2.10:  3.516E-01  0.000E+00
+   2.40:  2.682E-01  0.000E+00   2.70:  1.944E-01  0.000E+00   3.00:  1.360E-01  0.000E+00   3.30:  9.297E-02  0.000E+00
+   3.60:  6.292E-02  0.000E+00   3.90:  4.256E-02  0.000E+00   4.20:  2.897E-02  0.000E+00   4.50:  1.993E-02  0.000E+00
+   4.80:  1.387E-02  0.000E+00   5.10:  9.756E-03  0.000E+00   5.40:  6.932E-03  0.000E+00   5.70:  4.966E-03  0.000E+00
+   6.00:  3.581E-03  0.000E+00   6.30:  2.597E-03  0.000E+00   6.60:  1.892E-03  0.000E+00   6.90:  1.383E-03  0.000E+00
+   7.20:  1.015E-03  0.000E+00   7.50:  7.465E-04  0.000E+00   7.80:  5.504E-04  0.000E+00   8.10:  4.068E-04  0.000E+00
+   8.40:  3.012E-04  0.000E+00   8.70:  2.234E-04  0.000E+00   9.00:  1.660E-04  0.000E+00   9.30:  1.235E-04  0.000E+00
+   9.60:  9.200E-05  0.000E+00   9.90:  6.863E-05  0.000E+00  10.20:  5.126E-05  0.000E+00  10.50:  3.833E-05  0.000E+00
+  10.80:  2.869E-05  0.000E+00  11.10:  2.150E-05  0.000E+00  11.40:  1.612E-05  0.000E+00  11.70:  1.210E-05  0.000E+00
+  12.00:  9.093E-06  0.000E+00  12.30:  6.836E-06  0.000E+00  12.60:  5.144E-06  0.000E+00  12.90:  3.873E-06  0.000E+00
+  13.20:  2.918E-06  0.000E+00  13.50:  2.200E-06  0.000E+00  13.80:  1.660E-06  0.000E+00  14.10:  1.253E-06  0.000E+00
+  14.40:  9.464E-07  0.000E+00  14.70:  7.152E-07  0.000E+00  15.00:  5.408E-07  0.000E+00  15.30:  4.091E-07  0.000E+00
+  15.60:  3.096E-07  0.000E+00  15.90:  2.344E-07  0.000E+00  16.20:  1.776E-07  0.000E+00  16.50:  1.346E-07  0.000E+00
+  16.80:  1.020E-07  0.000E+00  17.10:  7.738E-08  0.000E+00  17.40:  5.871E-08  0.000E+00  17.70:  4.456E-08  0.000E+00
+  18.00:  3.383E-08  0.000E+00  18.30:  2.570E-08  0.000E+00  18.60:  1.952E-08  0.000E+00  18.90:  1.484E-08  0.000E+00
+  19.20:  1.128E-08  0.000E+00  19.50:  8.578E-09  0.000E+00  19.80:  6.525E-09  0.000E+00  20.10:  4.965E-09  0.000E+00
+  20.40:  3.779E-09  0.000E+00  20.70:  2.877E-09  0.000E+00  21.00:  2.190E-09  0.000E+00  21.30:  1.668E-09  0.000E+00
+  21.60:  1.271E-09  0.000E+00  21.90:  9.686E-10  0.000E+00  22.20:  7.383E-10  0.000E+00  22.50:  5.628E-10  0.000E+00
+  22.80:  4.292E-10  0.000E+00  23.10:  3.273E-10  0.000E+00  23.40:  2.497E-10  0.000E+00  23.70:  1.905E-10  0.000E+00
+  24.00:  1.454E-10  0.000E+00  24.30:  1.110E-10  0.000E+00  24.60:  8.472E-11  0.000E+00  24.90:  6.468E-11  0.000E+00
+  25.20:  4.940E-11  0.000E+00  25.50:  3.773E-11  0.000E+00  25.80:  2.882E-11  0.000E+00  26.10:  2.202E-11  0.000E+00
+  26.40:  1.683E-11  0.000E+00  26.70:  1.286E-11  0.000E+00  27.00:  9.833E-12  0.000E+00  27.30:  7.517E-12  0.000E+00
+  27.60:  5.748E-12  0.000E+00  27.90:  4.396E-12  0.000E+00  28.20:  3.362E-12  0.000E+00  28.50:  2.572E-12  0.000E+00
+  28.80:  1.967E-12  0.000E+00  29.10:  1.505E-12  0.000E+00  29.40:  1.152E-12  0.000E+00  29.70:  8.816E-13  0.000E+00
+  30.00:  2.026E-26  0.000E+00
+   1  1  2  7     0.100
+  Form factor at            7  from            0  is :
+   0.00:  0.000E+00  0.000E+00   0.30:  1.915E-01  0.000E+00   0.60:  3.516E-01  0.000E+00   0.90:  4.589E-01  0.000E+00
+   1.20:  5.035E-01  0.000E+00   1.50:  4.893E-01  0.000E+00   1.80:  4.317E-01  0.000E+00   2.10:  3.516E-01  0.000E+00
+   2.40:  2.682E-01  0.000E+00   2.70:  1.944E-01  0.000E+00   3.00:  1.360E-01  0.000E+00   3.30:  9.297E-02  0.000E+00
+   3.60:  6.292E-02  0.000E+00   3.90:  4.256E-02  0.000E+00   4.20:  2.897E-02  0.000E+00   4.50:  1.993E-02  0.000E+00
+   4.80:  1.387E-02  0.000E+00   5.10:  9.756E-03  0.000E+00   5.40:  6.932E-03  0.000E+00   5.70:  4.966E-03  0.000E+00
+   6.00:  3.581E-03  0.000E+00   6.30:  2.597E-03  0.000E+00   6.60:  1.892E-03  0.000E+00   6.90:  1.383E-03  0.000E+00
+   7.20:  1.015E-03  0.000E+00   7.50:  7.465E-04  0.000E+00   7.80:  5.504E-04  0.000E+00   8.10:  4.068E-04  0.000E+00
+   8.40:  3.012E-04  0.000E+00   8.70:  2.234E-04  0.000E+00   9.00:  1.660E-04  0.000E+00   9.30:  1.235E-04  0.000E+00
+   9.60:  9.200E-05  0.000E+00   9.90:  6.863E-05  0.000E+00  10.20:  5.126E-05  0.000E+00  10.50:  3.833E-05  0.000E+00
+  10.80:  2.869E-05  0.000E+00  11.10:  2.150E-05  0.000E+00  11.40:  1.612E-05  0.000E+00  11.70:  1.210E-05  0.000E+00
+  12.00:  9.093E-06  0.000E+00  12.30:  6.836E-06  0.000E+00  12.60:  5.144E-06  0.000E+00  12.90:  3.873E-06  0.000E+00
+  13.20:  2.918E-06  0.000E+00  13.50:  2.200E-06  0.000E+00  13.80:  1.660E-06  0.000E+00  14.10:  1.253E-06  0.000E+00
+  14.40:  9.464E-07  0.000E+00  14.70:  7.152E-07  0.000E+00  15.00:  5.408E-07  0.000E+00  15.30:  4.091E-07  0.000E+00
+  15.60:  3.096E-07  0.000E+00  15.90:  2.344E-07  0.000E+00  16.20:  1.776E-07  0.000E+00  16.50:  1.346E-07  0.000E+00
+  16.80:  1.020E-07  0.000E+00  17.10:  7.738E-08  0.000E+00  17.40:  5.871E-08  0.000E+00  17.70:  4.456E-08  0.000E+00
+  18.00:  3.383E-08  0.000E+00  18.30:  2.570E-08  0.000E+00  18.60:  1.952E-08  0.000E+00  18.90:  1.484E-08  0.000E+00
+  19.20:  1.128E-08  0.000E+00  19.50:  8.578E-09  0.000E+00  19.80:  6.525E-09  0.000E+00  20.10:  4.965E-09  0.000E+00
+  20.40:  3.779E-09  0.000E+00  20.70:  2.877E-09  0.000E+00  21.00:  2.190E-09  0.000E+00  21.30:  1.668E-09  0.000E+00
+  21.60:  1.271E-09  0.000E+00  21.90:  9.686E-10  0.000E+00  22.20:  7.383E-10  0.000E+00  22.50:  5.628E-10  0.000E+00
+  22.80:  4.292E-10  0.000E+00  23.10:  3.273E-10  0.000E+00  23.40:  2.497E-10  0.000E+00  23.70:  1.905E-10  0.000E+00
+  24.00:  1.454E-10  0.000E+00  24.30:  1.110E-10  0.000E+00  24.60:  8.472E-11  0.000E+00  24.90:  6.468E-11  0.000E+00
+  25.20:  4.940E-11  0.000E+00  25.50:  3.773E-11  0.000E+00  25.80:  2.882E-11  0.000E+00  26.10:  2.202E-11  0.000E+00
+  26.40:  1.683E-11  0.000E+00  26.70:  1.286E-11  0.000E+00  27.00:  9.833E-12  0.000E+00  27.30:  7.517E-12  0.000E+00
+  27.60:  5.748E-12  0.000E+00  27.90:  4.396E-12  0.000E+00  28.20:  3.362E-12  0.000E+00  28.50:  2.572E-12  0.000E+00
+  28.80:  1.967E-12  0.000E+00  29.10:  1.505E-12  0.000E+00  29.40:  1.152E-12  0.000E+00  29.70:  8.816E-13  0.000E+00
+  30.00:  2.026E-26  0.000E+00
+ 
+
+ Incoming partition  1 in excitation state # 1,   Laboratory Energy given for partition  1 Nucleus 1 in Excitation pair 1
+
+0Lab. ENERGY ranges :
+
+   from    2.00000     to   0.00000     in     0 intervals
+   from    0.00000     to   0.00000     in     0 intervals
+   from    0.00000     to   0.00000     in     0 intervals
+
+ Largest real,imaginary parts of any form factor at R=   29.00 are   4.97E-02  0.00E+00 MeV
+ Finished all Couplings @   3.3280002E-03           7
+
+ Symmetric Hamiltonian
+1***********************************************************************************************************************************
+************************************************************************************************************************************
+
+        INCOMING proton   ;    LABORATORY proton   ENERGY =   2.0000     MeV.
+
+ ***********************************************************************************************************************************
+ ***********************************************************************************************************************************
+
+ Allocate arrays for            5  channels, of which            5  need wfs.
+
+
+ ######################################################################################################################
+ #                                                                                                                    #
+ # Total SPIN and PARITY =     1.0 +,      5 channels,    0 in 1st block.  Rmin & Coul turning =    0.1    6.6 fm.  #
+ #                                                                                                                    #
+ ######################################################################################################################
+
+
+
+    C Projectl Target   #   EX.   (L  Proj) J  + Targ = Jtotal     E-cm      Re K     Re Eta     RM*K            CH
+    1 proton   7LI      #    1: I   1 0.5    0.5  1.5     1.0     1.74880   0.27154   0.33538    8.1461   0.18581   0.48023 1 1 1   1
+    2 proton   7LI      #    1: I   1 0.5    1.5  1.5     1.0     1.74880   0.27154   0.33538    8.1461   0.18581   0.48023 1 1 1   1
+    3 proton   7LI      #    1: I   3 0.5    2.5  1.5     1.0     1.74880   0.27154   0.33538    8.1461   0.27718  -0.46159 1 1 1   1
+    4 Gamma    8Be      #    1:     0 1.0    1.0  0.0     1.0    18.99880   0.09628   0.00000    2.8884  -0.12524  -0.48406 2 1 2   1
+    5 Gamma    8Be      #    1:     2 1.0    1.0  0.0     1.0    18.99880   0.09628   0.00000    2.8884  -0.42256   0.44008 2 1 2   1
+ For    1 from    1 by form    1 (  1  0  0  0  0  0)  0  0         1 get  1.0000       3.000000       0.000000  1.0000
+ For    1 from    1 by form    2 (  1  1  0  0  0  0)  0  0         2 get  1.0000       1.000000       0.000000  1.0000
+ For    1 from    1 by form    3 (  1  2  0  0  0  0)  0  0         3 get  1.0000       1.000000       0.000000  1.0000
+ For    1 from    1 by form    4 (  1  3  0  0  0  0)  0  0         4 get  1.0000      -2.000000       0.000000  1.0000
+ For    2 from    2 by form    1 (  1  0  0  0  0  0)  0  0         1 get  1.0000       3.000000       0.000000  1.0000
+ For    2 from    2 by form    2 (  1  1  0  0  0  0)  0  0         2 get  1.0000       1.000000       0.000000  1.0000
+ For    2 from    2 by form    3 (  1  2  0  0  0  0)  0  0         3 get  1.0000       1.000000       0.000000  1.0000
+ For    2 from    2 by form    4 (  1  3  0  0  0  0)  0  0         4 get  1.0000       1.000000       0.000000  1.0000
+ For    3 from    3 by form    1 (  1  0  0  0  0  0)  0  0         1 get  1.0000       3.000000       0.000000  1.0000
+ For    3 from    3 by form    2 (  1  1  0  0  0  0)  0  0         2 get  1.0000       1.000000       0.000000  1.0000
+ For    3 from    3 by form    3 (  1  2  0  0  0  0)  0  0         3 get  1.0000       1.000000       0.000000  1.0000
+ For    3 from    3 by form    4 (  1  3  0  0  0  0)  0  0         4 get  1.0000      -4.000000       0.000000  1.0000
+
+ Coupling #   1 to   2 from   1 of KIND= 2
+  Photonuclear couplings:           2  <-           1
+
+ M1   4  1  1  6  1  1  1.5  0  1  1.0  0.5   1  1.00000  0.28868 -0.16667  0.33333  1.00000 -0.02075  0.92852  3.089338E-04
+
+ > 1   4  1  1  6  1  1  1.5  0  1  1.0  0.5   1    0.0000       0.19646    
+
+ < 1   1  4  1  6  1  1  1.5  1  0  0.5  1.0   1    0.0000      -0.98232E-01
+
+ M1   4  2  1  6  1  1  1.5  0  1  1.0  1.5   1  1.00000  0.28868 -0.26352  0.33333  1.00000  0.02934  0.92852 -6.907970E-04
+
+ > 1   4  2  1  6  1  1  1.5  0  1  1.0  1.5   1    0.0000      -0.43931    
+
+ < 1   2  4  1  6  1  1  1.5  1  0  1.5  1.0   1    0.0000       0.21965    
+   S-matrix    1 =    0.89220  -0.45165 for L=    1, J=    0.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+ Elastic phase shift   1 =  -13.425   0.000 deg. for the L =    1, J =    0.5 channel.
+   S-matrix    1 =    0.89220  -0.45165 for L=    1, J=    0.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.00000   0.00000 for L=    1, J=    1.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.00000   0.00000 for L=    3, J=    2.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    4 =   -0.00010   0.00002 for L=    0, J=    1.0 channel on core I =   0.0 from L=    1,  Acc. loss =  0.4 D.
+   S-matrix    5 =    0.00000   0.00000 for L=    2, J=    1.0 channel on core I =   0.0 from L=    1,  Acc. loss =  0.0 D.
+       1.0  0.89219570 -0.45164902i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     1.0+/ 1 @ 1 =   0.000#, Out:   0.000#   0.028/  -0.000f
+ 
+   S-matrix    2 =    0.94527  -0.32628 for L=    1, J=    1.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+ Elastic phase shift   2 =   -9.522  -0.000 deg. for the L =    1, J =    1.5 channel.
+   S-matrix    1 =    0.00000   0.00000 for L=    1, J=    0.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.94527  -0.32628 for L=    1, J=    1.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.00000   0.00000 for L=    3, J=    2.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    4 =    0.00004  -0.00001 for L=    0, J=    1.0 channel on core I =   0.0 from L=    1,  Acc. loss =  0.5 D.
+   S-matrix    5 =    0.00000   0.00000 for L=    2, J=    1.0 channel on core I =   0.0 from L=    1,  Acc. loss =  0.0 D.
+       1.0  0.94527382 -0.32627812i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     1.0+/ 1 @ 2 =   0.000#, Out:   0.000#   4.281#  -0.000f
+ 
+   S-matrix    3 =    1.00000  -0.00221 for L=    3, J=    2.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+ Elastic phase shift   3 =   -0.063  -0.000 deg. for the L =    3, J =    2.5 channel.
+   S-matrix    1 =    0.00000   0.00000 for L=    1, J=    0.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.00000   0.00000 for L=    1, J=    1.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    3 =    1.00000  -0.00221 for L=    3, J=    2.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    4 =    0.00000   0.00000 for L=    0, J=    1.0 channel on core I =   0.0 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    5 =    0.00000   0.00000 for L=    2, J=    1.0 channel on core I =   0.0 from L=    3,  Acc. loss =  0.0 D.
+       1.0  0.99999757 -0.00220602i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     1.0+/ 3 @ 3 =   0.000#, Out:   0.000#   0.000#   0.000f
+ 
+
+
+ ######################################################################################################################
+ #                                                                                                                    #
+ # Total SPIN and PARITY =     1.0 -,      4 channels,    0 in 1st block.  Rmin & Coul turning =    0.1    6.6 fm.  #
+ #                                                                                                                    #
+ ######################################################################################################################
+
+
+
+    C Projectl Target   #   EX.   (L  Proj) J  + Targ = Jtotal     E-cm      Re K     Re Eta     RM*K            CH
+    1 proton   7LI      #    1: I   0 0.5    0.5  1.5     1.0     1.74880   0.27154   0.33538    8.1461  -0.34942   0.37254 1 1 1   1
+    2 proton   7LI      #    1: I   2 0.5    1.5  1.5     1.0     1.74880   0.27154   0.33538    8.1461   0.52315   0.02516 1 1 1   1
+    3 proton   7LI      #    1: I   2 0.5    2.5  1.5     1.0     1.74880   0.27154   0.33538    8.1461   0.52315   0.02516 1 1 1   1
+    4 Gamma    8Be      #    1:     1 1.0    1.0  0.0     1.0    18.99880   0.09628   0.00000    2.8884  -0.52742  -0.04235 2 1 2   1
+ For    1 from    1 by form    1 (  1  0  0  0  0  0)  0  0         1 get  1.0000       3.000000       0.000000  1.0000
+ For    1 from    1 by form    2 (  1  1  0  0  0  0)  0  0         2 get  1.0000       1.000000       0.000000  1.0000
+ For    1 from    1 by form    3 (  1  2  0  0  0  0)  0  0         3 get  1.0000       1.000000       0.000000  1.0000
+ For    2 from    2 by form    1 (  1  0  0  0  0  0)  0  0         1 get  1.0000       3.000000       0.000000  1.0000
+ For    2 from    2 by form    2 (  1  1  0  0  0  0)  0  0         2 get  1.0000       1.000000       0.000000  1.0000
+ For    2 from    2 by form    3 (  1  2  0  0  0  0)  0  0         3 get  1.0000       1.000000       0.000000  1.0000
+ For    2 from    2 by form    4 (  1  3  0  0  0  0)  0  0         4 get  1.0000      -3.000000       0.000000  1.0000
+ For    3 from    3 by form    1 (  1  0  0  0  0  0)  0  0         1 get  1.0000       3.000000       0.000000  1.0000
+ For    3 from    3 by form    2 (  1  1  0  0  0  0)  0  0         2 get  1.0000       1.000000       0.000000  1.0000
+ For    3 from    3 by form    3 (  1  2  0  0  0  0)  0  0         3 get  1.0000       1.000000       0.000000  1.0000
+ For    3 from    3 by form    4 (  1  3  0  0  0  0)  0  0         4 get  1.0000       2.000000       0.000000  1.0000
+
+ Coupling #   1 to   2 from   1 of KIND= 2
+  Photonuclear couplings:           2  <-           1
+
+ E1   4  1  1  6  1  1  1.5  1  0  1.0  0.5   1  1.00000  0.28868  0.40825 -0.57735  1.44970  0.49759 -4.908262E-02
+
+ > 1   4  1  1  6  1  1  1.5  1  0  1.0  0.5   1    0.0000        31.214    
+
+ < 1   1  4  1  6  1  1  1.5  0  1  0.5  1.0   1    0.0000       -15.607    
+
+ E1   4  2  1  6  1  1  1.5  1  2  1.0  1.5   1  1.00000  0.28868  0.09129  0.81650 -2.05019  0.49759 -2.195042E-02
+
+ > 1   4  2  1  6  1  1  1.5  1  2  1.0  1.5   1    0.0000       -13.959    
+
+ < 1   2  4  1  6  1  1  1.5  2  1  1.5  1.0   1    0.0000        6.9796    
+
+ E1   4  3  1  6  1  1  1.5  1  2  1.0  2.5   1  1.00000  0.28868  0.22361  0.81650  2.51096  0.49759  6.585125E-02
+
+ > 1   4  3  1  6  1  1  1.5  1  2  1.0  2.5   1    0.0000        41.878    
+
+ < 1   3  4  1  6  1  1  1.5  2  1  2.5  1.0   1    0.0000       -20.939    
+   S-matrix    1 =    0.37538  -0.92687 for L=    0, J=    0.5 channel on core I =   1.5 from L=    0,  Acc. loss =  0.0 D.
+ Elastic phase shift   1 =  -33.976  -0.000 deg. for the L =    0, J =    0.5 channel.
+   S-matrix    1 =    0.37538  -0.92687 for L=    0, J=    0.5 channel on core I =   1.5 from L=    0,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.00000   0.00000 for L=    2, J=    1.5 channel on core I =   1.5 from L=    0,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.00000   0.00000 for L=    2, J=    2.5 channel on core I =   1.5 from L=    0,  Acc. loss =  0.0 D.
+   S-matrix    4 =    0.00039  -0.00026 for L=    1, J=    1.0 channel on core I =   0.0 from L=    0,  Acc. loss =  2.5 D.
+       1.0  0.37538249 -0.92686999i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     1.0-/ 0 @ 1 =   0.000#, Out:   0.000#   0.543/  -0.001f
+ 
+   S-matrix    2 =    0.99947  -0.03256 for L=    2, J=    1.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+ Elastic phase shift   2 =   -0.933  -0.000 deg. for the L =    2, J =    1.5 channel.
+   S-matrix    1 =    0.00000   0.00000 for L=    0, J=    0.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.99947  -0.03256 for L=    2, J=    1.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.00000   0.00000 for L=    2, J=    2.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    4 =   -0.00005   0.00000 for L=    1, J=    1.0 channel on core I =   0.0 from L=    2,  Acc. loss =  2.0 D.
+       1.0  0.99946979 -0.03255967i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     1.0-/ 2 @ 2 =   0.000#, Out:   0.000#   7.072#  -0.000f
+ 
+   S-matrix    3 =    0.99953  -0.03063 for L=    2, J=    2.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+ Elastic phase shift   3 =   -0.878  -0.000 deg. for the L =    2, J =    2.5 channel.
+   S-matrix    1 =    0.00000   0.00000 for L=    0, J=    0.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.00000   0.00000 for L=    2, J=    1.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.99953  -0.03063 for L=    2, J=    2.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    4 =    0.00019  -0.00000 for L=    1, J=    1.0 channel on core I =   0.0 from L=    2,  Acc. loss =  2.1 D.
+       1.0  0.99953068 -0.03063355i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     1.0-/ 2 @ 3 =   0.000#, Out:   0.000#   0.086/  -0.000f
+ 
+
+
+ ######################################################################################################################
+ #                                                                                                                    #
+ # Total SPIN and PARITY =     2.0 +,      5 channels,    0 in 1st block.  Rmin & Coul turning =    0.3   10.3 fm.  #
+ #                                                                                                                    #
+ ######################################################################################################################
+
+
+
+    C Projectl Target   #   EX.   (L  Proj) J  + Targ = Jtotal     E-cm      Re K     Re Eta     RM*K            CH
+    1 proton   7LI      #    1: I   1 0.5    0.5  1.5     2.0     1.74880   0.27154   0.33538    8.1461   0.18581   0.48023 1 1 1   1
+    2 proton   7LI      #    1: I   1 0.5    1.5  1.5     2.0     1.74880   0.27154   0.33538    8.1461   0.18581   0.48023 1 1 1   1
+    3 proton   7LI      #    1: I   3 0.5    2.5  1.5     2.0     1.74880   0.27154   0.33538    8.1461   0.27718  -0.46159 1 1 1   1
+    4 proton   7LI      #    1: I   3 0.5    3.5  1.5     2.0     1.74880   0.27154   0.33538    8.1461   0.27718  -0.46159 1 1 1   1
+    5 Gamma    8Be      #    1:     2 1.0    2.0  0.0     2.0    18.99880   0.09628   0.00000    2.8884  -0.42256   0.44008 2 1 2   1
+
+ Coupling #   1 to   2 from   1 of KIND= 2
+  Photonuclear couplings:           2  <-           1
+
+ E2   5  1  1  7  2  1  1.5  2  1  2.0  0.5   2  1.00000  0.22361  0.28868 -0.63246 -1.62082  0.81190  5.372308E-02
+
+ > 2   5  1  1  7  2  1  1.5  2  1  2.0  0.5   2    0.0000       -34.165    
+
+ < 2   1  5  1  7  2  1  1.5  1  2  0.5  2.0   2    0.0000        17.082    
+
+ E2   5  2  1  7  2  1  1.5  2  1  2.0  1.5   2  1.00000  0.22361  0.20412 -0.63246  2.29218  0.81190 -5.372308E-02
+
+ > 2   5  2  1  7  2  1  1.5  2  1  2.0  1.5   2    0.0000        34.165    
+
+ < 2   2  5  1  7  2  1  1.5  1  2  1.5  2.0   2    0.0000       -17.082    
+
+ E2   5  3  1  7  2  1  1.5  2  3  2.0  2.5   2  1.00000  0.22361  0.08909  0.77460 -2.80734  0.81190 -3.517001E-02
+
+ > 2   5  3  1  7  2  1  1.5  2  3  2.0  2.5   2    0.0000       -22.366    
+
+ < 2   3  5  1  7  2  1  1.5  3  2  2.5  2.0   2    0.0000        11.183    
+
+ E2   5  4  1  7  2  1  1.5  2  3  2.0  3.5   2  1.00000  0.22361  0.18898  0.77460  3.24163  0.81190  8.614858E-02
+
+ > 2   5  4  1  7  2  1  1.5  2  3  2.0  3.5   2    0.0000        54.785    
+
+ < 2   4  5  1  7  2  1  1.5  3  2  3.5  2.0   2    0.0000       -27.393    
+   S-matrix    1 =    0.89220  -0.45165 for L=    1, J=    0.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+ Elastic phase shift   1 =  -13.425   0.000 deg. for the L =    1, J =    0.5 channel.
+   S-matrix    1 =    0.89220  -0.45165 for L=    1, J=    0.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.00000   0.00000 for L=    1, J=    1.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.00000   0.00000 for L=    3, J=    2.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    4 =    0.00000   0.00000 for L=    3, J=    3.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    5 =    0.00004  -0.00001 for L=    2, J=    2.0 channel on core I =   0.0 from L=    1,  Acc. loss =  5.5 D.
+       2.0  0.89219570 -0.45164902i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     2.0+/ 1 @ 1 =   0.000#, Out:   0.000#   6.818#  -0.000f
+ 
+   S-matrix    2 =    0.94527  -0.32628 for L=    1, J=    1.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+ Elastic phase shift   2 =   -9.522  -0.000 deg. for the L =    1, J =    1.5 channel.
+   S-matrix    1 =    0.00000   0.00000 for L=    1, J=    0.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.94527  -0.32628 for L=    1, J=    1.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.00000   0.00000 for L=    3, J=    2.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    4 =    0.00000   0.00000 for L=    3, J=    3.5 channel on core I =   1.5 from L=    1,  Acc. loss =  0.0 D.
+   S-matrix    5 =    0.00001  -0.00000 for L=    2, J=    2.0 channel on core I =   0.0 from L=    1,  Acc. loss =  5.4 D.
+       2.0  0.94527382 -0.32627812i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     2.0+/ 1 @ 2 =   0.000#, Out:   0.000#   0.693#  -0.000f
+ 
+   S-matrix    3 =    1.00000  -0.00221 for L=    3, J=    2.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+ Elastic phase shift   3 =   -0.063  -0.000 deg. for the L =    3, J =    2.5 channel.
+   S-matrix    1 =    0.00000   0.00000 for L=    1, J=    0.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.00000   0.00000 for L=    1, J=    1.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    3 =    1.00000  -0.00221 for L=    3, J=    2.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    4 =    0.00000   0.00000 for L=    3, J=    3.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    5 =   -0.00000   0.00000 for L=    2, J=    2.0 channel on core I =   0.0 from L=    3,  Acc. loss =  3.4 D.
+       2.0  0.99999757 -0.00220602i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     2.0+/ 3 @ 3 =   0.000#, Out:   0.000#   0.024#  -0.000f
+ 
+   S-matrix    4 =    1.00000  -0.00213 for L=    3, J=    3.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+ Elastic phase shift   4 =   -0.061  -0.000 deg. for the L =    3, J =    3.5 channel.
+   S-matrix    1 =    0.00000   0.00000 for L=    1, J=    0.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.00000   0.00000 for L=    1, J=    1.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.00000   0.00000 for L=    3, J=    2.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    4 =    1.00000  -0.00213 for L=    3, J=    3.5 channel on core I =   1.5 from L=    3,  Acc. loss =  0.0 D.
+   S-matrix    5 =    0.00001  -0.00000 for L=    2, J=    2.0 channel on core I =   0.0 from L=    3,  Acc. loss =  3.5 D.
+       2.0  0.99999773 -0.00213218i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     2.0+/ 3 @ 4 =   0.000#, Out:   0.000#   0.148#  -0.000f
+ 
+ Allocate arrays for            6  channels, of which            6  need wfs.
+
+
+ ######################################################################################################################
+ #                                                                                                                    #
+ # Total SPIN and PARITY =     2.0 -,      6 channels,    0 in 1st block.  Rmin & Coul turning =    0.3   10.3 fm.  #
+ #                                                                                                                    #
+ ######################################################################################################################
+
+
+
+    C Projectl Target   #   EX.   (L  Proj) J  + Targ = Jtotal     E-cm      Re K     Re Eta     RM*K            CH
+    1 proton   7LI      #    1: I   0 0.5    0.5  1.5     2.0     1.74880   0.27154   0.33538    8.1461  -0.34942   0.37254 1 1 1   1
+    2 proton   7LI      #    1: I   2 0.5    1.5  1.5     2.0     1.74880   0.27154   0.33538    8.1461   0.52315   0.02516 1 1 1   1
+    3 proton   7LI      #    1: I   2 0.5    2.5  1.5     2.0     1.74880   0.27154   0.33538    8.1461   0.52315   0.02516 1 1 1   1
+    4 proton   7LI      #    1: I   4 0.5    3.5  1.5     2.0     1.74880   0.27154   0.33538    8.1461  -0.23318  -0.51047 1 1 1   1
+    5 Gamma    8Be      #    1:     1 1.0    2.0  0.0     2.0    18.99880   0.09628   0.00000    2.8884  -0.52742  -0.04235 2 1 2   1
+    6 Gamma    8Be      #    1:     3 1.0    2.0  0.0     2.0    18.99880   0.09628   0.00000    2.8884  -0.20405   0.80414 2 1 2   1
+
+ Coupling #   1 to   2 from   1 of KIND= 2
+  Photonuclear couplings:           2  <-           1
+
+ M2   5  2  1  7  2  1  1.5  1  2  2.0  1.5   2  1.00000  0.22361 -0.15811  0.10000  0.81650 -0.11978  0.75777  2.620139E-04
+
+ > 2   5  2  1  7  2  1  1.5  1  2  2.0  1.5   2    0.0000       0.16663    
+
+ < 2   2  5  1  7  2  1  1.5  2  1  1.5  2.0   2    0.0000      -0.83313E-01
+
+ M2   5  3  1  7  2  1  1.5  1  2  2.0  2.5   2  1.00000  0.22361 -0.19720  0.10000  0.81650  0.14670  0.75777 -4.002329E-04
+
+ > 2   5  3  1  7  2  1  1.5  1  2  2.0  2.5   2    0.0000      -0.25452    
+
+ < 2   3  5  1  7  2  1  1.5  2  1  2.5  2.0   2    0.0000       0.12726    
+   S-matrix    1 =    0.37538  -0.92687 for L=    0, J=    0.5 channel on core I =   1.5 from L=    0,  Acc. loss =  0.0 D.
+ Elastic phase shift   1 =  -33.976  -0.000 deg. for the L =    0, J =    0.5 channel.
+   S-matrix    1 =    0.37538  -0.92687 for L=    0, J=    0.5 channel on core I =   1.5 from L=    0,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.00000   0.00000 for L=    2, J=    1.5 channel on core I =   1.5 from L=    0,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.00000   0.00000 for L=    2, J=    2.5 channel on core I =   1.5 from L=    0,  Acc. loss =  0.0 D.
+   S-matrix    4 =    0.00000   0.00000 for L=    4, J=    3.5 channel on core I =   1.5 from L=    0,  Acc. loss =  0.0 D.
+   S-matrix    5 =    0.00000   0.00000 for L=    1, J=    2.0 channel on core I =   0.0 from L=    0,  Acc. loss =  0.0 D.
+   S-matrix    6 =    0.00000   0.00000 for L=    3, J=    2.0 channel on core I =   0.0 from L=    0,  Acc. loss =  0.0 D.
+       2.0  0.37538249 -0.92686999i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     2.0-/ 0 @ 1 =   0.000#, Out:   0.000#   0.000#   0.000f
+ 
+   S-matrix    2 =    0.99947  -0.03256 for L=    2, J=    1.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+ Elastic phase shift   2 =   -0.933  -0.000 deg. for the L =    2, J =    1.5 channel.
+   S-matrix    1 =    0.00000   0.00000 for L=    0, J=    0.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.99947  -0.03256 for L=    2, J=    1.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.00000   0.00000 for L=    2, J=    2.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    4 =    0.00000   0.00000 for L=    4, J=    3.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    5 =    0.00000  -0.00000 for L=    1, J=    2.0 channel on core I =   0.0 from L=    2,  Acc. loss =  2.0 D.
+   S-matrix    6 =    0.00000   0.00000 for L=    3, J=    2.0 channel on core I =   0.0 from L=    2,  Acc. loss =  0.0 D.
+       2.0  0.99946979 -0.03255967i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     2.0-/ 2 @ 2 =   0.000#, Out:   0.000#   0.002#  -0.000f
+ 
+   S-matrix    3 =    0.99953  -0.03063 for L=    2, J=    2.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+ Elastic phase shift   3 =   -0.878  -0.000 deg. for the L =    2, J =    2.5 channel.
+   S-matrix    1 =    0.00000   0.00000 for L=    0, J=    0.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.00000   0.00000 for L=    2, J=    1.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.99953  -0.03063 for L=    2, J=    2.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    4 =    0.00000   0.00000 for L=    4, J=    3.5 channel on core I =   1.5 from L=    2,  Acc. loss =  0.0 D.
+   S-matrix    5 =   -0.00000   0.00000 for L=    1, J=    2.0 channel on core I =   0.0 from L=    2,  Acc. loss =  2.1 D.
+   S-matrix    6 =    0.00000   0.00000 for L=    3, J=    2.0 channel on core I =   0.0 from L=    2,  Acc. loss =  0.0 D.
+       2.0  0.99953068 -0.03063355i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     2.0-/ 2 @ 3 =   0.000#, Out:   0.000#   0.005#  -0.000f
+ 
+   S-matrix    4 =    1.00000  -0.00011 for L=    4, J=    3.5 channel on core I =   1.5 from L=    4,  Acc. loss =  0.0 D.
+ Elastic phase shift   4 =   -0.003  -0.000 deg. for the L =    4, J =    3.5 channel.
+   S-matrix    1 =    0.00000   0.00000 for L=    0, J=    0.5 channel on core I =   1.5 from L=    4,  Acc. loss =  0.0 D.
+   S-matrix    2 =    0.00000   0.00000 for L=    2, J=    1.5 channel on core I =   1.5 from L=    4,  Acc. loss =  0.0 D.
+   S-matrix    3 =    0.00000   0.00000 for L=    2, J=    2.5 channel on core I =   1.5 from L=    4,  Acc. loss =  0.0 D.
+   S-matrix    4 =    1.00000  -0.00011 for L=    4, J=    3.5 channel on core I =   1.5 from L=    4,  Acc. loss =  0.0 D.
+   S-matrix    5 =    0.00000   0.00000 for L=    1, J=    2.0 channel on core I =   0.0 from L=    4,  Acc. loss =  0.0 D.
+   S-matrix    6 =    0.00000   0.00000 for L=    3, J=    2.0 channel on core I =   0.0 from L=    4,  Acc. loss =  0.0 D.
+       2.0  0.99999999 -0.00010717i: elastic S-matrix  @@      0.00  0   0 F  0
+ Reaction Xsec     2.0-/ 4 @ 4 =   0.000#, Out:   0.000#   0.000#   0.000f
+ 
+ Finished all CC sets @   1.6213000E-02
+0CUMULATIVE REACTION cross section                 =    0.00000  <L> =     1.62  <L**2> =      2.9
+0CUMULATIVE outgoing cross sections in partition 1 :    0.00000
+0CUMULATIVE outgoing cross sections in partition 2 :  6.758E-04
+0Cumulative ABSORBTION by Imaginary Potentials     =   -0.00068  <L> =     1.01  <L**2> =      1.0
+   Fusion for specific proton   M-states :  319.558179  319.558179
+0CUMULATIVE OUTGOING cross section                 =    0.00068
+ To convert to S-factors (MeV.mb = keV.b),  multiply by  1.4385E+01
+
+
+ CROSS SECTIONS FOR OUTGOING proton   & 7LI      in state #   1 with spins & parities 0.5  + &  1.5  -;  0
+
+     0.01 deg.: X-S =   6.5759E+16 mb/sr,
++                                         /R =   1.0000E+00
+    45.00 deg.: X-S =   401.418316 mb/sr,
++                                         /R =   2.2574E+00
+    90.00 deg.: X-S =    96.068858 mb/sr,
++                                         /R =   6.2976E+00
+   135.00 deg.: X-S =    49.267176 mb/sr,
++                                         /R =   9.4118E+00
+   179.99 deg.: X-S =    41.115981 mb/sr,
++                                         /R =   1.0781E+01
+                                           Integrated********** mb, over [   0.000, 180.000] at     2.0000 MeV 
+
+ CROSS SECTIONS FOR OUTGOING Gamma    & 8Be      in state #   1 with spins & parities 1.0  + &  0.0  +;  0
+
+     0.00 deg.: X-S =   7.1771E-05 mb/sr,
++                                         REAC   6.7578E-04 mb
+    45.00 deg.: X-S =   6.4370E-05 mb/sr,
+    90.00 deg.: X-S =   4.9660E-05 mb/sr,
+   135.00 deg.: X-S =   4.7347E-05 mb/sr,
+   180.00 deg.: X-S =   5.1870E-05 mb/sr,
+                                           Integrated    0.0006 mb, over [   0.000, 180.000] at     2.0000 MeV 
+ Finished all xsecs @   1.9317999E-02
+
+  The following files have been created:
+   3:local copy of User input.            6:standard output.                   
+   7:elastic  S-matrix elements.         13:total cross sections/state.        
+  16:tables of cross sections.           17:output scattering waves.           
+  21:user files.                         35:Astrophysics S-factors  / Ecm.     
+  38:cross sections for each J/pi.       39:cross sections for each Ecm.       
+  40:all cross sectns. for each Elab.    45:scat phase shift as E functions.   
+  46:bs wave functions & ANC ratios.     56:Fusion for each Jtotal.            
+  75:S-factors for lab energies.        201:Separate cross sections.           
+ 202:Separate cross sections.           
+
+ PARAMETERS : MAXQRN   MFNL   MLOC  LMAX1 MCLIST
+    ALLOWED :      6     36      7     22     13
+    REQUIRED:      2      0      7      5      4
+
+
+ ACCURACY ANALYSIS at     2.000 MeV :
+
+  Elastic h*k = 0.027 so OK       compared with 0.200
+
+   Real(S-el) > 0.01 first at J =       1.0
+   Real(S-el) > 0.10 first at J =       1.0
+   Real(S-el) > 0.50 first at J =       1.0
+   Real(S-el) > 0.90 first at J =       1.0
+   Real(S-el) > 0.99 first at J =       1.0
+   R-turn =    10.34 fm    at J =       2.0
+
+ Forward-angle excitation cut off below  15.373 deg by max JT =       2.0
+                              and below   4.718 deg by max R.
+
+ Total CPU  0 time =       0.02 seconds

@@ -1,4 +1,4 @@
-'p-cd.in' 'p-cd.frout' 
+'p-cd.nin' 'p-cd.frout' 
 4 1
  &variable kind=1 name='r0' kp=1 pline=2 col=2 potential=1.171 step=0.01/
  &variable kind=1 name='V' kp=1 pline=2 col=1 potential=52.50 step=0.1/
