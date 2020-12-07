@@ -39,6 +39,11 @@ set FCOPT = ''
 #  copy & edit these lines yourself
 
 if(! $?ARCH && -X arch) setenv ARCH `arch`
+if( ${ARCH} == 'arm64' ) then
+      if( -X gfortran ) 	set COMP = 'gfortran'
+      if( -X nagfor ) 	        set COMP = 'nagfor'
+      set PREF=${ARCH}
+endif
 if( ${ARCH} == 'x86_64' ) then   
       if( -X pgf90 )   set COMP = 'pgf90'
       if( -X gfortran ) 	set COMP = 'gfortran'
