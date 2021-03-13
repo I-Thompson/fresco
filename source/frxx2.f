@@ -652,6 +652,7 @@ C
       PTYPE(2,M) = TYPE
       PTYPE(3,M) = 0
          IF(TYPE.EQ.20 .OR. TYPE.EQ.21) PTYPE(3,M) = M-MF+1
+         IF(TYPE>=5 .and. TYPE<=7) PTYPE(3,M) = 2   ! tensor parts of optical potentials
       PTYPE(4,M) = 0
       PTYPE(5,M) = 0
       IF(SHAPE.GE.20) PTYPE(5,M) = SHAPE
