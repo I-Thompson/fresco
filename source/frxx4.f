@@ -1175,7 +1175,7 @@ C
       J2=J2MIN+IJ2
   70  T = T + (2*J2+1) * RACAH(S1,L+Z, JT,S2,J, J2)
      &                 * RACAH(S1,LP+Z,JT,S2,JP,J2)
-     &    * RACAH(L+Z,LP+Z,S2,S2,2+Z,J)* (-1)**NINT(J2-L-S2)
+     &    * RACAH(L+Z,LP+Z,S2,S2,2+Z,J2)* (-1)**NINT(J2-L-S2)
       TENSOR = T * SQRT((2*L+1.)*(2*S2+1)*(2*J+1.)*(2*JP+1))
      &           * (-1)**NINT(J-JP+LP-L)
      &         *SQRT(2*(2*LP+1)/(3.*(2*L+1.)))*CLEB6(LP+Z,Z,2+Z,Z,L+Z,Z)
