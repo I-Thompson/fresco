@@ -147,14 +147,14 @@
     	
         write(koe,1002) 
  1002 	format(' FRESCO - FRES 3.4: Coupled Reaction Channels')
-	uu = .false.
-	inquire(file='fresco.in',exist=uu)
-	if(uu) then
-              write(koe,*) ' ***  USING AS INPUT FILE fresco.in,',
-     X		' NOT stdin  ***'
-  	      open(ki,file='fresco.in',status='old')
-	      rewind ki
-	      endif
+!	uu = .false.
+!	inquire(file='fresco.in',exist=uu)
+!	if(uu) then
+!              write(koe,*) ' ***  USING AS INPUT FILE fresco.in,',
+!     X		' NOT stdin  ***'
+!  	      open(ki,file='fresco.in',status='old')
+!	      rewind ki
+!	      endif
  1003 	read(ki,1005,end=999) headng
       	read(ki,1005) line
  1005 	format(a100)

@@ -1788,7 +1788,7 @@ C	   	Should be previous PHI, not current W
      & ' ARE REQUIRED,  SO INCREASE PARAMETER ',A6,' !!')
       DRY = .TRUE.
 	write(KO,20)
-20	format(/'  *** INTERNAL ERROR IN ALGORITHMN TO CALCULATE',
+20	format(/'  *** INTERNAL ERROR IN ALGORITHM TO CALCULATE',
      X ' PARAMETERS!! ***',/,'  *** Please report this (along with',
      X ' a copy of the input file)',/,
      X '      to Ian@kernz.org ***')
