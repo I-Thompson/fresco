@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Sfresco commands</TITLE>
+<META NAME="description" CONTENT="Sfresco commands">
+<META NAME="keywords" CONTENT="fresco-namelist-manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+
+<LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
+
+<LINK REL="previous" HREF="node14.html">
+<LINK REL="next" HREF="node16.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html171"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node16.html">Test run: a CCBA</A>
+<B> Up:</B> <A
+ HREF="node13.html">Input SFRESCO format</A>
+<B> Previous:</B> <A
+ HREF="node14.html">Search file</A>
+ &nbsp; <B>  <A ID="tex2html172"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00062000000000000000">
+Sfresco commands</A>
+</H2>
+
+<P>
+The inputs to <SPAN style="font-family:monospace">SFresco</SPAN> are
+<BR>
+Card 1: name of <SPAN style="font-family:monospace">search_file</SPAN>
+<BR>
+<P>
+Lines 2: repeatedly one of (in all upper or all lower case):
+
+<BR>
+EX: exit
+
+<BR>
+Q: query status of search variables
+
+<BR>
+SET <SPAN style="font-family:monospace">var val</SPAN>: set variable number <SPAN style="font-family:monospace">var</SPAN> to value <SPAN style="font-family:monospace">val</SPAN>.
+
+<BR>
+FIX <SPAN style="font-family:monospace">var</SPAN>: fix variable number <SPAN style="font-family:monospace">var</SPAN> (set <SPAN style="font-family:monospace">step</SPAN>=0).
+
+<BR>
+STEP <SPAN style="font-family:monospace">var step</SPAN>: unfix variable number <SPAN style="font-family:monospace">var</SPAN> with step <SPAN style="font-family:monospace">step</SPAN>.
+
+<BR>
+SCAN <SPAN style="font-family:monospace">var val1 val2 step</SPAN>: scan variable number <SPAN style="font-family:monospace">var</SPAN>
+from value <SPAN style="font-family:monospace">val1</SPAN> to value <SPAN style="font-family:monospace">val2</SPAN> in steps of <SPAN style="font-family:monospace">step</SPAN>.
+
+<BR>
+SHOW: list all datasets with current predictions and <SPAN CLASS="MATH"><IMG STYLE="height: 1.81ex; vertical-align: -0.62ex; " SRC="img234.svg"
+ ALT="$\chi$"></SPAN> values.
+
+<BR>
+PLOT <SPAN style="font-family:monospace">plotfile</SPAN>: write file (default: <SPAN style="font-family:monospace">search.plot</SPAN>) for reading by <SPAN style="font-family:monospace">xmgr, xvgr</SPAN>,
+ with data and theoretical curves.
+
+<BR>
+READ <SPAN style="font-family:monospace">file</SPAN>: read plot output <SPAN style="font-family:monospace">file</SPAN> for further searches, if not:
+
+<BR>
+READ <SPAN style="font-family:monospace">snapfile</SPAN>: if the input string <SPAN style="font-family:monospace">file</SPAN> contains the string 'snap',
+read to the end of previous snap output <SPAN style="font-family:monospace">snapfile</SPAN>, for further searches.
+
+<BR>
+ESCAN <SPAN style="font-family:monospace">emin emax estep</SPAN>: scan lab. energy in incident channel, to give
+phase shifts in fort.71, fusion &amp; reaction cross sections in fort.40,
+ and S-factors in fort.35 and 75.
+This is to look for/at resonances, or at behaviour out of data's energy range,
+not for <SPAN CLASS="MATH"><IMG STYLE="height: 2.60ex; vertical-align: -0.62ex; " SRC="img228.svg"
+ ALT="$\chi^2$"></SPAN> fitting.
+<BR>
+<BR>
+MIN: call <SPAN style="font-family:monospace">minuit</SPAN> interactively, to read from stdin.
+Return to <SPAN style="font-family:monospace">SFresco</SPAN> by <SPAN style="font-family:monospace">minuit</SPAN> command <SPAN style="font-family:monospace">end</SPAN>.
+
+<P>
+&nbsp;
+<BR>
+A example of this <SPAN style="font-family:monospace">search_file</SPAN> input is:
+<PRE>
+'6hep.in' '6hep.out' 7 1
+ &amp;variable kind=1 name='V' kp=1 pline=2 col=1 /
+ &amp;variable kind=1 name='r0' kp=1 pline=2 col=2 valmin=.7 valmax=2.0/
+ &amp;variable kind=1 name='a' kp=1 pline=2 col=3 /
+ &amp;variable kind=1 name='W' kp=1 pline=2 col=4 /
+ &amp;variable kind=1 name='rw' kp=1 pline=2 col=5 valmin=.7 valmax=2.0/
+ &amp;variable kind=1 name='aw' kp=1 pline=2 col=6 /
+ &amp;variable kind=5 name='exptnorm' /
+ &amp;data type=0 iscale=2  idir=0 lab=F  abserr=T/
+ 13.99     565.7     28.3
+ 17.59     478.19    23.91
+ 21.22     425.41    21.28
+ 24.92     338.44    16.93
+ 28.68     284.71    14.24
+ 36.48     168.59    8.43
+ 40.56     137.9     6.86
+ 44.8      104.75    5.24
+ 53.       30.0      9.14
+ 53.94     38.45     2.71
+ 59.       25.62     2.55
+ &amp;
+</PRE>
+
+A example of the full <SPAN style="font-family:monospace">SFresco</SPAN> input, suitable for batch running, is:
+<PRE>
+search4.in
+min
+fix 4
+migrad
+end
+q
+show
+plot
+</PRE>
+
+where <SPAN style="font-family:monospace">search4.in</SPAN> is the above <SPAN style="font-family:monospace">search_file</SPAN> input file name.
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node16.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node14.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html171"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node16.html">Test run: a CCBA</A>
+<B> Up:</B> <A
+ HREF="node13.html">Input SFRESCO format</A>
+<B> Previous:</B> <A
+ HREF="node14.html">Search file</A>
+ &nbsp; <B>  <A ID="tex2html172"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

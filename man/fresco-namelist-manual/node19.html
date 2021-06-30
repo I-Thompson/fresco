@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Stabilization method for coupled channels solutions</TITLE>
+<META NAME="description" CONTENT="Stabilization method for coupled channels solutions">
+<META NAME="keywords" CONTENT="fresco-namelist-manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+
+<LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
+
+<LINK REL="next" HREF="node20.html">
+<LINK REL="previous" HREF="node18.html">
+<LINK REL="next" HREF="node20.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="fresco-namelist-manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html179"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node20.html">About this document ...</A>
+<B> Up:</B> <A
+ HREF="fresco-namelist-manual.html">Fresco</A>
+<B> Previous:</B> <A
+ HREF="node18.html">KIND=1 Spin Transfer Couplings</A>
+ &nbsp; <B>  <A ID="tex2html180"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION000100000000000000000"></A>
+<A ID="hort"></A>
+<BR>
+Stabilization method for coupled channels solutions
+</H1>
+
+<P>
+Antonio Moro has contributed a 
+a stabilization algorithm to solve or, at least, palliate, the common problem of loss of linear dependence of the coupled channels solutions. Following the suggestion of some Japanese researchers, he implemented a method of re-orthogonalization similar to that described in the papers of Baylis <EM>et al</EM>, but using a QR orthogonalization procedure instead of the Gram-Schmidt method used by them.
+
+<P>
+Thanks to this implementation, we are now able to solve efficiently problems which were otherwise not feasible, for example, CDCC calculations with high-lying breakup states, including closed-channels. His group to extend this to the case of transfer reactions, but only with limited success, so in practice it works only for pure coupled channels equations.
+
+<P>
+A test case <SPAN style="font-family:monospace">dNi-cdcc-QR.in</SPAN> is included in the test/ folder, corresponding to a d+<SPAN CLASS="MATH"><IMG STYLE="height: 2.11ex; vertical-align: -0.10ex; " SRC="img258.svg"
+ ALT="$^{58}$"></SPAN>Ni reaction at 20 MeV, including closed channels. In this case, the standard Numerov method fails for JT<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN>3, whereas with the stabilization procedure the calculation runs smoothly for all required partial waves. 
+
+<P>
+To activate this option we added a variable <SPAN style="font-family:monospace">hort</SPAN> to the &amp;Fresco namelist, which corresponds to the radial interval step at which stabilization is performed. Typically, try <SPAN style="font-family:monospace">hort</SPAN> = 5 fm. 
+This orthogonalizing continues out to the largest classical turning radius for any open channel, but can continued further by setting the radius variable <SPAN style="font-family:monospace">rmort</SPAN> also in the FRESCO namelist.
+
+<P>
+WE. Baylis and S.J. Peel, Computer Physics Communications <B>25</B> (1982), 7-19, 
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node20.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="fresco-namelist-manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node18.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html179"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node20.html">About this document ...</A>
+<B> Up:</B> <A
+ HREF="fresco-namelist-manual.html">Fresco</A>
+<B> Previous:</B> <A
+ HREF="node18.html">KIND=1 Spin Transfer Couplings</A>
+ &nbsp; <B>  <A ID="tex2html180"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

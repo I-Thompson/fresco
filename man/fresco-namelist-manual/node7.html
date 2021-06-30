@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>&amp;PARTITION and &amp;STATES namelists</TITLE>
+<META NAME="description" CONTENT="&amp;PARTITION and &amp;STATES namelists">
+<META NAME="keywords" CONTENT="fresco-namelist-manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+
+<LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
+
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html131"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node8.html">&amp;POT potential namelists</A>
+<B> Up:</B> <A
+ HREF="node4.html">Input NAMELIST format</A>
+<B> Previous:</B> <A
+ HREF="node6.html">The &amp;FRESCO namelist</A>
+ &nbsp; <B>  <A ID="tex2html132"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html133"
+  HREF="node7.html#SECTION00043100000000000000">&amp;PARTITION namelist</A>
+<LI><A ID="tex2html134"
+  HREF="node7.html#SECTION00043200000000000000">&amp;STATES namelists</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A ID="SECTION00043000000000000000">
+&amp;PARTITION and &amp;STATES namelists</A>
+</H2>
+The &amp;PARTITION namelists are repeated until an empty &amp;PARTITION namelist is read in.
+After each non-empty (NEX <SPAN CLASS="MATH"><IMG STYLE="height: 1.77ex; vertical-align: -0.19ex; " SRC="img22.svg"
+ ALT="$&gt;0$"></SPAN>) &amp;PARTITION, NEX instances of the &amp;STATES namelist are required.
+
+<P>
+
+<H3><A ID="SECTION00043100000000000000">
+&amp;PARTITION namelist</A>
+</H3>
+<DL>
+<DT><STRONG>NAMEP,  MASSP,  ZP,  and NAMET,   MASST,    ZT</STRONG></DT>
+<DD>&nbsp;
+<BR>
+NAMEP = name of projectile-like nuclide (string 8 characters max),  
+<BR>
+MASSP = mass of projectile (in units of UNITMASS), 
+<BR>
+ZP = charge of nuclide, 
+<BR>
+NAMET, MASST, ZT = equivalent properties of target-like nuclide.
+
+<P>
+</DD>
+<DT><STRONG>NEX,  QVAL, PWF</STRONG></DT>
+<DD>&nbsp;
+<BR>
+abs(NEX) = number of excited-state pairs in this partition. 
+<BR>
+If NEX <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, then cross sections for this partition are not printed
+<BR>
+QVAL = <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img75.svg"
+ ALT="$Q$"></SPAN>-value (in MeV) of this partition for Ep+Et=0.0. Only differences in <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img75.svg"
+ ALT="$Q$"></SPAN>-values between partitions are significant.
+<BR>
+PWF = use asymptotic piecewise methods in this partition (default is True).
+
+<P>
+</DD>
+<DT><STRONG>READSTATES</STRONG></DT>
+<DD>&nbsp; 
+<BR>read in specification of the NEX states from file number READSTATES. 
+<BR>
+PRMAX = maximum radius in this partition. Useful for R-matrix calculations, but redefines what `local' interactions mean.
+<BR>
+<P>
+</DD>
+</DL>
+
+<P>
+
+<H3><A ID="SECTION00043200000000000000">
+&amp;STATES namelists</A>
+</H3>
+Repeated IA = 1,..,NEX times before the next &amp;PARTITION: 
+
+<P>
+<DL>
+<DT><STRONG>Jp,  COPYp,  BANDp , Ep,  KKp, Tp,&nbsp;&nbsp; Jt,  COPYt, BANDt , Et,  KKt, Tt</STRONG></DT>
+<DD>&nbsp;
+<BR>
+For both projectile (p) and target (t), the following are read:
+
+<P>
+J     = spin of the state (Jp and Jt, and similarly below).
+
+<P>
+BAND  <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0 for positive parity state, and <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0 for negative parity.
+The value of BAND defines the rotational band : all states of the
+same BAND may be coupled by rotational mechanisms.
+Odd multipoles couple BAND values of opposite sign.
+
+<P>
+If COPY is positive, then this level is a copy of a
+previous level number (COPY <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> IA) in the same partition.
+
+<P>
+If COPYp <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, then this level is an exchange copy of
+<EM>the same IA numbered</EM>
+level in the previous partition abs(COPY).
+That is, a copy with projectile and target nuclei exchanged.
+
+<P>
+If COPYt = -IC, then the target state is an exchanged projectile.
+If that state has spin zero, then only even partial waves are allowed.
+
+<P>
+COPYs are needed to define identical states of one nucleus in different
+pairings IA.   Spectroscopic amplitudes (in &amp;cfp namelists) should be defined
+for only the original `copied' level.
+
+<P>
+E     = excitation energy of state relative to ground state.
+
+<P>
+KK     = K of rotation band containing this state.
+(If zero, use spin of first level in this band.)
+
+<P>
+T     = isospin of this state (if zero, use INT((mass-2*charge)/2))
+
+<P>
+</DD>
+<DT><STRONG>KP, FEXCH,IGNORE, INFAM,OUTFAM</STRONG></DT>
+<DD>&nbsp;
+<BR>
+KP = index of optical potential for this pair of excited states.
+If zero, use as default KP = IC, the number of this partition.
+
+<P>
+If FEXCH = T calculate and write out all cross sections and amplitudes
+for <SPAN CLASS="MATH"><IMG STYLE="height: 1.92ex; vertical-align: -0.29ex; " SRC="img76.svg"
+ ALT="$180-\theta$"></SPAN>.
+
+<P>
+If IGNORE = T, ignore the convergence of this  state pair
+(see IPS discussion above).
+
+<P>
+If INFAM <SPAN CLASS="MATH"><IMG STYLE="height: 2.18ex; vertical-align: -0.53ex; " SRC="img70.svg"
+ ALT="$\ne$"></SPAN> 0,  read in complex amplitudes later to add to
+calculated scattering amplitudes
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, read in <SPAN ID="txt140">only one</SPAN> amplitude (non spin-flip)
+for each scattering angle, with others zero.
+
+<P>
+If OUTFAM <SPAN CLASS="MATH"><IMG STYLE="height: 2.18ex; vertical-align: -0.53ex; " SRC="img70.svg"
+ ALT="$\ne$"></SPAN> 0,  write out complex amplitudes later to add to
+calculated scattering amplitudes.
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0: write out <SPAN ID="txt141">only one</SPAN> amplitude 
+for each  angle, namely the average of diagonal amplitudes.
+
+<P>
+The output files are suitable to be reread later as input file
+</DD>
+</DL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html131"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node8.html">&amp;POT potential namelists</A>
+<B> Up:</B> <A
+ HREF="node4.html">Input NAMELIST format</A>
+<B> Previous:</B> <A
+ HREF="node6.html">The &amp;FRESCO namelist</A>
+ &nbsp; <B>  <A ID="tex2html132"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

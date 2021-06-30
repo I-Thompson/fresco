@@ -3,3 +3,7 @@ i686-*
 x86_64-*
 source/keep
 *.diff
+*.toc
+*.log
+*.aux
+*.synctex.gz

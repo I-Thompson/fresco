@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Test run: a CCBA calculation</TITLE>
+<META NAME="description" CONTENT="Test run: a CCBA calculation">
+<META NAME="keywords" CONTENT="fresco-namelist-manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+
+<LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
+
+<LINK REL="next" HREF="node17.html">
+<LINK REL="previous" HREF="node13.html">
+<LINK REL="next" HREF="node17.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node17.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="fresco-namelist-manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node15.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html173"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node17.html">File allocations</A>
+<B> Up:</B> <A
+ HREF="fresco-namelist-manual.html">Fresco</A>
+<B> Previous:</B> <A
+ HREF="node15.html">Sfresco commands</A>
+ &nbsp; <B>  <A ID="tex2html174"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00070000000000000000">
+Test run: a CCBA calculation</A>
+</H1>
+
+<P>
+The following test case calculates the inelastic and transfer cross sections
+for the reactions induced by <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.10ex; " SRC="img235.svg"
+ ALT="$^{19}$"></SPAN>F on <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.10ex; " SRC="img236.svg"
+ ALT="$^{28}$"></SPAN>Si at 60.0 MeV.   A Triton-Oxygen
+cluster structure is assumed for <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.10ex; " SRC="img235.svg"
+ ALT="$^{19}$"></SPAN>F, with the potentials for the triton
+and the oxygen core being folded together to give a diagonal Watanabe
+potential for elastic <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.10ex; " SRC="img235.svg"
+ ALT="$^{19}$"></SPAN>F scattering as well as the couplings to the
+inelastic 1/2+ state.
+These elastic and inelastic channels are coupled together to all orders,
+then a finite-range transfer step is calculated for the <SPAN CLASS="MATH"><IMG STYLE="height: 2.11ex; vertical-align: -0.10ex; " SRC="img237.svg"
+ ALT="$^{16}$"></SPAN>O + <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.10ex; " SRC="img238.svg"
+ ALT="$^{31}$"></SPAN>P channel,
+thus performing a CCBA calculation.
+
+<P>
+<SPAN CLASS="SPAN"></SPAN><PRE>
+Test run: CCBA calculation 28Si(19F,16O) 31P, cluster form factors.
+NAMELIST
+ &amp;FRESCO
+ hcm=.10 rmatch=25 rintp=0.50  hnl=0.100  rnl=3.
+ jtmin=0. jtmax=80 absend=.01 kqmax=1  thmin=0. thmax=60.0  thinc=2.5
+ iter=1   iblock=2 nnu=30 chans=1  listcc=2 smats=1 elab=60.0
+ /
+ &amp;PARTITION
+   namep='19-F' massp=19. zp=9 nex=2 namet='28-SI' masst=28 zt=14 /
+ &amp;states Jp=0.5   Bandp=+1 Ep=0.0  cpot=1          Jt=0.0   bandt=+1 Et=0.0 /
+ &amp;states Jp=2.5   Bandp=+1 Ep=0.2 /
+
+ &amp;PARTITION
+   namep='16-O' massp=16. zp=8 nex=1  namet='31-P' masst=31 zt=15 qval=6.199/
+ &amp;states Jp=0.0   Bandp=+1 Ep=0.0  cpot=2          Jt=0.5   bandt=+1 Et=0.0 /
+ &amp;partition /
+
+ &amp;pot kp=1 At=28.0     Ap=19.0   Rc=1.2 /
+ &amp;pot kp=2 At=31.0     Ap=16.0   Rc=1.35
+           V=31.20  rv=1.45    av=0.47    W=15.10   rw=1.270   aw=0.310
+           Vso=0.75 rso=1.24    aso=0.37 /
+ &amp;pot kp=3 At=19.0     Rc=1.25    ac=0.65
+           V=115.00 rv=1.250   av=0.650 Vso=6.30 rso=1.25    aso=0.650 /
+ &amp;pot kp=4 At=31.0     Rc=1.25    ac=0.65 V=99.000 rv=1.250   av=0.650
+           Vso=6.30 rso=1.25    aso=0.650 /
+ &amp;pot kp=5 At=28.0     Rc=1.2
+           V=27.00  rv=2.42452 av=0.460   W=11.66   rw=2.14456 aw=0.238 /
+ &amp;pot kp=6 At=28.0     Rc=1.25    ac=0.65
+           V=160.00 rv=1.07    av=0.72    W=37.0    rw=1.35    aw=0.88
+           Vso=10.0 rso=0.85    aso=0.850 /
+ &amp;pot  /
+ &amp;OVERLAP kn1=1 ic1=1 ic2=2 in=1 kind=0 nn=4 l=0 sn=.5 j=0.5 kbpot=3 be=11.73 isc=1 /
+ &amp;OVERLAP kn1=2 ic1=1 ic2=2 in=2 kind=0 nn=4 l=0 sn=.5 j=0.5 kbpot=4 be=17.899 isc=1 /
+ &amp;OVERLAP kn1=3 ic1=1 ic2=2 in=1 kind=0 nn=3 l=2 sn=.5 j=2.5 kbpot=3 be=11.53 isc=1 /
+ &amp;overlap /
+ &amp;COUPLING icto=2   icfrom=1   kind=7 ip1=0 ip2=0 ip3=0/
+ &amp;cfp     in=1   ib=1   ia=1   kn=1  a=1.00 /
+ &amp;cfp     in=1   ib=2   ia=1   kn=3  a=1.00 /
+ &amp;cfp     in=2   ib=1   ia=1   kn=2  a=1.00 /
+ &amp;cfp     /
+ &amp;COUPLING icto=1   icfrom=2   kind=3 ip1=4 ip2=1 ip3=0 kfrag=6 kcore=5/
+</PRE><SPAN CLASS="SPAN"></SPAN>
+
+<P>
+<BR><HR>
+
+</BODY>
+</HTML>

@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Search file</TITLE>
+<META NAME="description" CONTENT="Search file">
+<META NAME="keywords" CONTENT="fresco-namelist-manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+
+<LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
+
+<LINK REL="next" HREF="node15.html">
+<LINK REL="previous" HREF="node13.html">
+<LINK REL="next" HREF="node15.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html169"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node15.html">Sfresco commands</A>
+<B> Up:</B> <A
+ HREF="node13.html">Input SFRESCO format</A>
+<B> Previous:</B> <A
+ HREF="node13.html">Input SFRESCO format</A>
+ &nbsp; <B>  <A ID="tex2html170"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H2><A ID="SECTION00061000000000000000">
+Search file</A>
+</H2>
+A <SPAN style="font-family:monospace">search_file</SPAN> format is defined as follows:
+<PRE>
+(2*string, 2*integer: free format)
+input_file, output_file, nvariables, ndatasets
+</PRE>
+
+<P></P>
+
+<P>
+<SPAN style="font-family:monospace">input_file</SPAN>: name of file (in single quotes) with regular FRESCO input
+<BR><SPAN style="font-family:monospace">output_file</SPAN>: name of file for the final FRESCO output
+<BR><SPAN style="font-family:monospace">nvariables</SPAN>: number of search variables
+<BR><SPAN style="font-family:monospace">ndatasets</SPAN>:  number of experimental data sets.
+<BR>
+<P>
+Repeated <SPAN style="font-family:monospace">nvariables</SPAN> times, a namelist with some of the following variables:
+<PRE>
+namelist  &amp;variable:
+name,kind,step,valmin,valmax, kp,pline,col,potential,nopot,
+dataset,datanorm, nafrac,afrac,
+energy, jtot,par,channel,width,
+</PRE>
+<SPAN style="font-family:monospace">name</SPAN> is name of variable (up to 10 characters),
+<BR><SPAN style="font-family:monospace">kind</SPAN>: 0=ignore, 1=potential, 2=afrac, 3=R-matrix energy,
+<BR>
+4=R-mat partial width, 5=dataset normalisation
+<BR><SPAN style="font-family:monospace">step</SPAN>: step size for finding derivatives etc, zero for fixed. (default 0.01)
+<BR><SPAN style="font-family:monospace">valmin</SPAN>: strict lower bound (if non-zero),
+<BR><SPAN style="font-family:monospace">valmax</SPAN>: strict upper bound (if non-zero), 
+<BR><SPAN style="font-family:monospace">null</SPAN>: (default -124578) `undefined' value,
+<BR>
+<P>
+<SPAN style="font-family:monospace">kind=</SPAN><B>1: Variable potential parameter:</B>
+<BR><SPAN style="font-family:monospace">kp</SPAN>: number of potential as in &amp;pot namelist,
+<BR><SPAN style="font-family:monospace">pline</SPAN>: order of which &amp;pot namelist within potential definition,
+<BR><SPAN style="font-family:monospace">col</SPAN>:   number within namelist: selecting P0&ndash;P7 ,
+<BR><SPAN style="font-family:monospace">potential</SPAN>: value of this potential parameter (default <SPAN style="font-family:monospace">null</SPAN>: use <SPAN style="font-family:monospace">input_file</SPAN>)
+<BR>
+<P>
+<SPAN style="font-family:monospace">kind=</SPAN><B>2: Variable spectroscopic amplitude:</B>
+<BR><SPAN style="font-family:monospace">nafrac</SPAN>: order number of &amp;cfp namelist in <SPAN style="font-family:monospace">input_file</SPAN>
+<BR><SPAN style="font-family:monospace">afrac</SPAN>: spectroscopic amplitude A (default <SPAN style="font-family:monospace">null</SPAN>: use <SPAN style="font-family:monospace">input_file</SPAN>)
+<BR>
+<P>
+<SPAN style="font-family:monospace">kind=</SPAN><B>3: Variable energy of R-matrix term:</B>
+<BR><SPAN style="font-family:monospace">term</SPAN>: term number (default 1)
+<BR><SPAN style="font-family:monospace">jtot</SPAN>: J value for additional R-matrix term
+<BR><SPAN style="font-family:monospace">par</SPAN>: parity (+1 or &ndash;1)
+<BR><SPAN style="font-family:monospace">energy</SPAN>: energy (cm MeV in entrance channel) of additional R-matrix term (default 0)
+<BR><SPAN style="font-family:monospace">nopot</SPAN>: Disable potential &amp; Buttle correction for this J/pi set (logical T or F, default F)
+<BR>
+<P>
+<SPAN style="font-family:monospace">kind=</SPAN><B>4: Variable partial width of R-matrix term:</B>
+<BR><SPAN style="font-family:monospace">channel</SPAN>: channel number (in order generated by FRESCO)
+<BR><SPAN style="font-family:monospace">term</SPAN>: term number (default 1)
+<BR><SPAN style="font-family:monospace">width</SPAN>: width for this channel (MeV<SPAN CLASS="MATH"><IMG STYLE="height: 2.21ex; vertical-align: -0.10ex; " SRC="img229.svg"
+ ALT="$^{1/2}$"></SPAN> if <SPAN style="font-family:monospace">rwa</SPAN> or energy subthreshold, else MeV(cm)) (default 0)
+<BR>
+<P>
+<SPAN style="font-family:monospace">kind=</SPAN><B>5: Variable dataset normalisation:</B>
+<BR><SPAN style="font-family:monospace">dataset(1:2)</SPAN>: index (or, first and last, inclusive) of which dataset (1 to <SPAN style="font-family:monospace">ndatasets</SPAN>) (default 1), or
+<BR><SPAN style="font-family:monospace">reffile</SPAN>: filename of dataset. If has a `*', renorm all sets with names matching up to that character,
+<BR><SPAN style="font-family:monospace">datanorm</SPAN>: search on absolute normalisation factor of this dataset and its error (default: 1.0)
+<BR>
+<P>
+Repeated <SPAN style="font-family:monospace">ndatasets</SPAN> times, namelist with some of the following variables, then the
+corresponding data:
+<PRE>
+namelist \&amp;data:
+type,data_file,points,delta,xmin,lab,energy,angle,
+idir,iscale,abserr,ic,ia,k,q,jtot,par,channel,value,error,  % leg,
+pel,exl,labe,lin,lex, % ib % term
+</PRE>
+
+<P>
+<SPAN style="font-family:monospace">type</SPAN> (default 0)
+
+<BR>= 0 angular distribution for fixed energy
+
+<BR>= 1 excitation and angular cross section double distributions
+
+<BR>= 2 excitation cross section for fixed angle
+
+<BR>= 3 excitation total cross section. Also: ic=0: <SPAN style="font-family:monospace">ia</SPAN>=0 is total reaction cross section;
+<SPAN style="font-family:monospace">ia</SPAN>=1 is total fusion cross section; 1<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN><SPAN style="font-family:monospace">ia</SPAN><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN>NFUS+1 are fusion from potential
+KFUS (in &amp;Fresco namelist) for inelastic state <SPAN style="font-family:monospace">ia</SPAN>&ndash;1.
+
+<BR>= 4 excitation phase shift for fixed partial wave
+
+<BR>= 5 desired factor for bound state search (binding energy or potential scale
+ according to ISC).
+
+<BR>= 6 specific experimental constraint on a search parameter <SPAN style="font-family:monospace">par</SPAN>,
+    to be <SPAN style="font-family:monospace">value</SPAN> with error <SPAN style="font-family:monospace">error</SPAN> (<SPAN style="font-family:monospace">abserr</SPAN>=T or F).
+
+<P>
+<SPAN style="font-family:monospace">data_file</SPAN>: name of data file with data, `<SPAN CLASS="MATH"><IMG STYLE="height: 1.01ex; vertical-align: -0.10ex; " SRC="img230.svg"
+ ALT="$=$"></SPAN>' for <SPAN style="font-family:monospace">search_file</SPAN>,
+ `<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN>' for stdin (default `<SPAN CLASS="MATH"><IMG STYLE="height: 1.01ex; vertical-align: -0.10ex; " SRC="img230.svg"
+ ALT="$=$"></SPAN>')
+<BR><SPAN style="font-family:monospace">points</SPAN>: number of data points (default: keep reading as many as possible),
+
+<BR><SPAN style="font-family:monospace">delta</SPAN>: if non-zero, construct linear x-scale from <SPAN style="font-family:monospace">xmin</SPAN> in steps of <SPAN style="font-family:monospace">delta</SPAN>,
+ (default 0)
+<BR><SPAN style="font-family:monospace">lab</SPAN>: T  for lab angles and cross sections (default F for cm frame).
+<BR><SPAN style="font-family:monospace">energy</SPAN>: lab energy for this <SPAN style="font-family:monospace">type</SPAN>=0 dataset (default: use <SPAN style="font-family:monospace">ELAB(1)</SPAN> from Card 19)
+<BR><SPAN style="font-family:monospace">pel,exl,labe,lin,lex</SPAN>: specify input channels for this data set, as in Card 18
+
+<P>
+<SPAN style="font-family:monospace">idir</SPAN> (default 0)
+
+<BR>=-1 cross-section data are given as astrophysical S-factors, but will be converted to absolute,
+
+<BR>= 0 cross-section data are given in absolute units,
+
+<BR>= 1 cross-section data are ratio to Rutherford
+
+<BR>= 2 cross sections are given in absolute units but will be
+         converted to ratio to Rutherford.
+
+<P>
+<SPAN style="font-family:monospace">iscale</SPAN> (default 2)
+
+<BR>= -1 dimensionless (eg ratio to Rutherford if <SPAN style="font-family:monospace">idir</SPAN>=1),
+
+<BR>= 0 absolute cross-section units are fermi-squared/sr.
+
+<BR>= 1 absolute scale is barn/sr
+
+<BR>= 2 absolute scale is mb/sr
+
+<BR>= 3 absolute scale is micro-b/sr
+
+<P>
+<SPAN style="font-family:monospace">abserr</SPAN>: T or F for absolute error (default F)
+<BR><SPAN style="font-family:monospace">ic</SPAN>: partition number of cross section channel (index of Cards 6)  (default 1)
+<BR><SPAN style="font-family:monospace">ia</SPAN>: excitation pair number of cross section (index of Cards 7)  (default 1)
+<BR><SPAN style="font-family:monospace">k</SPAN>: tensor rank of cross section (0, 1, 2,..) (default 0). 
+<BR><SPAN style="font-family:monospace">q</SPAN>: index for tensor <SPAN CLASS="MATH"><IMG STYLE="height: 2.32ex; vertical-align: -0.78ex; " SRC="img231.svg"
+ ALT="$T_{kq}$"></SPAN> of cross section (0, 1, 2,..) (default 0).
+    <SPAN CLASS="MATH"><IMG STYLE="height: 2.00ex; vertical-align: -0.46ex; " SRC="img232.svg"
+ ALT="$T_{00}$"></SPAN> = angular distribution <!-- MATH
+ $\sigma(\theta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img233.svg"
+ ALT="$\sigma(\theta)$"></SPAN>.
+<BR><SPAN style="font-family:monospace">jtot</SPAN>: The <SPAN style="font-family:monospace">J</SPAN> value (as on Card 2) for phase shift
+<BR><SPAN style="font-family:monospace">par</SPAN>: The parity (&ndash;1 or +1) for phase shift, for <SPAN style="font-family:monospace">type</SPAN>=4
+<BR><SPAN style="font-family:monospace">par</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or number of search parameter, for <SPAN style="font-family:monospace">type</SPAN>=6.
+<BR><SPAN style="font-family:monospace">channel</SPAN>: Channel number of entrance channel in coupled channels set (default 1),
+for phase shift
+<BR><SPAN style="font-family:monospace">value</SPAN>: Value of search parameter, for <SPAN style="font-family:monospace">type</SPAN>=6
+<BR><SPAN style="font-family:monospace">error</SPAN>: Error in value of search parameter, for <SPAN style="font-family:monospace">type</SPAN>=6
+<BR>&nbsp;
+<BR>
+<P>
+<B>Data input</B> (free format):
+
+<BR>
+if <SPAN style="font-family:monospace">type</SPAN>=1 or &ndash;2, read:  <SPAN style="font-family:monospace">energy, angle, value, error</SPAN>
+
+<BR>
+if <SPAN style="font-family:monospace">type</SPAN>=5, read:  <SPAN style="font-family:monospace">kn, target, error</SPAN>
+
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;otherwise:
+
+<BR>
+if <SPAN style="font-family:monospace">delta</SPAN><SPAN CLASS="MATH"><IMG STYLE="height: 2.18ex; vertical-align: -0.53ex; " SRC="img70.svg"
+ ALT="$\ne$"></SPAN>0, read:  <SPAN style="font-family:monospace">value, error</SPAN>
+
+<BR>
+if <SPAN style="font-family:monospace">delta</SPAN>=0, read:  <SPAN style="font-family:monospace">x, value, error</SPAN>
+
+<P>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; where <SPAN style="font-family:monospace">x</SPAN> is angle for <SPAN style="font-family:monospace">type</SPAN>=0, is <SPAN style="font-family:monospace">leg</SPAN> for <SPAN style="font-family:monospace">type</SPAN>=&ndash;1 or &ndash;2, and lab energy for <SPAN style="font-family:monospace">type</SPAN>=&ndash;3, 2, 3 and 4.
+<BR>
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node15.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node13.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html169"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node15.html">Sfresco commands</A>
+<B> Up:</B> <A
+ HREF="node13.html">Input SFRESCO format</A>
+<B> Previous:</B> <A
+ HREF="node13.html">Input SFRESCO format</A>
+ &nbsp; <B>  <A ID="tex2html170"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Fresco</TITLE>
+<META NAME="description" CONTENT="Fresco">
+<META NAME="keywords" CONTENT="fresco-namelist-manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+
+<LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
+
+<LINK REL="next" HREF="node1.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node1.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up_g.png"> 
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev_g.png"> 
+<A ID="tex2html1"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node1.html">Contents</A>
+ &nbsp; <B>  <A ID="tex2html2"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<H1 class="CENTER"><SPAN CLASS="XHUGE">Fresco</SPAN></H1>
+<DIV CLASS="author_info">
+
+<STRONG>I.J. Thompson</STRONG>
+<BR>
+Nuclear Data and Theory Group
+<BR>
+PO Box 808, L-414,
+ Livermore, CA 94551, USA
+
+<BR>
+Telephone + 1 (925) 423 4978
+
+<BR>
+<BR>
+Email: I-Thompson@llnl.gov or Ian@kernz.org
+
+<BR>
+Available: https://github.com/I-Thompson/fresco
+
+<BR>
+More information: http://www.fresco.org.uk 
+<P>
+Version FRES 3.4, October 2020
+<BR>
+LLNL-SM-485670</P>
+</DIV>
+<BR><HR>
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html3"
+  HREF="node1.html">Contents</A>
+<LI><A ID="tex2html4"
+  HREF="node2.html">Introduction</A>
+<LI><A ID="tex2html5"
+  HREF="node3.html">Input card-image format</A>
+<LI><A ID="tex2html6"
+  HREF="node4.html">Input NAMELIST format</A>
+<UL>
+<LI><A ID="tex2html7"
+  HREF="node5.html">Initial Lines</A>
+<LI><A ID="tex2html8"
+  HREF="node6.html">The &amp;FRESCO namelist</A>
+<UL>
+<LI><A ID="tex2html9"
+  HREF="node6.html#SECTION00042100000000000000">Complete list of variables</A>
+<LI><A ID="tex2html10"
+  HREF="node6.html#SECTION00042200000000000000">Radial coordinates</A>
+<LI><A ID="tex2html11"
+  HREF="node6.html#SECTION00042300000000000000">Partial waves</A>
+<LI><A ID="tex2html12"
+  HREF="node6.html#SECTION00042400000000000000">Angular distributions</A>
+<LI><A ID="tex2html13"
+  HREF="node6.html#SECTION00042500000000000000">Defining coupled equations</A>
+<LI><A ID="tex2html14"
+  HREF="node6.html#SECTION00042600000000000000">Incident channel</A>
+<LI><A ID="tex2html15"
+  HREF="node6.html#SECTION00042700000000000000">Solving equations</A>
+<LI><A ID="tex2html16"
+  HREF="node6.html#SECTION00042800000000000000">R-matrix setup</A>
+<LI><A ID="tex2html17"
+  HREF="node6.html#SECTION00042900000000000000">Trace variables</A>
+<LI><A ID="tex2html18"
+  HREF="node6.html#SECTION000421000000000000000">Output details</A>
+</UL>
+<LI><A ID="tex2html19"
+  HREF="node7.html">&amp;PARTITION and &amp;STATES namelists</A>
+<UL>
+<LI><A ID="tex2html20"
+  HREF="node7.html#SECTION00043100000000000000">&amp;PARTITION namelist</A>
+<LI><A ID="tex2html21"
+  HREF="node7.html#SECTION00043200000000000000">&amp;STATES namelists</A>
+</UL>
+<LI><A ID="tex2html22"
+  HREF="node8.html">&amp;POT potential namelists</A>
+<UL>
+<LI><A ID="tex2html23"
+  HREF="node8.html#SECTION00044100000000000000">First kind of &amp;pot namelist</A>
+<LI><A ID="tex2html24"
+  HREF="node8.html#SECTION00044200000000000000">Second kind of &amp;pot namelist: TYPE<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN>0</A>
+<LI><A ID="tex2html25"
+  HREF="node8.html#SECTION00044300000000000000">Deformations</A>
+<LI><A ID="tex2html26"
+  HREF="node8.html#SECTION00044400000000000000">Pairwise couplings</A>
+</UL>
+<LI><A ID="tex2html27"
+  HREF="node9.html">&amp;OVERLAP namelists for one- and two-particle form factors</A>
+<UL>
+<LI><A ID="tex2html28"
+  HREF="node9.html#SECTION00045100000000000000">One-particle KINDs</A>
+<UL>
+<LI><A ID="tex2html29"
+  HREF="node9.html#SECTION00045110000000000000">For KIND = 0:</A>
+<LI><A ID="tex2html30"
+  HREF="node9.html#SECTION00045120000000000000">For KIND = 1:</A>
+<LI><A ID="tex2html31"
+  HREF="node9.html#SECTION00045130000000000000">For KIND = 2:</A>
+<LI><A ID="tex2html32"
+  HREF="node9.html#SECTION00045140000000000000">For KIND = 3:</A>
+</UL>
+<LI><A ID="tex2html33"
+  HREF="node9.html#SECTION00045200000000000000">Two-particle KINDs</A>
+<UL>
+<LI><A ID="tex2html34"
+  HREF="node9.html#SECTION00045210000000000000">For KIND <SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 6:</A>
+</UL>
+<LI><A ID="tex2html35"
+  HREF="node9.html#SECTION00045300000000000000">Namelist &amp;TWONT</A>
+<UL>
+<LI><A ID="tex2html36"
+  HREF="node9.html#SECTION00045310000000000000">For KIND = 6:</A>
+</UL>
+</UL>
+<LI><A ID="tex2html37"
+  HREF="node10.html">&amp;COUPLING namelists</A>
+<UL>
+<LI><A ID="tex2html38"
+  HREF="node10.html#SECTION00046010000000000000">For KIND = 1:</A>
+<LI><A ID="tex2html39"
+  HREF="node10.html#SECTION00046020000000000000">For KIND = 2:</A>
+<LI><A ID="tex2html40"
+  HREF="node10.html#SECTION00046030000000000000">For KIND = 3 or 4:</A>
+<LI><A ID="tex2html41"
+  HREF="node10.html#SECTION00046040000000000000">For KIND = 5 or 6:</A>
+<LI><A ID="tex2html42"
+  HREF="node10.html#SECTION00046050000000000000">For KIND = 7:</A>
+<LI><A ID="tex2html43"
+  HREF="node10.html#SECTION00046060000000000000">For KIND = 8:</A>
+<LI><A ID="tex2html44"
+  HREF="node10.html#SECTION00046100000000000000">&amp;CFP namelists</A>
+</UL>
+<LI><A ID="tex2html45"
+  HREF="node11.html">Glossary of Indexing Variables</A>
+</UL>
+<BR>
+<LI><A ID="tex2html46"
+  HREF="node12.html">Input CDCC format</A>
+<LI><A ID="tex2html47"
+  HREF="node13.html">Input SFRESCO format</A>
+<UL>
+<LI><A ID="tex2html48"
+  HREF="node14.html">Search file</A>
+<LI><A ID="tex2html49"
+  HREF="node15.html">Sfresco commands</A>
+</UL>
+<BR>
+<LI><A ID="tex2html50"
+  HREF="node16.html">Test run: a CCBA calculation</A>
+<LI><A ID="tex2html51"
+  HREF="node17.html">File allocations</A>
+<LI><A ID="tex2html52"
+  HREF="node18.html">KIND=1 Spin Transfer Couplings</A>
+<LI><A ID="tex2html53"
+  HREF="node19.html">Stabilization method for coupled channels solutions</A>
+<LI><A ID="tex2html54"
+  HREF="node20.html">About this document ...</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+
+</BODY>
+</HTML>

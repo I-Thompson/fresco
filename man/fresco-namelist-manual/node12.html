@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>Input CDCC format</TITLE>
+<META NAME="description" CONTENT="Input CDCC format">
+<META NAME="keywords" CONTENT="fresco-namelist-manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+
+<LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
+
+<LINK REL="next" HREF="node13.html">
+<LINK REL="previous" HREF="node4.html">
+<LINK REL="next" HREF="node13.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="fresco-namelist-manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html163"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node13.html">Input SFRESCO format</A>
+<B> Up:</B> <A
+ HREF="fresco-namelist-manual.html">Fresco</A>
+<B> Previous:</B> <A
+ HREF="node11.html">Glossary of Indexing Variables</A>
+ &nbsp; <B>  <A ID="tex2html164"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+
+<H1><A ID="SECTION00050000000000000000">
+Input CDCC format</A>
+</H1>
+
+<P>
+<B>&amp;CDCC namelist</B>
+
+<P>
+<SPAN style="font-family:monospace">hcm, rmatch, rintp, hnl, rnl, centre,  rsp, iter, pset, llmax,  dry,
+rasym, accrcy, switch, ajswtch, sinjmax,  cutl, cutr, cutc,
+absend, jtmin, jump, jbord, nnu,  rmatr, nrbases, nrbmin,  pralpha, pcon,  meigs,
+listcc, smats, veff, chans, xstabl, thmin, thmax, thinc,
+smallchan, smallcoup, melfil, nosol, cdetr, numnode, treneg,
+nlpl, trans, pel, exl, cdccc, qscale, pade, kfus,
+elab,  lab, lin, lex, 
+<BR>
+hktarg, ncoul, reor, pauli,  nk,
+q, ipc, iscgs, ipcgs,  hat, remnant, postprior, quasi,
+sumform, qc, la, static, expand, maxcoup
+</SPAN>
+<BR>
+<P>
+<BR>
+are all the same as the <B>&amp;FRESCO</B> namelist, except for:
+<BR><SPAN style="font-family:monospace">cdccc</SPAN> which is an alias for <SPAN style="font-family:monospace">cdcc</SPAN> of &amp;Fresco namelist,
+<BR> <SPAN style="font-family:monospace">q</SPAN> = <SPAN style="font-family:monospace">ip1</SPAN>, multiple for the projectile single-particle couplings,
+<BR><SPAN style="font-family:monospace">ncoul</SPAN> = <SPAN style="font-family:monospace">ip2</SPAN>, selecting nuclear and/or coulomb,
+<BR><SPAN style="font-family:monospace">reor</SPAN> = <SPAN style="font-family:monospace">ip3</SPAN>, selecting diagonal and/or off-diagonal couplings,
+<BR><SPAN style="font-family:monospace">qc</SPAN> = <SPAN style="font-family:monospace">ip4</SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img214.svg"
+ ALT="$Q_{\rm max}$"></SPAN> for the deformed core potential multipoles,
+<BR><SPAN style="font-family:monospace">la</SPAN> = <SPAN style="font-family:monospace">ip5</SPAN>, <!-- MATH
+ $\Lambda_{\rm max}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.07ex; vertical-align: -0.45ex; " SRC="img215.svg"
+ ALT="$\Lambda_{\rm max}$"></SPAN> for the new multipole orders with formfactor reduction,
+<BR><SPAN style="font-family:monospace">hat</SPAN> (logical, default T) to use mean bin energies (otherwise midpoint),
+<BR><SPAN style="font-family:monospace">quasi</SPAN>: if assigned, set all channel energies as if for this projectile
+energy (eg -<SPAN style="font-family:monospace">be</SPAN> for adiabatic),
+<BR><SPAN style="font-family:monospace">iscgs,ipcgs</SPAN> = <SPAN style="font-family:monospace">isc,ipc</SPAN> (&amp;overlap) for the projectile ground state wave
+function,
+<BR><SPAN style="font-family:monospace">elab</SPAN> = <SPAN style="font-family:monospace">ELAB(1)</SPAN>, just the one projectile lab energy,
+<BR><SPAN style="font-family:monospace">hktarg</SPAN> = target value of <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img216.svg"
+ ALT="$h.K$"></SPAN>, where <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img217.svg"
+ ALT="$h$"></SPAN>=<SPAN style="font-family:monospace">HCM</SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img109.svg"
+ ALT="$K$"></SPAN> is the elastic wave number.
+(default <SPAN style="font-family:monospace">hktarg</SPAN>=0.2). 
+<BR>
+If <SPAN style="font-family:monospace">HCM</SPAN>=0 in &amp;Fresco namelist,
+then <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img217.svg"
+ ALT="$h$"></SPAN> is calculated from <SPAN style="font-family:monospace">elab</SPAN> and <SPAN style="font-family:monospace">hktarg</SPAN>.
+<BR>
+<P>
+<SPAN style="font-family:monospace">sumform</SPAN> determines the bin formfactor reductions
+(default 2 if there are any <SPAN style="font-family:monospace">kind</SPAN>=3 bin states, else 0):
+<BR>&nbsp;&nbsp;   = 0 : no formfactor reduction:
+     <!-- MATH
+ $\langle {\tt KN} | K Q \lambda | {\tt KNP} \rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img218.svg"
+ ALT="$\langle {\tt KN} \vert K Q \lambda \vert {\tt KNP} \rangle$"></SPAN>
+
+<BR>= 1 : <SPAN CLASS="MATH"><IMG STYLE="height: 2.25ex; vertical-align: -0.51ex; " SRC="img219.svg"
+ ALT="$KQ\lambda$"></SPAN> formfactors summed into new multipole <SPAN CLASS="MATH"><IMG STYLE="height: 1.72ex; vertical-align: -0.10ex; " SRC="img220.svg"
+ ALT="$\Lambda$"></SPAN>:
+     <!-- MATH
+ $\langle {\tt KN} | \Lambda | {\tt KNP} \rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img221.svg"
+ ALT="$\langle {\tt KN} \vert \Lambda \vert {\tt KNP} \rangle$"></SPAN>
+
+<BR>= 2 : formfactors summed into composite projectile state:
+     <!-- MATH
+ $\langle {\tt IB} | {\Lambda} | {\tt IBP} \rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img222.svg"
+ ALT="$\langle {\tt IB} \vert {\Lambda} \vert {\tt IBP} \rangle$"></SPAN>.
+      This is not allowed if have spin-orbit or transfer couplings, and
+      <SPAN style="font-family:monospace">sumform</SPAN>=1 will be set in these cases.
+<BR>
+<P>
+If have no cc bins, then <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img109.svg"
+ ALT="$K$"></SPAN> multipoles truncated using <SPAN style="font-family:monospace">ip1=q</SPAN>.
+<BR>
+If have cc bins and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img214.svg"
+ ALT="$Q_{\rm max}$"></SPAN><SPAN style="font-family:monospace">=qc=ip4</SPAN> and
+<!-- MATH
+ $\Lambda_{\rm max}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.07ex; vertical-align: -0.45ex; " SRC="img215.svg"
+ ALT="$\Lambda_{\rm max}$"></SPAN><SPAN style="font-family:monospace">=la=ip5</SPAN> are unset, then
+<SPAN style="font-family:monospace">q</SPAN> sets the maximum multipole order of <SPAN CLASS="MATH"><IMG STYLE="height: 1.72ex; vertical-align: -0.10ex; " SRC="img220.svg"
+ ALT="$\Lambda$"></SPAN>, and
+ all possible values of  <SPAN CLASS="MATH"><IMG STYLE="height: 2.25ex; vertical-align: -0.51ex; " SRC="img219.svg"
+ ALT="$KQ\lambda$"></SPAN> are used that couple to <!-- MATH
+ $\Lambda \le {\tt q}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.21ex; vertical-align: -0.60ex; " SRC="img223.svg"
+ ALT="$\Lambda \le {\tt q}$"></SPAN>
+<BR>
+If <SPAN style="font-family:monospace">qc</SPAN> and <SPAN style="font-family:monospace">la</SPAN> are both set, then control each multipole
+individually:
+<BR>  <SPAN style="font-family:monospace">q</SPAN>     = <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img224.svg"
+ ALT="$K_{\rm max}$"></SPAN>,  <SPAN style="font-family:monospace">ip1</SPAN> set in usual way
+<BR>  <SPAN style="font-family:monospace">ip4=qc</SPAN>  = <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img214.svg"
+ ALT="$Q_{\rm max}$"></SPAN>. 
+<BR>  <SPAN style="font-family:monospace">ip5=la</SPAN> = <!-- MATH
+ $\Lambda_{\rm max}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.07ex; vertical-align: -0.45ex; " SRC="img215.svg"
+ ALT="$\Lambda_{\rm max}$"></SPAN> maximum order for new
+multipole.
+<BR>
+Note: <SPAN CLASS="MATH"><IMG STYLE="height: 1.89ex; vertical-align: -0.14ex; " SRC="img202.svg"
+ ALT="$\lambda$"></SPAN> will always run from <!-- MATH
+ $0\rightarrow Q$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img225.svg"
+ ALT="$0\rightarrow Q$"></SPAN>.
+<BR>
+<P>
+<SPAN style="font-family:monospace">trans</SPAN> determines the number of transfer partitions:
+<BR>&nbsp;&nbsp;   = 0 : no transfers: no E(jectile) or R(esidue)
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0 : only R(esidue): the Ejectile and Core are identical
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0 : both E(jectile) and R(esidue) independently of Core nucleus.
+
+<P>
+<SPAN style="font-family:monospace">postprior</SPAN> = <SPAN style="font-family:monospace">ip1</SPAN> for finite-range transfer couplings,
+<BR><SPAN style="font-family:monospace">remnant</SPAN> = <SPAN style="font-family:monospace">ip2</SPAN> for finite-range transfer couplings,
+<BR><SPAN style="font-family:monospace">pauli</SPAN> = attempted Pauli blocking using non-orthogonality couplings.
+
+<P>
+
+<BR><B>&amp;NUCLEUS namelist</B>
+<BR><SPAN style="font-family:monospace">part,name,mass,charge,spin,parity,be,n,l,j,ia,a,kind,lmax,nch,nce,ampl
+</SPAN>
+<BR> where this line is repeated for each <SPAN style="font-family:monospace">part</SPAN> beginning P: projectile, C:
+core, V: valence, T: target, E: ejectile, R: residue. The number of nuclei
+(4, 5 or 6) depends on <SPAN style="font-family:monospace">trans</SPAN>: see above.
+<BR> <SPAN style="font-family:monospace">name,mass,charge</SPAN> as <SPAN style="font-family:monospace">name, mass, zp/t</SPAN> in a &amp;partition namelist,
+<BR><SPAN style="font-family:monospace">spin,parity</SPAN> as <SPAN style="font-family:monospace">Jp/t, Bandp/t</SPAN> in a &amp;states namelist.
+<BR><SPAN style="font-family:monospace">be,n,l,j,ia,a,kind,lmax,nch</SPAN> prescribe the projectile P bound state,
+and with transfers also for residue R.
+<BR><SPAN style="font-family:monospace">nce</SPAN> is the number of Core excited states.
+
+<P>
+If <SPAN style="font-family:monospace">nce</SPAN><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN>0, then read that number of <B>&amp;CORESTATES</B> namelists. 
+<BR><B>&amp;CORESTATES namelist</B>: <SPAN style="font-family:monospace">spin,parity,ex </SPAN>
+<BR>
+for spin, parity (<SPAN CLASS="MATH"><IMG STYLE="height: 1.88ex; vertical-align: -0.29ex; " SRC="img226.svg"
+ ALT="$\pm1$"></SPAN>) and excitation energy of each Core
+state above the ground state.
+
+<P>
+
+<BR><B>&amp;BIN namelist</B>
+<BR><SPAN style="font-family:monospace">spin,parity, step,start,end,energy, n,l,j,isc,ipc, kind,lmax,nch,ia,il,ampl
+</SPAN>
+<BR>
+These are repeated until an empty  <B>&amp;BIN</B> namelist is encountered
+(<SPAN style="font-family:monospace">step</SPAN>=0).
+<BR>
+Each bin set has the same <SPAN style="font-family:monospace">spin, parity, l, j, isc, ipc, kind, lmax, nch, ia,
+il, ampl</SPAN>, but a different energy.
+The energy range is divided into (<SPAN style="font-family:monospace">end-start</SPAN>)/<SPAN style="font-family:monospace">step</SPAN> bins.
+If <SPAN style="font-family:monospace">energy</SPAN> then these are evenly spaced in energy, else they
+are evenly spaced in momentum <!-- MATH
+ $k \propto \sqrt{E}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.50ex; vertical-align: -0.39ex; " SRC="img227.svg"
+ ALT="$k \propto \sqrt{E}$"></SPAN>.
+Changing or starting partial waves is equivalent to <SPAN style="font-family:monospace">start</SPAN>= 0.001.
+
+<BR>
+The values of <SPAN style="font-family:monospace">lmax, nch, ia, il</SPAN> are only needed coupled channels bins
+<SPAN style="font-family:monospace">kind</SPAN>=3, with <SPAN style="font-family:monospace">il</SPAN> being the channel number of the incoming partial wave,
+which, if <SPAN style="font-family:monospace">il</SPAN>=0, is defined as the channel with quantum numbers
+<SPAN style="font-family:monospace">l, j</SPAN> and <SPAN style="font-family:monospace">ia</SPAN>. The array <SPAN style="font-family:monospace">ampl</SPAN> gives overall multiplicative
+spectroscopic amplitudes to the bin. The values of <SPAN style="font-family:monospace">isc, ipc, kind, lmax</SPAN>
+have the same meaning as in a &amp;overlap namelist, with <SPAN style="font-family:monospace">j</SPAN> an alias for <SPAN style="font-family:monospace">jn</SPAN>.
+<BR>
+If <SPAN style="font-family:monospace">l,j,ia</SPAN> are not set then <SPAN style="font-family:monospace">kind</SPAN>=3 coupled-channels bins are generated
+using <SPAN style="font-family:monospace">lmax</SPAN>, for all incoming waves. Setting <SPAN style="font-family:monospace">il</SPAN> will select an
+incoming channel.
+
+<P>
+
+<BR><B>&amp;POTENTIAL namelist</B>
+<BR><SPAN style="font-family:monospace">part, a1, a2, rc, ac, v, vr0, a, w, wr0, aw,
+wd, wdr0, awd, vso, rso0, aso, shape, freal, fimag,
+vsot, rsot0, asot, l, parity, nosub, itt,
+beta2, beta3, idef, beta2c, beta3c, beta2m, beta3m
+</SPAN>
+<BR>
+where this namelist is repeated for each <SPAN style="font-family:monospace">part</SPAN> beginning
+P: projectile-target  optical potential, C: core-target optical potential,
+V: valence-target  optical potential,
+T: projectile (C+V) ground state,
+B: projectile channels <EM>not</EM> containing the ground state,
+T: transfer channel optical potential,
+E: ejectile bound state, R: residue bound state.
+<BR>
+Different <SPAN style="font-family:monospace">part</SPAN>=B(in) potentials may be defined depending on <SPAN style="font-family:monospace">parity</SPAN>
+or partial wave <SPAN style="font-family:monospace">l</SPAN>. 
+<BR><SPAN style="font-family:monospace">nosub</SPAN> means that the P(rojectile) optical potential is <EM>added</EM> to
+the CDCC couplings as a diagonal in all projectile state channels.
+<BR>
+<P>
+For deformations, <SPAN style="font-family:monospace">beta2m, beta3m</SPAN> are the nuclear <EM>fractional</EM>
+deformations, and <SPAN style="font-family:monospace">beta2c, beta3c</SPAN> are the Coulomb equivalents (both with default
+values  <SPAN style="font-family:monospace">beta2, beta3</SPAN> respectively).
+<BR>
+The Coulomb and nuclear deformations may also be restricted by <SPAN style="font-family:monospace">idef</SPAN>:
+
+<BR>= 0 : Coulomb &amp; nuclear (complex)
+
+<BR>= 1 : nuclear (complex) only
+
+<BR>= 2 : Coulomb only
+
+<P>
+<B>Sample CDCC input file:</B>
+<PRE>
+11Be+4He spdf; 1+5*10+2*5 chs 0-10 MeV, q=0-3 2200 MeV, 30/100 fm
+CDCC
+ &amp;CDCC
+   hcm=0 rmatch=-30 absend=-50 rasym=100 accrcy=0.001
+   elab=2200
+   jbord=  0   60 200 2500
+   jump =  4    5  20
+   thmax=30 thinc=.05 smats=2 xstabl=1  cutr=-10 cutc=0
+   nk=50 ncoul=0 reor=0 q=3
+   /
+ &amp;NUCLEUS part='Proj' name='11Be' spin=0.5 parity=+1 be = 0.500 n=2 l=0 j=0.5 /
+ &amp;NUCLEUS part='Core' name='10Be' charge=4 mass=10 /
+ &amp;NUCLEUS part='Valence' name='neutron' charge=0 mass=1 spin=0.5/
+ &amp;NUCLEUS part='Target' name='4He' charge=2 mass=4 /
+
+ &amp;BIN spin=0.5 parity=+1 step=0.5 end=10. energy=F l=0 j=0.5/
+ &amp;BIN spin=0.5 parity=-1 step=0.5 end=10. energy=F l=1 j=0.5/
+ &amp;BIN spin=1.5 parity=-1 step=0.5 end=10. energy=F l=1 j=1.5/
+ &amp;BIN spin=1.5 parity=+1 step=1.0 end=10. energy=F l=2 j=1.5/
+ &amp;BIN spin=2.5 parity=+1 step=1.0 end=10. energy=F l=2 j=2.5/
+ &amp;BIN spin=2.5 parity=-1 step=2.0 end=10. energy=F l=3 j=2.5/
+ &amp;BIN spin=3.5 parity=-1 step=2.0 end=10. energy=F l=3 j=3.5/
+ &amp;BIN /
+
+ &amp;POTENTIAL part='Proj' a1=11 a2=4 rc=1.0  /
+ &amp;POTENTIAL part='Core' a1=10 a2=4 rc=1.0
+            V=46.92 vr0=1.204 a=0.53 W=23.46 wr0=1.328 aw=0.53 /
+ &amp;POTENTIAL part='Valence' a1=4 rc=1.3
+            V=37.14 vr0=1.17  a=0.75 W=8.12  wr0=1.26  aw=0.58 /
+ &amp;POTENTIAL part='Gs' a1=10 v=51.51 vr0=1.39 a=.52 vso=0.38 rso0=1.39 aso=0.52/
+ &amp;POTENTIAL part='Bi' a1=10 v=28.38 vr0=1.39 a=.52 vso=0.38 rso0=1.39 aso=0.52/
+</PRE>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node13.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="fresco-namelist-manual.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node11.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html163"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node13.html">Input SFRESCO format</A>
+<B> Up:</B> <A
+ HREF="fresco-namelist-manual.html">Fresco</A>
+<B> Previous:</B> <A
+ HREF="node11.html">Glossary of Indexing Variables</A>
+ &nbsp; <B>  <A ID="tex2html164"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

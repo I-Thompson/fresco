@@ -1,0 +1,610 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>&amp;COUPLING namelists</TITLE>
+<META NAME="description" CONTENT="&amp;COUPLING namelists">
+<META NAME="keywords" CONTENT="fresco-namelist-manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+
+<LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
+
+<LINK REL="next" HREF="node11.html">
+<LINK REL="previous" HREF="node9.html">
+<LINK REL="next" HREF="node11.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html152"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node11.html">Glossary of Indexing Variables</A>
+<B> Up:</B> <A
+ HREF="node4.html">Input NAMELIST format</A>
+<B> Previous:</B> <A
+ HREF="node9.html">&amp;OVERLAP namelists for one-</A>
+ &nbsp; <B>  <A ID="tex2html153"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><UL>
+<LI><A ID="tex2html154"
+  HREF="node10.html#SECTION00046010000000000000">For KIND = 1:</A>
+<LI><A ID="tex2html155"
+  HREF="node10.html#SECTION00046020000000000000">For KIND = 2:</A>
+<LI><A ID="tex2html156"
+  HREF="node10.html#SECTION00046030000000000000">For KIND = 3 or 4:</A>
+<LI><A ID="tex2html157"
+  HREF="node10.html#SECTION00046040000000000000">For KIND = 5 or 6:</A>
+<LI><A ID="tex2html158"
+  HREF="node10.html#SECTION00046050000000000000">For KIND = 7:</A>
+<LI><A ID="tex2html159"
+  HREF="node10.html#SECTION00046060000000000000">For KIND = 8:</A>
+</UL>
+<BR>
+<LI><A ID="tex2html160"
+  HREF="node10.html#SECTION00046100000000000000">&amp;CFP namelists</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A ID="SECTION00046000000000000000">
+&amp;COUPLING namelists</A>
+</H2>
+Now read in namelists for each kind of coupling between partitions
+and/or between excited states, ending with a namelist which is empty or has ICTO=0.
+Note that if deformed potentials were given as channel optical
+potentials then there will already be some couplings between
+excited states.
+
+<P>
+<DL>
+<DT><STRONG>ICTO, ICFROM</STRONG></DT>
+<DD>,KIND,  IP1,IP2,IP3,  P1,P2,  , IP4,IP5
+
+<P>
+The coupling is from all the states in partition ICFROM
+to all the states in partition ICTO.
+
+<P>
+Couplings in the reverse direction are also included unless
+ICTO <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, except for KINDs 1 &amp; 2 where finer control is allowed.
+
+<P>
+</DD>
+<DT><STRONG>JMAX, RMX</STRONG></DT>
+<DD>Couplings are only active for J <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> JMAX and Radius <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> RMX,
+(if JMAX=0, use JTMAX, and if RMX=0, use  RMATCH).
+
+<P>
+</DD>
+<DT><STRONG>KIND</STRONG></DT>
+<DD>The couplings can be of 8 KINDs:
+
+<P>
+= 1 : general spin transfer for projectile/transfer couplings
+<BR>            = 2 : electromagnetic one-photon couplings
+<BR>            = 3 : single-particle excitation of the projectile
+<BR>            = 4 : single-particle excitation of the target
+<BR>            = 5 : zero-range or LEA transfer with strength P1 and finite range radius P2 (in fm.)
+<BR>            = 6 : LEA transfer using <SPAN CLASS="MATH"><IMG STYLE="height: 2.00ex; vertical-align: -0.46ex; " SRC="img197.svg"
+ ALT="$D_0$"></SPAN>. &amp; <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img196.svg"
+ ALT="$D$"></SPAN> from bound states
+<BR>            = 7 : finite-range transfer
+<BR>            = 8 : non-orthogonality correction to a KIND 5,6,7 transfer 
+<P>
+After &amp;coupling namelists for KINDs 2,3,4,5,6,7 (&amp; 8 if IP2<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN>0),
+spectroscopic amplitudes are read in by means of <B>&amp;cfp</B> namelists.
+These coupling types are those for which ICTO &amp; ICFROM are
+different, one being a core partition and the other a composite
+nucleus. One table is used for all the amplitudes: it is indexed
+(besides the partition numbers) by IN,IB,IA &amp; KN (see glossary),
+and stores a real number A.
+
+<P>
+The table is filled cumulatively,
+starting perhaps with &amp;overlap namelists, 
+so amplitudes need only be
+entered after the namelist for the first KIND of coupling in which
+they appear.
+(So if all the amplitudes are already entered for a certain KIND
+of coupling, then the following namelist will be blank, to indicate
+no more &amp;cfp namelists are to be read).
+
+<P>
+</DD>
+</DL>
+<H4><A ID="SECTION00046010000000000000">
+For KIND = 1:</A>
+</H4> 
+<SPAN ID="txt340">General Spin Transfer</SPAN>
+(with local or non-local external form factors on FILE `INFILE' [default 4])
+See section <A HREF="node18.html#spintransfers">8</A> for more details.
+
+<P>
+IP1
+<BR>&nbsp;&nbsp;&nbsp;  = 0 : local form factor
+
+<BR>
+1 : non-local (two-dimensional) form factor
+
+<P>
+IP2
+<BR>&nbsp;&nbsp;&nbsp;  = 0 : read in real values      (only if IP3 <SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 0)
+
+<BR>
+1 : read in imaginary values    (only if IP3 <SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 0)
+
+<BR>
+2 : read in complex values        (only if IP3 <SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 0)
+
+<P>
+IP3
+<BR>&nbsp;&nbsp;&nbsp;  = 3 : read data from JLM folding program jlmP, for projectile couplings only
+
+<BR>
+2 : read data from JLM folding program jlmP, for target couplings only
+
+<BR>
+1 : read data from charge exchange program CHEX2, with appropriate scaling.
+
+<BR>
+0 : no jlmP or CHEX2 scaling factors, only P1, P2 and FSCALE
+
+<BR>&ndash;1 : write out typical non-local grid <SPAN CLASS="MATH"><IMG STYLE="height: 2.44ex; vertical-align: -0.66ex; " SRC="img198.svg"
+ ALT="$(R,R')$"></SPAN> coordinates
+
+<BR>&ndash;2 : calculate non-local grid <SPAN CLASS="MATH"><IMG STYLE="height: 2.44ex; vertical-align: -0.66ex; " SRC="img198.svg"
+ ALT="$(R,R')$"></SPAN> coordinates,
+and call subroutine FFNL to calculate form factor.
+
+<BR>&ndash;3 : calculate non-local grid <SPAN CLASS="MATH"><IMG STYLE="height: 2.44ex; vertical-align: -0.66ex; " SRC="img198.svg"
+ ALT="$(R,R')$"></SPAN> coordinates,
+call subroutine FNLSET to calculate an initial form factor, and the call
+FNLCC for each pair of coupled partial waves, for L-dependent factors.
+
+<BR>&ndash;4 : call subroutine FNLREAD to read in non-local form factor, and multiplying it by the Racah-algebra factor
+in section <A HREF="node18.html#spintransfers">8</A> (except for the <SPAN CLASS="MATH"><IMG STYLE="height: 2.77ex; vertical-align: -0.66ex; " SRC="img199.svg"
+ ALT="$1/\sqrt{4\pi}$"></SPAN> factor) for given <SPAN style="font-family:monospace">IB,IA</SPAN> final and initial excited states. 
+The order of form factors in the file must agree with the order called by a double loop of channels, with the `to' channel number varying more rapidly.
+
+<BR>&ndash;5 : call subroutine FNLREAD to read in non-local form factor for given <SPAN style="font-family:monospace">IB,IA</SPAN> final and initial excited states. 
+The order of form factors in the file must agree with the order called by a double loop of channels, with the `to' channel number varying more rapidly.
+
+<P>
+P1,P2 : scaling for the real and imaginary parts (respectively).
+<BR>
+<P>
+If IP3 <SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 0, read FROM FILE `INFILE'  the following lines
+   (until a blank line):
+<PRE>
+     Format 16.2: I4, 3F8.4,          I4,  2F4.0,   2I4,   A35
+                NP ,HNP,RFS,FSCALE, LTR, PTR,TTR, IB,IA, COMMENT
+            for NP = number of radial points
+                HNP = step size
+                RFS = radius of first point
+                FSCALE = scaling factor to be applied
+                LTR = L-transfer
+                PTR = projectile spin transfer
+                TTR = target spin transfer
+                IB  = excited-state pair fed by coupling
+                IA  = excited-state pair feeding the coupling
+                COMMENT = comment for display in printout.
+</PRE>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; then free format, repeatedly until sufficient data is read.
+<BR>
+<P>
+If IP1 =
+      0, read local form factor from i=1 to N
+
+<BR>
+1, read successively for j=1,NLO the non-local form factors
+ FNL(i,j), i=1 to NP   [NLO = RNL / max(HNL,HCM)]
+
+<P>
+When IP3=1 for CHEX2 input, the RFS and its F8.4 is omitted from Card 16.2,
+with default value RFS=HNP.
+
+<P>
+
+<H4><A ID="SECTION00046020000000000000">
+For KIND = 2:</A>
+</H4>
+<SPAN ID="txt349">Electromagnetic one-photon couplings</SPAN> (for <SPAN CLASS="MATH"><IMG STYLE="height: 1.89ex; vertical-align: -0.14ex; " SRC="img200.svg"
+ ALT="$E\lambda$"></SPAN> and
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.89ex; vertical-align: -0.14ex; " SRC="img201.svg"
+ ALT="$M\lambda$"></SPAN> processes).
+
+<P>
+ICTO is the gamma partition and ICFROM the particle partition.
+ The photon must be on the `projectile' side, and the bound state between
+ target states.
+
+<P>
+IP1 = <SPAN CLASS="MATH"><IMG STYLE="height: 1.89ex; vertical-align: -0.14ex; " SRC="img202.svg"
+ ALT="$\lambda$"></SPAN> : The multipolarity of the radiation.
+ If <SPAN CLASS="MATH"><IMG STYLE="height: 1.94ex; vertical-align: -0.19ex; " SRC="img203.svg"
+ ALT="$\lambda &gt;$"></SPAN> 0, include all multipoles 1,...,<SPAN CLASS="MATH"><IMG STYLE="height: 1.89ex; vertical-align: -0.14ex; " SRC="img202.svg"
+ ALT="$\lambda$"></SPAN>
+permitted by parity, whereas if IP1 <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, include only the multipole
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.89ex; vertical-align: -0.14ex; " SRC="img202.svg"
+ ALT="$\lambda$"></SPAN> = abs(IP1).
+
+<P>
+IP2
+<BR>&nbsp;&nbsp;   = 0,4 : Calculates both electric and magnetic couplings
+(reads <SPAN CLASS="MATH"><IMG STYLE="height: 1.62ex; vertical-align: -0.55ex; " SRC="img204.svg"
+ ALT="$g$"></SPAN>-factors from P1&amp;P2)
+
+<BR>
+1,5 : for electric only
+
+<BR>
+2 : for magnetic only (reads <SPAN CLASS="MATH"><IMG STYLE="height: 1.62ex; vertical-align: -0.55ex; " SRC="img204.svg"
+ ALT="$g$"></SPAN>-factors from P1&amp;P2)
+
+<BR>
+4,5 : include also Siegert remnant for electric transitions
+
+<P>
+IP3:  <EM>not implemented yet</EM>
+
+<P>
+P1  = projectile <SPAN CLASS="MATH"><IMG STYLE="height: 1.62ex; vertical-align: -0.55ex; " SRC="img204.svg"
+ ALT="$g$"></SPAN>-factor  
+<BR>
+P2  = target <SPAN CLASS="MATH"><IMG STYLE="height: 1.62ex; vertical-align: -0.55ex; " SRC="img204.svg"
+ ALT="$g$"></SPAN>-factor  
+<BR>
+<P>
+IP4 
+<BR>&nbsp;&nbsp;&nbsp;   = 0 : direct capture only
+
+<BR>
+1 : semi-direct capture only
+
+<BR>
+2 : direct + semi-direct capture mechanisms.
+
+<P>
+
+<H4><A ID="SECTION00046030000000000000">
+For KIND = 3 or 4:</A>
+</H4> 
+<SPAN ID="txt352">Single-particle excitations of the projectile (3) or target (4)</SPAN>
+
+<P>
+For these KINDs, ICTO is the partition of the nuclei being excited,
+and ICFROM is used to indicate the
+<EM>core</EM> partition if the single particle were removed.  No couplings are
+generated to or from the ICFROM partition, only within ICTO partition.
+
+<P>
+IP1 = Q : The multipole order of the deforming potential due to
+the colliding nucleus. If Q <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0, include all multipoles 0,1,...,Q
+permitted by parity, whereas if IP1 <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, include only the multipole
+Q = abs(IP1).
+
+<P>
+IP2
+
+<BR>= 0 : Coulomb &amp; nuclear (complex)
+
+<BR>= 1 : nuclear (complex) only
+
+<BR>= 2 : Coulomb only
+
+<P>
+IP3
+
+<BR>= 0 or 10 : include all re-orientation terms
+
+<BR>= 1 or 11 : no re-orientation terms for <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img205.svg"
+ ALT="$Q &gt; 0$"></SPAN>
+
+<BR>= 2 or 12 : ONLY re-orientation terms
+
+<BR>= 3 or 13 : include only couplings to and from the ground state,
+    but NOT gs reorientation,
+
+<BR>= 4 or 14 : include diagonal couplings,
+                and  couplings to and from the ground state
+
+<BR>= 5 or 15 : include diagonal couplings,
+                and  couplings to and from any bound state
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 10      : read namelist <B>&amp;scale</B> for
+complex factors [QSCALE(Q), Q=max(0,-IP1):abs(IP1)]
+to scale the folded form factors for multipoles Q.
+
+<P>
+P1  = FLOAT( potential KP index for fragment - target interaction) 
+<BR>
+P2  = FLOAT( potential KP index for core     - target interaction) 
+<BR>        (only SCALAR parts of the potentials P1 and P2 are used).
+
+<P>
+
+<H4><A ID="SECTION00046040000000000000">
+For KIND = 5 or 6:</A>
+</H4>
+<SPAN ID="txt356">Zero-range &amp; LEA transfers</SPAN>
+
+<P>
+IP1 and IP2 not used.
+
+<P>
+For KIND=5,
+
+<BR>
+P1 = <SPAN CLASS="MATH"><IMG STYLE="height: 2.00ex; vertical-align: -0.46ex; " SRC="img197.svg"
+ ALT="$D_0$"></SPAN> - ZR coupling constant
+
+<BR>
+P2 = FNRNG - Effective finite-range parameter for use
+in LEA (in units of fm.)
+
+<P>
+For KIND=6, use <SPAN CLASS="MATH"><IMG STYLE="height: 2.00ex; vertical-align: -0.46ex; " SRC="img197.svg"
+ ALT="$D_0$"></SPAN> and FNRNG = <!-- MATH
+ $\sqrt{(D/D_0 - 1)/k^2}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.94ex; vertical-align: -0.75ex; " SRC="img206.svg"
+ ALT="$\sqrt{(D/D_0 - 1)/k^2}$"></SPAN>. from the projectile
+bound states.  With unbound states, or if IP3 = 1,
+use <SPAN CLASS="MATH"><IMG STYLE="height: 2.00ex; vertical-align: -0.46ex; " SRC="img197.svg"
+ ALT="$D_0$"></SPAN> from state, but FNRNG = P2
+from this namelist.
+
+<P>
+In both KINDs, read in &amp;cfp namelists, noting that for KIND = 5
+spectroscopic factors for the projectile are not needed, and are ignored.
+
+<P>
+Users of these interactions kinds should also pay attention to the
+the parameter INH in the &amp;Fresco namelist.
+
+<P>
+
+<H4><A ID="SECTION00046050000000000000">
+For KIND = 7:</A>
+</H4>
+<SPAN ID="txt359">Finite-range transfers.</SPAN>
+
+<P>
+IP1 =
+<BR>&nbsp;&nbsp;&nbsp;  0,-2 : POST interaction
+
+<BR>
+1,-1 : PRIOR interaction
+ (N.B. meaning of IP1 thus depends on ICTO &amp; ICFROM!!!)
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img175.svg"
+ ALT="$\le$"></SPAN> -1 : Use <SPAN CLASS="MATH"><IMG STYLE="height: 1.76ex; vertical-align: -0.14ex; " SRC="img60.svg"
+ ALT="$\theta$"></SPAN> quadrature from <SPAN CLASS="MATH"><IMG STYLE="height: 1.76ex; vertical-align: -0.14ex; " SRC="img207.svg"
+ ALT="$\theta = \pi$"></SPAN> down to <SPAN CLASS="MATH"><IMG STYLE="height: 1.76ex; vertical-align: -0.14ex; " SRC="img208.svg"
+ ALT="$\theta = 0$"></SPAN>.
+ (Useful for finite-range knock-on with light projectiles)
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img175.svg"
+ ALT="$\le$"></SPAN> -3 : `VCORE' interaction:
+Use ONLY the core-core interaction potential
+ (Useful for finite-range knock-on with light projectiles)
+
+<BR>
+2 : Surface transfer operator, on surface if <EM>final</EM> bound state <SPAN CLASS="MATH"><IMG STYLE="height: 1.89ex; vertical-align: -0.10ex; " SRC="img209.svg"
+ ALT="$r' =$"></SPAN> P1. IP2 and IP3 ignored.
+
+<BR>
+3 : Surface transfer operator, on surface if <EM>initial</EM> bound state <SPAN CLASS="MATH"><IMG STYLE="height: 1.16ex; vertical-align: -0.10ex; " SRC="img210.svg"
+ ALT="$r =$"></SPAN> P1. (Not yet implemented)
+
+<BR>
+4 : Surface transfer operator calculated as PRIOR&ndash;POST. Need also to set RSMAX for <EM>final</EM> bound state to the desired surface radius. 
+   (Implemented, but not yet correctly).
+
+<BR>
+5 : Surface transfer operator calculated as POST&ndash;PRIOR. Need also to set RSMAX for <EM>initial</EM> bound state to the desired surface radius. 
+   (Not yet implemented).
+
+<P>
+IP2 =
+<BR>&nbsp;&nbsp;&nbsp;  0 : no remnant
+
+<BR>
+1 : full real remnant
+
+<BR>-1 : full complex remnant
+
+<BR>
+2 : &ldquo;non-orthogonality remnant" - this works by inserting
+a KIND = 8 coupling namelist after this coupling, before any subsequent
+couplings.
+This is does not affect the one-step amplitudes, and is only useful
+if another transfer step follows this coupling.
+
+<P>
+IP3 = KPCORE : the number KP of the potential to use between
+the two cores, in the remnant part of the interaction potential.
+
+<P>
+If IP3=0, use as KPCORE the optical potential given for
+the first pair of excited states in the partition of projectile core.
+(this uses the observation that optical potentials tend to depend
+more on the projectile than the target, and must clearly be re-examined
+if the projectile is heavier than the target.)
+
+<P>
+P1,P2 : not used.
+
+<P>
+
+<H4><A ID="SECTION00046060000000000000">
+For KIND = 8:</A>
+</H4>
+<SPAN ID="txt365">Non-orthogonality supplement</SPAN>
+appropriate to a previous
+KIND 5,6 or 7 interaction.
+
+<P>
+IP1 = 
+<BR>&nbsp;&nbsp;&nbsp;  0 : post
+
+<BR>
+1 : prior
+ (N.B. IP1 should be the same as the previous interaction!)
+
+<P>
+IP2
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0 : read in spectroscopic factors as &amp;cfp namelists
+ (Only useful if you did NOT have a previous KIND 5, 6 or s7
+interaction, which would have needed the amplitudes then.)
+
+<BR>= 0 : no &amp;cfp namelists to read.
+
+<P>
+Note that you should <EM>either</EM> use KIND=7, <SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>IP2<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>=2,
+<EM>or</EM> use  KIND=7, <SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>IP2<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>=1  and a KIND=8.
+If you have KIND=7, <SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>IP2<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>=2 and a KIND=8 namelist, then this is
+double counting.
+
+<P><P>
+<BR>
+
+<P>
+
+<P>
+
+<H3><A ID="SECTION00046100000000000000">
+&amp;CFP namelists</A>
+</H3>
+  <EM>Spectroscopic amplitudes</EM> for the overlaps between
+partitions ICTO &amp; ICFROM already defined by a &amp;coupling namelist:
+<DL>
+<DT><STRONG>IN, IB, IA, KN,  A</STRONG></DT>
+<DD>&nbsp;
+<BR>
+meaning that the overlap of the composite nucleus in excitation
+state IB with the core nucleus in excitation state IA is the
+bound-state form factor KN with amplitude A. The IN=1 specifies
+projectile overlap, and IN=2 target overlap.
+
+<P>
+If the form factor KN mixes different IA levels, then the spectroscopic
+ amplitudes should rather be specified in an &amp;overlap namelist.
+
+<P>
+N.B. The amplitudes A are signed, and are NOT the spectroscopic
+factors, but will typically be the square roots of these factors.
+For transfers out of or into closed shells of N antisymmetrised nucleons,
+the spectroscopic factors will usually contain factors of N,
+so the spectroscopic amplitudes needed by FRESCO will typically 
+need to already contain factors of <SPAN CLASS="MATH"><IMG STYLE="height: 2.50ex; vertical-align: -0.41ex; " SRC="img211.svg"
+ ALT="$\sqrt{N}$"></SPAN>.
+
+<BR>
+The sign of A should be consistent with the spin coupling order used in
+the program, which is
+<BR>
+<DIV ALIGN="CENTER">
+
+<!-- MATH
+ \begin{eqnarray}
+(\ell,s)j, J_{core}; J_{com}
+\end{eqnarray}
+ -->
+<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img212.svg"
+ ALT="$\displaystyle (\ell,s)j, J_{core}; J_{com}$"></TD>
+<TD>&nbsp;</TD>
+<TD>&nbsp;</TD>
+<TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
+(<SPAN CLASS="arabic">12</SPAN>)</TD></TR>
+</TABLE></DIV>
+<BR CLEAR="ALL"><P></P>
+for binding a <SPAN CLASS="MATH"><IMG STYLE="height: 2.19ex; vertical-align: -0.57ex; " SRC="img213.svg"
+ ALT="$\ell sj$"></SPAN> nucleon onto a core of spin <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img149.svg"
+ ALT="$J_{core}$"></SPAN> to form <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img150.svg"
+ ALT="$J_{com}$"></SPAN>.
+
+<BR>
+If IN<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN>0, use abs(IN) in this the last &amp;cfp namelist
+<BR>
+If IN=0, no more &amp;cfp namelists to be read.
+</DD>
+</DL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node11.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node9.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html152"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node11.html">Glossary of Indexing Variables</A>
+<B> Up:</B> <A
+ HREF="node4.html">Input NAMELIST format</A>
+<B> Previous:</B> <A
+ HREF="node9.html">&amp;OVERLAP namelists for one-</A>
+ &nbsp; <B>  <A ID="tex2html153"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

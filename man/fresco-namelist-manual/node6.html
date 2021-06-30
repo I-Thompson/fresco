@@ -1,0 +1,1218 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>The &amp;FRESCO namelist</TITLE>
+<META NAME="description" CONTENT="The &amp;FRESCO namelist">
+<META NAME="keywords" CONTENT="fresco-namelist-manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+
+<LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html119"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node7.html">&amp;PARTITION and &amp;STATES namelists</A>
+<B> Up:</B> <A
+ HREF="node4.html">Input NAMELIST format</A>
+<B> Previous:</B> <A
+ HREF="node5.html">Initial Lines</A>
+ &nbsp; <B>  <A ID="tex2html120"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html121"
+  HREF="node6.html#SECTION00042100000000000000">Complete list of variables</A>
+<LI><A ID="tex2html122"
+  HREF="node6.html#SECTION00042200000000000000">Radial coordinates</A>
+<LI><A ID="tex2html123"
+  HREF="node6.html#SECTION00042300000000000000">Partial waves</A>
+<LI><A ID="tex2html124"
+  HREF="node6.html#SECTION00042400000000000000">Angular distributions</A>
+<LI><A ID="tex2html125"
+  HREF="node6.html#SECTION00042500000000000000">Defining coupled equations</A>
+<LI><A ID="tex2html126"
+  HREF="node6.html#SECTION00042600000000000000">Incident channel</A>
+<LI><A ID="tex2html127"
+  HREF="node6.html#SECTION00042700000000000000">Solving equations</A>
+<LI><A ID="tex2html128"
+  HREF="node6.html#SECTION00042800000000000000">R-matrix setup</A>
+<LI><A ID="tex2html129"
+  HREF="node6.html#SECTION00042900000000000000">Trace variables</A>
+<LI><A ID="tex2html130"
+  HREF="node6.html#SECTION000421000000000000000">Output details</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A ID="SECTION00042000000000000000">
+The &amp;FRESCO namelist</A>
+</H2>
+
+<P>
+
+<H3><A ID="SECTION00042100000000000000">
+Complete list of variables</A>
+</H3>
+
+<P>
+<EM>Radial coordinates:</EM>
+hcm, rmatch, rintp, hnl, rnl, centre, hnn, rnn, rmin, rsp, cutl, cutr, cutc, 
+<BR>
+rasym, accrcy, switch, sinjmax, ajswtch, 
+
+<P>
+
+<EM>Partial waves:</EM>
+jtmin, jtmax, absend, jump, jbord, pset, jset,  iso, llmax, 
+
+<P>
+
+<EM>Angular distributions:</EM>
+kqmax,  thmin, thmax, thinc, pp, koords,  nearfa,
+
+<P>
+
+<EM>Defining coupled equations:</EM>
+inh, nnu, maxl, minl, mtmin, epc,  erange, dk,  plane,   rela,  
+<BR>
+ccbins, complexbins, sumform,  pluto,  unitmass, finec,  
+
+<P>
+
+<EM>Incident channel:</EM>
+ pel, exl, lab, lin, lex, elab, nlab, 
+
+<P>
+
+<EM>Solving equations:</EM>
+ips, it0, iter, fatal, iblock, pade, nosol, dry, smallchan, smallcoup, hort, rmort, 
+<BR>
+psiren, initwf, maxcoup, expand, 
+
+<P>
+
+<EM>R-matrix setup</EM>:
+nrbases, nrbmin, pralpha, pcon, rmatr, btype, ebeta, buttle, weak, 
+<BR>
+nparameters,   
+
+<P>
+
+<EM>Trace variables:</EM>
+chans, listcc, treneg, cdetr, smats,    
+
+<P>
+
+<EM>Output details:</EM>
+xstabl, nlpl, waves, lampl, veff, kfus, nfus, wdisk, bpm, melfil, cdcc, 
+<BR>
+tmp
+
+<P>
+
+<H3><A ID="SECTION00042200000000000000">
+Radial coordinates</A>
+</H3>
+
+<P>
+<DL>
+<DT><STRONG>HCM,  RMATCH, RINTP, HNL, RNL, CENTRE, HNN, RNN, RMIN, RSP, CUTL, CUTR, CUTC</STRONG></DT>
+<DD>
+
+<P>
+Wave functions calculated at intervals of HCM up to abs(RMATCH).
+
+<P>
+If RMATCH <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, then use values of RASYM, ACCRCY, SWITCH, AJSWITCH for  coupled Coulomb wave functions.
+
+<P>
+Non-local kernels <!-- MATH
+ $K_{fi}'(R_{f},D_{fi})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.87ex; vertical-align: -1.08ex; " SRC="img8.svg"
+ ALT="$K_{fi}'(R_{f},D_{fi})$"></SPAN> calculated at <SPAN CLASS="MATH"><IMG STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img15.svg"
+ ALT="$R_f$"></SPAN> intervals of RINTP,
+and for a non-local (<SPAN CLASS="MATH"><IMG STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img7.svg"
+ ALT="$D_{fi}$"></SPAN>) range of RNL centred at CENTRE in steps of HNL.
+
+<P>
+RMATCH and RINTP are rounded to multiples of HCM, and HNL is rounded either to
+a multiple or a sub-multiple of HCM.
+
+<P>
+For two-nucleon transfers, the nucleon-nucleon distance is
+discretized from RMIN to RNN in a multiple of 6 Gaussian quadrature
+points to give step size close to HNN.
+
+<P>
+RSP is the upper limit of state radius when folding single-particle states (bound states or continuum bins) with
+KIND=3 or 4 couplings.
+
+<P>
+CUTL: set the number of radial points per <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.10ex; " SRC="img16.svg"
+ ALT="$\ell$"></SPAN> of the lower radial cutoff when integrating the radial equations. Default = &ndash;1.6
+<BR>
+When CUTL<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN>0, use <SPAN CLASS="MATH"><IMG STYLE="height: 1.76ex; vertical-align: -0.14ex; " SRC="img17.svg"
+ ALT="$\ell=J$"></SPAN> (total angular momentum of CC set),
+<BR>
+When CUTL<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN>0, use <SPAN CLASS="MATH"><IMG STYLE="height: 2.08ex; vertical-align: -0.45ex; " SRC="img18.svg"
+ ALT="$\ell=L_{in}$"></SPAN> (orbital angular momentum of incoming partial wave). 
+Using  CUTL<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN>0 gives more accurate analyzing powers.
+
+<P>
+CUTR = lower radial cutoff (fm).  Combining with CUTL is to use <SPAN CLASS="MATH"><IMG STYLE="height: 1.97ex; vertical-align: -0.43ex; " SRC="img19.svg"
+ ALT="$R_{\min}$"></SPAN> = max(CUTL*<SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.10ex; " SRC="img16.svg"
+ ALT="$\ell$"></SPAN>*HCM,CUTR).
+<BR>
+If CUTR <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, put cutoff at point-Coulomb turning point <SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img20.svg"
+ ALT="$- \vert$"></SPAN>CUTR<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>.
+
+<P>
+CUTC = lower radial cutoff (in fm) for off-diagonal couplings.
+
+<P>
+</DD>
+</DL>
+
+<P>
+<DL>
+<DT><STRONG>RASYM, ACCRCY, SWITCH, SINJMAX, AJSWITCH</STRONG></DT>
+<DD>
+
+<P>
+Use coupled Coulomb wave functions from CRCWFN out to asymptotic radius RASYM from
+inner radius abs(RMATCH) for those partitions in which PWF is TRUE.
+
+<BR>
+If RASYM <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, then determine the outer radius in order that classical
+Coulomb trajectories reach an angle abs(RASYM) degrees.
+
+<P>
+ACCRCY is an accuracy parameter controlling the piecewise step length.
+Default is 0.01: smaller values give greater accuracy.
+
+<P>
+SWITCH is the radius at which to switch from Airy functions
+to sines and cosines in piecewise method.  Default is 1000 fm.
+If SINJMAX<SPAN CLASS="MATH"><IMG STYLE="height: 1.77ex; vertical-align: -0.19ex; " SRC="img22.svg"
+ ALT="$&gt;0$"></SPAN>, then change switchover condition to <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.19ex; " SRC="img23.svg"
+ ALT="$J&gt;$"></SPAN> SINJMAX.
+
+<P>
+AJSWITCH
+Normally the Coupled Coulomb wfns are matched to zero
+and the Numerov integration is omitted
+when the Coulomb distance of closest approach is more than 4.5 fm outside
+abs(RMATCH) (or  the  &ndash;CUTR distance if   CUTR negative).
+This is only allowed when <SPAN CLASS="MATH"><IMG STYLE="height: 1.93ex; vertical-align: -0.39ex; " SRC="img24.svg"
+ ALT="$J \geq $"></SPAN>AJSWITCH.  Default is 0.0
+</DD>
+</DL>
+
+<P>
+
+<H3><A ID="SECTION00042300000000000000">
+Partial waves</A>
+</H3>
+
+<P>
+<DL>
+<DT><STRONG>JTMIN, JTMAX, ABSEND, JLEAST</STRONG></DT>
+<DD>Calculate coupled-channels sets with total <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.14ex; " SRC="img25.svg"
+ ALT="$J$"></SPAN> in the interval
+max(0,JTMIN) <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.19ex; " SRC="img26.svg"
+ ALT="$&lt; J &lt;$"></SPAN> JTMAX,
+stopping sooner if the absorption from the elastic channel
+is less than ABSEND millibarns of three successive <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.14ex; " SRC="img25.svg"
+ ALT="$J$"></SPAN>/parity sets.
+(If ABSEND <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, this takes the full <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.14ex; " SRC="img25.svg"
+ ALT="$J$"></SPAN> interval.)
+<BR>
+If JLEAST<SPAN CLASS="MATH"><IMG STYLE="height: 1.77ex; vertical-align: -0.19ex; " SRC="img22.svg"
+ ALT="$&gt;0$"></SPAN>, then only stop if <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.19ex; " SRC="img23.svg"
+ ALT="$J&gt;$"></SPAN> JLEAST.
+
+<BR>
+If JTMIN <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, then for <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.19ex; " SRC="img27.svg"
+ ALT="$J &lt;$"></SPAN> abs(JTMIN) include only the incoming channel
+in the calculations, ignoring transfers and excited states.
+This is needed if the elastic scattering cross sections are to be given
+correctly.
+
+<P>
+</DD>
+<DT><STRONG>JUMP(1:), JBORD(1:)</STRONG></DT>
+<DD>Calculate coupled-channels sets not for every <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.14ex; " SRC="img25.svg"
+ ALT="$J$"></SPAN>
+value, but at intervals of JUMP(i) for  <SPAN CLASS="MATH"><IMG STYLE="height: 1.93ex; vertical-align: -0.39ex; " SRC="img24.svg"
+ ALT="$J \geq $"></SPAN> JBORD(i), for i=1,5.
+(The program sets JUMP(0)=1 &amp; JBORD(0)=JTMIN, and, 
+if there are NJ non-zero values, also JBORD(NJ+1)=JTMAX.  
+This gives no <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.14ex; " SRC="img25.svg"
+ ALT="$J$"></SPAN> jumping if JUMP and JBORD are not set in the namelist.)
+The omitted <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.14ex; " SRC="img25.svg"
+ ALT="$J$"></SPAN> values are provided by interpolation on the scattering
+amplitudes <SPAN CLASS="MATH"><IMG STYLE="height: 2.44ex; vertical-align: -0.66ex; " SRC="img28.svg"
+ ALT="$A(m'M':mM; L)$"></SPAN> prior to calculating cross sections.
+
+<P>
+</DD>
+<DT><STRONG>PSET, JSET</STRONG></DT>
+<DD>&nbsp;
+<BR>
+If PSET =  &ndash;1 or +1,  restrict parity of CRC sets to that value (0 = no restriction)
+<BR>
+<P>
+JSET = number of CRC sets to calculate before stopping (0 = all sets)
+
+<P>
+</DD>
+<DT><STRONG>ISO</STRONG></DT>
+<DD> = `A' or `J', for replacing all barriers <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img29.svg"
+ ALT="$L(L+1)$"></SPAN> by that for <SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.14ex; " SRC="img30.svg"
+ ALT="$L = J$"></SPAN> barrier
+
+<BR>= `B' or `L', for replacing all barriers by <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img31.svg"
+ ALT="$L = L_{in}$"></SPAN> barrier.
+ 
+<BR>= 0 or blank, for no isocentrifugal approximations,
+
+<P>
+Of course, the <EM>simplest and fastest</EM> way to use the isocentrifugal
+approximation is to put all spins and parities to <SPAN CLASS="MATH"><IMG STYLE="height: 1.98ex; vertical-align: -0.14ex; " SRC="img32.svg"
+ ALT="$0^+$"></SPAN>, and all
+transition multipoles to <SPAN CLASS="MATH"><IMG STYLE="height: 1.76ex; vertical-align: -0.14ex; " SRC="img33.svg"
+ ALT="$k=0$"></SPAN>. The ISO variable is not needed then.
+
+<P>
+</DD>
+<DT><STRONG>LLMAX</STRONG></DT>
+<DD>Maximum partial wave <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img34.svg"
+ ALT="$L$"></SPAN> in any CRC set.
+</DD>
+</DL>
+
+<P>
+
+<H3><A ID="SECTION00042400000000000000">
+Angular distributions</A>
+</H3>
+
+<P>
+<DL>
+<DT><STRONG>KQMAX, THMIN, THMAX, THINC</STRONG></DT>
+<DD><P>
+Give cross sections (and tensor analyzing powers up to rank K = KQMAX)
+for centre-of-mass scattering angle from THMIN
+to abs(THMAX) in steps of THINC.
+<BR>
+Elastic channels normally output the ratio to Rutherford, unless THMAX <SPAN CLASS="MATH"><IMG STYLE="height: 1.77ex; vertical-align: -0.19ex; " SRC="img35.svg"
+ ALT="$&lt; 0$"></SPAN>.
+
+<P>
+</DD>
+<DT><STRONG>PP</STRONG></DT>
+<DD>Calculate analyzing powers/polarizations for projectile (PP=0 or blank),
+target (PP=1), ejectile (PP=2) or residual nucleus (PP=3).
+PP=4 gives projectile (PP=0) analyzing powers, along with Kyy results.
+
+<P>
+</DD>
+<DT><STRONG>KOORDS </STRONG></DT>
+<DD>determines the coordinate systems used for the analyzing powers:
+
+<BR>= 0 : Madison coordinates (default)
+
+<BR>= 1 : Madison + Transverse
+
+<BR>= 2 : Madison + Transverse + Recoil
+
+<BR>= 3 : Madison + Transverse + Recoil + Hooton-Johnson
+
+<P>
+</DD>
+<DT><STRONG>NEARFA</STRONG></DT>
+<DD>For mod(NEARFA,10) values: 
+
+<BR>= 0 or 1 for the usual cross sections,
+
+<BR>= 2 or &ndash;2 for printing `far side' cross sections too,
+
+<BR>= 3 or &ndash;3 for printing far and near side cross sections too.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0 for printing far &amp; near-sides for elastic channel only.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0 for printing far &amp; near-sides for all channels.
+<BR>
+If abs(NEARFA)<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN>10, also split the Coulomb amplitude according to Cha, CPC 176 (2007) 318.
+
+<P>
+</DD>
+<DT><STRONG>COMPLEXBINS, CCBINS</STRONG></DT>
+<DD>&nbsp;
+<BR>
+If COMPLEXBINS=T, allow for complex-valued bins (e.g. from optical potentials)
+<BR>
+If CCBINS=T, allow for coupled-channels bins, which are necessarily complex-valued.
+
+<P>
+</DD>
+</DL>
+
+<P>
+
+<H3><A ID="SECTION00042500000000000000">
+Defining coupled equations</A>
+</H3>
+
+<P>
+<DL>
+<DT><STRONG>INH</STRONG></DT>
+<DD>= 0 : zero-range transfer forms in intervals of HCM exactly
+
+<BR>= 1 : stored in steps of HCM * (proj. core)/(proj. composite mass)
+
+<BR>= 2 : stored in steps of HCM * (targ. core)/(targ. composite mass)
+<BR>
+So INH=2 corrects for longitudinal recoil during transfers with zero-range projectiles.
+
+<P>
+</DD>
+<DT><STRONG>NNU, MAXL, MINL, MTMIN, EPC</STRONG></DT>
+<DD>control the accuracy of non-local transfer form factors:
+
+<P>
+NNU is the number of Gaussian integration points
+in the angular
+integration used for the non-local transfer kernels. NNU should
+be a multiple of 6; NNU = 18 is the minimum, and 24 or 36 give
+acceptable accuracy for all the reactions tried so far.
+
+<P>
+MAXL,MINL are the maximum and minimum <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img34.svg"
+ ALT="$L$"></SPAN> values
+for the non-local
+kernels. If zero, MAXL has the default value JTMAX+6, and
+if MINL <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0 it takes the default value <SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>JTMIN<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>-6.
+
+<P>
+MTMIN is the lowest L-transfer for calculating transfer form factors
+using the m-dependent expressions for spherical harmonics.
+Putting MTMIN = 0 gives default value MTMIN = 6 (use MTMIN <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0 to avoid
+invoking default, if all transfers are to use this method).
+
+<P>
+EPC = percentage cutoff accuracy in the NNU angular integration.
+If zero, the default is (30/NNU)<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.10ex; " SRC="img36.svg"
+ ALT="$^2$"></SPAN>%.
+
+<P>
+</DD>
+<DT><STRONG>ERANGE, DK</STRONG></DT>
+<DD>set default parameters for continuum bins:
+
+<P>
+ERANGE = range of energies of the upper and lower boundaries
+of continuum bins:
+<BR>
+if ERANGE <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0, then <EM>ratio</EM> of these energies;
+<BR>
+if ERANGE <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, then <EM>difference</EM> of the energies in MeV.
+
+<P>
+DK     = step size of <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img37.svg"
+ ALT="$k$"></SPAN> (fm<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.10ex; " SRC="img38.svg"
+ ALT="$^{-1}$"></SPAN>) for integration over the ERANGE to construct the continuum bin.
+
+<P>
+</DD>
+<DT><STRONG>PLANE</STRONG></DT>
+<DD>&nbsp;
+<BR>      = 1, 3: zero Coulomb potential for elastic channel
+<BR>      = 2, 3: zero Coulomb potentials for all nonelastic channels.
+
+<P>
+</DD>
+<DT><STRONG>RELA, RELREF</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 2.18ex; vertical-align: -0.53ex; " SRC="img39.svg"
+ ALT="$\neq$"></SPAN><SPAN  CLASS="textsf">'</SPAN><SPAN  CLASS="textsf">'</SPAN>: use relativistic kinematics for the incident projectile:
+<BR>
+If RELA contains `a', use Ingemarsson eq(16) for kinematics
+<BR>
+If RELA contains `b', use Ingemarsson eq(17) for kinematics
+<BR>
+If RELA contains `c' or `3d', options for knockout reactions
+<BR>
+If RELA contains `na' to use potential factor <SPAN CLASS="MATH"><IMG STYLE="height: 1.79ex; vertical-align: -0.60ex; " SRC="img40.svg"
+ ALT="$\gamma$"></SPAN> for inhomogenous terms.
+
+<P>
+</DD>
+<DT><STRONG>PLUTO(:)</STRONG></DT>
+<DD>=  list of potential numbers KP to be prepared for the Lagrange-mesh method for single-particle eigenstates. 
+
+<P>
+</DD>
+<DT><STRONG>UNITMASS</STRONG></DT>
+<DD>: unit (in amu) for MASS values read in.
+Default = 1.000
+
+<P>
+</DD>
+<DT><STRONG>FINEC</STRONG></DT>
+<DD>: 1/(fine-structure constant): used to determine electrostatic <SPAN CLASS="MATH"><IMG STYLE="height: 2.11ex; vertical-align: -0.13ex; " SRC="img41.svg"
+ ALT="$e^2$"></SPAN>.
+Default = 137.03599.
+
+<P>
+</DD>
+</DL>
+
+<P>
+
+<H3><A ID="SECTION00042600000000000000">
+Incident channel</A>
+</H3>
+<DL>
+<DT><STRONG>PEL, EXL, LAB, LIN, LEX</STRONG></DT>
+<DD>Incoming plane waves are present in partition PEL with excitation
+pair EXL.  The energies ELAB(:) are the laboratory energies for
+partition LAB's nucleus LIN (1 or 2 for projectile or target)
+in excitation pair LEX.
+
+<P>
+The defaults for PEL,EXL,LIN &amp; LEX are all 1, and the default
+for LAB is PEL, so these variables can be normally omitted.
+
+<P>
+</DD>
+<DT><STRONG>ELAB(:5), NLAB(:4)</STRONG></DT>
+<DD>:
+Solve at different laboratory energies <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img42.svg"
+ ALT="$E$"></SPAN> until ELAB(i) = 0 is found.
+<BR>
+If NLAB(i) <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 1, then the range of <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img42.svg"
+ ALT="$E$"></SPAN> from ELAB(i) to ELAB(i+1) is covered in NLAB(i) linear intervals.
+<BR>
+For just one energy <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img42.svg"
+ ALT="$E$"></SPAN>, just specify 'ELAB = <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img42.svg"
+ ALT="$E$"></SPAN>'.
+
+<P>
+</DD>
+</DL>
+
+<P>
+
+<H3><A ID="SECTION00042700000000000000">
+Solving equations</A>
+</H3>
+
+<P>
+<DL>
+<DT><STRONG>IPS, IT0, ITER, FATAL, IBLOCK, PADE</STRONG></DT>
+<DD><P>
+Solve the coupled channels equations by at least IT0 iterations, and
+up to ITER iterations.
+Stop sooner if the absolute differences between successive <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.14ex; " SRC="img43.svg"
+ ALT="$S$"></SPAN>-matrix
+elements (scaled by (2<SPAN CLASS="MATH"><IMG STYLE="height: 1.68ex; vertical-align: -0.14ex; " SRC="img25.svg"
+ ALT="$J$"></SPAN>+1)/(2.JTMAX+1)) are less than IPS percent.
+(Excited state pairs with IGNORE set in the &amp;STATE namelist are not counted against IPS).
+
+<P>
+Putting IT0=ITER zero solves only the elastic channel (along with the
+IBLOCK channels: see below).
+Putting IT0=ITER = 1 or 2 etc. gives 1 or 2-step DWBA.
+
+<P>
+Normally, a run is terminated if more than ITER steps are required for
+convergence. 
+<BR>
+Setting FATAL=False allows continuation even after
+convergence has failed after abs(ITER) iterations.
+
+<P>
+Iterations are normally also stopped if the successive differences are smaller
+than the errors estimated for the numerical integration of the coupled
+equations. Setting IPS <SPAN CLASS="MATH"><IMG STYLE="height: 1.77ex; vertical-align: -0.19ex; " SRC="img35.svg"
+ ALT="$&lt; 0$"></SPAN> uses abs(IPS), without this extra check.
+
+<P>
+IBLOCK is the number of pairs of excitation levels
+(starting from partition 1, excitation 1) that are coupled exactly by
+blocking together.
+
+<P>
+PADE
+ = 0 for no Pade acceleration,
+
+<BR>= 1 for Pade acceleration by the epsilon algorithm,
+
+<BR>= 2 for Pade acceleration by finding the N/D polynomials.
+
+<P>
+</DD>
+<DT><STRONG>HORT, RMORT</STRONG></DT>
+<DD>&nbsp;
+<BR>
+HORT = radial interval step at which QR stabilization is performed
+<BR>
+RMORT = radius outside classical turning point to which to extend orthogonalizing. 
+<BR>
+See section <A HREF="node19.html#hort">9</A> for more details.
+
+<P>
+</DD>
+<DT><STRONG>NOSOL</STRONG></DT>
+<DD>: if not to solve the CRC equations, only construct couplings
+
+<P>
+</DD>
+<DT><STRONG>DRY</STRONG></DT>
+<DD>normally F (false), but if T (true) the code does a `dry run'
+to check that all arrays are of sufficient size.
+All coupled channel sets are generated, but only the elastic
+channels should be non-zero.
+
+<P>
+</DD>
+<DT><STRONG>SMALLCHAN, SMALLCOUP</STRONG></DT>
+<DD>&nbsp;
+<BR>
+SMALLCHAN = fraction of unitarity to define a 'small channel'. 
+A channel that is `small' for NSMALL=5 times is dropped permanently.
+
+<P>
+SMALLCOUP: if all nonelastic channels are weaker than the fraction
+SMALLCOUP of unitarity, then permanently change from coupled-channels to DWBA.
+
+<P>
+</DD>
+<DT><STRONG>PSIREN</STRONG></DT>
+<DD>: do simple renormalisation of channel wfs after Pade acceleration
+</DD>
+<DT><STRONG>INITWF</STRONG></DT>
+<DD>: read in external scattering wave functions before iterating couplings.
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.77ex; vertical-align: -0.19ex; " SRC="img22.svg"
+ ALT="$&gt;0$"></SPAN>: read in formatted data from file number INITWF.
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.77ex; vertical-align: -0.19ex; " SRC="img35.svg"
+ ALT="$&lt; 0$"></SPAN>: read in unformatted data from file number INITWF.
+<BR>
+The file format is that which is produced when WAVES<SPAN CLASS="MATH"><IMG STYLE="height: 1.77ex; vertical-align: -0.19ex; " SRC="img22.svg"
+ ALT="$&gt;0$"></SPAN>. 
+All channels not read in are set to zero.
+
+<P>
+</DD>
+<DT><STRONG>MAXCOUP(:), EXPAND(:)</STRONG></DT>
+<DD>: fudge limits and factors (respectively) to adjust sizes of generated work arrays.
+
+<P>
+</DD>
+</DL>
+
+<P>
+
+<H3><A ID="SECTION00042800000000000000">
+R-matrix setup</A>
+</H3>
+<DL>
+<DT><STRONG>NRBASES</STRONG></DT>
+<DD>&nbsp;
+<BR>
+When NRBASES<SPAN CLASS="MATH"><IMG STYLE="height: 2.18ex; vertical-align: -0.53ex; " SRC="img39.svg"
+ ALT="$\neq$"></SPAN>0, R-matrix solutions are selected then all channels
+are `blocked' together and solved in a full CRC procedure. All non-local potentials are included to all all orders (not iteratively).
+
+<P>
+NRBASES = target number of radial basis states in each channel.
+(Use 2*NRBASES for the elastic and first-inelastic channel for more accuracy).
+<BR>
+If NRBASES <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, then use <EM>Lagrange mesh</EM> basis with NLAG=&ndash;NRBASES basis functions.
+
+<P>
+</DD>
+<DT><STRONG>NRBMIN, BUTTLE, PRALPHA, PCON, RMATR, EBETA, WEAK, BES</STRONG></DT>
+<DD>&nbsp;
+<BR>
+NRBMIN = minimum number of radial basis states (default NRBASES).
+
+<P>
+BUTTLE = 4 for none, 0,2 for complex, 1,3 for real
+(2,3 without energy shift) Buttle correction.
+<BR>(default 0)
+
+<P>
+PRALPHA = print basis-state eigenvalues to files fort.60,61,62,63
+
+<P>
+PCON = trace variable for calculation of radial basis states (same
+meaning as IPC for single-particle bound states).
+
+<P>
+RMATR = R-matrix matching radius (default RMATCH ).
+Warning: RMATR will be changed to an even multiple of HCM.
+
+<P>
+Energy EBETA = <SPAN CLASS="MATH"><IMG STYLE="height: 2.74ex; vertical-align: -0.66ex; " SRC="img44.svg"
+ ALT="$\hbar^2k^2/2m$"></SPAN>, where <SPAN CLASS="MATH"><IMG STYLE="height: 2.44ex; vertical-align: -0.66ex; " SRC="img45.svg"
+ ALT="$k= f'/f$"></SPAN>, the logarithmic derivative
+for all radial basis states at <SPAN CLASS="MATH"><IMG STYLE="height: 1.16ex; vertical-align: -0.10ex; " SRC="img46.svg"
+ ALT="$r$"></SPAN>=RMATR, with <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img37.svg"
+ ALT="$k$"></SPAN> having the same
+sign as EBETA. 
+
+<P>
+If WEAK<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN>0, then non-elastic columns of the R-matrix are set to zero,
+  when penetrabilities <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> WEAK.
+
+<P>
+</DD>
+<DT><STRONG>NPARAMETERS</STRONG></DT>
+<DD>Read in this number of R-matrix parameter namelists after the &amp;FRESCO namelist.
+
+<P>
+</DD>
+</DL>
+
+<P>
+
+<H3><A ID="SECTION00042900000000000000">
+Trace variables</A>
+</H3>
+A value of 0 gives no trace,
+increasing values give progressively more printed output.
+<BR><EM>Decremented</EM> variables are decreased by 1 on each use.
+
+<P>
+<DL>
+<DT><STRONG>CHANS</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 1 : Print the sets of coupled partial waves for each J,parity.
+Decremented.
+
+<P>
+</DD>
+<DT><STRONG>LISTCC</STRONG></DT>
+<DD>= 1 : Print coupling coefficients between these channels. Decremented.
+
+<BR>= 1,2,... Print progressively more detail of couplings.
+</DD>
+<DT><STRONG>TRENEG</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 1 : Print all multipole potentials
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 3 : Print all monopole potentials as well
+</DD>
+<DT><STRONG>CDETR</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 1 : Print information on the solving of the coupled equations.
+(decremented).
+</DD>
+<DT><STRONG>SMATS</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 1 : Print absorbtion &amp; reaction cross sections for successive
+partitions and excitations.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 2 : Print elastic S-matrix elements (<SPAN CLASS="MATH"><IMG STYLE="height: 2.05ex; vertical-align: -0.46ex; " SRC="img47.svg"
+ ALT="$S_{el}$"></SPAN>).
+Also `punch' these elastic <SPAN CLASS="MATH"><IMG STYLE="height: 2.05ex; vertical-align: -0.46ex; " SRC="img47.svg"
+ ALT="$S_{el}$"></SPAN> on output file 7,
+in format (2F15.10,L,J,JTOT) for <SPAN CLASS="MATH"><IMG STYLE="height: 2.05ex; vertical-align: -0.46ex; " SRC="img47.svg"
+ ALT="$S_{el}$"></SPAN> complex, L, J and JTOT.
+See WDISK below for description of these quantum numbers.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 3 : Print all S-matrix elements for the `grazing partial waves'
+defined by <!-- MATH
+ $0.05 < Re(S_{el}) < 0.95$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img48.svg"
+ ALT="$0.05 &lt; Re(S_{el}) &lt; 0.95$"></SPAN>
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 4 : Always print all the S-matrix elements.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 5 : Print all S-matrix elements at each iteration of the coupled
+equations (or, if PADE  <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0, the Pade approximant)
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 6 : Print all actual S-matrix elements at each iteration (these
+may be divergent before Pade acceleration).
+
+<P>
+</DD>
+</DL>
+
+<P>
+
+<H3><A ID="SECTION000421000000000000000">
+Output details</A>
+</H3>
+
+<P>
+<DL>
+<DT><STRONG>XSTABL, NLPL, WAVES, LAMPL, VEFF, KFUS, NFUS, WDISK, BPM, MELFIL, CDCC,  TCFILE</STRONG></DT>
+<DD><P>
+</DD>
+<DT><STRONG>XSTABL</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 2.18ex; vertical-align: -0.53ex; " SRC="img39.svg"
+ ALT="$\neq$"></SPAN> 0 : If XSTABL is non-zero, in file 16 punch output cross sections
+for all excitation levels in all partitions.
+A header line in FORMAT(5I6) gives partition IC, level pair IA,
+number of tensor ranks of analyzing powers 1 <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> KQ1PR <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> XSTABL,
+number of angles NANGL, and NEARF.  NEARF=1 for total cross section,
+2 for far-side component, and 3 for near-side component.
+
+<P>
+Then follow NANGL print operations in
+<SPAN style="font-family:monospace">FORMAT(1P,6E12.4)</SPAN>, repeating
+the <SPAN style="font-family:monospace">FORMAT</SPAN> for each operation if KQ1PR is large,
+of THETA, elastic xs (mb), <SPAN CLASS="MATH"><IMG STYLE="height: 2.00ex; vertical-align: -0.46ex; " SRC="img49.svg"
+ ALT="$T_{10}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.97ex; vertical-align: -0.43ex; " SRC="img50.svg"
+ ALT="$iT_{11}$"></SPAN>,
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.00ex; vertical-align: -0.46ex; " SRC="img51.svg"
+ ALT="$T_{20}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.97ex; vertical-align: -0.43ex; " SRC="img52.svg"
+ ALT="$T_{21}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.97ex; vertical-align: -0.43ex; " SRC="img53.svg"
+ ALT="$T_{22}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.00ex; vertical-align: -0.46ex; " SRC="img54.svg"
+ ALT="$iT_{30}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.00ex; vertical-align: -0.46ex; " SRC="img55.svg"
+ ALT="$iT_{31}$"></SPAN>
+etc.
+
+<P>
+</DD>
+<DT><STRONG>NLPL</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0 : print a `contour plot' of the non-local kernels
+<!-- MATH
+ $K_{fi}(R_{f},D_{fi})$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.53ex; vertical-align: -0.77ex; " SRC="img56.svg"
+ ALT="$K_{fi}(R_{f},D_{fi})$"></SPAN>.  This is useful to determine if the parameters in the &amp;Fresco namelist
+are adequate.  Decremented.
+
+<P>
+</DD>
+<DT><STRONG>WAVES</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 1.69ex; vertical-align: -0.29ex; " SRC="img57.svg"
+ ALT="$\pm$"></SPAN>1 or <SPAN CLASS="MATH"><IMG STYLE="height: 1.69ex; vertical-align: -0.29ex; " SRC="img57.svg"
+ ALT="$\pm$"></SPAN>3 : print out wave function solutions of the coupled
+equations at the end of the iterations.
+(If WAVES<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN>0 : print out the RATIO of the w/f to its asymptotic
+form <!-- MATH
+ $((G-iF) - S.(G+iF)).i/2$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img58.svg"
+ ALT="$((G-iF) - S.(G+iF)).i/2$"></SPAN>)
+
+<BR>
+2 or 3     : print out the source terms at
+<EM>each</EM> iteration of the coupled equations.
+
+<P>
+</DD>
+<DT><STRONG>LAMPL</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 2.18ex; vertical-align: -0.53ex; " SRC="img39.svg"
+ ALT="$\neq$"></SPAN> 0: Print out (on Fortran file 36)
+the coefficients <SPAN CLASS="MATH"><IMG STYLE="height: 2.44ex; vertical-align: -0.66ex; " SRC="img28.svg"
+ ALT="$A(m'M':mM; L)$"></SPAN> for the Legendre
+coefficients in the scattering amplitude for the partition number
+abs(LAMPL),
+<EM>and</EM>
+print out the <!-- MATH
+ $f(m'M':mM; \theta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.44ex; vertical-align: -0.66ex; " SRC="img59.svg"
+ ALT="$f(m'M':mM; \theta)$"></SPAN> for each angle <SPAN CLASS="MATH"><IMG STYLE="height: 1.76ex; vertical-align: -0.14ex; " SRC="img60.svg"
+ ALT="$\theta$"></SPAN>.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN>0 : only print out on file 37 the amplitudes <SPAN CLASS="MATH"><IMG STYLE="height: 2.15ex; vertical-align: -0.57ex; " SRC="img61.svg"
+ ALT="$f$"></SPAN>, not the <SPAN CLASS="MATH"><IMG STYLE="height: 1.69ex; vertical-align: -0.10ex; " SRC="img62.svg"
+ ALT="$A$"></SPAN>'s,
+for partition abs(LAMPL).
+
+<P>
+The phase convention here is that there is no Coulomb phase shift
+for <SPAN CLASS="MATH"><IMG STYLE="height: 1.72ex; vertical-align: -0.14ex; " SRC="img63.svg"
+ ALT="$L = 0$"></SPAN> in the Coulomb scattering amplitude : factors such as
+<!-- MATH
+ $\exp i(\sigma_L-\sigma_0))$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img64.svg"
+ ALT="$\exp i(\sigma_L-\sigma_0))$"></SPAN> appear in the <SPAN CLASS="MATH"><IMG STYLE="height: 1.69ex; vertical-align: -0.10ex; " SRC="img62.svg"
+ ALT="$A$"></SPAN>'s.
+
+<P>
+</DD>
+<DT><STRONG>VEFF</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 2.18ex; vertical-align: -0.53ex; " SRC="img39.svg"
+ ALT="$\neq$"></SPAN> 0 : Calculate the `coupled channels effective potential'
+found be averaging the `trivially equivalent potential' over all
+the <SPAN CLASS="MATH"><IMG STYLE="height: 2.07ex; vertical-align: -0.53ex; " SRC="img65.svg"
+ ALT="$J,\pi$"></SPAN> sets, with weights of the elastic wave functions
+times the reaction cross section, in each set.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0 : Add this effective potential to optical potential
+of the elastic channel before printing.
+
+<BR>= &ndash;2 or +2 : Exclude partial waves with elastic <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.14ex; " SRC="img43.svg"
+ ALT="$S$"></SPAN>-matrix element
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.03ex; vertical-align: -0.44ex; " SRC="img66.svg"
+ ALT="$S_\ell&lt; 0.1$"></SPAN> from the averaging sum.
+
+<BR>
+The results show the real and imaginary parts for successive
+values of <SPAN CLASS="MATH"><IMG STYLE="height: 1.83ex; vertical-align: -0.29ex; " SRC="img67.svg"
+ ALT="$J-L$"></SPAN>, for the projectile only.
+
+<P>
+</DD>
+<DT><STRONG>KFUS, NFUS</STRONG></DT>
+<DD>If KFUS  <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0 :  Calculate `core fusion' using the imaginary and scalar
+parts of potential number KFUS (i.e.&amp;pot namelists with TYPE = 1 or 2,
+and KP = KFUS), also for the first NFUS inelastic channels.
+
+<P>
+</DD>
+<DT><STRONG>WDISK</STRONG></DT>
+<DD>= 1 :  Print elastic wave functions on output file 17, FORMATTED
+
+<BR>= 2 :  Print   all   wave functions on output file 17, FORMATTED
+
+<BR>=&ndash;1 :  Print elastic wave functions on output file 17, UNFORMATTED
+
+<BR>=&ndash;2 :  Print   all   wave functions on output file 17, UNFORMATTED
+
+<P>
+<BLOCKQUOTE>
+The following data formats are used when WDISK <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0 :
+</BLOCKQUOTE><PRE>
+line A: (I4,2F8.4,F8.1,I3)
+         NR,H,ENLAB,JTOTAL,PARITY,MP,MT,ZP,ZT :
+           number radial points, step size, lab. energy,  J,pi,
+           projectile and target masses and charges
+line B: (2I4,2F6.1,I4,F6.1,2F15.10,f12.8)
+         IT,L,J,JTOT,LIN,JIN,SMAT (complex), ETA
+</PRE><BLOCKQUOTE>
+where
+</BLOCKQUOTE>
+<P>
+<BLOCKQUOTE>IT = index to excited state pair, counts lines 7.
+<BR>
+L  = partial wave
+<BR>
+J  = L + projectile spin
+<BR>
+JTOT = total spin = J<SPAN CLASS="MATH"><IMG STYLE="height: 1.33ex; vertical-align: -0.46ex; " SRC="img68.svg"
+ ALT="$_{total}$"></SPAN> = J + target spin
+<BR>
+LIN  = incoming partial wave
+<BR>
+JIN  = incoming J value.
+<BR>
+SMAT = S matrix element for this partial wave.
+<BR></BLOCKQUOTE>
+<P><PRE>
+line C: (6E12.4)   (psi(I),I=1,NR)   wave function
+line C is repeated until NR complex values given
+NB: the first point psi(1) = 0 always, as at r=0
+</PRE><BLOCKQUOTE>
+Lines B &amp; C are repeated for each channel, until IT <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0.
+
+<BR>
+When WDISK <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, successive records contain the two real values
+of psi(I), starting IN THIS CASE, from I=2 (i.e. <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img69.svg"
+ ALT="$r=h$"></SPAN>).
+
+</BLOCKQUOTE>
+
+<P>
+</DD>
+<DT><STRONG>BPM</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 1 : Calculate fusion cross sections in the Barrier Penetration
+Model using first the bare potential, and then the bare potential + the
+`weighted equivalent potential' calculated when VEFF <SPAN CLASS="MATH"><IMG STYLE="height: 2.18ex; vertical-align: -0.53ex; " SRC="img39.svg"
+ ALT="$\neq$"></SPAN> 0.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 2 : Print out <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img34.svg"
+ ALT="$L$"></SPAN>-distributions of the fusion cross section.
+
+<P>
+</DD>
+<DT><STRONG>MELFIL</STRONG></DT>
+<DD><SPAN CLASS="MATH"><IMG STYLE="height: 2.18ex; vertical-align: -0.53ex; " SRC="img70.svg"
+ ALT="$\ne$"></SPAN> 0 : Write real files 53 and 54 in the `mel' and `spec' format
+        for use e.g. by R-matrix program <SPAN style="font-family:monospace">sturmxx</SPAN>.
+
+<BR>= <SPAN CLASS="MATH"><IMG STYLE="height: 1.69ex; vertical-align: -0.29ex; " SRC="img57.svg"
+ ALT="$\pm$"></SPAN>2 : Write complex files 53 and 54 in the `mel' and `spec' format.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0 : Write file 53 `mel' in text format format.
+
+<P>
+</DD>
+<DT><STRONG>CDCC = 1</STRONG></DT>
+<DD>:
+Print out the <!-- MATH
+ $f(m'M':mM; \theta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.44ex; vertical-align: -0.66ex; " SRC="img59.svg"
+ ALT="$f(m'M':mM; \theta)$"></SPAN> for each angle <SPAN CLASS="MATH"><IMG STYLE="height: 1.76ex; vertical-align: -0.14ex; " SRC="img60.svg"
+ ALT="$\theta$"></SPAN>
+on file 57 for partition <SPAN style="font-family:monospace">PEL</SPAN>, after the following information for <EM>uncoupled</EM> bin states:
+<SPAN CLASS="FOOTNOTESIZE"></SPAN><PRE>
+line Y:(i2)  1    (indicating CDCC=1 format below)
+line Z: (A120)   HEADNG from Fresco input.
+line A: (F10.4,3F8.4)   ENLAB,Bproj,H2SM,e^2,Btarg,inp, (Qval if inp=1)
+              lab energy,projectile binding energy, hbar^2/2.m, e^2, 
+              target binding energy,inp, Qval if inp=1
+                                                
+line B: (7f8.4)         massp,masst,massc,massv,massr  
+                                         masses: projectile,target,core,valence,residual
+line C: (7f8.4)         Zp,Zt,Zc,Zv,Zr                charges
+line D: (7A8)           namep,namet,namec,namev,namer names
+line E: (7f8.1)         Jp,Jt,Jc,Jv,Jr                g.s. spins
+line F: (7i8)           Pp,Pt,Pc,Pv,Pr                g.s. parities
+   If inp=1, cards B-F (incl) have further #6 and #7 values 
+                for 'initial projectile' and 'initial target' too.
+   
+line G: (4I4)           NBINS,NKMAX,NEXB,NNJMAX no. CDCC bins, max NK,
+                                                no. excited states, max(2*Jex+1)
+line H: (I4,2f8.4)      NANGL,THMIN,THINC       (cm angular range from \&amp;FRESCO)
+for each of the NBINS bins:
+ line I:(i2,2f4.1,3f8.4,2i4)
+         l,j,Emid,kmin,kmax,NK,KN,ISC
+            l,j: quantum numbers  (s==Jv)
+            Emid:  centre of bin with respect to continuum threshold
+            kmin,kmax,NK: Min,max and number of k values in bin integral
+            KN:  original KN index for bin state
+            ISC:  normalisation used for bin
+     for each IK=1,NK
+         line J: (10f8.4) delta(IK): nuclear phase shift used in bin integral (radians)
+
+for each excited state pair in the entrance partition: IA=1,NEXB::
+    line K: (f4.1,i4,f8.4,i4) Jex,Parity,Eex,IBIN:
+            Jex :          spin of this projectile excited state  (not including core spin)
+            Parity:        parity of this projectile state
+            Eex:           excitation energy of this state above g.s.
+            IBIN:          (first) bin defined for this excited state
+    for each IANG=1,NANGL: read complex numbers:
+    line L: (6E12.4): ((FAM(MEX,MP,IANG,IA),MEX=1,2*Jex(IA)+1),MP=1,2*Jp+1)
+</PRE><SPAN CLASS="FOOTNOTESIZE"></SPAN>
+
+<P>
+The phase convention for all CDCC values is that there is no Coulomb phase shift
+for <SPAN CLASS="MATH"><IMG STYLE="height: 1.72ex; vertical-align: -0.14ex; " SRC="img63.svg"
+ ALT="$L = 0$"></SPAN> in the Coulomb scattering amplitude : factors such as
+<!-- MATH
+ $\exp i(\sigma_L-\sigma_0))$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img64.svg"
+ ALT="$\exp i(\sigma_L-\sigma_0))$"></SPAN> appear in the <SPAN CLASS="MATH"><IMG STYLE="height: 1.69ex; vertical-align: -0.10ex; " SRC="img62.svg"
+ ALT="$A$"></SPAN>'s.t
+
+<P>
+&nbsp;
+<BR>
+Summary of bin normalisation factors for different ISC values:
+
+<P>
+ISC
+<BR>
+<BR>= 2:  <!-- MATH
+ $\exp(-i\delta(k))$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img71.svg"
+ ALT="$\exp(-i\delta(k))$"></SPAN>
+
+<BR>= 4:  <!-- MATH
+ $\sin(\delta(k))\exp(-i\delta(k))$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img72.svg"
+ ALT="$\sin(\delta(k))\exp(-i\delta(k))$"></SPAN>
+
+<BR>= 12:  <!-- MATH
+ $k\exp(-i\delta(k))$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img73.svg"
+ ALT="$k\exp(-i\delta(k))$"></SPAN>
+
+<BR>= 14:  <!-- MATH
+ $k\sin(\delta(k))\exp(-i\delta(k))$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img74.svg"
+ ALT="$k\sin(\delta(k))\exp(-i\delta(k))$"></SPAN>
+
+<P>
+</DD>
+<DT><STRONG>CDCC = 2</STRONG></DT>
+<DD>:
+Print out the <!-- MATH
+ $f(m'M':mM; \theta)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.44ex; vertical-align: -0.66ex; " SRC="img59.svg"
+ ALT="$f(m'M':mM; \theta)$"></SPAN> for each angle <SPAN CLASS="MATH"><IMG STYLE="height: 1.76ex; vertical-align: -0.14ex; " SRC="img60.svg"
+ ALT="$\theta$"></SPAN>
+on file 57 for partition <SPAN style="font-family:monospace">PEL</SPAN>, after the following information for <EM>coupled bin states</EM>:
+
+<P>
+<SPAN CLASS="FOOTNOTESIZE"></SPAN><PRE>
+line Y:(i2)  2    (indicating CDCC=2 format below)
+line Z: (A120)   HEADNG from Fresco input.
+line A: (F10.4,3F8.4)   ENLAB,Bproj,H2SM,e^2,Btarg,inp, Qval if inp=1
+                  lab energy,projectile binding energy, hbar^2/2.m, e^2, 
+                  target binding energy,inp, Qval 
+line B: (7f8.4)         massp,masst,massc,massv,massr  
+                                         masses: projectile,target,core,valence,residual
+line C: (7f8.4)         Zp,Zt,Zc,Zv,Zr                charges
+line D: (7A8)           namep,namet,namec,namev,namer names
+line E: (7f8.1)         Jp,Jt,Jc,Jv,Jr                g.s. spins
+line F: (7i8)           Pp,Pt,Pc,Pv,Pr                g.s. parities
+   If inp=1, cards B-F (incl) have further #6 and #7 values 
+                for 'initial projectile' and 'initial target' too.
+
+line G: (5I4)           NBINS,NKMAX,NEXB,NNJMAX,NCHMAX
+                                                no. CDCC bins, max NK,
+                                                no. excited states, max(2*Jex+1), max nch
+line H: (I4,2f8.4)      NANGL,THMIN,THINC       (cm angular range from \&amp;FRESCO)
+line I: (I4)                NCE              (number of excited states. NCE=0 for only gs).
+for each of the ICE=1...NCE core excited states  (card skipped if NCE=0)
+lines J: (I4,2f8.4)      IPARCE, JCE, ECE    (parity -1,+1; spin; energy of excited states)
+                         (for the gs: parity=Pc, spin=Jc, energy=0.0)
+for each of the NBINS bins:
+ card K:(f4.1,2I4,f4.1,3f8.4,2i4)
+         Jex,Pex,nch,Emid,kmin,kmax,NK,KN,ISC
+            Jex: overall spin  [ (l s)j, JCE(ICE); Jex&gt;
+            Pex: overall parity = parity(ICE) * (-1)**l
+            nch: number of partial wave channels coupled to Jex/Pex.
+            IL: incident channel (1&lt;= IL &lt;= nch)
+            Emid:  centre of bin with respect to continuum threshold
+            kmin,kmax,NK: Min,max and number of k values in bin integral
+            KN:  original KN index for bin state
+            ISC:  normalisation used for bin
+         For each partial wave c=1..nch
+         line L: (i4,f4.1,i4)
+            l,j,ICE: quantum numbers. Use s=Jv.            
+     for each IK=1,NK for    k=kmin+(IK-1)*kinc where kinc = (kmax-kmin)/(NK-1)
+         line M: (2f10.6) delta(IK),k: any nuclear phase shift used in bin integral (radians)
+         line N: (10f10.6) S(:,:)     the full scattering S matrix for nch channels 
+                                        (always nch*nch, so closed channels included)
+
+for each excited state pair in the entrance partition: IA=1,NEXB::
+    line K: (f4.1,i4,f8.4,i4) Jex,Parity,Eex,IBIN:
+            Jex :          spin of this projectile excited state (including core spin)
+            Pex:           parity of this projectile state
+            Eex:           excitation energy of this state above g.s. (including core energy)
+            IBIN:          (first) bin defined for this excited state
+    for each IANG=1,NANGL: read complex numbers:
+    line L: (6E12.4): ((FAM(MEX,MP,IANG,IA),MEX=1,2*Jex(IA)+1),MP=1,2*Jp+1)
+</PRE><SPAN CLASS="FOOTNOTESIZE"></SPAN>
+
+<P>
+</DD>
+<DT><STRONG>TMP</STRONG></DT>
+<DD>:  name of directory for temporary files: `/tmp' or `.'  Default = /tmp/
+
+<P>
+</DD>
+</DL>
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node7.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node5.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html119"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node7.html">&amp;PARTITION and &amp;STATES namelists</A>
+<B> Up:</B> <A
+ HREF="node4.html">Input NAMELIST format</A>
+<B> Previous:</B> <A
+ HREF="node5.html">Initial Lines</A>
+ &nbsp; <B>  <A ID="tex2html120"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>

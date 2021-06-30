@@ -1,0 +1,871 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<HTML lang="en">
+<HEAD>
+<TITLE>&amp;OVERLAP namelists for one- and two-particle form factors</TITLE>
+<META NAME="description" CONTENT="&amp;OVERLAP namelists for one- and two-particle form factors">
+<META NAME="keywords" CONTENT="fresco-namelist-manual">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+
+<LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
+
+<LINK REL="next" HREF="node10.html">
+<LINK REL="previous" HREF="node8.html">
+<LINK REL="next" HREF="node10.html">
+</HEAD>
+
+<BODY >
+
+<DIV CLASS="navigation"><!--Navigation Panel-->
+<A
+ HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html141"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node10.html">&amp;COUPLING namelists</A>
+<B> Up:</B> <A
+ HREF="node4.html">Input NAMELIST format</A>
+<B> Previous:</B> <A
+ HREF="node8.html">&amp;POT potential namelists</A>
+ &nbsp; <B>  <A ID="tex2html142"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR></DIV>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A ID="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL CLASS="ChildLinks">
+<LI><A ID="tex2html143"
+  HREF="node9.html#SECTION00045100000000000000">One-particle KINDs</A>
+<UL>
+<LI><A ID="tex2html144"
+  HREF="node9.html#SECTION00045110000000000000">For KIND = 0:</A>
+<LI><A ID="tex2html145"
+  HREF="node9.html#SECTION00045120000000000000">For KIND = 1:</A>
+<LI><A ID="tex2html146"
+  HREF="node9.html#SECTION00045130000000000000">For KIND = 2:</A>
+<LI><A ID="tex2html147"
+  HREF="node9.html#SECTION00045140000000000000">For KIND = 3:</A>
+</UL>
+<BR>
+<LI><A ID="tex2html148"
+  HREF="node9.html#SECTION00045200000000000000">Two-particle KINDs</A>
+<UL>
+<LI><A ID="tex2html149"
+  HREF="node9.html#SECTION00045210000000000000">For KIND <SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 6:</A>
+</UL>
+<BR>
+<LI><A ID="tex2html150"
+  HREF="node9.html#SECTION00045300000000000000">Namelist &amp;TWONT</A>
+<UL>
+<LI><A ID="tex2html151"
+  HREF="node9.html#SECTION00045310000000000000">For KIND = 6:</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H2><A ID="SECTION00045000000000000000">
+&amp;OVERLAP namelists for one- and two-particle form factors</A>
+</H2>
+
+<P>
+Read in a namelist for each desired particle-nucleus form factor, then an empty namelist.
+
+<P>
+<DL>
+<DT><STRONG>KN1, KN2, IC1, IC2, IN</STRONG></DT>
+<DD>&nbsp;
+<BR> Each form factor is indexed by a number KN, which may refer to
+a single form, or for two-nucleon form factors will refer to a range
+of forms KN1 - KN2
+(one for each distance and angular momentum between the two nucleons).
+
+<P>
+Each form factor is the binding of one or two particles to a
+specified nucleus, where the composite system is another specified
+nucleus.
+
+<P>
+To specify the core and composite nuclei, their partition numbers
+IC1 and IC2 are required (either order), with <SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>IN<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>=1 for projectile
+and <SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>IN<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img21.svg"
+ ALT="$\vert$"></SPAN>=2 for target nuclei.
+
+<P>
+The mass of the particle is the strict difference of the masses of
+the core and composite nuclei, except that if IN <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, then a
+relativistic correction is made for effect of the relative Q-values
+on the mass of the composite nucleus, when extracting by differences
+the mass of the bound fragment.
+
+<P>
+</DD>
+<DT><STRONG>KIND</STRONG></DT>
+<DD>the kind of coupling order (0 to 4 for one-particle states, and
+6 to 9 for two-particle states) :
+
+<P>
+= 0 for (LN,SN) JN couplings&nbsp;&nbsp;&nbsp;<SPAN CLASS="MATH"><IMG STYLE="height: 1.01ex; vertical-align: -0.10ex; " SRC="img140.svg"
+ ALT="$\leftarrow$"></SPAN> use for typical transfers
+<BR>= 1 for <!-- MATH
+ $|L_{n}, (SN,J_{core})S ; J_{com}\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img141.svg"
+ ALT="$\vert L_{n}, (SN,J_{core})S ; J_{com}\rangle$"></SPAN> (IA &amp; IB must be given) *
+<BR>= 2 for eigenstate in deformed potential (fixed SN, K, Parity)  *
+<BR>= 3 for <!-- MATH
+ $|(LN,SN)Jn, J_{core}; J_{com}\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img142.svg"
+ ALT="$\vert(LN,SN)Jn, J_{core}; J_{com}\rangle$"></SPAN> (IA &amp; IB must be given)
+<BR>= 4 for form of leg of the Dalitz-Thacker Triton
+<BR>= 5  (not used)
+<BR>= 6 for <!-- MATH
+ $|L_{nn}, (\ell,S_{12})j_{12}; J_{12}\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img143.svg"
+ ALT="$\vert L_{nn}, (\ell,S_{12})j_{12}; J_{12}\rangle$"></SPAN> with isospin <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img144.svg"
+ ALT="$(.5,.5) T$"></SPAN>
+<BR>= 7 for <!-- MATH
+ $|(L_{nn},\ell)L_t, (S_{12},J_{core})S_t ;  J_{com}\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img145.svg"
+ ALT="$\vert(L_{nn},\ell)L_t, (S_{12},J_{core})S_t ; J_{com}\rangle$"></SPAN> &amp; <!-- MATH
+ $|(.5,.5)T,T_{core};T_{com}\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img146.svg"
+ ALT="$\vert(.5,.5)T,T_{core};T_{com}\rangle$"></SPAN> *
+<BR>= 8  (not used)
+<BR>= 9 for <!-- MATH
+ $(L_{nn},(\ell,S_{12})j_{12})J_{12}, J_{core}; J_{com}\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img147.svg"
+ ALT="$(L_{nn},(\ell,S_{12})j_{12})J_{12}, J_{core}; J_{com}\rangle$"></SPAN> &amp;
+<!-- MATH
+ $(.5,.5)T,T_{core};T_{com}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img148.svg"
+ ALT="$(.5,.5)T,T_{core};T_{com}$"></SPAN>
+
+<P>
+where
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img149.svg"
+ ALT="$J_{core}$"></SPAN> = spin of core nucleus (state Ia if given)
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img150.svg"
+ ALT="$J_{com}$"></SPAN> = spin of composite nucleus (state IB if given)
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img151.svg"
+ ALT="$K_{core}$"></SPAN> = projection K of core nucleus (state IA)
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img152.svg"
+ ALT="$K_{com}$"></SPAN> = projection K of composite nucleus (state IB)
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img153.svg"
+ ALT="$T_{core}$"></SPAN> = isospin of core nucleus (state IA)
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img154.svg"
+ ALT="$T_{com}$"></SPAN> = isospin of composite nucleus (state IB)
+
+<P>
+and  *  signifies that transfers using these KINDs are not yet implemented.
+
+<P>
+</DD>
+<DT><STRONG>CH1, NN, L, LMAX, SN, IA, JN, IB</STRONG></DT>
+<DD>&nbsp;
+<BR>
+CH1 = single-character identifier to distinguish clusters of
+nucleons of different structures that are not further described
+but should not be confused with each other.
+Use A-M for positive parity clusters, and N-Z for negative parities.
+
+<P>
+NN = number of nodes (include the origin, but not infinity, so NN <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0)
+
+<P>
+L  = LN = angular momentum of bound cluster relative to the core
+
+<P>
+LMAX = maximum value of L in states in deformed potential,
+
+<P>
+SN
+      = intrinsic spin of bound nucleon (one-particle states)
+
+<BR>= total angular momentum (L+S) of bound cluster (KINDs 6 &amp; 9)
+
+<BR>= combined cluster and core intrinsic spins     (KIND 7)
+
+<P>
+IA = index (within core partition) of excited state of core,
+or zero if to be specified later.
+
+<P>
+JN
+     = vector sum LN + SN,
+
+<BR>
+but for KIND=1, JN = SN + J<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img155.svg"
+ ALT="$_{core}$"></SPAN> (i.e. S in LS coupling)
+
+<BR>
+and for KIND=7, JN = <SPAN CLASS="MATH"><IMG STYLE="height: 2.08ex; vertical-align: -0.45ex; " SRC="img156.svg"
+ ALT="$L_{nn} + \ell$"></SPAN> (i.e. L in LS coupling)
+
+<P>
+IB = index (within composite partition) of excited state of composite,
+or zero if to be specified later.
+
+<P>
+</DD>
+<DT><STRONG>KBPOT, KRPOT, BE,   ISC, NK, ER</STRONG></DT>
+<DD>&nbsp;
+<BR>
+KBPOT = index KP of potential in which to bind this state
+
+<P>
+KRPOT = index KP' of potential with which to multiply this states'
+wave function for transfer interactions. If zero, use KBPOT.
+If the binding potential was adjusted for a specific binding
+energy, then this adjusted potential (not the original) is used
+for transfers.
+
+<P>
+BE = Binding Energy (positive for bound states, negative for
+continuum bins)
+
+<P>
+
+<P><P>
+<BR>
+<B>BOUND STATES:</B>
+
+<P>
+ISC
+      = 0 to vary the binding energy for fixed potential,
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0 to vary the TYPE = ISC component of the potential KBPOT
+by a scaling factor to give binding energy BE.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0 to vary the TYPE = ISC component of the potential KBPOT,
+as above, but <B>also</B> to permanently rescale all the varied potential
+components. This affects all later bound and scattering states using
+the potential KBPOT.
+
+<P>
+
+<P><P>
+<BR>
+<B>CONTINUUM BINS:</B>
+
+<P>
+ISC   (default value 2)
+<BR>      = &ndash;2: no weighting or normalisation,
+
+<BR>= 1, 2 : weight wave functions by <!-- MATH
+ $\exp(-i\delta(k))$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img71.svg"
+ ALT="$\exp(-i\delta(k))$"></SPAN>,
+so they are real, before integrating over bin width.
+
+<BR>= 3, 4 : weight wave functions by <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img157.svg"
+ ALT="$T(k)$"></SPAN>* (useful for resonances)
+
+<BR>= &ndash;1, 1, 3 : normalise wave functions to unity (by usual square norm).
+<B>(This option is not recommended, for physics reasons!)</B>
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 10: use additional <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img37.svg"
+ ALT="$k$"></SPAN> factor in the weighting function, with
+mod(ISC,10) for above choices. Recommended for low-energy  bins.
+
+<P>
+The values ISC<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN>0 give real-valued bins for single-channel states,
+but not, in general, for coupled-channels bins. In that case, Fresco stores
+<EM>all</EM> bound and continuum states as complex functions.
+KIND=3 and 4 forward and reverse couplings are both calculated
+explicitly, but not KIND=7 transfer couplings. For transfers, the
+reverse couplings must be put in explicitly.
+<BR> <B>Warning:</B> imaginary parts of bins give imaginary parts of long-range
+Coulomb couplings that are <EM>ignored</EM> between abs(RMATCH) and RASYM
+in the CRCWFN calculations (the values in the &amp;Fresco namelist).
+<BR> In general, ISC=2 is recommended (or ISC=4 for resonances), since then
+the coupled-channels bins will be nearly real. With ISC=&ndash;2 (no phase weighting)
+there will be  different results because of different weighting within the
+bin. Note that all channels within a bin have the same scalar
+weighting factor.
+
+<P>
+</DD>
+<DT><STRONG>IPC, NFL</STRONG></DT>
+<DD>&nbsp;
+<BR>
+IPC = print control for further information:
+<PRE><TT>
+IPC&nbsp;&nbsp; Print Iterations&nbsp;&nbsp; Print Final Result&nbsp;&nbsp;Print W/F
+<BR>
+0 		no 		no 		no
+<BR>
+1 		no 		yes 		yes
+<BR>
+2 		no 		yes 		no
+<BR>
+3 		yes 		yes 		yes
+<BR>
+4 		yes 		yes 		no
+<BR>
+</TT></PRE>
+For bin states, read this table with `iterations' replaced by `intermediate
+phase shifts'.
+
+<P>
+NFL
+      <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0    : to write wave-function u(R)/R and potential overlap
+V(R)u(R)/R to file number abs(NFL).
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0 : to read a previously-written wave function from file number
+NFL.
+
+<BR>
+These wave function files contain a comment line,
+then (free format) NPOINTS, RSTEP, RFIRST,
+followed by NPOINTS wf points in steps of RSTEP starting at r=RFIRST,
+and then NPOINTS for the vertex function (potential*wf).
+The file numbers NFL should be in the range 20&ndash;33 (see section <A HREF="node17.html#files">7</A>).
+
+<P>
+</DD>
+<DT><STRONG>NAM, AMPL</STRONG></DT>
+<DD>&nbsp;
+<BR>
+If IA and IB are both non-zero, then there is enough
+information to set up the spectroscopic amplitude now,
+to  <!-- MATH
+ $\sqrt{NAM} \times AMPL$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.50ex; vertical-align: -0.38ex; " SRC="img158.svg"
+ ALT="$\sqrt{NAM} \times AMPL$"></SPAN>.
+See discussion for the &amp;cfp namelists, for further information about these amplitudes.
+<BR><B>Note:</B> If this is a form factor with mixed core levels,
+then AMPL should be specified <EM>here</EM> rather than on a &amp;cfp namelist
+(as &amp;cfp namelists require an IA specification, and such a state would
+have multiple IA assignments).
+
+<P>
+If NAM = &ndash;1, then use AMPL for the mass of the bound particle,
+independent of the MASSes in the &amp;partition namelists.
+(If NAM <SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 0, then the default particle mass is the difference of
+the MASSes of the projectiles (IN=1) or targets (IN=2) for partitions
+IC1 and IC2).
+
+<P>
+If NAM <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> &ndash;1, then use AMPL instead of ERANGE for the range ER of the
+energies of the upper
+and lower boundaries of the continuum bins, and use at leastgr
+NK=<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img159.svg"
+ ALT="$5\times\vert NAM\vert$"></SPAN> integration steps over this range.
+(These ER and NK override the input values.)
+
+<P>
+</DD>
+<DT><STRONG>DM</STRONG></DT>
+<DD>Set particle mass specifically, rather than using mass differences.
+
+<P>
+</DD>
+<DT><STRONG>NK, ER, E</STRONG></DT>
+<DD>Specific values for this continuum bin.
+
+<P>
+</DD>
+<DT><STRONG>RSMIN, RSMAX</STRONG></DT>
+<DD>If specified, set the overlap form factors to zero outside the interval [RSMIN,RSMAX]
+
+<P>
+</DD>
+<DT><STRONG>NLAG, PHASE, AUTOWID</STRONG></DT>
+<DD>Parameters for P<SMALL>LUTO</SMALL> with bound or resonant states.
+
+<P>
+</DD>
+</DL>
+
+<P>
+
+<H3><A ID="SECTION00045100000000000000">
+One-particle KINDs</A>
+</H3>
+
+<P>
+
+<H4><A ID="SECTION00045110000000000000">
+For KIND = 0:</A>
+</H4>   (LN,SN) JN couplings.
+
+<P>
+One form factor with LN,SN, &amp; JN as read in.
+
+<P>
+LMAX is not used.
+
+<P>
+IA &amp; IB are used only if NAM &amp; AMPL are non-zero, to specify
+spectroscopic amplitudes.
+
+<P>
+
+<H4><A ID="SECTION00045120000000000000">
+For KIND = 1:</A>
+</H4>  <!-- MATH
+ $L_{n},(SN,J_{core})S; J_{com}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img160.svg"
+ ALT="$L_{n},(SN,J_{core})S; J_{com}$"></SPAN> i.e. LS coupling.
+
+<P>
+Coupled form factors with sum over <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img161.svg"
+ ALT="$L_{n}$"></SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.14ex; " SRC="img43.svg"
+ ALT="$S$"></SPAN>.
+
+<P>
+SN as read in, the intrinsic spin of the bound particle.
+
+<P>
+IA giving <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img149.svg"
+ ALT="$J_{core}$"></SPAN>, spin of core nucleus.
+
+<P>
+IB giving <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img150.svg"
+ ALT="$J_{com}$"></SPAN>,  spin of composite nucleus.
+
+<P>
+LMAX is maximum <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img161.svg"
+ ALT="$L_{n}$"></SPAN> in summation.
+
+<P>
+JN   is maximum S  in summation.
+
+<P>
+NN &amp; L restrict the number of radial nodes of one component
+wave function in the coupled set :
+
+<P>
+NN gives the number of radial nodes of the last partial wave of
+angular momentum L<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img162.svg"
+ ALT="$_{n}$"></SPAN> = L input.
+
+<P>
+
+<H4><A ID="SECTION00045130000000000000">
+For KIND = 2:</A>
+</H4>  eigenstates in a deformed potential, for fixed
+parity and K projection :
+
+<P>
+Coupled form factors  <!-- MATH
+ $(l_{n},SN) JN,K$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img163.svg"
+ ALT="$(l_{n},SN) JN,K$"></SPAN> , with sum over <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img161.svg"
+ ALT="$L_{n}$"></SPAN> &amp; Jn.
+
+<P>
+SN, LMAX, NN &amp; L are as for KIND = 1 :
+
+<P>
+SN as read in, the intrinsic spin of the bound particle.
+
+<P>
+LMAX is maximum L<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img162.svg"
+ ALT="$_{n}$"></SPAN> in summation.
+
+<P>
+NN &amp; L restrict the number of radial nodes of one component
+wave function in the coupled set.
+
+<P>
+IA is a core state with correct K<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img155.svg"
+ ALT="$_{core}$"></SPAN> projection quantum number.
+
+<P>
+IB is a composite state with correct K<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img164.svg"
+ ALT="$_{com}$"></SPAN> projection number, 
+    so <!-- MATH
+ $K = K_{com} - K_{core}$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img165.svg"
+ ALT="$K = K_{com} - K_{core}$"></SPAN>
+
+<P>
+JN is the maximum Jn in the summation.
+
+<P>
+
+<H4><A ID="SECTION00045140000000000000">
+For KIND = 3:</A>
+</H4>   sum over coupled core and (ls)j particle states :
+
+<BR>
+Coupled form factors (L<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img166.svg"
+ ALT="$_n$"></SPAN>,SN)Jn,  J<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img155.svg"
+ ALT="$_{core}$"></SPAN>; J<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img164.svg"
+ ALT="$_{com}$"></SPAN>
+        (summing over L<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img166.svg"
+ ALT="$_n$"></SPAN>,   Jn &amp; J<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img155.svg"
+ ALT="$_{core}$"></SPAN>).
+
+<P>
+NN is the required number of radial nodes for the component
+wave function with core state IA and partial wave L<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img166.svg"
+ ALT="$_n$"></SPAN> = L.
+
+<P>
+LMAX is maximum L<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img166.svg"
+ ALT="$_n$"></SPAN> in summation.
+
+<P>
+SN as read in, the intrinsic spin of the bound particle.
+
+<P>
+All core states are included that can be coupled to form J<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img164.svg"
+ ALT="$_{com}$"></SPAN>,
+using a deformed binding potential.
+<EM>Note that such a deformed potential must be TYPE = 11,
+whether the projectile or target is deformed: not 10 or 12 or 13</EM>.
+
+<P>
+JN is the maximum Jn in the summation (single particle <SPAN CLASS="MATH"><IMG STYLE="height: 1.91ex; vertical-align: -0.28ex; " SRC="img167.svg"
+ ALT="$l+s$"></SPAN>)
+
+<P>
+IB gives <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img150.svg"
+ ALT="$J_{com}$"></SPAN> (fixed) : spin of composite nucleus.
+
+<P>
+BE is the single-particle binding energy for core state IA.
+
+<P>
+
+<H3><A ID="SECTION00045200000000000000">
+Two-particle KINDs</A>
+</H3>
+
+<P>
+
+<H4><A ID="SECTION00045210000000000000">
+For KIND <SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 6:</A>
+</H4>  two-particle bound states are constructed out of sums
+of pairs of previously-defined one-particle states,
+and input parameters NN through to BE in the &amp;overlap namelist are given new meanings:
+
+<P>
+NN    <SPAN CLASS="MATH"><IMG STYLE="height: 1.01ex; vertical-align: -0.10ex; " SRC="img131.svg"
+ ALT="$\rightarrow$"></SPAN> NPAIRS, the number of pair-products to be summed
+
+<P>
+L     <SPAN CLASS="MATH"><IMG STYLE="height: 1.01ex; vertical-align: -0.10ex; " SRC="img131.svg"
+ ALT="$\rightarrow$"></SPAN> <SPAN CLASS="MATH"><IMG STYLE="height: 2.08ex; vertical-align: -0.45ex; " SRC="img168.svg"
+ ALT="$\ell_{min}$"></SPAN> , minimum orbital angular momentum <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.10ex; " SRC="img16.svg"
+ ALT="$\ell$"></SPAN>.
+
+<P>
+LMAX  <SPAN CLASS="MATH"><IMG STYLE="height: 1.01ex; vertical-align: -0.10ex; " SRC="img131.svg"
+ ALT="$\rightarrow$"></SPAN> <SPAN CLASS="MATH"><IMG STYLE="height: 2.08ex; vertical-align: -0.45ex; " SRC="img169.svg"
+ ALT="$\ell_{max}$"></SPAN> , maximum orbital angular momentum <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.10ex; " SRC="img16.svg"
+ ALT="$\ell$"></SPAN>.
+
+<P>
+SN    <SPAN CLASS="MATH"><IMG STYLE="height: 1.01ex; vertical-align: -0.10ex; " SRC="img131.svg"
+ ALT="$\rightarrow$"></SPAN> S<SPAN CLASS="MATH"><IMG STYLE="height: 1.27ex; vertical-align: -0.45ex; " SRC="img170.svg"
+ ALT="$_{min}$"></SPAN> , minimum sum S<SPAN CLASS="MATH"><IMG STYLE="height: 1.29ex; vertical-align: -0.43ex; " SRC="img171.svg"
+ ALT="$_{12}$"></SPAN> of the two nucleons' intrinsic spins
+                 (S<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img172.svg"
+ ALT="$_{max}$"></SPAN> = 1.0 always).
+
+<P>
+IA, IB   give core and composite states, as before.
+
+<P>
+JN    <SPAN CLASS="MATH"><IMG STYLE="height: 1.01ex; vertical-align: -0.10ex; " SRC="img131.svg"
+ ALT="$\rightarrow$"></SPAN> J<SPAN CLASS="MATH"><IMG STYLE="height: 1.29ex; vertical-align: -0.43ex; " SRC="img171.svg"
+ ALT="$_{12}$"></SPAN> , total angular momentum of the two-particle state
+outside J<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img155.svg"
+ ALT="$_{core}$"></SPAN>.
+
+<P>
+KBPOT <SPAN CLASS="MATH"><IMG STYLE="height: 1.01ex; vertical-align: -0.10ex; " SRC="img131.svg"
+ ALT="$\rightarrow$"></SPAN> T     , total Isospin  of the 2-nucleon state (0 or 1)s
+(used to enforce  <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.10ex; " SRC="img16.svg"
+ ALT="$\ell$"></SPAN> + S<SPAN CLASS="MATH"><IMG STYLE="height: 1.29ex; vertical-align: -0.43ex; " SRC="img171.svg"
+ ALT="$_{12}$"></SPAN> + T = odd)
+
+<P>
+KRPOT <SPAN CLASS="MATH"><IMG STYLE="height: 1.01ex; vertical-align: -0.10ex; " SRC="img131.svg"
+ ALT="$\rightarrow$"></SPAN> KNZR, the KN index to a single-particle state <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img173.svg"
+ ALT="$u_{12}(r)$"></SPAN>
+of KIND 0 or 1, giving the N-N relative motion in the
+other participating nucleus (usually in the light ion).
+
+<P>
+If KNZR <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0, then just the overlap <!-- MATH
+ $u(R)  =  <u_{12}(r) | U(r,R) >$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img174.svg"
+ ALT="$u(R) = &lt;u_{12}(r) \vert U(r,R) &gt; $"></SPAN> is
+produced, suitable for zero-range two-nucleon transfer calculations.
+
+<P>
+BE    <SPAN CLASS="MATH"><IMG STYLE="height: 1.01ex; vertical-align: -0.10ex; " SRC="img131.svg"
+ ALT="$\rightarrow$"></SPAN> EPS   , the threshold percentage to define components with
+square norms sufficiently small to be omitted in the final two-nucleon
+state.
+
+<P>
+If ISC <SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img175.svg"
+ ALT="$\le$"></SPAN> 0, use Gaussian quadrature grid, in blocks of 6th-order
+      positions, for the N-N distance RMIN to RNN ( &amp;Fresco namelist).
+
+<BR>
+If ISC <SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 1, use uniform grid for the N-N distances.  Not so accurate.
+
+<BR>
+If ISC <SPAN CLASS="MATH"><IMG STYLE="height: 2.18ex; vertical-align: -0.53ex; " SRC="img39.svg"
+ ALT="$\neq$"></SPAN> 0, print out numerical values of resulting two-nucleon wavefunction
+U(r,R).
+
+<P>
+IPC controls the details printed (along with ISC as just above):
+<BR>      <SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 0 : one-line summary of U(r,R) form factor for each r.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 1 : overall norm and rms radius of total NN state.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 2 : contour plot of the L,<SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.10ex; " SRC="img16.svg"
+ ALT="$\ell$"></SPAN> components included.
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.90ex; vertical-align: -0.39ex; " SRC="img2.svg"
+ ALT="$\geq $"></SPAN> 3 : contour plot of the <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img176.svg"
+ ALT="$U(r,R) \times$"></SPAN> interaction potential
+
+<P>
+NFL
+      <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0    : to write two-nucleon wave-function U(r,R) to file
+number abs(NFL).
+
+<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0 : to read a previously-written wave function from file number
+NFL.  The values of NPAIRS, <SPAN CLASS="MATH"><IMG STYLE="height: 2.08ex; vertical-align: -0.45ex; " SRC="img177.svg"
+ ALT="$l_{min}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.08ex; vertical-align: -0.45ex; " SRC="img178.svg"
+ ALT="$l_{max}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.04ex; vertical-align: -0.45ex; " SRC="img179.svg"
+ ALT="$S_{min}$"></SPAN> of
+<EM>the present</EM>
+run are ignored.  Thus NPAIRS can be set to zero.
+
+<P>
+
+<H3><A ID="SECTION00045300000000000000">
+Namelist &amp;TWONT</A>
+</H3>
+This namelist gives the details of the single-particle wave functions and their amplitudes in the sum of pairs.
+<DL>
+<DT><STRONG>NT(1:4, :), COEF(:)</STRONG></DT>
+<DD>&nbsp;
+<BR>
+The sum over I of  COEF(I) <!-- MATH
+ $| (l_1,s_1)j_1, (l_2,s_2)j_2 ; J_{12},T \rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img180.svg"
+ ALT="$\vert (l_1,s_1)j_1, (l_2,s_2)j_2 ; J_{12},T \rangle$"></SPAN>,
+
+<BR>&nbsp;&nbsp;&nbsp; for  <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img181.svg"
+ ALT="$(l_1,s_1)j_1$"></SPAN> given by state <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img182.svg"
+ ALT="$u_1(r_1)$"></SPAN> of KN1 = NT(1,I) <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0,
+
+<BR>&nbsp;&nbsp;&nbsp;    and  <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img183.svg"
+ ALT="$(l_2,s_2)j_2$"></SPAN> given by state <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img184.svg"
+ ALT="$u_2(r_2)$"></SPAN> of KN2 = NT(2,I) <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0,
+
+<BR>
+is then transformed into the required KIND = 6 format.
+
+<P>
+The <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img185.svg"
+ ALT="$(r_1,r_2)$"></SPAN> coordinates become <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img186.svg"
+ ALT="$(r,R)$"></SPAN> coordinates,
+where
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.16ex; vertical-align: -0.10ex; " SRC="img46.svg"
+ ALT="$r$"></SPAN> = distance between the two nucleons (angular spin <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.10ex; " SRC="img16.svg"
+ ALT="$\ell$"></SPAN>), and
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img114.svg"
+ ALT="$R$"></SPAN> = distance from the core to their centre of mass
+     (corresponding angular momentum is L<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img187.svg"
+ ALT="$_{nn}$"></SPAN>.
+
+<P>
+If NT(3,I) <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+ ALT="$&gt;$"></SPAN> 0, then the wave functions <!-- MATH
+ $u_1(r_1)\times u_2(r_2)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img188.svg"
+ ALT="$u_1(r_1)\times u_2(r_2)$"></SPAN> are further
+multiplied by <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img189.svg"
+ ALT="$u_3(r)$"></SPAN> (of KN3 = NT(3,I)) before coordinate transformations.
+Only the radial shape of KN3 is used, not any angular momentum numbers.
+
+<P>
+If NT(1,I) = &ndash;1, then an external form factor is read in from Fortran file
+number NT(2,I), and processed using the subroutine EXTERN1.
+At present, this routine is written to read triton wave functions
+from the Grenoble Faddeev calculations,
+only reading wave functions, <EM>not</EM> the potential <SPAN CLASS="MATH"><IMG STYLE="height: 1.69ex; vertical-align: -0.29ex; " SRC="img190.svg"
+ ALT="$\times$"></SPAN>
+wavefunction (so for e.g. stripping, only use prior interactions).
+
+<P>
+If NT(1,I) = &ndash;2, then an external form factor is read in from Fortran file
+number NT(2,I), and processed using the subroutine EXTERN2.
+At present, this routine is written to read 3-body wave functions
+from HH calculations, reading wave functions, <EM>as well as</EM> the
+potential <SPAN CLASS="MATH"><IMG STYLE="height: 1.69ex; vertical-align: -0.29ex; " SRC="img190.svg"
+ ALT="$\times$"></SPAN> wavefunction. The 'vrr' file format is assumed,
+and the breakup (third) vertex function  is ignored.
+
+<P>
+If NT(3,I) <SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+ ALT="$&lt;$"></SPAN> 0, then the I'th component of the pair summation is simply
+the product of cluster wave functions <!-- MATH
+ $u_1(r)  u_2(R)$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img191.svg"
+ ALT="$u_1(r) u_2(R) $"></SPAN>
+where <SPAN CLASS="MATH"><IMG STYLE="height: 1.50ex; vertical-align: -0.43ex; " SRC="img192.svg"
+ ALT="$u_{2}$"></SPAN> may be KIND = 0 or 1.
+
+<P>
+NT(4,I) is not used in this version of FRESCO.
+</DD>
+</DL>
+
+<P>
+
+<H4><A ID="SECTION00045310000000000000">
+For KIND = 6:</A>
+</H4> construct components of the form
+<!-- MATH
+ $L_{nn}, ((\ell, (s_1,s_2)S_{12})j_{12}; J_{12},T\rangle$
+ -->
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img193.svg"
+ ALT="$L_{nn}, ((\ell, (s_1,s_2)S_{12})j_{12}; J_{12},T\rangle
+$"></SPAN>
+for all different <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img194.svg"
+ ALT="$L_{nn}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 1.73ex; vertical-align: -0.10ex; " SRC="img16.svg"
+ ALT="$\ell$"></SPAN>, S<SPAN CLASS="MATH"><IMG STYLE="height: 1.29ex; vertical-align: -0.43ex; " SRC="img171.svg"
+ ALT="$_{12}$"></SPAN> &amp; j<SPAN CLASS="MATH"><IMG STYLE="height: 1.29ex; vertical-align: -0.43ex; " SRC="img171.svg"
+ ALT="$_{12}$"></SPAN> values permitted within the
+limits set by <SPAN CLASS="MATH"><IMG STYLE="height: 2.08ex; vertical-align: -0.45ex; " SRC="img168.svg"
+ ALT="$\ell_{min}$"></SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.08ex; vertical-align: -0.45ex; " SRC="img169.svg"
+ ALT="$\ell_{max}$"></SPAN>, S<SPAN CLASS="MATH"><IMG STYLE="height: 1.27ex; vertical-align: -0.45ex; " SRC="img170.svg"
+ ALT="$_{min}$"></SPAN>, and S<SPAN CLASS="MATH"><IMG STYLE="height: 0.92ex; vertical-align: -0.45ex; " SRC="img172.svg"
+ ALT="$_{max}$"></SPAN>
+(J<SPAN CLASS="MATH"><IMG STYLE="height: 1.29ex; vertical-align: -0.43ex; " SRC="img171.svg"
+ ALT="$_{12}$"></SPAN> and T are fixed)
+by summing over pairs of single-particle wave functions.
+
+<P>
+For all KINDs, the printout also lists:
+
+<P>
+DZ = derived charge of the bound particle (always positive).
+
+<P>
+DM = derived mass of the bound particle
+
+<P>
+K  = the wave number of the bound state asymptotically
+
+<P>
+NORM=overall square norm of this bound state.
+The wave functions of the single-particle bound states are always
+normalised to unity.
+
+<P>
+RMS= root-mean-square radius of this bound state
+
+<P>
+<SPAN CLASS="MATH"><IMG STYLE="height: 2.00ex; vertical-align: -0.46ex; " SRC="img195.svg"
+ ALT="$D_{0}$"></SPAN> = zero-range stripping strength for transfers from this stare
+
+<P>
+<SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img196.svg"
+ ALT="$D$"></SPAN> = asymptotic stripping strength, as used e.g. in sub-Coulomb
+transfers
+
+<P>
+
+<DIV CLASS="navigation"><HR>
+<!--Navigation Panel-->
+<A
+ HREF="node10.html">
+<IMG WIDTH="37" HEIGHT="24" ALT="next" SRC="next.png"></A> 
+<A
+ HREF="node4.html">
+<IMG WIDTH="26" HEIGHT="24" ALT="up" SRC="up.png"></A> 
+<A
+ HREF="node8.html">
+<IMG WIDTH="63" HEIGHT="24" ALT="previous" SRC="prev.png"></A> 
+<A ID="tex2html141"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALT="contents" SRC="contents.png"></A>  
+<BR>
+<B> Next:</B> <A
+ HREF="node10.html">&amp;COUPLING namelists</A>
+<B> Up:</B> <A
+ HREF="node4.html">Input NAMELIST format</A>
+<B> Previous:</B> <A
+ HREF="node8.html">&amp;POT potential namelists</A>
+ &nbsp; <B>  <A ID="tex2html142"
+  HREF="node1.html">Contents</A></B> </DIV>
+<!--End of Navigation Panel-->
+
+</BODY>
+</HTML>
