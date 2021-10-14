@@ -4,7 +4,7 @@
  &variable kind=1 name='V' kp=1 pline=2 col=1 potential=52.50 step=0.1/
  &variable kind=1 name='W' kp=1 pline=2 col=4 potential=3.5 step=0.1/
  &variable kind=1 name='WD' kp=1 pline=3 col=4 potential=8.5 step=0.1/
- &data iscale=0  idir=1 lab=F  points=28 abserr=T/
+ &data iscale=0  idir=1 lab=F  points=28 abserr=T energy = 27.9/
  22.       0.548     0.044
  26.       0.475     0.024
  30.       0.481     0.014
