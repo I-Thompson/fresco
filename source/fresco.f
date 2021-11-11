@@ -76,7 +76,7 @@ C			DO IT!
 C			DONE IT!
         do I=201,210
           inquire(I,opened=op)
-          if(op) close(10)
+          if(op) close(I)
         enddo
 
  	stop
