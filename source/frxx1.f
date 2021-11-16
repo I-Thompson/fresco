@@ -128,7 +128,7 @@ C    -----------------
 	integer IC,IA,NA,MAM,IF1,IF2,ITCM,IMA,JBLOCK,L,IPARIT,KS
 	integer JF,JIN,IAM,J,NLJ,IN,IPUT,IGET,LAP,IF,I,IT
 	integer KN,NSP,L1,IE,NPROJ,NTARG,KINTL,JUMP2
-	integer NICH,MAXXCH,IB,JFT,JFTT,NFL,NR,IR0,IR,IC1
+	integer NICH,MAXXCH,IB,JFT,JFTT,NFL,NR,IR0,IR,IC1,KKP
 	integer IC2,IN1,ICH,KP,KPB,IX,KK,II,NBEST,NSOLI,ITNL,IPARI
 	integer NJDONE,LL,JJ,I0,nbas,CHANSI,JF0,NFD,NEXK
 	integer LAST,J2LAST,J2,KNLAST
@@ -1120,9 +1120,9 @@ C                       EXCEPT (March 2021) for spin.spin couplings!!! FIXED
            if(JFT==13) T = sqrt(2*JTARG(C)+1.)   ! target couplings
        ENDIF
 C
-       KP = (-1)**KK
-      if (JFTT.eq.10.and.BAND(1,ic,ia).ne.BAND(1,ic,ib)*KP .or.
-     x    JFTT.eq.11.and.BAND(2,ic,ia).ne.BAND(2,ic,ib)*KP ) go to 300
+       KKP = (-1)**KK
+      if (JFTT.eq.10.and.BAND(1,ic,ia).ne.BAND(1,ic,ib)*KKP .or.
+     x    JFTT.eq.11.and.BAND(2,ic,ia).ne.BAND(2,ic,ib)*KKP ) go to 300
 
       IF(JFT>=12.and.JFT<=13.and.PTYPE(3,JF)>0) THEN
 C                           LOOK UP TABLE OF ALLOWED COUPLINGS for KK>0 or off-diagonal monopole (7)
