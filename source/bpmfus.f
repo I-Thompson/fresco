@@ -146,4 +146,5 @@ C     IF(BAR.GT.0) WRITE(KO,*) 'EKL : WKB = ',EKL,', H-W = ',PI*BAR/HOM
       IF(C.EQ.2) WRITE(KO,945) ENLAB,BARE,TOTFUS(1),CORFUS(1,1)
   945 FORMAT('0Fusion at',F8.3,' MeV: Bare =',1P,E11.3,', Actual =',
      X E11.3,:,', BPM-equiv =',E11.3,' mb')
+      write(391,'(G12.4,1p,E12.5)') ENLAB,BARE
 !	END SUBROUTINE BPMFUS

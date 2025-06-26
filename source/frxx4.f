@@ -858,21 +858,21 @@ C                     Local form factor:
 	   CLIST(C1,C2,NC) =  CH*(0.,1.)**(LVAL(C2)-LVAL(C1))
 	   NFLIST(C1,C2,NC) = KN
 	   NCLIST(C1,C2) =  NC
-	   if(LN<=4) then
-	   if(CPLD(C1,C2,LN)) WRITE(KO,924) C1,C2,IX,LN,SN,JN
-924  	     format(/' Chs ',2i4,' ALREADY coupled by',i3,':',i3,2f5.1)
+C	   if(LN<=4) then
+C	   if(CPLD(C1,C2,LN)) WRITE(KO,924) C1,C2,IX,LN,SN,JN
+C924  	     format(/' Chs ',2i4,' ALREADY coupled by',i3,':',i3,2f5.1)
 	   CPLD(C1,C2,LN) = .true.
-	   endif
+C	   endif
          IF(REV.and.IA/=IB) THEN
            NC = NCLIST(C2,C1)+1
  	   if(NC>MCLIST) call check(NC,MCLIST,30)
  	   CLIST(C2,C1,NC) =  CH*(0.,1.)**(LVAL(C1)-LVAL(C2))
  	   NFLIST(C2,C1,NC) = KN
  	   NCLIST(C2,C1) =  NC
-	   if(LN<=4) then
-	   if(CPLD(C2,C1,LN)) WRITE(KO,924) C2,C1,IX,LN,SN,JN
+C	   if(LN<=4) then
+C	   if(CPLD(C2,C1,LN)) WRITE(KO,924) C2,C1,IX,LN,SN,JN
 	   CPLD(C2,C1,LN) = .true.
-	   endif
+C	   endif
  	 ENDIF
       ELSE
 C            Non-local form factor:
