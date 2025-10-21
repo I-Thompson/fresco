@@ -1,6 +1,7 @@
 i386-*
 i686-*
 x86_64-*
+arm64-*
 source/keep
 *.diff
 *.toc

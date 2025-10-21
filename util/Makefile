@@ -1,4 +1,4 @@
 FC=f90
-FC=g95
-FFLAGS = -g -fbounds-check -ftrace=full    # debug
+FC=gfortran
+FFLAGS = -g -fcheck=all   # debug
 

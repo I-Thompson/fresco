@@ -172,7 +172,7 @@ C
 C   for IX=1,NIX the array MATRIX(i,IX) has info about matrix elements:
 C
 C      MATRIX(1,IX)  =  IB  :  state fed by coupling
-C             2      =  IA  :  state feedingfthe state1IB
+C             2      =  IA  :  state feeding the state IB
 C             3      =  k   :  multipole deformation
 C             4      =  NF  :  JF number of deformation multipole
 C             5      =  NFD :  JF number of original potential

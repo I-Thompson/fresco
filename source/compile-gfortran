@@ -1,0 +1,3 @@
+gfortran  -O3 	-std=legacy -o fresco globx7.f frxx0.f frxx1.f frxx2.f frxx3.f frxx4.f frxx5.f frxx6.f frxx7a.f frxx7b.f frxx8.f coulfg.f frxx9.f frxx10.f frxx11.f frxx13.f frxx16.f frxx17.f lapack.f cdc.f   cpu_time.f  fresco.f  nagstub.f
+
+gfortran  -O3 	-std=legacy -o sfresco globx7.f frxx0.f frxx1.f frxx2.f frxx3.f frxx4.f frxx5.f frxx6.f frxx7a.f frxx7b.f frxx8.f coulfg.f frxx9.f frxx10.f frxx11.f frxx13.f frxx16.f frxx17.f lapack.f cdc.f   cpu_time.f  sfresco.f  nagstub.f minuit.f
