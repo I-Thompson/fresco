@@ -8,3 +8,4 @@ source/keep
 *.log
 *.aux
 *.synctex.gz
+*.old

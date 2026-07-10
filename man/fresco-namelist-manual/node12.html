@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 
-<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
 <HTML lang="en">
 <HEAD>
 <TITLE>Input CDCC format</TITLE>
@@ -11,7 +11,7 @@
 
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 <META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
-<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
 
 <LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
 
@@ -76,12 +76,14 @@ are all the same as the <B>&amp;FRESCO</B> namelist, except for:
 <BR> <SPAN style="font-family:monospace">q</SPAN> = <SPAN style="font-family:monospace">ip1</SPAN>, multiple for the projectile single-particle couplings,
 <BR><SPAN style="font-family:monospace">ncoul</SPAN> = <SPAN style="font-family:monospace">ip2</SPAN>, selecting nuclear and/or coulomb,
 <BR><SPAN style="font-family:monospace">reor</SPAN> = <SPAN style="font-family:monospace">ip3</SPAN>, selecting diagonal and/or off-diagonal couplings,
-<BR><SPAN style="font-family:monospace">qc</SPAN> = <SPAN style="font-family:monospace">ip4</SPAN>, <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img214.svg"
+<BR><SPAN style="font-family:monospace">qc</SPAN> = <SPAN style="font-family:monospace">ip4</SPAN>, <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img214.svg"
  ALT="$Q_{\rm max}$"></SPAN> for the deformed core potential multipoles,
 <BR><SPAN style="font-family:monospace">la</SPAN> = <SPAN style="font-family:monospace">ip5</SPAN>, <!-- MATH
  $\Lambda_{\rm max}$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.07ex; vertical-align: -0.45ex; " SRC="img215.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.07ex; vertical-align: -0.45ex; " SRC="img215.svg"
  ALT="$\Lambda_{\rm max}$"></SPAN> for the new multipole orders with formfactor reduction,
 <BR><SPAN style="font-family:monospace">hat</SPAN> (logical, default T) to use mean bin energies (otherwise midpoint),
 <BR><SPAN style="font-family:monospace">quasi</SPAN>: if assigned, set all channel energies as if for this projectile
@@ -89,14 +91,18 @@ energy (eg -<SPAN style="font-family:monospace">be</SPAN> for adiabatic),
 <BR><SPAN style="font-family:monospace">iscgs,ipcgs</SPAN> = <SPAN style="font-family:monospace">isc,ipc</SPAN> (&amp;overlap) for the projectile ground state wave
 function,
 <BR><SPAN style="font-family:monospace">elab</SPAN> = <SPAN style="font-family:monospace">ELAB(1)</SPAN>, just the one projectile lab energy,
-<BR><SPAN style="font-family:monospace">hktarg</SPAN> = target value of <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img216.svg"
- ALT="$h.K$"></SPAN>, where <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img217.svg"
- ALT="$h$"></SPAN>=<SPAN style="font-family:monospace">HCM</SPAN> and <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img109.svg"
+<BR><SPAN style="font-family:monospace">hktarg</SPAN> = target value of <SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img216.svg"
+ ALT="$h.K$"></SPAN>, where <SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img217.svg"
+ ALT="$h$"></SPAN>=<SPAN style="font-family:monospace">HCM</SPAN> and <SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img109.svg"
  ALT="$K$"></SPAN> is the elastic wave number.
 (default <SPAN style="font-family:monospace">hktarg</SPAN>=0.2). 
 <BR>
 If <SPAN style="font-family:monospace">HCM</SPAN>=0 in &amp;Fresco namelist,
-then <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img217.svg"
+then <SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.75ex; vertical-align: -0.13ex; " SRC="img217.svg"
  ALT="$h$"></SPAN> is calculated from <SPAN style="font-family:monospace">elab</SPAN> and <SPAN style="font-family:monospace">hktarg</SPAN>.
 <BR>
 <P>
@@ -106,75 +112,93 @@ then <SPAN CLASS="MATH"><IMG STYLE="height: 1.75ex; vertical-align: -0.13ex; " S
      <!-- MATH
  $\langle {\tt KN} | K Q \lambda | {\tt KNP} \rangle$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img218.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img218.svg"
  ALT="$\langle {\tt KN} \vert K Q \lambda \vert {\tt KNP} \rangle$"></SPAN>
 
-<BR>= 1 : <SPAN CLASS="MATH"><IMG STYLE="height: 2.25ex; vertical-align: -0.51ex; " SRC="img219.svg"
- ALT="$KQ\lambda$"></SPAN> formfactors summed into new multipole <SPAN CLASS="MATH"><IMG STYLE="height: 1.72ex; vertical-align: -0.10ex; " SRC="img220.svg"
+<BR>= 1 : <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.25ex; vertical-align: -0.51ex; " SRC="img219.svg"
+ ALT="$KQ\lambda$"></SPAN> formfactors summed into new multipole <SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.72ex; vertical-align: -0.10ex; " SRC="img220.svg"
  ALT="$\Lambda$"></SPAN>:
      <!-- MATH
  $\langle {\tt KN} | \Lambda | {\tt KNP} \rangle$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img221.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img221.svg"
  ALT="$\langle {\tt KN} \vert \Lambda \vert {\tt KNP} \rangle$"></SPAN>
 
 <BR>= 2 : formfactors summed into composite projectile state:
      <!-- MATH
  $\langle {\tt IB} | {\Lambda} | {\tt IBP} \rangle$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img222.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.41ex; vertical-align: -0.66ex; " SRC="img222.svg"
  ALT="$\langle {\tt IB} \vert {\Lambda} \vert {\tt IBP} \rangle$"></SPAN>.
       This is not allowed if have spin-orbit or transfer couplings, and
       <SPAN style="font-family:monospace">sumform</SPAN>=1 will be set in these cases.
 <BR>
 <P>
-If have no cc bins, then <SPAN CLASS="MATH"><IMG STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img109.svg"
+If have no cc bins, then <SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.64ex; vertical-align: -0.10ex; " SRC="img109.svg"
  ALT="$K$"></SPAN> multipoles truncated using <SPAN style="font-family:monospace">ip1=q</SPAN>.
 <BR>
-If have cc bins and <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img214.svg"
+If have cc bins and <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img214.svg"
  ALT="$Q_{\rm max}$"></SPAN><SPAN style="font-family:monospace">=qc=ip4</SPAN> and
 <!-- MATH
  $\Lambda_{\rm max}$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.07ex; vertical-align: -0.45ex; " SRC="img215.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.07ex; vertical-align: -0.45ex; " SRC="img215.svg"
  ALT="$\Lambda_{\rm max}$"></SPAN><SPAN style="font-family:monospace">=la=ip5</SPAN> are unset, then
-<SPAN style="font-family:monospace">q</SPAN> sets the maximum multipole order of <SPAN CLASS="MATH"><IMG STYLE="height: 1.72ex; vertical-align: -0.10ex; " SRC="img220.svg"
+<SPAN style="font-family:monospace">q</SPAN> sets the maximum multipole order of <SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.72ex; vertical-align: -0.10ex; " SRC="img220.svg"
  ALT="$\Lambda$"></SPAN>, and
- all possible values of  <SPAN CLASS="MATH"><IMG STYLE="height: 2.25ex; vertical-align: -0.51ex; " SRC="img219.svg"
+ all possible values of  <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.25ex; vertical-align: -0.51ex; " SRC="img219.svg"
  ALT="$KQ\lambda$"></SPAN> are used that couple to <!-- MATH
  $\Lambda \le {\tt q}$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.21ex; vertical-align: -0.60ex; " SRC="img223.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.21ex; vertical-align: -0.60ex; " SRC="img223.svg"
  ALT="$\Lambda \le {\tt q}$"></SPAN>
 <BR>
 If <SPAN style="font-family:monospace">qc</SPAN> and <SPAN style="font-family:monospace">la</SPAN> are both set, then control each multipole
 individually:
-<BR>  <SPAN style="font-family:monospace">q</SPAN>     = <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img224.svg"
+<BR>  <SPAN style="font-family:monospace">q</SPAN>     = <SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img224.svg"
  ALT="$K_{\rm max}$"></SPAN>,  <SPAN style="font-family:monospace">ip1</SPAN> set in usual way
-<BR>  <SPAN style="font-family:monospace">ip4=qc</SPAN>  = <SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img214.svg"
+<BR>  <SPAN style="font-family:monospace">ip4=qc</SPAN>  = <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img214.svg"
  ALT="$Q_{\rm max}$"></SPAN>. 
 <BR>  <SPAN style="font-family:monospace">ip5=la</SPAN> = <!-- MATH
  $\Lambda_{\rm max}$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.07ex; vertical-align: -0.45ex; " SRC="img215.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.07ex; vertical-align: -0.45ex; " SRC="img215.svg"
  ALT="$\Lambda_{\rm max}$"></SPAN> maximum order for new
 multipole.
 <BR>
-Note: <SPAN CLASS="MATH"><IMG STYLE="height: 1.89ex; vertical-align: -0.14ex; " SRC="img202.svg"
+Note: <SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.89ex; vertical-align: -0.14ex; " SRC="img202.svg"
  ALT="$\lambda$"></SPAN> will always run from <!-- MATH
  $0\rightarrow Q$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img225.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.09ex; vertical-align: -0.51ex; " SRC="img225.svg"
  ALT="$0\rightarrow Q$"></SPAN>.
 <BR>
 <P>
 <SPAN style="font-family:monospace">trans</SPAN> determines the number of transfer partitions:
 <BR>&nbsp;&nbsp;   = 0 : no transfers: no E(jectile) or R(esidue)
 
-<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
+<BR><SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img14.svg"
  ALT="$&lt;$"></SPAN> 0 : only R(esidue): the Ejectile and Core are identical
 
-<BR><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+<BR><SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
  ALT="$&gt;$"></SPAN> 0 : both E(jectile) and R(esidue) independently of Core nucleus.
 
 <P>
@@ -197,11 +221,13 @@ and with transfers also for residue R.
 <BR><SPAN style="font-family:monospace">nce</SPAN> is the number of Core excited states.
 
 <P>
-If <SPAN style="font-family:monospace">nce</SPAN><SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+If <SPAN style="font-family:monospace">nce</SPAN><SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
  ALT="$&gt;$"></SPAN>0, then read that number of <B>&amp;CORESTATES</B> namelists. 
 <BR><B>&amp;CORESTATES namelist</B>: <SPAN style="font-family:monospace">spin,parity,ex </SPAN>
 <BR>
-for spin, parity (<SPAN CLASS="MATH"><IMG STYLE="height: 1.88ex; vertical-align: -0.29ex; " SRC="img226.svg"
+for spin, parity (<SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.88ex; vertical-align: -0.29ex; " SRC="img226.svg"
  ALT="$\pm1$"></SPAN>) and excitation energy of each Core
 state above the ground state.
 
@@ -221,7 +247,8 @@ If <SPAN style="font-family:monospace">energy</SPAN> then these are evenly space
 are evenly spaced in momentum <!-- MATH
  $k \propto \sqrt{E}$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.50ex; vertical-align: -0.39ex; " SRC="img227.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.50ex; vertical-align: -0.39ex; " SRC="img227.svg"
  ALT="$k \propto \sqrt{E}$"></SPAN>.
 Changing or starting partial waves is equivalent to <SPAN style="font-family:monospace">start</SPAN>= 0.001.
 

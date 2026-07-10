@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 
-<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
 <HTML lang="en">
 <HEAD>
 <TITLE>Stabilization method for coupled channels solutions</TITLE>
@@ -11,7 +11,7 @@
 
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 <META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
-<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
 
 <LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
 
@@ -62,8 +62,10 @@ a stabilization algorithm to solve or, at least, palliate, the common problem of
 Thanks to this implementation, we are now able to solve efficiently problems which were otherwise not feasible, for example, CDCC calculations with high-lying breakup states, including closed-channels. His group to extend this to the case of transfer reactions, but only with limited success, so in practice it works only for pure coupled channels equations.
 
 <P>
-A test case <SPAN style="font-family:monospace">dNi-cdcc-QR.in</SPAN> is included in the test/ folder, corresponding to a d+<SPAN CLASS="MATH"><IMG STYLE="height: 2.11ex; vertical-align: -0.10ex; " SRC="img258.svg"
- ALT="$^{58}$"></SPAN>Ni reaction at 20 MeV, including closed channels. In this case, the standard Numerov method fails for JT<SPAN CLASS="MATH"><IMG STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
+A test case <SPAN style="font-family:monospace">dNi-cdcc-QR.in</SPAN> is included in the test/ folder, corresponding to a d+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.11ex; vertical-align: -0.10ex; " SRC="img258.svg"
+ ALT="$^{58}$"></SPAN>Ni reaction at 20 MeV, including closed channels. In this case, the standard Numerov method fails for JT<SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.49ex; vertical-align: -0.19ex; " SRC="img1.svg"
  ALT="$&gt;$"></SPAN>3, whereas with the stabilization procedure the calculation runs smoothly for all required partial waves. 
 
 <P>

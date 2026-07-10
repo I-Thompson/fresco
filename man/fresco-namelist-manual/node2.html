@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 
-<!--Converted with LaTeX2HTML 2020 (Released January 1, 2020) -->
+<!--Converted with LaTeX2HTML 2021 (Released January 1, 2021) -->
 <HTML lang="en">
 <HEAD>
 <TITLE>Introduction</TITLE>
@@ -11,7 +11,7 @@
 
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 <META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
-<META NAME="Generator" CONTENT="LaTeX2HTML v2020">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2021">
 
 <LINK REL="STYLESHEET" HREF="fresco-namelist-manual.css">
 
@@ -89,7 +89,7 @@ at a much smaller number of interpolation points,
 and then expanded when necessary to calculate the source terms by
 integrating
 <BR>
-<DIV ALIGN="CENTER">
+<DIV CLASS="displaymath">
 
 <!-- MATH
  \begin{eqnarray}
@@ -97,8 +97,9 @@ S(R _ f ) = \int _ 0 ^ {R _ {match}}
                 K _ {fi} (R _ f , R _ i ) u(R _ i ) dR _ i
 \end{eqnarray}
  -->
-<TABLE CELLPADDING="0" ALIGN="CENTER" WIDTH="100%">
-<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG STYLE="height: 5.16ex; vertical-align: -1.87ex; " SRC="img3.svg"
+<TABLE CLASS="equation" WIDTH="100%">
+<TR VALIGN="MIDDLE"><TD NOWRAP ALIGN="RIGHT"><IMG
+ STYLE="height: 5.16ex; vertical-align: -1.87ex; " SRC="img3.svg"
  ALT="$\displaystyle S(R _ f ) = \int _ 0 ^ {R _ {match}}
 K _ {fi} (R _ f , R _ i ) u(R _ i ) dR _ i$"></TD>
 <TD>&nbsp;</TD>
@@ -106,39 +107,49 @@ K _ {fi} (R _ f , R _ i ) u(R _ i ) dR _ i$"></TD>
 <TD CLASS="eqno" WIDTH=10 ALIGN="RIGHT">
 (<SPAN CLASS="arabic">1</SPAN>)</TD></TR>
 </TABLE></DIV>
-<BR CLEAR="ALL"><P></P>
 where RMATCH and HCM, the step size, are given in the &amp;Fresco namelist.
 Since the kernel function <!-- MATH
  $K_{fi}(R_f,R_i)$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.53ex; vertical-align: -0.77ex; " SRC="img4.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.53ex; vertical-align: -0.77ex; " SRC="img4.svg"
  ALT="$K_{fi}(R_f,R_i)$"></SPAN> is usually rapidly varying with
 <!-- MATH
  $D_{fi} = R_{f} - R_{i}$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img5.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img5.svg"
  ALT="$D_{fi} = R_{f} - R_{i}$"></SPAN> (especially with heavy-ion reactions), and only slowly
-varying with <SPAN CLASS="MATH"><IMG STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img6.svg"
- ALT="$R_{f}$"></SPAN> (if <SPAN CLASS="MATH"><IMG STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img7.svg"
+varying with <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img6.svg"
+ ALT="$R_{f}$"></SPAN> (if <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img7.svg"
  ALT="$D_{fi}$"></SPAN> is constant),  FRESCO calculates and stores
 the function <!-- MATH
  $K_{fi}'(R_{f},D_{fi})$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.87ex; vertical-align: -1.08ex; " SRC="img8.svg"
- ALT="$K_{fi}'(R_{f},D_{fi})$"></SPAN> at intervals of RINTP in <SPAN CLASS="MATH"><IMG STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img6.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.87ex; vertical-align: -1.08ex; " SRC="img8.svg"
+ ALT="$K_{fi}'(R_{f},D_{fi})$"></SPAN> at intervals of RINTP in <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img6.svg"
  ALT="$R_{f}$"></SPAN>,
-and intervals of HNL in <SPAN CLASS="MATH"><IMG STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img7.svg"
- ALT="$D_{fi}$"></SPAN>. The <SPAN CLASS="MATH"><IMG STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img7.svg"
+and intervals of HNL in <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img7.svg"
+ ALT="$D_{fi}$"></SPAN>. The <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img7.svg"
  ALT="$D_{fi}$"></SPAN> range considered is
 CENTRE-RNL/2 to CENTRE+RNL/2, i.e. range of RNL centred at CENTRE,
 and FRESCO later suggests improved values for RNL &amp; CENTRE.
-The HNL reflects to physical variation of <SPAN CLASS="MATH"><IMG STYLE="height: 2.87ex; vertical-align: -1.08ex; " SRC="img9.svg"
- ALT="$K_{fi}'$"></SPAN> with <SPAN CLASS="MATH"><IMG STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img7.svg"
+The HNL reflects to physical variation of <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.87ex; vertical-align: -1.08ex; " SRC="img9.svg"
+ ALT="$K_{fi}'$"></SPAN> with <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img7.svg"
  ALT="$D_{fi}$"></SPAN>, and can be
 a fraction of HCM (for heavy ion reactions) or a multiple of HCM
 (for light ion reactions especially with `prior' interactions).
 If HNL is a submultiple of HCM, the program anticipates the interpolation
-of <SPAN CLASS="MATH"><IMG STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img10.svg"
+of <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.42ex; vertical-align: -0.66ex; " SRC="img10.svg"
  ALT="$u(R_{i})$"></SPAN> in the equation above, and only stores an effective kernel
 function at intervals of HCM.
 
@@ -148,14 +159,17 @@ calculate the form factors of the transfer kernels. If the L-transfer value
 (estimated by <!-- MATH
  $\ell_f + \ell_i$
  -->
-<SPAN CLASS="MATH"><IMG STYLE="height: 2.40ex; vertical-align: -0.77ex; " SRC="img11.svg"
+<SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.40ex; vertical-align: -0.77ex; " SRC="img11.svg"
  ALT="$\ell_f + \ell_i$"></SPAN>)
 is larger than or equal to MTMIN, then the m-dependent expressions for the
 spherical harmonics are used explicitly.
 Otherwise, the
 angular dependencies of the initial and final transfer states
-are transformed into those of the channel variables <SPAN CLASS="MATH"><IMG STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img12.svg"
- ALT="$R_{i}$"></SPAN> &amp; <SPAN CLASS="MATH"><IMG STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img6.svg"
+are transformed into those of the channel variables <SPAN CLASS="MATH"><IMG
+ STYLE="height: 1.99ex; vertical-align: -0.45ex; " SRC="img12.svg"
+ ALT="$R_{i}$"></SPAN> &amp; <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.31ex; vertical-align: -0.77ex; " SRC="img6.svg"
  ALT="$R_{f}$"></SPAN> using
 Moshinsky's solid-harmonic transformation, as given for example
 in
@@ -164,7 +178,8 @@ By careful control of the numerical approximations, the second method can
 be extended to find heavy-ion transfer form factors, but the maximum
 transferred angular momentum L is still limited by numerical cancellation
 errors arising from the finite roundoff errors in the computer.
-With 8-byte word lengths, the unit roundoff is approximately <SPAN CLASS="MATH"><IMG STYLE="height: 2.15ex; vertical-align: -0.14ex; " SRC="img13.svg"
+With 8-byte word lengths, the unit roundoff is approximately <SPAN CLASS="MATH"><IMG
+ STYLE="height: 2.15ex; vertical-align: -0.14ex; " SRC="img13.svg"
  ALT="$10^{-15}$"></SPAN>,
 and this limits the transferred L to 6 or less, so the default value
 of MTMIN is set to 6. The Moshinsky method is much faster when it is
